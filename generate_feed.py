@@ -7,7 +7,11 @@ from pathlib import Path
 
 OWNER = "vllm-project"
 REPO = "vllm"
-LABEL = "good first issue"
+LABELS = [
+    "good first issue",
+    "gpt-oss",
+    "moe",
+]
 MAX_ITEMS = 50
 OUTPUT_FILE = Path("feed.xml")
 
@@ -17,7 +21,7 @@ API_URL = f"https://api.github.com/repos/{OWNER}/{REPO}/issues"
 def fetch_issues():
     params = {
         "state": "open",
-        "labels": LABEL,
+        "labels": LABELS,
         "per_page": MAX_ITEMS,
         "sort": "created",
         "direction": "desc",
