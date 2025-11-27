@@ -1,12 +1,13 @@
-name: Build vLLM good first issues feed
+name: Build vLLM label feeds
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # 每 30 分钟跑一次
-  workflow_dispatch:         # 手动触发
+    - cron: "*/30 * * * *"   # 每 30 分钟执行一次
+  workflow_dispatch:         # 支持手动触发
   push:
     paths:
       - generate_feed.py
+      - .github/workflows/build.yml
 
 jobs:
   build:
@@ -26,20 +27,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Generate feed.xml
+      - name: Generate feeds
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python generate_feed.py
+          ls -l feed*.xml || true
 
       - name: Commit and push if changed
         run: |
-          if git status --porcelain | grep feed.xml; then
+          if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add feed.xml
-            git commit -m "Update feed.xml"
+            git add feed*.xml
+            git commit -m "Update vLLM label feeds"
             git push
           else
-            echo "No changes in feed.xml"
+            echo "No changes to commit"
           fi
