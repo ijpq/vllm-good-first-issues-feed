@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>vLLM issues - label: moe</title>
+  <link>https://github.com/vllm-project/vllm/issues</link>
+  <description>Open issues with label 'moe' in vllm-project/vllm</description>
+  <language>en</language>
+  <lastBuildDate>Thu, 27 Nov 2025 13:12:23 +0000</lastBuildDate>
+  <item>
+    <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
+    <link>https://github.com/vllm-project/vllm/pull/29512</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29512</guid>
+    <pubDate>Wed, 26 Nov 2025 17:38:56 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+We have been using `silu_and_mul`, `swigluoai_and_mul`, etc as unvectorized kernels for essentially all of the fused moe methods, so there are free gains to be had there, especially for large batch sizes. This PR expands all of them to 128 bit vectorized loads.
+
+## E2E Perf
+
+Ran on H100 so using `cutlass_moe_fp8`:
+```
+vllm serve RedHatAI/Qwen3-30B-A3B-FP8-dynamic
+vllm bench serve --model RedHatAI/Qwen3-30B-A3B-FP8-dynamic --num-prompts 10 --random-input-len 512 --random-output-len 10
+```
+
+&gt; These results were noisy, need to retake
+
+## Traces
+
+```
+vllm serve RedHatAI/Qwen3-30B-A3B-FP8-dynamic
+vllm bench serve --model RedHatAI/Qwen3-30B-A3B-FP8-dynamic --num-prompts 10 --random-input-len 512 --random-output-len 10 --profile
+```
+
+Profiles below are f
+
+...</description>
+  </item>
+  <item>
+    <title>[Refactor] Split up compressed_tensors_moe.py into separate files per method</title>
+    <link>https://github.com/vllm-project/vllm/pull/29427</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29427</guid>
+    <pubDate>Tue, 25 Nov 2025 18:23:03 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Similar to other quant methods like gptq_marlin.py or fp8.py, I&#x27;d like to colocate the MoE methods for a given quantization config next to its same Linear method. So this PR splits the monolithic compressed_tensors_moe.py such that each class is now in its own file i.e. CompressedTensorsW4A4Nvfp4MoeMethod is now in compressed_tensors_w4a4_nvfp4.py
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary d
+
+...</description>
+  </item>
+  <item>
+    <title>[Feature]: Generalize RoutingMethodType for broader MoE routing control</title>
+    <link>https://github.com/vllm-project/vllm/issues/28408</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28408</guid>
+    <pubDate>Mon, 10 Nov 2025 17:52:48 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+PR #27492 introduced `RoutingMethodType` to support different routing methods for FP8 flashinfer TRTLLM MOE (DeepSeekV3, Llama4, Renormalize, etc.).
+While this was implemented to support Qwen3 and Qwen3-next models, the review discussion revealed opportunities to use this more broadly across the
+codebase to simplify MoE routing configuration.
+
+### Motivation:
+
+Currently, MoE routing behavior is controlled through multiple fragmented parameters (scoring_func, renormalize, use_grouped_topk, custom routing
+functions, etc.). This creates several issues:
+
+1. Lack of clarity: The routing method isn&#x27;t explicitly defined in one place
+2. Code duplication: Each model must explicitly specify routing parameters
+3. Maintenance burden: Adding new routing methods 
+
+...</description>
+  </item>
+  <item>
+    <title>[Perf] Improve default fused moe configs by analyzing tuned configs</title>
+    <link>https://github.com/vllm-project/vllm/pull/24700</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24700</guid>
+    <pubDate>Thu, 11 Sep 2025 22:24:47 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+With the help of Claude, I took a look at the statistics of the 200+ configs we have for fused moe and came away with some recommendations. Haven&#x27;t validated them e2e yet, but from smoke tests it seems faster.
+
+The main improvement seems to be from just including defaults for `&#x27;num_warps&#x27;: 4, &#x27;num_stages&#x27;: 3`, which were omitted before except for block fp8.
+
+### Benchmarks on H100
+
+Mixtral BF16
+```
+python benchmarks/kernels/benchmark_moe.py --model=mistralai/Mixtral-8x7B-Instruct-v0.1 -tp=2
+
+# Tuned Config
+(BenchmarkWorker pid=3339388) INFO 09-12 01:05:21 [fused_moe.py:720] Using configuration from /home/mgoin/code/vllm/vllm/model_executor/layers/fused_moe/configs/E=8,N=7168,device_name=NVIDIA_H100_80GB_HBM3.json for MoE layer.
+Batch size: 1, Kern
+
+...</description>
+  </item>
+  <item>
+    <title>[Benchmark] Add expert parallel support to MoE benchmark</title>
+    <link>https://github.com/vllm-project/vllm/pull/20876</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/20876</guid>
+    <pubDate>Sun, 13 Jul 2025 09:12:49 +0000</pubDate>
+    <description>## Essential Elements of an Effective PR Description Checklist
+- [x] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [x] The test plan, such as providing test command.
+- [x] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+
+
+## Purpose
+This PR enhances the MoE kernel benchmark script (benchmarks/kernels/benchmark_moe.py) by adding support for tuning configurations with expert parallelism (EP).
+
+Previously, the script only supported tuning for tensor parallelism (TP), where the intermediate size is sharded. This change introduces an --enable-expert-parallel flag, which modifies the 
+
+...</description>
+  </item>
+</channel>
+</rss>

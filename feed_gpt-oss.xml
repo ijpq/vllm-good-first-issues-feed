@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>vLLM issues - label: gpt-oss</title>
+  <link>https://github.com/vllm-project/vllm/issues</link>
+  <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
+  <language>en</language>
+  <lastBuildDate>Thu, 27 Nov 2025 13:12:22 +0000</lastBuildDate>
+  <item>
+    <title>[responsesAPI] support input output messages for non harmony models</title>
+    <link>https://github.com/vllm-project/vllm/pull/29549</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29549</guid>
+    <pubDate>Wed, 26 Nov 2025 22:15:54 +0000</pubDate>
+    <description>## Purpose
+
+The responsesAPI reasoning / tool calling parser may not always be correct (ie Q1 in https://huggingface.co/moonshotai/Kimi-K2-Thinking/blob/main/docs/tool_call_guidance.md). We should provide support to show the raw token in / token out as optional additional payload in responsesAPI.
+
+We already output the &quot;token format&quot; for GPTOSS harmony; this PR extends support for non harmony models, albeit in a more basic string / tokens format.
+
+## Test Plan
+
+```
+vllm serve moonshotai/Kimi-K2-Thinking   --trust-remote-code   --tensor-parallel-size 8   --enable-auto-tool-choice   --max-num-batched-tokens 32768   --tool-call-parser kimi_k2   --reasoning-parser kimi_k2  
+```
+
+```
+ curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Be
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend] Add streaming tool-call support to Responses API (non-Harmony)</title>
+    <link>https://github.com/vllm-project/vllm/pull/29513</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29513</guid>
+    <pubDate>Wed, 26 Nov 2025 17:39:05 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+## Purpose
+Implemented streaming tool-call support for Responses API on non-Harmony models. The streaming generator now parses tool calls, emits function call add/delta/done events, and finalizes tool-call items rather than returning raw text.
+
+## Test Plan
+Added integration test.
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [
+
+...</description>
+  </item>
+  <item>
+    <title>Fix parameter order in GPT-OSS weight loading function for non-MXFP4 weights </title>
+    <link>https://github.com/vllm-project/vllm/pull/29506</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29506</guid>
+    <pubDate>Wed, 26 Nov 2025 17:09:48 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+Current arguments order is wrong as _load_weights_other accepts ep_rank_end as the first argument and ep_rank_start as the second. 
+This only affects non-MXFP4 GPTOSS variants like this one https://huggingface.co/unsloth/gpt-oss-20b-BF16
+
+```
+ def _load_weights_other(
+        self,
+        ep_rank_end: int,
+        ep_rank_start: int,
+        heads_per_rank: int,
+        head_start: int,
+        weights: Iterable[tuple[str, torch.Tensor]],
+        stacked_params_mapping: list[tuple[str, ...]],
+    ) -&gt; set[str]:
+```
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The 
+
+...</description>
+  </item>
+  <item>
+    <title>fix: Add validation for tool requests that the tool is available</title>
+    <link>https://github.com/vllm-project/vllm/pull/29498</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29498</guid>
+    <pubDate>Wed, 26 Nov 2025 14:26:48 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+  - Add request-level validation so Harmony tool calls fail fast when the requested built-in tool is not available on the configured tool server (browser/
+    code_interpreter/container). This prevents the silent “best-effort” behavior noted in the PR discussion and surfaces an invalid_request_error instead.
+
+## Test Plan
+
+  - .venv/bin/pytest tests/entrypoints/openai/test_serving_responses.py -q
+
+## Test Result
+
+  - 6 passed, 3 warnings (module-level tests including new coverage)
+
+## Fix PR
+
+https://github.com/vllm-project/vllm/issues/29432
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [x] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The tes
+
+...</description>
+  </item>
+  <item>
+    <title>[Bug]: Add validation for tool requests that the tool is available</title>
+    <link>https://github.com/vllm-project/vllm/issues/29432</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29432</guid>
+    <pubDate>Tue, 25 Nov 2025 19:04:15 +0000</pubDate>
+    <description>### 🐛 Describe the bug
+
+Currently there is no check for this, vLLM will just respond sub-optimally in a &quot;silent&quot; way. We should fail the individual request in this case with appropriate error message.
+
+This is a problem in particular for example when using the demo tool server without the `gpt-oss` package installed.
+
+See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecomment-3573053391
+</description>
+  </item>
+  <item>
+    <title>[responsesAPI][3] ResponsesParser to set up non harmony MCP</title>
+    <link>https://github.com/vllm-project/vllm/pull/29413</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29413</guid>
+    <pubDate>Tue, 25 Nov 2025 14:56:22 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+Part 1 of supporting MCP tools for non harmony models, this PR includes
+- setting up a ResponsesParser class, which stores the internal state of the context in responsesAPI native format
+- add a ParsableContext, which can then handle the context for serving_engine generate_with_builtin_tools
+- add an experimental VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT flag
+- this PR allows ParsableContext to handle reasoning + user facing content, next PR will parse tools
+
+Next:
+- add MCP server and parse tools in the next PR (https://github.com/qandrew/vllm/pull/11, https://github.com/qandrew/vllm/pull/10)
+
+## Test Plan
+
+I tested on minimax; it works on kimi k2 thinking also
+
+Server
+`VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-p
+
+...</description>
+  </item>
+  <item>
+    <title>Support compressed-tensors W4A8 MoE checkpoints in GptOssModel weight loader for CPU</title>
+    <link>https://github.com/vllm-project/vllm/pull/29315</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29315</guid>
+    <pubDate>Mon, 24 Nov 2025 14:43:11 +0000</pubDate>
+    <description>1. Add GptOssModel.load_per_expert_unfused_w4a8 helper to handle per-expert unfused MoE weights (gate_proj, up_proj, down_proj) in W4A8 checkpoints and map them into the fused FusedMoE layout (w13_* and w2_* parameters).
+	•	Handles .weight, .weight_scale, .bias, and .input_scale suffixes.
+	•	For biases, manually slices and writes into the appropriate columns of w13_bias (gate vs up) and w2_bias, supporting both 1D and 2D parameter layouts and using expert_id to pick the correct expert slice when the source tensor has an extra expert dimension.
+	•	For weights/scales, delegates to a custom weight_loader when present, falling back to default_weight_loader otherwise, and surfaces whether the mapping was successfully handled.
+
+2. Extend _load_weights_other to:
+	•	Detect W4A8 (int4 weights, int8
+
+...</description>
+  </item>
+  <item>
+    <title>[Optimization] Add Fused Triton Kernel for GPT-OSS Router</title>
+    <link>https://github.com/vllm-project/vllm/pull/29237</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29237</guid>
+    <pubDate>Sat, 22 Nov 2025 11:44:59 +0000</pubDate>
+    <description>&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 24.04.3 LTS (x86_64)
+GCC version                  : (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Clang version                : Could not collect
+CMake version                : version 3.28.3
+Libc version                 : glibc-2.39
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+==============================
+Python
+
+...</description>
+  </item>
+  <item>
+    <title>Fix gpt oss tool parser v2</title>
+    <link>https://github.com/vllm-project/vllm/pull/29236</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29236</guid>
+    <pubDate>Sat, 22 Nov 2025 11:27:13 +0000</pubDate>
+    <description>Purpose
+This PR fixes critical issues with tool call extraction in the OpenAIToolParser (Harmony/gpt-oss), specifically when using Custom Tools and MCP (Model Context Protocol).
+
+Previously, the parser failed to correctly capture tool calls that resided in the active stream buffer (current_content) but hadn&#x27;t yet been finalized into a message object. This led to two major issues:
+
+Tool Call Failure: valid tool calls were dropped or ignored.
+
+Channel Leakage/Hallucination: The model appeared to hallucinate or leak tool call structures into the final (user-facing) message channel instead of processing them as structured tool calls.
+
+Changes Implemented:
+
+Active Buffer Parsing: Added logic to inspect parser.current_content and parser.current_channel. If the active channel is commentary (used 
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend] Add tool filtering support to ToolServer</title>
+    <link>https://github.com/vllm-project/vllm/pull/29224</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29224</guid>
+    <pubDate>Sat, 22 Nov 2025 05:13:27 +0000</pubDate>
+    <description>## Purpose
+Add `allowed_tools` parameter to `get_tool_description` method in ToolServer interface and implementations. This allows filtering tools from MCP servers and demo tool servers based on a list of allowed tool names.
+
+Features:
+- Supports wildcard (&quot;*&quot;) to allow all tools
+- Returns None if no tools match the filter
+- Maintains backward compatibility with None default (all tools allowed)
+
+## Test Plan
+```
+VLLM_ENABLE_RESPONSES_API_STORE=1 VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_GPT_OSS_HARMONY_SYSTEM_INSTRUCTIONS=1 CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 vllm serve ~/gptoss/  --served-model-name=default 
+
+Test with no allowed tools:
+```
+curl -X POST http://localhost:8000/v1/responses   -H &quot;Content-Type: application/json&quot;   -d &#x27;{
+    &quot;mo
+
+...</description>
+  </item>
+  <item>
+    <title>[Core] Add xxHash as a high-performance hash option for accelerating prefix caching</title>
+    <link>https://github.com/vllm-project/vllm/pull/29163</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29163</guid>
+    <pubDate>Fri, 21 Nov 2025 07:50:58 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+This PR introduces xxHash-based hash algorithms to vLLM’s prefix caching, providing a faster and collision-resistant alternative to the SHA-256 variants added in #23673.
+
+**Why xxHash?** Prefix Caching does not require cryptographic security:
+
+- It never stores secret data.
+- It never leaves process boundaries.
+- It is used exclusively to identify structural equivalence of prefix blocks.
+
+Therefore, cryptographic collision resistance is unnecessary. 
+
+xxHash strikes the right balance: Much better collision resistance compared to Python builtin `hash()`, which is salted and unstable across processes. Much faster than SHA-256 and SHA-256+CBOR used in current prefix caching.
+
+This change is lightweight: it only introduces the xxhash dependency and ad
+
+...</description>
+  </item>
+  <item>
+    <title>[ROCm][Quantization] add quark format moe mapping in WeightsMapper for gpt-oss model</title>
+    <link>https://github.com/vllm-project/vllm/pull/29008</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29008</guid>
+    <pubDate>Wed, 19 Nov 2025 11:21:15 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>[ROCm][CI] Fixes tests for pytorch nightly and python only builds</title>
+    <link>https://github.com/vllm-project/vllm/pull/28979</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28979</guid>
+    <pubDate>Wed, 19 Nov 2025 01:26:03 +0000</pubDate>
+    <description>This PR fixes tests for labels:
+- `Pytorch Nightly Dependency Override Check`
+- `Python-only Installation Test`
+
+It also includes `torchaudio` package into Dockerfile.</description>
+  </item>
+  <item>
+    <title>[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4</title>
+    <link>https://github.com/vllm-project/vllm/pull/28971</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28971</guid>
+    <pubDate>Tue, 18 Nov 2025 23:49:06 +0000</pubDate>
+    <description>## Purpose
+
+This PR is to support FusedMoE LoRA Triton kernel for mxfp4 model.
+* Add UnfusedOAITritonExperts
+* Inject lora module in activation: Since matmul_ogs can fuse activation, set fused_activation to None to unfuse activation in the first matmul_ogs.
+* Inject lora module in moe_sum: This need to unfuse sum in second matmul_ogs. Grouped reduction does scatter + accumulate, it is essentially equal to: `y[dst_indx // n_expts_act, :] += x[src_indx, :]`, so that scatter sum across multiple experts, and collapse `M * topk` to `M` rows. Therefore, we need to temporarily set `routing_data.n_expts_act` to 1, so it doesn&#x27;t sum across multiple experts, in order unfuse moe_sum in the second matmul_ogs.
+* Added test_modular_oai_triton_moe.py
+
+## Test Plan
+
+```
+pytest -s -v tests/kernels/moe/test
+
+...</description>
+  </item>
+  <item>
+    <title>[DNM] kimi k2 thinking tool calling</title>
+    <link>https://github.com/vllm-project/vllm/pull/28794</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28794</guid>
+    <pubDate>Sun, 16 Nov 2025 02:32:29 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>[Bugfix] Multiple fixes for gpt-oss Chat Completion prompting</title>
+    <link>https://github.com/vllm-project/vllm/pull/28729</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28729</guid>
+    <pubDate>Fri, 14 Nov 2025 15:22:04 +0000</pubDate>
+    <description>## Purpose
+
+This fixes multiple issues with how we were prompting gpt-oss models for Chat Completion requests. A summary of the fixes:
+
+- We were not setting the recipient to &quot;assistant&quot; on tool responses
+- We were not mapping the tool_call_id to the proper function name on tool responses, resulting in the model getting confused about which tool response matched which tool call.
+- When the model generates tool calls during a turn, we return any model output to the commentary channel as the `content` of that tool call response. We were not properly restoring this content as a commentary message when those tool calls were passed back in via Chat Completion messages.
+- When the model generates reasoning messages during a tool call turn, we return that as a `reasoning` properly on the Chat Com
+
+...</description>
+  </item>
+  <item>
+    <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
+    <link>https://github.com/vllm-project/vllm/pull/28685</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28685</guid>
+    <pubDate>Thu, 13 Nov 2025 21:25:45 +0000</pubDate>
+    <description>## Purpose
+
+Implement RFC #28326 to enable users to easily integrate custom models with vLLM for both training and inference, with support for external parallelism libraries (e.g., Megatron-LM, FSDP, DeepSpeed).
+
+Enables use cases like:
+  - RL training with vLLM acceleration
+  - Integrating third-party models without rewriting parallelism logic
+  - Mixing external tensor parallel layers (Megatron) with vLLM attention
+
+## Test Plan
+
+```
+# example, should be a test
+python examples/offline_inference/custom_model_with_megatron.py
+```
+  - Full transformer using Megatron-LM&#x27;s ColumnParallelLinear + RowParallelLinear for MLPs
+  - TrainableFlashAttention for attention (with KV cache + backward pass)
+  - Ground truth validation against independent PyTorch run
+  - Tests TP=4, dynamic batching, train
+
+...</description>
+  </item>
+  <item>
+    <title>[Bug]: rocm crash AMD Ryzen AI 9 HX PRO 370 w/ Radeon 890M - docker/podman</title>
+    <link>https://github.com/vllm-project/vllm/issues/28460</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28460</guid>
+    <pubDate>Tue, 11 Nov 2025 10:16:32 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 22.04.5 LTS (x86_64)
+GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
+Clang version                : 20.0.0git (https://github.com/RadeonOpenCompute/llvm-project roc-7.0.0 25314 f4087f6b428f0e6f575ebac8a8a724dab123d06e)
+CMake version                : version 3.31.6
+Libc version                 : glibc-2.35
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0a0+git1c57644
+Is debug build               : False
+CUDA used to build PyTorc
+
+...</description>
+  </item>
+  <item>
+    <title>Fix/responses api harmony channel metadata    #28262</title>
+    <link>https://github.com/vllm-project/vllm/pull/28355</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28355</guid>
+    <pubDate>Sun, 09 Nov 2025 00:48:27 +0000</pubDate>
+    <description> 
+ 
+## Purpose
+Fix issue #28262: Restore missing channel metadata when converting Responses API output items back to Harmony Messages for multi-turn conversations.
+Changes:
+Set channel=&#x27;commentary&#x27; for function_call_output type inputs
+Set channel=&#x27;analysis&#x27; or &#x27;commentary&#x27; for reasoning type based on the following message (commentary if followed by function_call, analysis otherwise)
+Add test to verify channel metadata is correctly preserved across conversation turns
+Update parse_response_input() to accept optional next_msg parameter for context-aware channel assignmen
+## Test Plan
+pytest tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_call_with_previous_input_messages -v
+## Test Result
+pass 
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix] Parse gpt-oss refusals w/ newer openai-harmony</title>
+    <link>https://github.com/vllm-project/vllm/pull/28303</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28303</guid>
+    <pubDate>Fri, 07 Nov 2025 15:35:05 +0000</pubDate>
+    <description>## Purpose
+
+The output generated by gpt-oss models does not always strictly follow its expected harmony chat template format. This commonly - but not exclusively - happens when gpt-oss-120b generates refusals for content that violates its built-in safety guidelines.
+
+To fix this, a non-strict mode was added to the openai-harmony library to allow attempted recovery of malformed message headers in the model output, such as a missing `&lt;|message|&gt;` special token before the assistant text.
+
+This will resolve some cases where the error
+`openai_harmony.HarmonyError: unexpected tokens remaining in message header` was previously thrown. It will not resolve all of those, as not every malformed message output can be recovered. Other ongoing work around using structured output for the Harmony format c
+
+...</description>
+  </item>
+  <item>
+    <title>[3/n] ParsableContext initial implementation</title>
+    <link>https://github.com/vllm-project/vllm/pull/28154</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28154</guid>
+    <pubDate>Wed, 05 Nov 2025 19:45:04 +0000</pubDate>
+    <description>## Purpose
+
+Copied over from my draft version in https://github.com/qandrew/vllm/pull/5
+
+- Adds the concept of sentences &amp; textContent, similar to openaiHarmony
+- Add a ParsableContext, which will use the ParsableStreamer and have structured sentences
+- Add a function _make_response_output_items_from_parsable_context to parse out the final output.
+- This is all gated behind an env var so it should be safe to merge
+
+this PR does not cover the following, which we&#x27;ll add later
+- streaming
+- tool calling
+
+## Test Plan
+
+this generates one sentence with 2 textContents.
+
+server: `VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1  vllm serve MiniMaxAI/MiniMax-M2     --tensor-parallel-size 4     --tool-call-parser minimax_m2     --reasoning-parser minimax_m2     --enable-auto-tool-choice     --port 8000`
+
+```
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend] [gpt-oss] Chat format GD for tool calling with gptoss</title>
+    <link>https://github.com/vllm-project/vllm/pull/28148</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28148</guid>
+    <pubDate>Wed, 05 Nov 2025 18:17:40 +0000</pubDate>
+    <description>## Purpose
+Building on top of the initial gpt-oss reasoning parser in #25515, this PR fleshes out the full structural tags schema to guide the chat format for gpt-oss.
+
+It is only added to the Responses API path for now, but it should be able to fix issues like the ones mentioned in #24954 without needing to make adjustments to Harmony.
+
+Guided decoding for the gpt-oss chat format should only be enabled if `structured_outputs_config.enable_in_reasoning` is True, since the chat format is technically in the reasoning section of model output. It also lets us continue to use structured outputs for the content of the final message. `structured_outputs_config.reasoning_parser` is set by default for gpt-oss. 
+
+TODO: test that structured output works alongside this after #28000 is merged, and adju
+
+...</description>
+  </item>
+  <item>
+    <title>[ez][responsesAPI] refactor function to harmony utils</title>
+    <link>https://github.com/vllm-project/vllm/pull/28009</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28009</guid>
+    <pubDate>Mon, 03 Nov 2025 23:36:40 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Ideally all GPTOSS/harmony specific code should not be in serving responses. this code cleans up one function by moving it to harmony-utils.
+
+## Test Plan
+
+no functional changes; CI passes
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update
+
+...</description>
+  </item>
+  <item>
+    <title>[Quantization] support gpt-oss for quantized kv cache weight loading</title>
+    <link>https://github.com/vllm-project/vllm/pull/27980</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27980</guid>
+    <pubDate>Mon, 03 Nov 2025 12:03:40 +0000</pubDate>
+    <description>## Purpose
+This PR aims to fix quantized kv cache model loading issues using AMD-Quark. 
+The fix was initially applied to the `gpt-oss` model and may be extended to other models in `vllm/model_executor/models`, as they share a nearly identical methodology.
+
+Here is the original error traceback w/o this PR fixing.
+&lt;img width=&quot;1219&quot; height=&quot;468&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/1ce1b92e-04a9-404a-91da-f06151cd54c9&quot; /&gt;
+
+##
+Here is a check list of some models defined in `vllm/model_executor/models/` for the supportness of quantized kv cache loading. Models with `get_cache_scale` called is marked as ✅, while models without `get_cache_scale` called is marked as ⚠️.
+
+The ⚠️ symbol is preferred over ❌ since some models can intrinsically have non-quantized KV cache, for i
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix] Handle escaped characters in GLM tool parser to prevent double serialization</title>
+    <link>https://github.com/vllm-project/vllm/pull/27970</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27970</guid>
+    <pubDate>Mon, 03 Nov 2025 08:37:00 +0000</pubDate>
+    <description>## Purpose
+
+This PR fixes a bug where the tool call parser fails when the model&#x27;s output contains literal escaped characters, such as `\n`, `\&quot;`.
+
+**The Problem:**
+When GLM-4 outputs tool calls, the XML may contain &#x27;\n&#x27; literal characters and the JSON content within `&lt;arg_value&gt;` tags may contain escaped characters like `\&quot;`, causing regex matching and json parsing both failed. For example:
+
+```
+&lt;tool_call&gt;todo_write\n&lt;arg_key&gt;todos&lt;/arg_key&gt;\n&lt;arg_value&gt;[{\&quot;id\&quot;: \&quot;1\&quot;, \&quot;task\&quot;: \&quot;检查后端代码中的硬编码问题\&quot;, \&quot;status\&quot;: \&quot;in_progress\&quot;}, {\&quot;id\&quot;: \&quot;2\&quot;, \&quot;task\&quot;: \&quot;检查前端代码中的硬编码问题\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}, {\&quot;id\&quot;: \&quot;3\&quot;, \&quot;task\&quot;: \&quot;检查违反单一职责的代码\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}, {\&quot;id\&quot;: \&quot;4\&quot;, \&quot;task\&quot;: \&quot;创建整改建议报告\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}]&lt;/arg_value&gt;
+&lt;/tool_call&gt;
+```
+
+The current regex fails to ma
+
+...</description>
+  </item>
+  <item>
+    <title>[Metrics] [KVConnector] Add Offloading Connector metrics</title>
+    <link>https://github.com/vllm-project/vllm/pull/27942</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27942</guid>
+    <pubDate>Sun, 02 Nov 2025 15:36:12 +0000</pubDate>
+    <description>Added queries and hits metrics for the Offloading Connector.
+Also added timing metrics for store and load operations, which take the average time it takes to load/store, per-token.
+The metrics are available from Prometheus and from the StatLogger.
+## Purpose
+Allows collection of timing metrics for the Offloading Connector, which is essential for future development.
+@orozery please review.
+## Test Plan
+
+## Test Result
+</description>
+  </item>
+  <item>
+    <title>[WIP] Enable async scheduling by default</title>
+    <link>https://github.com/vllm-project/vllm/pull/27614</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27614</guid>
+    <pubDate>Mon, 27 Oct 2025 23:07:26 +0000</pubDate>
+    <description>Currently just doing full CI test to flush out any issues.
+</description>
+  </item>
+  <item>
+    <title>[WIP] [GPT-OSS] customized symm_mem based EP comm kernel integration</title>
+    <link>https://github.com/vllm-project/vllm/pull/27495</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27495</guid>
+    <pubDate>Sat, 25 Oct 2025 01:04:50 +0000</pubDate>
+    <description>Integrates Triton MoE communication kernels
+
+achieved 60% throughput increase compared to #[24588](https://github.com/vllm-project/vllm/pull/24588)
+
+&lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
+</description>
+  </item>
+  <item>
+    <title>[CI/Build] Add aime25 eval to gpt-oss CI</title>
+    <link>https://github.com/vllm-project/vllm/pull/27398</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27398</guid>
+    <pubDate>Thu, 23 Oct 2025 07:38:49 +0000</pubDate>
+    <description>## Purpose
+This PR added eval config for gpt-oss-120b on H100. 
+
+## Test Plan
+pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-oss.txt --tp-size=1
+
+## Test Result
+
+1 passed, 6 warnings in 455.90s (0:07:35) 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the releas
+
+...</description>
+  </item>
+  <item>
+    <title>[Bug]: gptoss calls built-in tool when no tools are given</title>
+    <link>https://github.com/vllm-project/vllm/issues/27385</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27385</guid>
+    <pubDate>Thu, 23 Oct 2025 04:01:36 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 20.04.6 LTS (x86_64)
+GCC version                  : (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
+Clang version                : Could not collect
+CMake version                : version 3.29.2
+Libc version                 : glibc-2.31
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.8.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+==============================
+Python version
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix] Actually enable serialize_messages for harmony Responses (related to #26185)</title>
+    <link>https://github.com/vllm-project/vllm/pull/27377</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27377</guid>
+    <pubDate>Thu, 23 Oct 2025 01:07:10 +0000</pubDate>
+    <description>## Purpose
+
+For the OpenAI-compatible `v1/responses` route, enable raw messages to be sent when `enable_response_messages` is set to True in `extra_body`.
+
+Previously, the responses are empty because of an issue in openai/harmony. (https://github.com/openai/harmony/issues/78)
+
+https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
+
+The fix is to trigger
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
+    <link>https://github.com/vllm-project/vllm/pull/27310</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27310</guid>
+    <pubDate>Wed, 22 Oct 2025 00:57:44 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+The current way of implementation forces the system prompt to go into the developer message and it confuses the usage of different roles. We should have developer into developer message, and allow system message to override the system prompt as supported by signature of harmony_utils.py
+
+## Test Result
+Override
+            &quot;openai_harmony_message&quot;: {
+                &quot;author&quot;: {
+                    &quot;role&quot;: &quot;system&quot;
+                },
+                &quot;content&quot;: [
+                    {
+                        &quot;system_content&quot;: {
+                            &quot;type&quot;: &quot;system_content&quot;,
+                            &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
+                            &quot;reasoning_effort&quot;: &quot;high&quot;,
+                       
+
+...</description>
+  </item>
+  <item>
+    <title>Support PP on tpu_inference</title>
+    <link>https://github.com/vllm-project/vllm/pull/27296</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
+    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>Experimental attention backend in helion</title>
+    <link>https://github.com/vllm-project/vllm/pull/27293</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
+    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+very experimental and draft PR so far
+
+## Test Plan
+
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
+```
+## Test Result
+
+t.b.a.
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in 
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
+
+...</description>
+  </item>
+  <item>
+    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
+    <link>https://github.com/vllm-project/vllm/pull/27100</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
+    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
+</description>
+  </item>
+  <item>
+    <title>Transform HF interleaved weights to halves in vllm</title>
+    <link>https://github.com/vllm-project/vllm/pull/27024</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27024</guid>
+    <pubDate>Thu, 16 Oct 2025 13:24:44 +0000</pubDate>
+    <description>## Purpose
+- HF provides the gate + up weights interleaved as [g0, u0, g1, u1]
+- vllm expects the gate + up tensors to be in halves [g0, g1, u0, u1]
+- Add a funtion to do the transformation for gate + up weights and bias
+
+## Test Plan
+Tested with gpt-oss
+
+## Test Result
+Gives the correct results on CPU
+</description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Support all MCP servers for gpt-oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/26704</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26704</guid>
+    <pubDate>Mon, 13 Oct 2025 12:51:59 +0000</pubDate>
+    <description>## Purpose
+This PR is an implementation of #26703 
+
+Note: This PR is really big, but there was a lot that had to be cleaned up at the same time. A large amount of the code is from adding tests to existing code and a MCP server to test with and new MCP tests.
+
+There are three main motivations:
+- vLLM should support integrating with all MCP servers
+  - TODO: Test with enterprise ones like Github
+- Clean up gpt-oss tool specific code paths in vLLM
+  - Tools and models change, but MCP is a protocol meant to support all models
+  - Sets the stage for full MCP integration for all tool calling models
+- Avoid losing information due to lossy OpenAI types for output
+  - An example below
+
+```
+# What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
+class ActionOp
+
+...</description>
+  </item>
+  <item>
+    <title>fix json schema alias serializing when streaming</title>
+    <link>https://github.com/vllm-project/vllm/pull/26356</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26356</guid>
+    <pubDate>Tue, 07 Oct 2025 14:12:21 +0000</pubDate>
+    <description>## Purpose
+
+Fix a serialization bug in streaming responses where Pydantic field aliases (e.g. `schema` → `schema_`) were not preserved during `.model_dump()` calls.
+
+This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quot;` in streamed response events for JSON schema output formats, breaking compatibility with the OpenAI SDK’s `ResponseFormatTextJSONSchemaConfig` parsing.
+
+**Related issue:** [vllm-project/vllm#26288](https://github.com/vllm-project/vllm/issues/26288)
+
+### Root Cause
+- `ResponsesResponse.from_request(...).model_dump()` was called without `by_alias=True` at:
+  - `vllm/entrypoints/openai/serving_responses.py:1830`
+  - `vllm/entrypoints/openai/serving_responses.py:1879`
+- Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
+
+...</description>
+  </item>
+  <item>
+    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
+    <link>https://github.com/vllm-project/vllm/pull/26291</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
+    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
+    <description>Hi team!
+
+## Purpose
+
+We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
+
+## Test Plan
+
+Server command:
+
+```
+vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
+```
+
+Test script `streaming_client.py`:
+
+```
+#!/usr/bin/env python3
+
+import asyncio
+import sys
+from typing import List, Dict
+
+import httpx
+from openai import AsyncOpenAI
+
+
+class StreamingClient:
+    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
+
+...</description>
+  </item>
+  <item>
+    <title>[Tests] Tool call tests for openai/gpt-oss-20b</title>
+    <link>https://github.com/vllm-project/vllm/pull/26237</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26237</guid>
+    <pubDate>Sun, 05 Oct 2025 02:45:01 +0000</pubDate>
+    <description>Test suite for verifying tool-calling behavior in vLLM with **openai tool-call parser**.
+
+This suite validates:
+1. Single and multiple tool invocation behavior.
+2. Correct parsing of tool names and argument payloads.
+3. Model compliance with OpenAI&#x27;s tool-calling specification.
+4. Handling of invalid or incomplete tool inputs.
+5. Variation in reasoning and tool behavior under different temperatures.
+
+Tools used:
+- calculator: Performs arithmetic calculations.
+- get_time: Retrieves the current time in a given city.
+
+Model under test: openai/gpt-oss-20b
+Parser used:
+- Tool call parser: openai</description>
+  </item>
+  <item>
+    <title>[Bugfix] fixing streaming issues and tool call output for gpt-oss (#22704)</title>
+    <link>https://github.com/vllm-project/vllm/pull/25728</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25728</guid>
+    <pubDate>Fri, 26 Sep 2025 00:32:21 +0000</pubDate>
+    <description>## Purpose
+Closely related to bugs associated with streaming for gpt-oss response API (#22704):
+
+Harmony’s streaming didn’t support `functions.*` tool calls at all. We handled reasoning on `analysis`, final text on `final`, and built-ins like code/web—but `&quot;commentary&quot;` messages with a `recipient=&quot;functions.NAME&quot;` had a no-op branch.
+
+## Test Plan
+
+First, tested GPT-OSS with a basic set of instructions, few-shot examples, a function definition, and a prompt to find the weather in San Francisco, using the get_weather function call as input.
+
+Next, tested with the following relevant tests:
+```
+- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_simple_input
+- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_streaming
+
+```
+
+## Test Result
+
+
+
+...</description>
+  </item>
+  <item>
+    <title>[GPT-OSS] Save `extra_weight_attrs` and use at `load_weights` time for Marlin kernel</title>
+    <link>https://github.com/vllm-project/vllm/pull/25694</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25694</guid>
+    <pubDate>Thu, 25 Sep 2025 17:22:44 +0000</pubDate>
+    <description>
+## Purpose
+Weight loading with GPT-OSS is broken : #23577 
+
+The issue is that we assign `weight_loader` attributes to the parameters in `GPTOSSModule` at init time, but while loading new weights, we create a new `Parameter` object which no longer has this attribute. 
+
+This PR resolves the above issue, and weights can be loaded successfully now. However, the responses are garbage because weight loading for the bias terms in experts `gate_up_proj_bias` and `down_proj_bias` are broken. 
+
+This PR has only tested weight syncing when the quantization method is of type `Mxfp4MoEMethod` with `use_marlin` True, since that seems to be the default path on Hopper. (correct me if I&#x27;m wrong)
+
+## Test Plan
+
+I modified the existing example `examples/offline_inference/rlhf.py` to use gpt-oss and simply re
+
+...</description>
+  </item>
+  <item>
+    <title>[Core] Support openai HarmonyContext plugin</title>
+    <link>https://github.com/vllm-project/vllm/pull/25594</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25594</guid>
+    <pubDate>Wed, 24 Sep 2025 16:31:54 +0000</pubDate>
+    <description>## Purpose
+In some gpt-oss use cases, especially internal scenarios, we need to customize the HarmonyContext class. However, the current implementation does not allow this in OSS. I believe other users may also want similar flexibility to define their own class methods.
+This PR introduces custom plugin registration for HarmonyContext, making it more extensible by allowing users to register and load their own implementations.
+
+Example:
+```
+from vllm.entrypoints.harmony_utils import register_context_loader
+
+@register_context_loader(&quot;HarmonyContextFB&quot;)
+class HarmonyContextFB(HarmonyContext):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    async def call_tool(self) -&gt; list[Message]:
+        pass
+
+    async def call_search_tool(
+        self, tool_session
+
+...</description>
+  </item>
+  <item>
+    <title>[Misc][Metrics] expose requests preemptions in logger</title>
+    <link>https://github.com/vllm-project/vllm/pull/25303</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25303</guid>
+    <pubDate>Sat, 20 Sep 2025 05:22:36 +0000</pubDate>
+    <description>### Summary
+The purpose of this PR is to store the num preemptions per step in the logger class locally thus it can be leveraged in children classes.
+
+Currently when no new blocks available from each step, we already record this as [request events](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/core/sched/scheduler.py#L279) and set it back to engine client by EngineCoreResponses which later got [aggregated](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/metrics/stats.py#L156) in the [iteration stats](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/engine/async_llm.py#L458). 
+
+
+### Test Plan
+1. Added a simple unit tests for iteration stats. 
+2. Run locally, satu
+
+...</description>
+  </item>
+  <item>
+    <title>[Kernels] Move shared/fused expert sum and final reduce into FusedMoE layer</title>
+    <link>https://github.com/vllm-project/vllm/pull/25200</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25200</guid>
+    <pubDate>Thu, 18 Sep 2025 20:01:35 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>[Rocm] [quantization] support quark wmxfp4 for gptoss</title>
+    <link>https://github.com/vllm-project/vllm/pull/25159</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
+    <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
+    <description></description>
+  </item>
+  <item>
+    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
+    <link>https://github.com/vllm-project/vllm/pull/25052</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
+    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
+    <description>## Purpose
+
+Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
+
+## Test Plan
+
+tested by CI
+
+## Test Result
+
+tested by CI 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before a
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
+    <link>https://github.com/vllm-project/vllm/pull/24998</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
+    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
+    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
+
+This PR also handles several variations of enabling or disabling thinking in the prompt.
+
+Thinking enabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;&lt;/think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+```
+
+
+
+cc: @DarkLight1337 </description>
+  </item>
+</channel>
+</rss>
