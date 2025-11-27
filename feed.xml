@@ -3,1070 +3,130 @@
 <channel>
   <title>vLLM good first issues</title>
   <link>https://github.com/vllm-project/vllm/issues</link>
-  <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
+  <description>Open issues with label '['good first issue', 'gpt-oss', 'moe']' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 27 Nov 2025 12:51:06 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 27 Nov 2025 13:03:26 +0000</lastBuildDate>
   <item>
-    <title>[Bug]: Add validation for tool requests that the tool is available</title>
-    <link>https://github.com/vllm-project/vllm/issues/29432</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29432</guid>
-    <pubDate>Tue, 25 Nov 2025 19:04:15 +0000</pubDate>
-    <description>### 🐛 Describe the bug
+    <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
+    <link>https://github.com/vllm-project/vllm/pull/29512</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29512</guid>
+    <pubDate>Wed, 26 Nov 2025 17:38:56 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
 
-Currently there is no check for this, vLLM will just respond sub-optimally in a &quot;silent&quot; way. We should fail the individual request in this case with appropriate error message.
+## Purpose
 
-This is a problem in particular for example when using the demo tool server without the `gpt-oss` package installed.
+We have been using `silu_and_mul`, `swigluoai_and_mul`, etc as unvectorized kernels for essentially all of the fused moe methods, so there are free gains to be had there, especially for large batch sizes. This PR expands all of them to 128 bit vectorized loads.
 
-See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecomment-3573053391
-</description>
-  </item>
-  <item>
-    <title>[Feature]: Optimize collectives in TP MoE case using torch.compile pass</title>
-    <link>https://github.com/vllm-project/vllm/issues/29139</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29139</guid>
-    <pubDate>Fri, 21 Nov 2025 01:36:06 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
+## E2E Perf
 
-To avoid redundant work in MoE models in the TP case, sequence parallelism was added to the Deepseek model definition in #24134 and expanded to other models in #24982. However, to avoid performing surgery on the linear layer, the current approach performs more communication than necessary. With a torch.compile custom pass, we can rewrite the graph to remove the redundant computation.
-
-### More details
-
-Before the SP optimization, the ops in the model were:
+Ran on H100 so using `cutlass_moe_fp8`:
 ```
-- o_proj:[num_tokens, ...] -&gt; [num_tokens, ...] (incomplete results)
-- all_reduce:[num_tokens, ...] -&gt; [num_tokens, ...]
-- router:[num_tokens, ...] -&gt; [num_tokens, ...]
-- experts:[num_tokens, ...] -&gt; [num_tokens, ...]
-- ...
+vllm serve RedHatAI/Qwen3-30B-A3B-FP8-dynamic
+vllm bench serve --model RedHatAI/Qwen3-30B-A3B-FP8-dynamic --num-prompts 10 --random-input-len 512 --random-output-len 10
 ```
 
-With sequence parallel enabled, this becomes:
-```
-- o_proj: [num_
+&gt; These results were noisy, need to retake
 
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Disable logging `/metrics`</title>
-    <link>https://github.com/vllm-project/vllm/issues/29023</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29023</guid>
-    <pubDate>Wed, 19 Nov 2025 18:25:48 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-- IGW hits `/metrics` continuously to understand the current load on the system
-- This leads to an overload of logs
-- We can disable this with `--disable-uvicorn-access-log`, but lose access to all access logs
-
-We should have `--disable-uvicorn-metrics-access-log` to avoid logging * just * metrics. Per Gemini, we can do this with something like:
-
-```python
-# Define the routes for which access logs should be disabled
-EXCLUDE_PATHS = [&quot;/health&quot;, &quot;/metrics&quot;]
-
-class EndpointFilter(logging.Filter):
-    def filter(self, record: logging.LogRecord) -&gt; bool:
-        # Check if the log record contains arguments and if the path matches an excluded path
-        if record.args and len(record.args) &gt;= 3:
-            path = record.args[2]  # The path is typically 
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Fused Kernel for GPT-OSS Router</title>
-    <link>https://github.com/vllm-project/vllm/issues/28986</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28986</guid>
-    <pubDate>Wed, 19 Nov 2025 03:18:25 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-&lt;img width=&quot;1257&quot; height=&quot;250&quot; alt=&quot;Image&quot; src=&quot;https://github.com/user-attachments/assets/31eba061-522c-4521-b0a9-9f25bb36c3df&quot; /&gt;
-
-- Right now, we spend ~3.5% of the layer in the expert selection
-- The operation is unfused
-
-Write a fused kernel like we have for deepseek grouped_topk
-
-### Alternatives
-
-- torch compile
-- triton
-- cuda
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug][RL]: Port Conflict</title>
-    <link>https://github.com/vllm-project/vllm/issues/28498</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28498</guid>
-    <pubDate>Tue, 11 Nov 2025 22:51:35 +0000</pubDate>
-    <description>### Your current environment
-
-- bug report:
+## Traces
 
 ```
-Hello vLLM team, I&#x27;m running into a suspicious ZMQ socket bug with my 2P 4D configuration for DeepSeek-V3 (see below). I thought it is caused by reusing same nodes for many vLLM launches, but now it happened also at a clean node. Seems like a DP bug of sorts. Please find logs attached. vllm==0.11.0.
+vllm serve RedHatAI/Qwen3-30B-A3B-FP8-dynamic
+vllm bench serve --model RedHatAI/Qwen3-30B-A3B-FP8-dynamic --num-prompts 10 --random-input-len 512 --random-output-len 10 --profile
 ```
 
-```bash
-[1;36m(APIServer pid=670293)[0;0m   File &quot;XXX/.venv/lib/python3.12/site-packages/vllm/v1/engine/async_llm.py&quot;, line 134, in __init__
-[1;36m(APIServer pid=670293)[0;0m     self.engine_core = EngineCoreClient.make_async_mp_client(
-[1;36m(APIServer pid=670293)[0;0m                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[1;36m(APIServer pid=670293)[0;0m   File &quot;XXX/.venv/lib/python3.12/site-packages/vllm/v1/engine/core_client.py&quot;,
+Profiles below are f
 
 ...</description>
   </item>
   <item>
-    <title>[Feature]: Improve DCP error messages</title>
-    <link>https://github.com/vllm-project/vllm/issues/28407</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28407</guid>
-    <pubDate>Mon, 10 Nov 2025 17:46:39 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
+    <title>[Refactor] Split up compressed_tensors_moe.py into separate files per method</title>
+    <link>https://github.com/vllm-project/vllm/pull/29427</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29427</guid>
+    <pubDate>Tue, 25 Nov 2025 18:23:03 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
 
-Currently if a backend doesn&#x27;t support DCP we get the following error message 
+## Purpose
 
-```
-AssertionError: DCP requires attention impls to return the softmax lse for decode, but the impl FlashInferImpl does not return the softmax lse for decode.
-```
+Similar to other quant methods like gptq_marlin.py or fp8.py, I&#x27;d like to colocate the MoE methods for a given quantization config next to its same Linear method. So this PR splits the monolithic compressed_tensors_moe.py such that each class is now in its own file i.e. CompressedTensorsW4A4Nvfp4MoeMethod is now in compressed_tensors_w4a4_nvfp4.py
 
-It would good to suggest to the user to try an alternative backend using `VLLM_ATTENTION_BACKEND`
+## Test Plan
 
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Feature]: Implement naive prepare/finalize class to replace naive dispatching in fused_moe/layer.py</title>
-    <link>https://github.com/vllm-project/vllm/issues/28236</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28236</guid>
-    <pubDate>Thu, 06 Nov 2025 18:38:38 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-The `FusedMoE` layer has a special case dispatch/combine for EP+DP when there is no specific all2all backend specified.  This makes the code in `layer.py` a bit confusing and hard to follow.  One way to simplify this is to implement a proper `FusedMoEPrepareAndFinalize` subclass for naive dispatch/combine.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[RFC]: Make PassConfig flags less verbose</title>
-    <link>https://github.com/vllm-project/vllm/issues/27995</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27995</guid>
-    <pubDate>Mon, 03 Nov 2025 17:49:29 +0000</pubDate>
-    <description>### Motivation.
-
-Almost all `PassConfig` field names have `enable_` in the name, which is unnecessarily verbose. They are also pretty long, and sometimes not descriptive enough. Finally, `enable_fusion` should be split into rmsnorm+quant and activation+quant flags as we want to control these flags separately.
-
-### Proposed Change.
-
-We should rename the flags:
-- `enable_async_tp` -&gt; `fuse_gemm_comms`
-- `enable_attn_fusion` -&gt; `fuse_attn_quant` 
-- `enable_fi_allreduce_fusion` -&gt; `fuse_allreduce_rms` 
-- `enable_fusion` -&gt; `fuse_norm_quant`, `fuse_act_quant`
-- `enable_noop` -&gt; `eliminate_noops`
-- `enable_sequence_parallelism` -&gt; `enable_sp`
-
-For future RoPE-based fusion passes, the flags will look like:
-- `enable_qknorm_rope_fusion` -&gt; `fuse_qknorm_rope`
-- `enable_rope_cache_fusion` -&gt; `fuse_r
-
-...</description>
-  </item>
-  <item>
-    <title>[RFC]: Remap `CompilationConfig` from `-O` to `-cc` in CLI</title>
-    <link>https://github.com/vllm-project/vllm/issues/27832</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27832</guid>
-    <pubDate>Thu, 30 Oct 2025 20:29:31 +0000</pubDate>
-    <description>### Motivation.
-
-With #20283 (and #26847), we&#x27;re repurposing `-O0`/`-O1`/`-O2`/`-O3` to map to `optimization_level` instead of `CompilationConfig.level`/`CompilationConfig.mode`. This leaves us in a slightly confusing state where `-O` can refer to optimization level or compilation config depending on what follows it:
-- `-O0` -&gt; `optimization_level=0`
-- `-O 3` -&gt; `optimization_level=3`
-- `-O {&quot;cudagraph_mode&quot;: &quot;NONE&quot;}` -&gt; `CompilationConfig(cudagraph_mode=&quot;NONE&quot;)`
-- `-O.use_inductor=False` -&gt; `CompilationConfig(use_inductor=False)`
-- `--compilation-config.backend=eager` -&gt; `CompilationConfig(backend=&quot;eager&quot;)`
-
-This is bad UX, and we should fix it. However, a CLI shorthand for `CompilationConfig` is still needed so users can easily compose different properties.
-
-### Proposed Change.
-
-We shou
-
-...</description>
-  </item>
-  <item>
-    <title>[Usage]: how to request a qwen2.5-VL-7B classify model served by vllm using openai SDK?</title>
-    <link>https://github.com/vllm-project/vllm/issues/27413</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27413</guid>
-    <pubDate>Thu, 23 Oct 2025 12:32:25 +0000</pubDate>
-    <description>### Your current environment
-
-```text
-The output of `python collect_env.py`
-```
-
-
-### How would you like to use vllm
-
-I launch a server with the following command to serving a Qwen2.5-VL-7B model finetued for seqence classification. (this model replaced the lm_head with a 2 classes score_head)
-
-The launch command is :
-```
-vllm serve --model=//video_classification/qwenvl_7b_video_cls/v5-20251011-121851/2340_vllm_format --served_model_name Qwen2.5-7B-shenhe --task=classify --port=8080 --tensor-parallel-size=2
-```
-
-I don&#x27;t know how to request the server with the openAI sdk.
-I use the code snnipet showed below which works well with pure text, but it got 400 bad request when I put the video url into the prompt
-
-this works well:
-```
-# SPDX-License-Identifier: Apache-2.0
-# SPDX-FileCopyrightText:
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Better base64 to torch tenser</title>
-    <link>https://github.com/vllm-project/vllm/issues/26781</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/26781</guid>
-    <pubDate>Tue, 14 Oct 2025 08:00:48 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Support float32, float16, bfloat16, fp8_e4m3, fp8_e5m2 embed dtype in #26414
-
-
-The following line of code will raise annoying UserWarning
-```
-torch.frombuffer(
-    base64.b64decode(data[&quot;embedding&quot;]), dtype=torch_dtype
-).to(torch.float32)
-```
-
-UserWarning:
-```
-examples/online_serving/pooling/embedding_embed_dtype_client.py:49: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Improve config validation using Pydantic</title>
-    <link>https://github.com/vllm-project/vllm/issues/26366</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/26366</guid>
-    <pubDate>Tue, 07 Oct 2025 16:55:37 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-All the configs in https://github.com/vllm-project/vllm/tree/main/vllm/config are decorated with `pydantic.dataclass`. However, many of them include manual validation in `__post_init__`.
-
-This issue is a call for help to improve the configs in the following ways:
-
-- Use [`pydantic.Field`](https://docs.pydantic.dev/latest/api/fields/#pydantic.fields.Field) to apply simple constraints, such as `gt=0`, directly to the default values of the dataclass fields ([usage docs](https://docs.pydantic.dev/latest/concepts/fields/))
-- Use [`pydantic.field_validator`](https://docs.pydantic.dev/latest/api/functional_validators/#pydantic.functional_validators.field_validator) to apply more complex field validation to individual fields. ([usage docs](https://docs.pyda
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Compute &quot;average KV cache lifetime&quot;</title>
-    <link>https://github.com/vllm-project/vllm/issues/25725</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/25725</guid>
-    <pubDate>Fri, 26 Sep 2025 00:02:06 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-It would be useful to provide a measure how long each KV block/request stays in cache in average. This is to answer questions like &quot;if a user returns in 10min they will expect a prefix cache and better experience&quot;.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[RFC]: Limit the use of envvars in vLLM</title>
-    <link>https://github.com/vllm-project/vllm/issues/25700</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/25700</guid>
-    <pubDate>Thu, 25 Sep 2025 18:13:19 +0000</pubDate>
-    <description>### Motivation.
-
-vLLM&#x27;s envvars are on the edge of getting out of control. There are many envvars should instead be configs. Like the attention backend, all2all kernel backend, and even there is a flag to control KV cache layout. envvars are evil because:
-
-1. It is equivalent of using global variables everywhere in the code, which is a bad programming practice.
-2. envvars have no advanced structure like, hierarchy, typechecks, etc. 
-
-In summary, I think envvars are the kind of thing that is very easy to add so people tend to add envvars as the shortest path to implement their feature, but this can quickly becomes unmanageable and makes the project very hard to use. 
-
-### Proposed Change.
-
-I think we should:
-
-1. Spend some effort on reviewing the current envvars and move many of them to con
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: automatically use pre-compiled wheels when installed from github</title>
-    <link>https://github.com/vllm-project/vllm/issues/24706</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24706</guid>
-    <pubDate>Fri, 12 Sep 2025 01:06:34 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-When people use `pip install git+https://github.com/vllm-project/vllm.git` , it&#x27;s safe to turn on pre-compiled wheels.
-
-Many people still use this way, and right now it goes through full compilation.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug]: `vllm bench serve` isn&#x27;t an exact replacement of benchmark_serving.py</title>
-    <link>https://github.com/vllm-project/vllm/issues/24684</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24684</guid>
-    <pubDate>Thu, 11 Sep 2025 18:21:00 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-Collecting environment information...
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 22.04.5 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 4.1.0
-Libc version                 : glibc-2.35
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.7.1+cu128
-Is debug build               : False
-CUDA used to build PyTorch   : 12.8
-ROCM used to build PyTorch   : N/A
-
-==============================
-      Python Environment
-========
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Assign worker process titles and logging prefix earlier</title>
-    <link>https://github.com/vllm-project/vllm/issues/24476</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24476</guid>
-    <pubDate>Tue, 09 Sep 2025 04:10:23 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-In #22205, we enhanced worker process title by fetching parallelism information from `vllm.distributed.parallel_state`. Worker process title and logging prefix are critical for debugging purpose. Assigning them earlier may be helpful for triaging issues.
-Explore whether this is reasonably achievable and implement it if yes.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug]: Hangs on mulit-node setup when len(prompt) &gt; max_model_len</title>
-    <link>https://github.com/vllm-project/vllm/issues/24454</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24454</guid>
-    <pubDate>Mon, 08 Sep 2025 17:50:25 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-Collecting environment information...
-/traindata/eugen/lotus/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:789: UserWarning: Can&#x27;t initialize NVML
-  warnings.warn(&quot;Can&#x27;t initialize NVML&quot;)
-/traindata/eugen/lotus/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:789: UserWarning: Can&#x27;t initialize NVML
-  warnings.warn(&quot;Can&#x27;t initialize NVML&quot;)
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 22.04.5 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 4.0.2
-Libc version     
-
-...</description>
-  </item>
-  <item>
-    <title>[Bug]: the port number after --port didn&#x27;t take effect; it&#x27;s still using the default port 8000</title>
-    <link>https://github.com/vllm-project/vllm/issues/24416</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24416</guid>
-    <pubDate>Mon, 08 Sep 2025 06:19:51 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-INFO 09-07 23:10:44 [__init__.py:239] Automatically detected platform cuda.
-Collecting environment information...
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 22.04.4 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 4.0.0
-Libc version                 : glibc-2.35
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.6.0+cu124
-Is debug build               : False
-CUDA used to build PyTorch   : 12.4
-ROCM used to build PyTor
-
-...</description>
-  </item>
-  <item>
-    <title>[MM processor]: Benchmark mm processor&#x27;s performance</title>
-    <link>https://github.com/vllm-project/vllm/issues/24171</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24171</guid>
-    <pubDate>Wed, 03 Sep 2025 10:35:12 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Currently, we haven&#x27;t had scripts to benchmark mm_processor&#x27;s performance under complicated deploy environments (DP, multiple instances etc).
-
-Therefore, we should add some benchmark script to simulate it and identify the potential bottlenecks.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-cc @DarkLight1337 @ywang96 
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Feature]: Improve `vllm bench serve` startup time with random data</title>
-    <link>https://github.com/vllm-project/vllm/issues/24058</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24058</guid>
-    <pubDate>Mon, 01 Sep 2025 22:05:20 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-There are some issues with the benchmark script for long requests
-- A) we send a single test request to the server to make sure its working- 
-- B) generating random data from scratch is very slow
-
-
-For example, running the following takes over 10 minutes to startup:
-
-```bash
-vllm bench serve --base-url http://infra-wide-ep-pd-inference-gateway-istio.llm-d-wide-ep-pd.svc.cluster.local --model deepseek-ai/DeepSeek-V3-0324 --dataset-name random --random-input-len 2000 --random-output-len 1000 --max-concurrency 10000 --num-prompts 100000 --seed $(date +%s) --ignore-eos
-```
-
-Update the script to:
-- A) use a tiny request to ensure the server is working (e.g. 200 prompt tokens, 10 decode tokens)
-- B) have a more efficient way to generate random data (eithe
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Benchmark for the Sampler</title>
-    <link>https://github.com/vllm-project/vllm/issues/23977</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23977</guid>
-    <pubDate>Sat, 30 Aug 2025 01:58:09 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-We have sampler, however, there are some potential optimize opportunities. We should add some benchmark script to identify the potential bottlenecks.
-
-Some benchmark example here: https://github.com/vllm-project/vllm/tree/main/benchmarks
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Feature]: Support `Phi4Flash` model in V1</title>
-    <link>https://github.com/vllm-project/vllm/issues/23957</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23957</guid>
-    <pubDate>Fri, 29 Aug 2025 18:31:01 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-We will drop support for V0 in the very near future, and if we want to continue supporting this model in vLLM, it needs to be ported to V1.
-
-The main work here is in:
-1. Adapting the custom Mamba layer to match how V1 manages the mamba state. The MambaMixer, MambaMixer2, MinimaxLinearAttention and ShortConv can all be used as a reference for how to do this.
-2. Porting the differential attention backend to V1. 
-
-### Alternatives
-
-Drop model support in vLLM
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked que
-
-...</description>
-  </item>
-  <item>
-    <title>[MM Encoder] General encoder performance improvement</title>
-    <link>https://github.com/vllm-project/vllm/issues/23884</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23884</guid>
-    <pubDate>Fri, 29 Aug 2025 01:53:02 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-On vLLM, most multimodal model support was directly contributed by the model vendors, but sometimes the implementation can still be improved in terms of inference performance (e.g, by leveraging fused operations or avoid cumemcpy). 
-
-Two examples are 
-- https://github.com/vllm-project/vllm/pull/22792
-- https://github.com/vllm-project/vllm/pull/22184
-
-We should more actively hunt for such improvement, in particular for more popular models such as Qwen2.5VL, InternVL, GLM4.5V, etc. It should be also made sure that such improvement does not result in accuracy regression.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the c
-
-...</description>
-  </item>
-  <item>
-    <title>[MM Encoder] ViT attention performance and consolidation</title>
-    <link>https://github.com/vllm-project/vllm/issues/23880</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23880</guid>
-    <pubDate>Fri, 29 Aug 2025 01:17:21 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Today many vision transformers on vLLM leverage standard `F.scaled_dot_product_attention` to compute attention scores.
-
-While there has been some effort in [vision.py](https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/vision.py) to help developers easily choose which backend to use, it would be great if vLLM can consolidate non-mask MHA implementations with different backends without caching so that developers can easily plug them in.
-
-We should also investigate integrating FA3 for a few vision models we have and make sure there&#x27;s no accuracy  regression.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and 
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature][P/D]: Optimize NIXL Connector xfer Launch</title>
-    <link>https://github.com/vllm-project/vllm/issues/23780</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23780</guid>
-    <pubDate>Wed, 27 Aug 2025 22:45:32 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-NIXL Connector takes ~3ms to launch a transfer per request due to the `_get_block_desc_ids` We can optimize this by leveraging the numpy bindings for nixl
-
-&lt;img width=&quot;1073&quot; height=&quot;700&quot; alt=&quot;Image&quot; src=&quot;https://github.com/user-attachments/assets/407c1c3f-4772-4599-996c-8c02d324f15c&quot; /&gt;
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[New Model]: Grok 2</title>
-    <link>https://github.com/vllm-project/vllm/issues/23557</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23557</guid>
-    <pubDate>Mon, 25 Aug 2025 13:35:32 +0000</pubDate>
-    <description>### The model to consider.
-
-https://huggingface.co/xai-org/grok-2
-
-### The closest model vllm already supports.
-
-Grok 1 has already been supported (https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/grok1.py) and it seems Grok 2 is a few modifications ontop of it - still listing its architecture as `Grok1ForCausalLM` in the [config.json](https://huggingface.co/xai-org/grok-2/blob/main/config.json)
-
-You can reference this sglang PR that implements the changes to the Grok1 definition to support the new version https://github.com/sgl-project/sglang/pull/9532/
-
-### What&#x27;s your difficulty of supporting the model you want?
-
-I think it should be relatively trivial since it modifies an existing arch. It does seem the checkpoint is in a weird format, so not sure if conversion
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: GPT-OSS harmony format support</title>
-    <link>https://github.com/vllm-project/vllm/issues/23217</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23217</guid>
-    <pubDate>Wed, 20 Aug 2025 00:12:15 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-From the view of API server, GPT-OSS introduces the following features:
-* Builtin tool call: tool calls that happens inside chain of thought. It is different from most existing models where tool call only exists in the output to users.
-* Harmony: a new text format to represent the chain of thought, tool calls, etc. vLLM needs to implement the parsing between `OpenAI API &lt;-&gt; harmony &lt;-&gt; model input/output tokens`
-
-vLLM has basic support of the above features on response API now. But as shown in https://docs.vllm.ai/projects/recipes/en/latest/OpenAI/GPT-OSS.html#harmony-format-support , the response API with streaming, and chat completion is still in an early stage. And help wanted on completing these features!
-
-### Alternatives
-
-_No response_
-
-### Ad
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: consider all env vars in compilation hash with some opt-out</title>
-    <link>https://github.com/vllm-project/vllm/issues/23107</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23107</guid>
-    <pubDate>Mon, 18 Aug 2025 14:19:50 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Follow-up of https://github.com/vllm-project/vllm/pull/22449 and https://github.com/vllm-project/vllm/issues/16501 , we can take all env vars into consideration, and use an opt-out list that we don&#x27;t consider in the hash computation.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[RFC]: Refactor CI/CD</title>
-    <link>https://github.com/vllm-project/vllm/issues/22992</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/22992</guid>
-    <pubDate>Fri, 15 Aug 2025 16:26:44 +0000</pubDate>
-    <description>### Motivation.
-
-vLLM&#x27;s CI/CD has grown in a less than ideal way as it has built up over the years.
-
-We have the following problems:
-- CI takes very long, especially on a per commit cycle
-- CI has failures that cannot be reproduced on every machine due to numerics
-- CI has failures on models that are not the 80-20 of our usage --- which runs per commit
-- CI failures in early tests often lead to vLLM not cleaning up properly --- which creates failures across many tests that makes it hard to identify what is wrong
-- CI is NOT covering the models that actually matter (since not enough GPU memory) or hardware that actually matters to the majority of our users
-- CI is NOT covering performance!
-
-These issues are creating a bad developer experience for vLLM and causes issues like the CI &quot;death sp
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Tune Triton Configs for Qwen3-30B-A3-Fp8 and Bf16</title>
-    <link>https://github.com/vllm-project/vllm/issues/22294</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/22294</guid>
-    <pubDate>Wed, 06 Aug 2025 02:20:33 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Hardware Cases:
-- H100, H200, B200
-
-Configurations:
-- TP=1
-- TP=2
-- TP=4
-- TP=8
-- EP=1
-- EP=2
-- EP=4
-- EP=8
-
-Precisions
-- Fp8
-- Bf16
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug]: Add tests for all parallel sampling parameter combinations</title>
-    <link>https://github.com/vllm-project/vllm/issues/21948</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/21948</guid>
-    <pubDate>Wed, 30 Jul 2025 16:20:13 +0000</pubDate>
-    <description>Verify that we have tests that explicitly exercise parallel sampling (`n&gt;1` request sampling parameter) for all of the following combinations:
-- Via `AsyncLLM.generate`, via `LLMEngine add_request() / step()`
-- For `output_kind` equal to each of `CUMULATIVE`, `DELTA`, `FINAL_ONLY`
-
-Ideally a test for each of `AsyncLLM` and `LLMEngine` in the appropriate files, with `output_kind` parameterized.
-
-Additionally we can still test `LLM.generate()` but this enforces `FINAL_ONLY`. There is already a test for this one [here](https://github.com/vllm-project/vllm/blob/004203e95330ac9a878df8192619570b0770667e/tests/v1/engine/test_llm_engine.py#L120), but I&#x27;m not sure about the other cases.
-
-@sethkimmel3 has reported that the `LLMEngine` + `CUMULATIVE` combination is not working properly, this should b
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature] Skip modules for disabled modalities</title>
-    <link>https://github.com/vllm-project/vllm/issues/21943</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/21943</guid>
-    <pubDate>Wed, 30 Jul 2025 15:50:17 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Provide a way to skip loading modules by modality.
-
-We can enable this automatically via `--limit-mm-per-prompt`, as discussed in https://github.com/vllm-project/vllm/pull/20868#issuecomment-3071205115. For example, we can use text-only mode for an image-text model by setting `--limit-mm-per-prompt &#x27;{&quot;image&quot;: 0}&#x27;`
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Feature]: Add Triton implementation of NVFP4 GEMM</title>
-    <link>https://github.com/vllm-project/vllm/issues/21014</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/21014</guid>
-    <pubDate>Tue, 15 Jul 2025 21:33:26 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Currently we only have NVFP4 GEMMs written in CUTLASS for SM100, which means we have no support for SM120. While we still expect tuned CUTLASS kernels to provide the best performance, it would be nice to have a reference Triton implementation available as a fallback if no other kernels are available.
-
-It seems Triton has supported FP4 formats for several months so we should have a new enough version of Triton https://github.com/triton-lang/triton/blob/620237edd282d3fa275e7f931af2018423108c4a/python/test/unit/language/test_matmul.py#L652
-
-A good starting point would be to add the triton kernel directly to https://github.com/vllm-project/vllm/blob/main/benchmarks/kernels/bench_nvfp4_gemm.py and compare the performance to the CUTLASS kernel, before int
-
-...</description>
-  </item>
-  <item>
-    <title>[Usage]: How am I suppose to pass images to /tokenize?</title>
-    <link>https://github.com/vllm-project/vllm/issues/20778</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/20778</guid>
-    <pubDate>Thu, 10 Jul 2025 18:12:17 +0000</pubDate>
-    <description>### Your current environment
-
-I believe this is env-independent.
-
-### How would you like to use vllm
-
-I&#x27;m trying to figure out how I successfully get the token-counts for an image when working with a VLM.
-
-Every time I try to pass a messages array like:
-```
-&quot;messages&quot;: [
-      {
-        &quot;role&quot;: &quot;user&quot;,
-        &quot;content&quot;: [
-          {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;What is in this image?&quot;
-          },
-          {
-            &quot;type&quot;: &quot;image_url&quot;,
-            &quot;image_url&quot;: {
-              &quot;url&quot;: &quot;https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg&quot;
-            }
-          }
-        ]
-```
-I just get the tokens of the string-literal text inside `content`.
-
-Same with like:
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Use `QuantFp8` `CustomOp`-abstraction for MoE layers</title>
-    <link>https://github.com/vllm-project/vllm/issues/20711</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/20711</guid>
-    <pubDate>Wed, 09 Jul 2025 21:41:36 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-#19830 added `QuantFp8`, which uses the `CustomOp` abstraction to implement fp8 quantization in both CUDA and torch, allowing Inductor to achieve superior performance over the CUDA ops (which are unoptimized and also do not fuse by default). However, the class has to be instantiated during init, and MoE uses are currently in util free functions many levels deep. Those need to be mildly rearchitected to take advantage of the new abstraction.
-
-The use to be rearchitected is here: https://github.com/vllm-project/vllm/blob/c7a00e6e6716f45db09e39cb21a8f91f741f10b9/vllm/model_executor/layers/fused_moe/utils.py#L37-L40
-
-The free functions should be converted to class instances with separate init and forward steps.
-
-### Alternatives
-
-_No response_
-
-### Addi
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Support EPLB for More MoE Models, e.g. Qwen 3, Llama 4</title>
-    <link>https://github.com/vllm-project/vllm/issues/20468</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/20468</guid>
-    <pubDate>Fri, 04 Jul 2025 05:06:31 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-🎉 **#18343 introduces dynamic Expert Parallelism Load Balancing (EPLB)** for DeepSeek-V2/V3/R1 models.
-
-As MoE (Mixture-of-Experts) models become more common, we’d love help extending EPLB support to other MoE models—such as Qwen3, Llama 4, and more.
-
-This is a great **first good issue** for anyone interested in model internals or systems work. #18343 was built with generality in mind, so extending it to other models or quantization methods should be relatively straightforward.
+## Test Result
 
 ---
-
-### ✅ How to add support for a new model
-
-Implement the `MixtureOfExperts` protocol. Specifically, you’ll need to:
-
-- Expose relevant MoE configuration flags.
-- Provide access to expert weights for EPLB to rearrange.
-- Forward EPLB-related arguments into the `FusedMoE` 
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: `CustomOp` cleanup</title>
-    <link>https://github.com/vllm-project/vllm/issues/19817</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/19817</guid>
-    <pubDate>Wed, 18 Jun 2025 20:10:27 +0000</pubDate>
-    <description>### 🚀 Motivation
-
-Currently, we do not have a consistent plan for &quot;light&quot; custom ops (subclasses of `CustomOp` with both torch-native and GPU implementations). As we work on improved performance on NVIDIA Blackwell and AMD, we should be more intentional with CompilationConfig defaults that control custom op dispatching. This is a parent issue that tracks smaller PRs addressing `CustomOp`s.
-
-In vLLM, there are two kinds of custom kernels/ops:
-1. &quot;heavy&quot; ops like GEMMs, MoE, and attention, which will mostly use tuned custom kernels for maximum performance.
-2. &quot;light&quot; ops like `RMSNorm`, `SiluAndMul`, and `RoPE`, which have both torch-native and custom GPU implementations.
-
-This issue only refers to &quot;light&quot; ops, which are (or should be) all subclasses of `CustomOp`.
-
-When we enabled `torch.co
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Composite model loading using `AutoWeightsLoader` for all models</title>
-    <link>https://github.com/vllm-project/vllm/issues/15697</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/15697</guid>
-    <pubDate>Fri, 28 Mar 2025 10:39:19 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-#9160 first introduced `AutoWeightsLoader` to recursively call `load_weights` on sub-modules. This lets composite models (most notably multi-modal models) use language backbones (`*Model` classes such as `LlamaModel`) without having to repeat their weight loading logic.
-
-Currently, `load_weights` is only implemented in a few language backbones. It would be great to standardize this approach and apply it to all language backbones in vLLM. The steps to do this are pretty straightforward:
-
-1. Move the existing `load_weights` function from `*ForCausalLM` to `*Model`.
-2. Create a new `load_weights` function in `*ForCausalLM` that loads the weights using `AutoWeightsLoader`.
-3. Move any logic in `*Model.load_weights` that only applies to `*ForCausalLM` ba
-
-...</description>
-  </item>
-  <item>
-    <title>[Performance]: Update Cascade Attention Heuristics for FA3</title>
-    <link>https://github.com/vllm-project/vllm/issues/15647</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/15647</guid>
-    <pubDate>Thu, 27 Mar 2025 22:02:43 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Currently, we use a heuristic (https://github.com/vllm-project/vllm/blob/4098b72210dc10761bb348b373bbd0fc9b23b0e4/vllm/v1/attention/backends/flash_attn.py#L331)
-to determine whether using cascade attention would improve performance. However, this heuristic was developed prior to the FA3 integration and is therefore optimized only for FA2. The calculation of SM occupancy it uses is no longer accurate for FA3 and needs updating.
-
-Specifically,
-1. We need to split the case for FA2 and FA3, since FA2 is still used for certain GPUs.
-2. Afaik, FA3 uses different heuristics for GQA packing and split kv than FA2. The heuristics in use_cascade should reflect this difference (although it doesn&#x27;t need to be super accurate).
-3. It&#x27;d be nice if we can cite speci
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Audit and Update Examples To Use `VLLM_USE_V1=1`</title>
-    <link>https://github.com/vllm-project/vllm/issues/14530</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14530</guid>
-    <pubDate>Mon, 10 Mar 2025 02:36:23 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Many of the examples leverage V0 internals.
-
-We should:
-- raise `NotImplementedError` if `envs.VLLM_USE_V1` with these
-- convert them to use `V1` if we can
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug]: `triton_scaled_mm` never used on ROCm</title>
-    <link>https://github.com/vllm-project/vllm/issues/14397</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14397</guid>
-    <pubDate>Fri, 07 Mar 2025 02:04:44 +0000</pubDate>
-    <description>### Your current environment
-
 &lt;details&gt;
-&lt;summary&gt;The output of `python collect_env.py`&lt;/summary&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
 
-```text
-INFO 03-07 02:02:58 [__init__.py:207] Automatically detected platform rocm.
-Collecting environment information...
-PyTorch version: 2.5.1+rocm6.2
-Is debug build: False
-CUDA used to build PyTorch: N/A
-ROCM used to build PyTorch: 6.2.41133-dd7f95766
-
-OS: Ubuntu 22.04.5 LTS (x86_64)
-GCC version: (Ubuntu 10.5.0-1ubuntu1~22.04) 10.5.0
-Clang version: Could not collect
-CMake version: version 3.31.6
-Libc version: glibc-2.35
-
-Python version: 3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0] (64-bit runtime)
-Python platform: Linux-5.15.0-131-generic-x86_64-with-glibc2.35
-Is CUDA available: True
-CUDA runtime version: Could not collect
-CUDA_MODULE_LOADING set to: LAZY
-GPU models and configuration:
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary d
 
 ...</description>
   </item>
   <item>
-    <title>[Feature]: Improve Logging for Error Messages</title>
-    <link>https://github.com/vllm-project/vllm/issues/14083</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14083</guid>
-    <pubDate>Sat, 01 Mar 2025 17:14:04 +0000</pubDate>
+    <title>[Feature]: Generalize RoutingMethodType for broader MoE routing control</title>
+    <link>https://github.com/vllm-project/vllm/issues/28408</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28408</guid>
+    <pubDate>Mon, 10 Nov 2025 17:52:48 +0000</pubDate>
     <description>### 🚀 The feature, motivation and pitch
 
-Improve logging on VLLM V1 for common errors in initialization.
+PR #27492 introduced `RoutingMethodType` to support different routing methods for FP8 flashinfer TRTLLM MOE (DeepSeekV3, Llama4, Renormalize, etc.).
+While this was implemented to support Qwen3 and Qwen3-next models, the review discussion revealed opportunities to use this more broadly across the
+codebase to simplify MoE routing configuration.
 
-For example:
-- not enough memory to fit the model
-- not enough kv cache space to fit the model
-- ...
+### Motivation:
 
-Currently we have decently logging of the exceptions that arise. It would be better however if we could explicitly catch these issues and return clearer error messages
+Currently, MoE routing behavior is controlled through multiple fragmented parameters (scoring_func, renormalize, use_grouped_topk, custom routing
+functions, etc.). This creates several issues:
 
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Usage]: [V1] Misleading Error Messages</title>
-    <link>https://github.com/vllm-project/vllm/issues/13510</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/13510</guid>
-    <pubDate>Wed, 19 Feb 2025 03:48:22 +0000</pubDate>
-    <description>Looking for help to improve error messages during startup!
-
-Running a model that does not exist (e.g. `MODEL=neuralmagic/Meta-Llama-3-8B-Instruct-FP8-dynamic` &lt;&lt; this does not exist), gives the following stack trace:
-
-```bash
-(venv-nm-vllm-abi3) rshaw@beaker:~$ VLLM_USE_V1=1 vllm serve $MODEL --disable-log-requests --no-enable-prefix-caching
-INFO 02-19 03:45:16 __init__.py:190] Automatically detected platform cuda.
-INFO 02-19 03:45:18 api_server.py:840] vLLM API server version 0.7.2.0
-INFO 02-19 03:45:18 api_server.py:841] args: Namespace(subparser=&#x27;serve&#x27;, model_tag=&#x27;neuralmagic/Meta-Llama-3-8B-Instruct-FP8-dynamic&#x27;, config=&#x27;&#x27;, host=None, port=8000, uvicorn_log_level=&#x27;info&#x27;, allow_credentials=False, allowed_origins=[&#x27;*&#x27;], allowed_methods=[&#x27;*&#x27;], allowed_headers=[&#x27;*&#x27;], api_key=None, lora_mo
+1. Lack of clarity: The routing method isn&#x27;t explicitly defined in one place
+2. Code duplication: Each model must explicitly specify routing parameters
+3. Maintenance burden: Adding new routing methods 
 
 ...</description>
   </item>
   <item>
-    <title>[Misc]: CMake Clean-up / Refactor Tasks</title>
-    <link>https://github.com/vllm-project/vllm/issues/9129</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/9129</guid>
-    <pubDate>Mon, 07 Oct 2024 16:07:04 +0000</pubDate>
-    <description>In an effort to make the CMake more readable, stable and easy to use we have a few tasks we&#x27;d like to work on, creating a GitHub issue here to track that progress, some planned changes/investigations:
+    <title>[Perf] Improve default fused moe configs by analyzing tuned configs</title>
+    <link>https://github.com/vllm-project/vllm/pull/24700</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24700</guid>
+    <pubDate>Thu, 11 Sep 2025 22:24:47 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
 
-- [ ]  Have vllm-flash-attn use [ExternalProject](https://cmake.org/cmake/help/latest/module/ExternalProject.html) currently vllm-flash-attn uses the parent CMake scope which creates many footguns since it is in a separate repo, using `ExternalProject` will mean that the vllm-flash-attn will be run in a separate CMake scope/process
-  - [ ] It might be even better to revert to the FlashMLA approach, where CMake code lives in vllm.
-- [ ]  Warn that PTX builds are not currently supported (post https://github.com/vllm-project/vllm/pull/8845), currently if there is a `+PTX` in `TORCH_CUDA_ARCH_LI
+## Purpose
+
+With the help of Claude, I took a look at the statistics of the 200+ configs we have for fused moe and came away with some recommendations. Haven&#x27;t validated them e2e yet, but from smoke tests it seems faster.
+
+The main improvement seems to be from just including defaults for `&#x27;num_warps&#x27;: 4, &#x27;num_stages&#x27;: 3`, which were omitted before except for block fp8.
+
+### Benchmarks on H100
+
+Mixtral BF16
+```
+python benchmarks/kernels/benchmark_moe.py --model=mistralai/Mixtral-8x7B-Instruct-v0.1 -tp=2
+
+# Tuned Config
+(BenchmarkWorker pid=3339388) INFO 09-12 01:05:21 [fused_moe.py:720] Using configuration from /home/mgoin/code/vllm/vllm/model_executor/layers/fused_moe/configs/E=8,N=7168,device_name=NVIDIA_H100_80GB_HBM3.json for MoE layer.
+Batch size: 1, Kern
+
+...</description>
+  </item>
+  <item>
+    <title>[Benchmark] Add expert parallel support to MoE benchmark</title>
+    <link>https://github.com/vllm-project/vllm/pull/20876</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/20876</guid>
+    <pubDate>Sun, 13 Jul 2025 09:12:49 +0000</pubDate>
+    <description>## Essential Elements of an Effective PR Description Checklist
+- [x] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [x] The test plan, such as providing test command.
+- [x] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+
+
+## Purpose
+This PR enhances the MoE kernel benchmark script (benchmarks/kernels/benchmark_moe.py) by adding support for tuning configurations with expert parallelism (EP).
+
+Previously, the script only supported tuning for tensor parallelism (TP), where the intermediate size is sharded. This change introduces an --enable-expert-parallel flag, which modifies the 
 
 ...</description>
   </item>
