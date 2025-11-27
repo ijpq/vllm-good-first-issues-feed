@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 27 Nov 2025 14:46:50 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 27 Nov 2025 14:55:49 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] support input output messages for non harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/29549</link>
@@ -207,8 +207,7 @@ ROCM used to build PyTorch   : N/A
 
 ==============================
       Python Environment
-==============================
-Python
+=============
 
 ...</description>
   </item>
