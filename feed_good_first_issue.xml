@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 27 Nov 2025 13:45:41 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 27 Nov 2025 13:55:41 +0000</lastBuildDate>
   <item>
     <title>[Bug]: Add validation for tool requests that the tool is available</title>
     <link>https://github.com/vllm-project/vllm/issues/29432</link>
