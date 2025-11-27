@@ -80,7 +80,7 @@ def build_rss(issues):
 <channel>
   <title>vLLM good first issues</title>
   <link>https://github.com/{OWNER}/{REPO}/issues</link>
-  <description>Open issues with label '{LABEL}' in {OWNER}/{REPO}</description>
+  <description>Open issues with label '{LABELS}' in {OWNER}/{REPO}</description>
   <language>en</language>
   <lastBuildDate>{now_str}</lastBuildDate>
 {items_str}
