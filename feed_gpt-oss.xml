@@ -5,37 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 28 Nov 2025 23:14:47 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 28 Nov 2025 23:27:07 +0000</lastBuildDate>
   <item>
-    <title>Revert &quot;[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4 (#28971)&quot;</title>
-    <link>https://github.com/vllm-project/vllm/pull/29697</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29697</guid>
-    <pubDate>Fri, 28 Nov 2025 18:59:01 +0000</pubDate>
-    <description>This reverts commit 745a3bae1aef2ff3aa70b3eab8624e4571698ba0.
-
-&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-This PR is reverting https://github.com/vllm-project/vllm/pull/28971 as it is breaking the following tests from nightly
-
-https://buildkite.com/vllm/ci/builds/41020/steps/canvas?jid=019ac943-dd5c-4673-97e4-736893ab6035
-https://buildkite.com/vllm/ci/builds/41020/steps/canvas?sid=019ac943-dd87-4ee9-b343-39cd7b152457
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ 
-
-...</description>
+    <title>Flashrl</title>
+    <link>https://github.com/vllm-project/vllm/pull/29586</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29586</guid>
+    <pubDate>Thu, 27 Nov 2025 05:56:16 +0000</pubDate>
+    <description>## Updating vLLM version to 0.11 with flash-rl updates and patches</description>
   </item>
   <item>
     <title>[responsesAPI] support input output messages for non harmony models</title>
