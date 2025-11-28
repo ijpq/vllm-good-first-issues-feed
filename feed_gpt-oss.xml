@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 28 Nov 2025 19:54:06 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 28 Nov 2025 20:04:30 +0000</lastBuildDate>
   <item>
     <title>Revert &quot;[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4 (#28971)&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/29697</link>
@@ -17,7 +17,7 @@
 
 ## Purpose
 
-This PR is reverting https://github.com/vllm-project/vllm/pull/29697 as it is breaking the following tests from nightly
+This PR is reverting https://github.com/vllm-project/vllm/pull/28971 as it is breaking the following tests from nightly
 
 https://buildkite.com/vllm/ci/builds/41020/steps/canvas?jid=019ac943-dd5c-4673-97e4-736893ab6035
 https://buildkite.com/vllm/ci/builds/41020/steps/canvas?sid=019ac943-dd87-4ee9-b343-39cd7b152457
