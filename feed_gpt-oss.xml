@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 28 Nov 2025 02:26:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 28 Nov 2025 03:01:58 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] support input output messages for non harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/29549</link>
@@ -319,26 +319,6 @@ This change is lightweight: it only introduces the xxhash dependency and ad
 - `Python-only Installation Test`
 
 It also includes `torchaudio` package into Dockerfile.</description>
-  </item>
-  <item>
-    <title>[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4</title>
-    <link>https://github.com/vllm-project/vllm/pull/28971</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28971</guid>
-    <pubDate>Tue, 18 Nov 2025 23:49:06 +0000</pubDate>
-    <description>## Purpose
-
-This PR is to support FusedMoE LoRA Triton kernel for mxfp4 model.
-* Add UnfusedOAITritonExperts
-* Inject lora module in activation: Since matmul_ogs can fuse activation, set fused_activation to None to unfuse activation in the first matmul_ogs.
-* Inject lora module in moe_sum: This need to unfuse sum in second matmul_ogs. Grouped reduction does scatter + accumulate, it is essentially equal to: `y[dst_indx // n_expts_act, :] += x[src_indx, :]`, so that scatter sum across multiple experts, and collapse `M * topk` to `M` rows. Therefore, we need to temporarily set `routing_data.n_expts_act` to 1, so it doesn&#x27;t sum across multiple experts, in order unfuse moe_sum in the second matmul_ogs.
-* Added test_modular_oai_triton_moe.py
-
-## Test Plan
-
-```
-pytest -s -v tests/kernels/moe/test
-
-...</description>
   </item>
   <item>
     <title>[DNM] kimi k2 thinking tool calling</title>
@@ -1165,6 +1145,31 @@ You are a helpful agent...
 
 
 cc: @DarkLight1337 </description>
+  </item>
+  <item>
+    <title>[Bug] Fix gpt-oss missing tool content</title>
+    <link>https://github.com/vllm-project/vllm/pull/24954</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24954</guid>
+    <pubDate>Tue, 16 Sep 2025 09:06:25 +0000</pubDate>
+    <description>## Purpose
+This PR requires the following PRs to be merged first: https://github.com/vllm-project/vllm/pull/24768 and the harmony lib PR (https://github.com/openai/harmony/pull/76).
+
+The changes include adding &#x27;with_recipient&#x27; and the Assistant&#x27;s &#x27;analysis&#x27; content.
+Without adding this content, there was an issue where the gpt-oss model had a higher probability of outputting abnormal tokens when calling tools.
+
+## Test Plan
+[gpt-oss_test.py](https://github.com/user-attachments/files/22359291/gpt-oss_test.py)
+[messages.txt](https://github.com/user-attachments/files/22359292/messages.txt)
+
+Run python3 gpt-oss_test.py about 10 times.
+
+## Test Result 
+(before)
+&lt;img width=&quot;1239&quot; height=&quot;225&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/3e1f91d6-7275-43cf-804f-040d490c79fa&quot; /&gt;
+
+(a
+
+...</description>
   </item>
 </channel>
 </rss>
