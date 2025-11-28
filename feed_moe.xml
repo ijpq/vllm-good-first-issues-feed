@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 28 Nov 2025 21:33:44 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 28 Nov 2025 21:42:36 +0000</lastBuildDate>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
@@ -83,6 +83,29 @@ functions, etc.). This creates several issues:
 1. Lack of clarity: The routing method isn&#x27;t explicitly defined in one place
 2. Code duplication: Each model must explicitly specify routing parameters
 3. Maintenance burden: Adding new routing methods 
+
+...</description>
+  </item>
+  <item>
+    <title>[MoE] CuteDSL MoE with Nvfp4 DeepEP dispatch </title>
+    <link>https://github.com/vllm-project/vllm/pull/27141</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27141</guid>
+    <pubDate>Sat, 18 Oct 2025 04:37:34 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+In light of. https://github.com/vllm-project/vllm/pull/25778/files 
+## Purpose
+Dispatch with nvfp4 DeepEP low latency mode. The dispatch is a fusion of quantization and dispatch. 
+deps on https://github.com/deepseek-ai/DeepEP/pull/341 and https://github.com/vllm-project/vllm/pull/25990. Should rebase after 25990 is merged.
+
+## Test Plan
+NVFP4 dispatch:
+VLLM_DEEPEPLL_NVFP4_DISPATCH=1 \
+VLLM_USE_FLASHINFER_MOE_FP4=1 \
+VLLM_USE_STANDALONE_COMPILE=0 \
+VLLM_FLASHINFER_MOE_BACKEND=&quot;masked_gemm&quot; \
+VLLM_WORKER_MULTIPROC_METHOD=spawn \
+VLLM_ALL2ALL_BACKEND=&quot;deepep_low_latency&quot; \
+lm_eval --model vllm --model_args pretrained=nvidia/DeepSeek-R1-0528-FP4,data_parallel_size=4,enable_expert_parallel=True,tensor_parallel_size=1,enforce_eager=True,max_model_len=2048 --trust_re
 
 ...</description>
   </item>
