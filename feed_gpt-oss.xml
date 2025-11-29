@@ -5,7 +5,43 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 29 Nov 2025 00:39:00 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 29 Nov 2025 01:09:45 +0000</lastBuildDate>
+  <item>
+    <title>[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4</title>
+    <link>https://github.com/vllm-project/vllm/pull/29708</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29708</guid>
+    <pubDate>Sat, 29 Nov 2025 00:49:25 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+#28971 got reverted by #29697 because of breaking tests. This PR redo #28971.
+
+* https://buildkite.com/vllm/ci/builds/41020/steps/canvas?jid=019ac943-dd5c-4673-97e4-736893ab6035
+  * Fix test_modular_oai_triton_moe.py by removing big M size test to avoid OOM.
+* https://buildkite.com/vllm/ci/builds/41020/steps/canvas?sid=019ac943-dd87-4ee9-b343-39cd7b152457
+  * test_olmoe_tp.py test failure should be unrelated, because #28971 only apply to mxfp4
+
+## Test Plan
+
+```
+pytest -s -v tests/kernels/moe/test_modular_oai_triton_moe.py
+```
+
+## Test Result
+
+Unit test passed
+
+@jeejeelee @DarkLight1337 Please take a look. Thanks a lot for reviewing!
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose 
+
+...</description>
+  </item>
   <item>
     <title>Flashrl</title>
     <link>https://github.com/vllm-project/vllm/pull/29586</link>
@@ -1116,31 +1152,6 @@ You are a helpful agent...
 
 
 cc: @DarkLight1337 </description>
-  </item>
-  <item>
-    <title>[Bug] Fix gpt-oss missing tool content</title>
-    <link>https://github.com/vllm-project/vllm/pull/24954</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24954</guid>
-    <pubDate>Tue, 16 Sep 2025 09:06:25 +0000</pubDate>
-    <description>## Purpose
-This PR requires the following PRs to be merged first: https://github.com/vllm-project/vllm/pull/24768 and the harmony lib PR (https://github.com/openai/harmony/pull/76).
-
-The changes include adding &#x27;with_recipient&#x27; and the Assistant&#x27;s &#x27;analysis&#x27; content.
-Without adding this content, there was an issue where the gpt-oss model had a higher probability of outputting abnormal tokens when calling tools.
-
-## Test Plan
-[gpt-oss_test.py](https://github.com/user-attachments/files/22359291/gpt-oss_test.py)
-[messages.txt](https://github.com/user-attachments/files/22359292/messages.txt)
-
-Run python3 gpt-oss_test.py about 10 times.
-
-## Test Result 
-(before)
-&lt;img width=&quot;1239&quot; height=&quot;225&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/3e1f91d6-7275-43cf-804f-040d490c79fa&quot; /&gt;
-
-(a
-
-...</description>
   </item>
 </channel>
 </rss>
