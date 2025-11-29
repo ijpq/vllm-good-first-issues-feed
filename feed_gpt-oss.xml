@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 29 Nov 2025 02:32:41 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 29 Nov 2025 03:03:05 +0000</lastBuildDate>
   <item>
     <title>[LoRA] Support FusedMoE LoRA Triton kernel for mxfp4</title>
     <link>https://github.com/vllm-project/vllm/pull/29708</link>
@@ -18,9 +18,9 @@
 #28971 got reverted by #29697 because of breaking tests. This PR redo #28971.
 
 * https://buildkite.com/vllm/ci/builds/41020/steps/canvas?jid=019ac943-dd5c-4673-97e4-736893ab6035
-  * Fix test_modular_oai_triton_moe.py by removing big M size test to avoid OOM.
+  * Fix test_modular_oai_triton_moe.py by removing big MNK size test to avoid OOM.
 * https://buildkite.com/vllm/ci/builds/41020/steps/canvas?sid=019ac943-dd87-4ee9-b343-39cd7b152457
-  * test_olmoe_tp.py test failure should be unrelated, because #28971 only apply to mxfp4
+  * test_olmoe_tp.py test failure should be unrelated, because #28971 only apply to mxfp4, and I can see it has been failing before.
 
 ## Test Plan
 
@@ -32,13 +32,11 @@ pytest -s -v tests/kernels/moe/test_modular_oai_triton_moe.py
 
 Unit test passed
 
-@jeejeelee @DarkLight1337 Please take a look. Thanks a lot for reviewing!
-
 ---
 &lt;details&gt;
 &lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
 
-- [ ] The purpose 
+- [ ] The purpose of the PR, such as &quot;Fix some i
 
 ...</description>
   </item>
