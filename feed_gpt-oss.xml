@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 30 Nov 2025 11:44:21 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 30 Nov 2025 11:52:56 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add streaming tool-call support to Responses API (non-Harmony)</title>
     <link>https://github.com/vllm-project/vllm/pull/29726</link>
