@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 01 Dec 2025 07:58:22 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 01 Dec 2025 08:14:23 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add streaming tool-call support to Responses API (non-Harmony)</title>
     <link>https://github.com/vllm-project/vllm/pull/29726</link>
@@ -196,30 +196,6 @@ Channel Leakage/Hallucination: The model appeared to hallucinate or leak tool ca
 Changes Implemented:
 
 Active Buffer Parsing: Added logic to inspect parser.current_content and parser.current_channel. If the active channel is commentary (used 
-
-...</description>
-  </item>
-  <item>
-    <title>[Frontend] Add tool filtering support to ToolServer</title>
-    <link>https://github.com/vllm-project/vllm/pull/29224</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29224</guid>
-    <pubDate>Sat, 22 Nov 2025 05:13:27 +0000</pubDate>
-    <description>## Purpose
-Add `allowed_tools` parameter to `get_tool_description` method in ToolServer interface and implementations. This allows filtering tools from MCP servers and demo tool servers based on a list of allowed tool names.
-
-Features:
-- Supports wildcard (&quot;*&quot;) to allow all tools
-- Returns None if no tools match the filter
-- Maintains backward compatibility with None default (all tools allowed)
-
-## Test Plan
-```
-VLLM_ENABLE_RESPONSES_API_STORE=1 VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_GPT_OSS_HARMONY_SYSTEM_INSTRUCTIONS=1 CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 vllm serve ~/gptoss/  --served-model-name=default 
-
-Test with no allowed tools:
-```
-curl -X POST http://localhost:8000/v1/responses   -H &quot;Content-Type: application/json&quot;   -d &#x27;{
-    &quot;mo
 
 ...</description>
   </item>
@@ -1133,6 +1109,26 @@ Run python3 gpt-oss_test.py about 10 times.
 &lt;img width=&quot;1239&quot; height=&quot;225&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/3e1f91d6-7275-43cf-804f-040d490c79fa&quot; /&gt;
 
 (a
+
+...</description>
+  </item>
+  <item>
+    <title>[HMA] Enabling Skipping SWA for Fp8 Quant</title>
+    <link>https://github.com/vllm-project/vllm/pull/24912</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24912</guid>
+    <pubDate>Mon, 15 Sep 2025 20:30:12 +0000</pubDate>
+    <description>[WIP] see https://github.com/vllm-project/vllm/issues/24916 for context
+
+### Known limitations
+- ~Currently not compatible w/ prefix caching because we use two different block sizes for SW and Full Attention layers.~
+- [Update 09/17] We will probably defer most of the KV cache modifications to https://github.com/vllm-project/vllm/pull/24949 which also enables prefix caching.
+
+
+## Purpose
+
+This PR adds a flag to skip the sliding window layers when quantizing the attention. The idea is that we can anyways not save much memory / latency in those layers, yet quantizing adds overheads. Furthermore, quantization always comes with additional quality risks. Not quantizing the SW layers leads to better performance as outlined in https://github.com/vllm-project/vllm/issues/24916
+
+Turing off all SW l
 
 ...</description>
   </item>
