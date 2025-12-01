@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 01 Dec 2025 18:15:56 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 01 Dec 2025 18:33:46 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][5] ResponsesParser with tools for full MCP loop</title>
     <link>https://github.com/vllm-project/vllm/pull/29798</link>
@@ -28,7 +28,7 @@ curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-T
           {
             &quot;type&quot;: &quot;mcp&quot;,
             &quot;server_label&quot;: &quot;code_interpreter&quot;,
-     
+            &quot;headers&quot;:
 
 ...</description>
   </item>
