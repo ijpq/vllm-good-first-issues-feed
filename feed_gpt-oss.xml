@@ -5,7 +5,34 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 01 Dec 2025 22:40:01 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 01 Dec 2025 22:49:15 +0000</lastBuildDate>
+  <item>
+    <title>[Frontend] refactor harmony utils output message parsing</title>
+    <link>https://github.com/vllm-project/vllm/pull/29820</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29820</guid>
+    <pubDate>Mon, 01 Dec 2025 22:43:21 +0000</pubDate>
+    <description>  Purpose
+
+  Refactor parse_output_message() in harmony_utils.py to improve
+  code organization and maintainability by extracting parsing
+  logic into focused helper functions.
+
+  Changes
+
+  Split the monolithic parse_output_message() function into four
+  specialized helper functions:
+  - _parse_browser_tool_call() - Handles browser tool calls
+  (search, open, find)
+  - _parse_function_call() - Handles custom function calls
+  - _parse_reasoning_content() - Handles reasoning/analysis
+  content
+  - _parse_final_message() - Handles final output messages
+
+  Testing
+
+  - Existing harmony utils tests pass
+  - No functional changes - pure refactoring</description>
+  </item>
   <item>
     <title>[responsesAPI][5] ResponsesParser with tools for full MCP loop</title>
     <link>https://github.com/vllm-project/vllm/pull/29798</link>
@@ -1112,31 +1139,6 @@ You are a helpful agent...
 
 
 cc: @DarkLight1337 </description>
-  </item>
-  <item>
-    <title>[Bug] Fix gpt-oss missing tool content</title>
-    <link>https://github.com/vllm-project/vllm/pull/24954</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24954</guid>
-    <pubDate>Tue, 16 Sep 2025 09:06:25 +0000</pubDate>
-    <description>## Purpose
-This PR requires the following PRs to be merged first: https://github.com/vllm-project/vllm/pull/24768 and the harmony lib PR (https://github.com/openai/harmony/pull/76).
-
-The changes include adding &#x27;with_recipient&#x27; and the Assistant&#x27;s &#x27;analysis&#x27; content.
-Without adding this content, there was an issue where the gpt-oss model had a higher probability of outputting abnormal tokens when calling tools.
-
-## Test Plan
-[gpt-oss_test.py](https://github.com/user-attachments/files/22359291/gpt-oss_test.py)
-[messages.txt](https://github.com/user-attachments/files/22359292/messages.txt)
-
-Run python3 gpt-oss_test.py about 10 times.
-
-## Test Result 
-(before)
-&lt;img width=&quot;1239&quot; height=&quot;225&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/3e1f91d6-7275-43cf-804f-040d490c79fa&quot; /&gt;
-
-(a
-
-...</description>
   </item>
 </channel>
 </rss>
