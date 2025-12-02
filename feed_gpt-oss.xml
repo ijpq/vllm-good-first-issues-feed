@@ -5,7 +5,38 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 02 Dec 2025 00:38:52 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 02 Dec 2025 01:09:41 +0000</lastBuildDate>
+  <item>
+    <title>Added regression test for openai/harmony/issues/78</title>
+    <link>https://github.com/vllm-project/vllm/pull/29830</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29830</guid>
+    <pubDate>Tue, 02 Dec 2025 01:06:49 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Add regression tests for [openai/harmony#78](https://github.com/openai/harmony/issues/78), particularly the FastAPI `vllm serve` path which wasn&#x27;t fully addressed in #26185.
+
+## Test Plan
+
+Modify the existing `test_output_messages_enabled` test in test_response_api_with_harmony.py to add the following validations:
+
+```python
+    for _message in [*response.input_messages, *response.output_messages]:
+        for _item in _message.get(&quot;content&quot;):
+            assert isinstance(_item, dict), _message
+            assert len(_item) &gt; 0, _message
+```
+
+&lt;details&gt;&lt;summary&gt;full code details&lt;/summary&gt;
+
+```python
+@pytest.mark.asyncio
+@pytest.mark.parametrize(&quot;model_name&quot;, [MODEL_NAME])
+async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
+
+...</description>
+  </item>
   <item>
     <title>[Frontend] refactor harmony utils output message parsing</title>
     <link>https://github.com/vllm-project/vllm/pull/29820</link>
@@ -1107,38 +1138,6 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
-  </item>
-  <item>
-    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
-    <link>https://github.com/vllm-project/vllm/pull/24998</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
-    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
-    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
-
-This PR also handles several variations of enabling or disabling thinking in the prompt.
-
-Thinking enabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;&lt;/think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-```
-
-
-
-cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
