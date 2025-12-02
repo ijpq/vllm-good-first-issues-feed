@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 02 Dec 2025 11:52:44 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 02 Dec 2025 12:02:44 +0000</lastBuildDate>
   <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
