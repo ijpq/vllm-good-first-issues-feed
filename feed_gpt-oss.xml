@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 02 Dec 2025 16:16:35 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 02 Dec 2025 16:34:49 +0000</lastBuildDate>
   <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
@@ -187,32 +187,6 @@ This is a problem in particular for example when using the demo tool server with
 
 See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecomment-3573053391
 </description>
-  </item>
-  <item>
-    <title>[responsesAPI][3] ResponsesParser to set up non harmony MCP</title>
-    <link>https://github.com/vllm-project/vllm/pull/29413</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29413</guid>
-    <pubDate>Tue, 25 Nov 2025 14:56:22 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-Part 1 of supporting MCP tools for non harmony models, this PR includes
-- setting up a ResponsesParser class, which stores the internal state of the context in responsesAPI native format
-- add a ParsableContext, which can then handle the context for serving_engine generate_with_builtin_tools
-- add an experimental VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT flag
-- this PR allows ParsableContext to handle reasoning + user facing content, next PR will parse tools
-
-Next:
-- add MCP server and parse tools in the next PR (https://github.com/qandrew/vllm/pull/11, https://github.com/qandrew/vllm/pull/10)
-
-## Test Plan
-
-I tested on minimax; it works on kimi k2 thinking also
-
-Server
-`VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-p
-
-...</description>
   </item>
   <item>
     <title>Support compressed-tensors W4A8 MoE checkpoints in GptOssModel weight loader for CPU</title>
@@ -1138,6 +1112,38 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
+  </item>
+  <item>
+    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
+    <link>https://github.com/vllm-project/vllm/pull/24998</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
+    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
+    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
+
+This PR also handles several variations of enabling or disabling thinking in the prompt.
+
+Thinking enabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;&lt;/think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+```
+
+
+
+cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
