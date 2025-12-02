@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 02 Dec 2025 17:43:27 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 02 Dec 2025 17:53:24 +0000</lastBuildDate>
   <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
@@ -71,22 +71,18 @@ async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
     <pubDate>Mon, 01 Dec 2025 17:55:08 +0000</pubDate>
     <description>## Purpose
 
+This PR is part 2 for the ResponsesParser, which provides the tool parser for responsesParser and the ability to run a MCP python tool.
+
+Not in this PR
+- other types of tools
+- https://github.com/qandrew/vllm/pull/12 supporting raw input / output messages
+- there is a shortcoming in this PR where the 2nd turn onwards doesn&#x27;t properly insert the tokens back in to the engine with the same prefix, due to responses / chat messages mapping to the template. I&#x27;ll follow up with a PR to fix this.
+
 ## Test Plan
 
 Minimax M2
 ```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
-```
-
-```
-curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer dummy-api-key&quot;   -d &#x27;{
-        &quot;model&quot;: &quot;MiniMaxAI/MiniMax-M2&quot;,
-        &quot;input&quot;: &quot;Multiply 64548*15151 using the python tool.&quot;,
-        &quot;tools&quot;: [
-          {
-            &quot;type&quot;: &quot;mcp&quot;,
-            &quot;server_label&quot;: &quot;code_interpreter&quot;,
-            &quot;headers&quot;:
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-too
 
 ...</description>
   </item>
