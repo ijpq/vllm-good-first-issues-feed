@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 16:01:39 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 16:14:52 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix parse_output_message crash on commentary with no recipient</title>
     <link>https://github.com/vllm-project/vllm/pull/29972</link>
@@ -248,31 +248,6 @@ Channel Leakage/Hallucination: The model appeared to hallucinate or leak tool ca
 Changes Implemented:
 
 Active Buffer Parsing: Added logic to inspect parser.current_content and parser.current_channel. If the active channel is commentary (used 
-
-...</description>
-  </item>
-  <item>
-    <title>[Core] Add xxHash as a high-performance hash option for accelerating prefix caching</title>
-    <link>https://github.com/vllm-project/vllm/pull/29163</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29163</guid>
-    <pubDate>Fri, 21 Nov 2025 07:50:58 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-This PR introduces xxHash-based hash algorithms to vLLM’s prefix caching, providing a faster and collision-resistant alternative to the SHA-256 variants added in #23673.
-
-**Why xxHash?** Prefix Caching does not require cryptographic security:
-
-- It never stores secret data.
-- It never leaves process boundaries.
-- It is used exclusively to identify structural equivalence of prefix blocks.
-
-Therefore, cryptographic collision resistance is unnecessary. 
-
-xxHash strikes the right balance: Much better collision resistance compared to Python builtin `hash()`, which is salted and unstable across processes. Much faster than SHA-256 and SHA-256+CBOR used in current prefix caching.
-
-This change is lightweight: it only introduces the xxhash dependency and ad
 
 ...</description>
   </item>
@@ -1138,6 +1113,31 @@ You are a helpful agent...
 
 
 cc: @DarkLight1337 </description>
+  </item>
+  <item>
+    <title>[Bug] Fix gpt-oss missing tool content</title>
+    <link>https://github.com/vllm-project/vllm/pull/24954</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24954</guid>
+    <pubDate>Tue, 16 Sep 2025 09:06:25 +0000</pubDate>
+    <description>## Purpose
+This PR requires the following PRs to be merged first: https://github.com/vllm-project/vllm/pull/24768 and the harmony lib PR (https://github.com/openai/harmony/pull/76).
+
+The changes include adding &#x27;with_recipient&#x27; and the Assistant&#x27;s &#x27;analysis&#x27; content.
+Without adding this content, there was an issue where the gpt-oss model had a higher probability of outputting abnormal tokens when calling tools.
+
+## Test Plan
+[gpt-oss_test.py](https://github.com/user-attachments/files/22359291/gpt-oss_test.py)
+[messages.txt](https://github.com/user-attachments/files/22359292/messages.txt)
+
+Run python3 gpt-oss_test.py about 10 times.
+
+## Test Result 
+(before)
+&lt;img width=&quot;1239&quot; height=&quot;225&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/3e1f91d6-7275-43cf-804f-040d490c79fa&quot; /&gt;
+
+(a
+
+...</description>
   </item>
 </channel>
 </rss>
