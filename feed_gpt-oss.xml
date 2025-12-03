@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 20:47:06 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 20:56:28 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][7] Browser, Container MCP tools for non harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/29989</link>
@@ -47,33 +47,6 @@ Per [Harmony format docs](https://cookbook.openai.com/articles/openai-harmony), 
 
 **Impact**: 
 Stream terminates prem
-
-...</description>
-  </item>
-  <item>
-    <title>[Kernels] Remove BatchedTritonOrDeepGemmExperts and default fallback to Triton</title>
-    <link>https://github.com/vllm-project/vllm/pull/29929</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29929</guid>
-    <pubDate>Wed, 03 Dec 2025 03:02:26 +0000</pubDate>
-    <description>## Purpose
-
-Remove `BatchedTritonOrDeepGemmExperts`.  Always try to use DeepGEMM if it is installed and the MoE layer is compatible, i.e. fp8 + 128 block quantized).   If the MoE layer is compatible and DeepGEMM isn&#x27;t installed, throw an error.  Otherwise, use BatchedTritonExperts.
-
-## Test Plan
-CI
-
-## Test Result
-
-cc @tlrmchlsmth , @varun-sundar-rabindranath 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` 
 
 ...</description>
   </item>
@@ -1133,6 +1106,38 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
+  </item>
+  <item>
+    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
+    <link>https://github.com/vllm-project/vllm/pull/24998</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
+    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
+    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
+
+This PR also handles several variations of enabling or disabling thinking in the prompt.
+
+Thinking enabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;&lt;/think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+```
+
+
+
+cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
