@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 19:45:29 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 19:54:04 +0000</lastBuildDate>
   <item>
     <title>[Bug]: Add validation for tool requests that the tool is available</title>
     <link>https://github.com/vllm-project/vllm/issues/29432</link>
@@ -190,31 +190,6 @@ _No response_
 ### Before submitting a new issue...
 
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[RFC]: Make PassConfig flags less verbose</title>
-    <link>https://github.com/vllm-project/vllm/issues/27995</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27995</guid>
-    <pubDate>Mon, 03 Nov 2025 17:49:29 +0000</pubDate>
-    <description>### Motivation.
-
-Almost all `PassConfig` field names have `enable_` in the name, which is unnecessarily verbose. They are also pretty long, and sometimes not descriptive enough. Finally, `enable_fusion` should be split into rmsnorm+quant and activation+quant flags as we want to control these flags separately.
-
-### Proposed Change.
-
-We should rename the flags:
-- `enable_async_tp` -&gt; `fuse_gemm_comms`
-- `enable_attn_fusion` -&gt; `fuse_attn_quant` 
-- `enable_fi_allreduce_fusion` -&gt; `fuse_allreduce_rms` 
-- `enable_fusion` -&gt; `fuse_norm_quant`, `fuse_act_quant`
-- `enable_noop` -&gt; `eliminate_noops`
-- `enable_sequence_parallelism` -&gt; `enable_sp`
-
-For future RoPE-based fusion passes, the flags will look like:
-- `enable_qknorm_rope_fusion` -&gt; `fuse_qknorm_rope`
-- `enable_rope_cache_fusion` -&gt; `fuse_r
-
-...</description>
   </item>
   <item>
     <title>[Usage]: how to request a qwen2.5-VL-7B classify model served by vllm using openai SDK?</title>
