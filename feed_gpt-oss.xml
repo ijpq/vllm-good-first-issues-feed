@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 03:36:56 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 03:58:06 +0000</lastBuildDate>
   <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
@@ -74,7 +74,8 @@ async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
 This PR is part 2 for the ResponsesParser, which provides the tool parser for responsesParser and the ability to run a MCP python tool.
 
 Not in this PR
-- other types of tools
+- other types of MCP tools like browser
+- logging for tokens
 - https://github.com/qandrew/vllm/pull/12 supporting raw input / output messages
 - there is a shortcoming in this PR where the 2nd turn onwards doesn&#x27;t properly insert the tokens back in to the engine with the same prefix, due to responses / chat messages mapping to the template. I&#x27;ll follow up with a PR to fix this.
 
@@ -82,7 +83,7 @@ Not in this PR
 
 Minimax M2
 ```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-too
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-
 
 ...</description>
   </item>
