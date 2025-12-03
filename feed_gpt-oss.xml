@@ -5,7 +5,32 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 19:12:13 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 19:26:02 +0000</lastBuildDate>
+  <item>
+    <title>[responsesAPI][7] Browser, Container MCP tools for non harmony models</title>
+    <link>https://github.com/vllm-project/vllm/pull/29989</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29989</guid>
+    <pubDate>Wed, 03 Dec 2025 19:13:41 +0000</pubDate>
+    <description>## Purpose
+- add browser tool, container tool
+
+## Test Plan
+```
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
+```
+
+```
+curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer dummy-api-key&quot;   -d &#x27;{
+        &quot;model&quot;: &quot;MiniMaxAI/MiniMax-M2&quot;,
+        &quot;input&quot;: &quot;Whats the latest news in New York City?&quot;,
+        &quot;tools&quot;: [
+          {
+            &quot;type&quot;: &quot;mcp&quot;,
+            &quot;server_label&quot;: &quot;web_search_preview&quot;,
+ 
+
+...</description>
+  </item>
   <item>
     <title>[Bugfix] Fix parse_output_message crash on commentary with no recipient</title>
     <link>https://github.com/vllm-project/vllm/pull/29972</link>
@@ -120,7 +145,7 @@ async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
 This PR is part 2 for the ResponsesParser, which provides the tool parser for responsesParser and the ability to run a MCP python tool.
 
 Not in this PR
-- other types of MCP tools like browser
+- other types of MCP tools like browser: https://github.com/vllm-project/vllm/pull/29989
 - logging for tokens
 - https://github.com/qandrew/vllm/pull/12 supporting raw input / output messages
 - there is a shortcoming in this PR where the 2nd turn onwards doesn&#x27;t properly insert the tokens back in to the engine with the same prefix, due to responses / chat messages mapping to the template. I&#x27;ll follow up with a PR to fix this.
@@ -131,7 +156,7 @@ Added unit tests, and tested the following manually:
 
 Minimax M2
 ```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vl
 
 ...</description>
   </item>
@@ -1108,38 +1133,6 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
-  </item>
-  <item>
-    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
-    <link>https://github.com/vllm-project/vllm/pull/24998</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
-    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
-    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
-
-This PR also handles several variations of enabling or disabling thinking in the prompt.
-
-Thinking enabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;&lt;/think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-```
-
-
-
-cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
