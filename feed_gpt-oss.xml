@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 06:47:13 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 06:58:32 +0000</lastBuildDate>
   <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
@@ -65,7 +65,7 @@ async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
   - No functional changes - pure refactoring</description>
   </item>
   <item>
-    <title>[responsesAPI][5] ResponsesParser with tools for full MCP loop</title>
+    <title>[responsesAPI][5] ResponsesParser with tools for full MCP python loop</title>
     <link>https://github.com/vllm-project/vllm/pull/29798</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29798</guid>
     <pubDate>Mon, 01 Dec 2025 17:55:08 +0000</pubDate>
@@ -81,9 +81,11 @@ Not in this PR
 
 ## Test Plan
 
+Added unit tests, and tested the following manually:
+
 Minimax M2
 ```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel
 
 ...</description>
   </item>
