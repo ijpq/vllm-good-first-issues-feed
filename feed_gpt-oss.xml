@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 03 Dec 2025 21:41:25 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 03 Dec 2025 21:49:39 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][7] Browser, Container MCP tools for non harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/29989</link>
@@ -522,6 +522,26 @@ no functional changes; CI passes
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optional) Release notes update. If your change is user facing, please update
+
+...</description>
+  </item>
+  <item>
+    <title>[Core] Add a random suffix to frontend-provided request IDs</title>
+    <link>https://github.com/vllm-project/vllm/pull/27987</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27987</guid>
+    <pubDate>Mon, 03 Nov 2025 15:13:12 +0000</pubDate>
+    <description>Since #9550 and #10968 we support client&#x27;s supplying a custom request ID. The motivation for this is that it can be very helpful when you need to correlate vLLM logs with logs of a related service.
+
+Since the request ID is used ubiquitously across vLLM as a unique key, it obviously is problematic if we ever have multiple in-flight requests using the same client-provided request ID.
+
+We saw this happening recently when `vllm serve bench` started including a request ID and the request IDs from multiple concurrent instances caused collisions. See #27723
+
+We try to guard against request ID collisions currently in the frontend in OutputProcessor:
+
+```
+    def add_request(...):
+        if request_id in self.request_states:
+            raise ValueError(f&quot;Request id {request_id} already running.&quot;)
 
 ...</description>
   </item>
@@ -1106,38 +1126,6 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
-  </item>
-  <item>
-    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
-    <link>https://github.com/vllm-project/vllm/pull/24998</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
-    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
-    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
-
-This PR also handles several variations of enabling or disabling thinking in the prompt.
-
-Thinking enabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;&lt;/think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-```
-
-
-
-cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
