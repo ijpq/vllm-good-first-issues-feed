@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 04 Dec 2025 12:35:52 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 04 Dec 2025 13:02:07 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP type support infrastructure to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/30054</link>
@@ -988,17 +988,16 @@ Parser used:
     <pubDate>Fri, 03 Oct 2025 15:30:00 +0000</pubDate>
     <description>## Purpose
 Offline eplb- make it possible to rearrange experts once at the start time.
-This allows better experts balancedness without metrics tracking/rearrangement overhead.
+This allows rebalancing experts when engine starts. With `static` experts are rebalanced only once when engine starts,
+this allows better experts balancedness without metrics tracking/rearrangement overhead.
 
-EPLB now works in 4 modes:
-- no `save_dir` no `load_path`:
-online eplb
-- only `save_dir`:
-EPLB will record matrics and save to a file
-- only `load_path`:
-EPLB will rearrange experts once at the start based on load_path statistics
-- `save_dir` and `load_path`:
-EPLB will rearrange experts once at the start based on load_path statistics and continue rearranging based on online data
+EPLB has more options now:
+- `load_initial_load_window` and `load_path`:
+Whether to use initial load window and corresponding path.
+- `save_load_window` and `load_path`:
+Whether to save load window and corresponding path.
+- `static`:
+Whether to actively rebalance experts during runtime.
 
 ## Test Plan
 Integration test test_eplb_offline.py added.
