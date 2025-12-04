@@ -5,7 +5,37 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 04 Dec 2025 10:54:22 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 04 Dec 2025 11:04:47 +0000</lastBuildDate>
+  <item>
+    <title>[Frontend] Add MCP type support infrastructure to Responses API</title>
+    <link>https://github.com/vllm-project/vllm/pull/30054</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30054</guid>
+    <pubDate>Thu, 04 Dec 2025 10:58:35 +0000</pubDate>
+    <description># Add MCP type support infrastructure to Responses API
+
+## Summary
+Add MCP type support infrastructure to Responses API
+
+## Changes
+- Import and use `McpCall` type from openai library
+- Add `_parse_mcp_call()` function to parse MCP tool calls into properly typed output items
+- Update `parse_output_message()` to route unknown recipients (not `browser.*`, `functions.*`, or built-in tools) to MCP parsing
+- Update `parse_remaining_state()` to handle in-progress MCP calls
+- Add `server_label` field to `McpCall` objects (extracted from recipient name)
+
+## Test Plan
+
+**Unit tests:**
+```bash
+python3 -m pytest tests/entrypoints/test_harmony_utils.py -k &quot;mcp&quot; -v
+```
+
+**Manual test - Before this change (missing `server_label` field):**
+```bash
+curl -X POST &quot;http://localhost:8000/
+
+...</description>
+  </item>
   <item>
     <title>[responsesAPI][7] Browser, Container MCP tools for non harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/29989</link>
@@ -1096,33 +1126,6 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
-  </item>
-  <item>
-    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
-    <link>https://github.com/vllm-project/vllm/pull/25052</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
-    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
-    <description>## Purpose
-
-Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
-
-## Test Plan
-
-tested by CI
-
-## Test Result
-
-tested by CI 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before a
-
-...</description>
   </item>
 </channel>
 </rss>
