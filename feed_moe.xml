@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 04 Dec 2025 01:51:19 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 04 Dec 2025 02:29:27 +0000</lastBuildDate>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
@@ -108,25 +108,6 @@ python benchmarks/kernels/benchmark_moe.py --model=mistralai/Mixtral-8x7B-Instru
 # Tuned Config
 (BenchmarkWorker pid=3339388) INFO 09-12 01:05:21 [fused_moe.py:720] Using configuration from /home/mgoin/code/vllm/vllm/model_executor/layers/fused_moe/configs/E=8,N=7168,device_name=NVIDIA_H100_80GB_HBM3.json for MoE layer.
 Batch size: 1, Kern
-
-...</description>
-  </item>
-  <item>
-    <title>[Benchmark] Add expert parallel support to MoE benchmark</title>
-    <link>https://github.com/vllm-project/vllm/pull/20876</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/20876</guid>
-    <pubDate>Sun, 13 Jul 2025 09:12:49 +0000</pubDate>
-    <description>## Essential Elements of an Effective PR Description Checklist
-- [x] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [x] The test plan, such as providing test command.
-- [x] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-
-
-## Purpose
-This PR enhances the MoE kernel benchmark script (benchmarks/kernels/benchmark_moe.py) by adding support for tuning configurations with expert parallelism (EP).
-
-Previously, the script only supported tuning for tensor parallelism (TP), where the intermediate size is sharded. This change introduces an --enable-expert-parallel flag, which modifies the 
 
 ...</description>
   </item>
