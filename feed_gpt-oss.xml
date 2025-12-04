@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 04 Dec 2025 23:30:42 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 04 Dec 2025 23:40:36 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP type support infrastructure to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/30054</link>
@@ -46,19 +46,19 @@ curl -X POST &quot;http://localhost:8000/v1/responses&quot; \
 - add browser tool, container tool
 
 ## Test Plan
+minimax server
 ```
 VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
 ```
 
+gptoss server
 ```
-curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer dummy-api-key&quot;   -d &#x27;{
-        &quot;model&quot;: &quot;MiniMaxAI/MiniMax-M2&quot;,
-        &quot;input&quot;: &quot;Whats the latest news in New York City?&quot;,
-        &quot;tools&quot;: [
-          {
-            &quot;type&quot;: &quot;mcp&quot;,
-            &quot;server_label&quot;: &quot;web_search_preview&quot;,
- 
+VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;/data/users/axia/checkpoints/gpt-oss-120b&quot; -tp 2     --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
+```
+
+container tool
+```
+curl -X 
 
 ...</description>
   </item>
