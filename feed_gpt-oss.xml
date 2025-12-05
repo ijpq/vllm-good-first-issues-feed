@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 16:11:13 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 16:27:05 +0000</lastBuildDate>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -120,31 +120,6 @@ Modify the existing `test_output_messages_enabled` test in test_response_api_wit
 @pytest.mark.asyncio
 @pytest.mark.parametrize(&quot;model_name&quot;, [MODEL_NAME])
 async def test_output_messages_enabled(client: OpenAI, model_name: str, serv
-
-...</description>
-  </item>
-  <item>
-    <title>[responsesAPI][5] ResponsesParser with tools for full MCP python loop</title>
-    <link>https://github.com/vllm-project/vllm/pull/29798</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29798</guid>
-    <pubDate>Mon, 01 Dec 2025 17:55:08 +0000</pubDate>
-    <description>## Purpose
-
-This PR is part 2 for the ResponsesParser, which provides the tool parser for responsesParser and the ability to run a MCP python tool.
-
-Not in this PR
-- other types of MCP tools like browser: https://github.com/vllm-project/vllm/pull/29989
-- logging for tokens
-- https://github.com/qandrew/vllm/pull/12 supporting raw input / output messages
-- there is a shortcoming in this PR where the 2nd turn onwards doesn&#x27;t properly insert the tokens back in to the engine with the same prefix, due to responses / chat messages mapping to the template. I&#x27;ll follow up with a PR to fix this.
-
-## Test Plan
-
-Added unit tests, and tested the following manually:
-
-Minimax M2
-```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vl
 
 ...</description>
   </item>
@@ -1131,6 +1106,13 @@ Currently when no new blocks available from each step, we already record this as
 &lt;/details&gt;
 
 </description>
+  </item>
+  <item>
+    <title>[Rocm] [quantization] support quark wmxfp4 for gptoss</title>
+    <link>https://github.com/vllm-project/vllm/pull/25159</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
+    <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
+    <description></description>
   </item>
 </channel>
 </rss>
