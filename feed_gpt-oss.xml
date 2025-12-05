@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 10:41:29 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 10:51:47 +0000</lastBuildDate>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -89,25 +89,6 @@ VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interprete
 ```
 
 containe
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Fix parse_output_message crash on commentary with no recipient</title>
-    <link>https://github.com/vllm-project/vllm/pull/29972</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29972</guid>
-    <pubDate>Wed, 03 Dec 2025 15:15:19 +0000</pubDate>
-    <description>## Purpose
-
-Fixes #24170 
-
-Resolves `ValueError: Unknown recipient: None` crash in `harmony_utils.py` when gpt-oss models generate commentary channel preambles (explanatory text before tool calls) without a specific recipient.
-
-**Root Cause**: 
-Per [Harmony format docs](https://cookbook.openai.com/articles/openai-harmony), the commentary channel can contain &quot;preambles to calling multiple functions.&quot; When instructions prompt the model to generate explanation text alongside tool calls, gpt-oss-120b generates these preambles in the commentary channel with `recipient=None` (since they&#x27;re not addressing a specific function). The parser crashed because it only handled commentary with specific recipients like `functions.X`, `python`, `browser`, or `container`.
-
-**Impact**: 
-Stream terminates prem
 
 ...</description>
   </item>
@@ -593,7 +574,7 @@ We try to guard against request ID collisions currently in the frontend in Outpu
 ```
     def add_request(...):
         if request_id in self.request_states:
-            raise ValueError(f&quot;Request id {request_id} already
+            raise ValueError(f&quot;Request id {request_id} already running.&quot;)
 
 ...</description>
   </item>
@@ -1123,6 +1104,23 @@ class HarmonyContextFB(HarmonyContext):
 
     async def call_search_tool(
         self, tool_session
+
+...</description>
+  </item>
+  <item>
+    <title>[Misc][Metrics] expose requests preemptions in logger</title>
+    <link>https://github.com/vllm-project/vllm/pull/25303</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25303</guid>
+    <pubDate>Sat, 20 Sep 2025 05:22:36 +0000</pubDate>
+    <description>### Summary
+The purpose of this PR is to store the num preemptions per step in the logger class locally thus it can be leveraged in children classes.
+
+Currently when no new blocks available from each step, we already record this as [request events](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/core/sched/scheduler.py#L279) and set it back to engine client by EngineCoreResponses which later got [aggregated](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/metrics/stats.py#L156) in the [iteration stats](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/engine/async_llm.py#L458). 
+
+
+### Test Plan
+1. Added a simple unit tests for iteration stats. 
+2. Run locally, satu
 
 ...</description>
   </item>
