@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 09:15:53 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 09:31:35 +0000</lastBuildDate>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -443,6 +443,24 @@ Libc version                 : glibc-2.35
 PyTorch version              : 2.9.0a0+git1c57644
 Is debug build               : False
 CUDA used to build PyTorc
+
+...</description>
+  </item>
+  <item>
+    <title>Parse vLLM engine required fields from hf_config to model_arch_config</title>
+    <link>https://github.com/vllm-project/vllm/pull/28454</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28454</guid>
+    <pubDate>Tue, 11 Nov 2025 08:25:52 +0000</pubDate>
+    <description>## Purpose
+See https://github.com/vllm-project/vllm/issues/24384 for more context.
+
+Use llama3 as prototype 
+
+## Design
+- `model_arch_config` explicitly specify all standardized fields required for vllm runtime
+- model arch parser read from config.json/params.json/etc. and perform the standardization process. The goal is to eventually remove most of the standardization logic from config/model.py once the migration to the new parser workflow is complete
+- For hf-model-arch-parser, if the model is not in `_CONFIG_REGISTRY`, we still call `AutoConfig.from_pretrained`. This allows us to leverage the normalization already implemented in HuggingFace’s `PretrainedConfig`. A more standardized PretrainedConfig will enable a thinner, simpler parser layer.
+https://github.com/vllm-project/vllm/blob/f0
 
 ...</description>
   </item>
@@ -1105,23 +1123,6 @@ class HarmonyContextFB(HarmonyContext):
 
     async def call_search_tool(
         self, tool_session
-
-...</description>
-  </item>
-  <item>
-    <title>[Misc][Metrics] expose requests preemptions in logger</title>
-    <link>https://github.com/vllm-project/vllm/pull/25303</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25303</guid>
-    <pubDate>Sat, 20 Sep 2025 05:22:36 +0000</pubDate>
-    <description>### Summary
-The purpose of this PR is to store the num preemptions per step in the logger class locally thus it can be leveraged in children classes.
-
-Currently when no new blocks available from each step, we already record this as [request events](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/core/sched/scheduler.py#L279) and set it back to engine client by EngineCoreResponses which later got [aggregated](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/metrics/stats.py#L156) in the [iteration stats](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/engine/async_llm.py#L458). 
-
-
-### Test Plan
-1. Added a simple unit tests for iteration stats. 
-2. Run locally, satu
 
 ...</description>
   </item>
