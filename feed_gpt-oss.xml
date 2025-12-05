@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 19:56:13 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 20:09:24 +0000</lastBuildDate>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -500,35 +500,6 @@ It is only added to the Responses API path for now, but it should be able to fix
 Guided decoding for the gpt-oss chat format should only be enabled if `structured_outputs_config.enable_in_reasoning` is True, since the chat format is technically in the reasoning section of model output. It also lets us continue to use structured outputs for the content of the final message. `structured_outputs_config.reasoning_parser` is set by default for gpt-oss. 
 
 TODO: test that structured output works alongside this after #28000 is merged, and adju
-
-...</description>
-  </item>
-  <item>
-    <title>[ez][responsesAPI] refactor function to harmony utils</title>
-    <link>https://github.com/vllm-project/vllm/pull/28009</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28009</guid>
-    <pubDate>Mon, 03 Nov 2025 23:36:40 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-Ideally all GPTOSS/harmony specific code should not be in serving responses. this code cleans up one function by moving it to harmony-utils.
-
-## Test Plan
-
-no functional changes; CI passes
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update
 
 ...</description>
   </item>
@@ -1112,6 +1083,33 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
+  </item>
+  <item>
+    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
+    <link>https://github.com/vllm-project/vllm/pull/25052</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
+    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
+    <description>## Purpose
+
+Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
+
+## Test Plan
+
+tested by CI
+
+## Test Result
+
+tested by CI 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before a
+
+...</description>
   </item>
 </channel>
 </rss>
