@@ -5,7 +5,23 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 21:58:52 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 22:10:16 +0000</lastBuildDate>
+  <item>
+    <title>[responsesAPI][6] input/output messages for ResponsesParser</title>
+    <link>https://github.com/vllm-project/vllm/pull/30158</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30158</guid>
+    <pubDate>Fri, 05 Dec 2025 22:09:21 +0000</pubDate>
+    <description>## Purpose
+
+## Test Plan
+
+One shortcoming of ResponsesParser, note `&lt;/think&gt;\n\n[e~[\n]~b]` which is in the 2nd turn prompt but not in first output.
+```
+output.prompt
+&#x27;]~!b[]~b]system\nYou are a helpful assistant.\n\n# Tools\nYou may call one or more tools to assist with the user query.\nHere are the tools available in JSONSchema format:\n\n&lt;tools&gt;\n&lt;tool&gt;{&quot;server_label&quot;: &quot;code_interpreter&quot;, &quot;type&quot;: &quot;mcp&quot;, &quot;allowed_tools&quot;: null, &quot;authorization&quot;: null, &quot;connector_id&quot;: null, &quot;headers&quot;: {&quot;test&quot;: &quot;test&quot;}, &quot;require_approval&quot;: null, &quot;server_description&quot;: null, &quot;server_url&quot;: &quot;IGNORED&quot;}&lt;/tool&gt;\n&lt;/tools&gt;\n\nWhen making tool calls, use XML format to invoke tools and pass parameters:\n\n&lt;minimax:tool_call&gt;\n&lt;invoke name=&quot;tool-name-1&quot;&gt;\n&lt;parameter name=&quot;param-key-1&quot;&gt;param-value-1&lt;/parameter&gt;\n&lt;paramet
+
+...</description>
+  </item>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -1083,33 +1099,6 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
-  </item>
-  <item>
-    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
-    <link>https://github.com/vllm-project/vllm/pull/25052</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
-    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
-    <description>## Purpose
-
-Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
-
-## Test Plan
-
-tested by CI
-
-## Test Result
-
-tested by CI 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before a
-
-...</description>
   </item>
 </channel>
 </rss>
