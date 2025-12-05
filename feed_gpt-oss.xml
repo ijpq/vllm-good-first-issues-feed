@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 10:51:47 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 11:00:08 +0000</lastBuildDate>
   <item>
     <title>[ez] move harmony utils to parser folder</title>
     <link>https://github.com/vllm-project/vllm/pull/30117</link>
@@ -889,23 +889,6 @@ Earlier gpt-oss was failing when expert parallelism was enabled, after the fix i
 </description>
   </item>
   <item>
-    <title>Transform HF interleaved weights to halves in vllm</title>
-    <link>https://github.com/vllm-project/vllm/pull/27024</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27024</guid>
-    <pubDate>Thu, 16 Oct 2025 13:24:44 +0000</pubDate>
-    <description>## Purpose
-- HF provides the gate + up weights interleaved as [g0, u0, g1, u1]
-- vllm expects the gate + up tensors to be in halves [g0, g1, u0, u1]
-- Add a funtion to do the transformation for gate + up weights and bias
-
-## Test Plan
-Tested with gpt-oss
-
-## Test Result
-Gives the correct results on CPU
-</description>
-  </item>
-  <item>
     <title>[Frontend][gpt-oss] Support all MCP servers for gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/26704</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26704</guid>
@@ -1123,6 +1106,31 @@ Currently when no new blocks available from each step, we already record this as
 2. Run locally, satu
 
 ...</description>
+  </item>
+  <item>
+    <title>[Kernels] Move shared/fused expert sum and final reduce into FusedMoE layer</title>
+    <link>https://github.com/vllm-project/vllm/pull/25200</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25200</guid>
+    <pubDate>Thu, 18 Sep 2025 20:01:35 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
