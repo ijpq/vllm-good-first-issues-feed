@@ -5,7 +5,32 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 13:52:30 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 14:01:23 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
+    <link>https://github.com/vllm-project/vllm/issues/30075</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30075</guid>
+    <pubDate>Thu, 04 Dec 2025 18:19:03 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+EPLB requires the number of experts to be chosen up front and there is a known minimum valid value that can be derived from the vllm startup configuration.  Since extra EPLB experts trades kv cache memory for potential performance improvements, but that is not guaranteed to pay off, having the EPLB value default to the minimum valid value would reduce friction on enabling EPLB the first time until users are ready to tune.
+
+As a consequence, it would also streamline templating the same config to work across multiple EP sizes for the default case.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_
+
+### Before submitting a new issue...
+
+- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bo
+
+...</description>
+  </item>
   <item>
     <title>[Bug]: Add validation for tool requests that the tool is available</title>
     <link>https://github.com/vllm-project/vllm/issues/29432</link>
