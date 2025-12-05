@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 05 Dec 2025 00:37:59 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 01:08:17 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP type support infrastructure to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/30054</link>
