@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 04 Dec 2025 23:57:15 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 05 Dec 2025 00:37:59 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP type support infrastructure to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/30054</link>
@@ -43,7 +43,7 @@ curl -X POST &quot;http://localhost:8000/v1/responses&quot; \
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29989</guid>
     <pubDate>Wed, 03 Dec 2025 19:13:41 +0000</pubDate>
     <description>## Purpose
-- add browser tool, container tool
+- add browser tool, container tool to ParsableContext
 
 ## Test Plan
 minimax server
@@ -56,9 +56,7 @@ gptoss server
 VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;/data/users/axia/checkpoints/gpt-oss-120b&quot; -tp 2     --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
 ```
 
-container tool
-```
-curl -X 
+containe
 
 ...</description>
   </item>
