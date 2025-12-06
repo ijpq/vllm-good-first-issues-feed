@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 06 Dec 2025 02:56:18 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 06 Dec 2025 03:27:17 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][6] input/output messages for ResponsesParser</title>
     <link>https://github.com/vllm-project/vllm/pull/30158</link>
@@ -933,28 +933,6 @@ class StreamingClient:
 ...</description>
   </item>
   <item>
-    <title>[Tests] Tool call tests for openai/gpt-oss-20b</title>
-    <link>https://github.com/vllm-project/vllm/pull/26237</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26237</guid>
-    <pubDate>Sun, 05 Oct 2025 02:45:01 +0000</pubDate>
-    <description>Test suite for verifying tool-calling behavior in vLLM with **openai tool-call parser**.
-
-This suite validates:
-1. Single and multiple tool invocation behavior.
-2. Correct parsing of tool names and argument payloads.
-3. Model compliance with OpenAI&#x27;s tool-calling specification.
-4. Handling of invalid or incomplete tool inputs.
-5. Variation in reasoning and tool behavior under different temperatures.
-
-Tools used:
-- calculator: Performs arithmetic calculations.
-- get_time: Retrieves the current time in a given city.
-
-Model under test: openai/gpt-oss-20b
-Parser used:
-- Tool call parser: openai</description>
-  </item>
-  <item>
     <title>[EPLB] Offline eplb support</title>
     <link>https://github.com/vllm-project/vllm/pull/26176</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26176</guid>
@@ -1099,6 +1077,33 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
+  </item>
+  <item>
+    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
+    <link>https://github.com/vllm-project/vllm/pull/25052</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
+    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
+    <description>## Purpose
+
+Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
+
+## Test Plan
+
+tested by CI
+
+## Test Result
+
+tested by CI 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before a
+
+...</description>
   </item>
 </channel>
 </rss>
