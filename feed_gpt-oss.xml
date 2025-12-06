@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 06 Dec 2025 22:27:23 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 06 Dec 2025 22:38:18 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][6] input/output messages for ResponsesParser</title>
     <link>https://github.com/vllm-project/vllm/pull/30158</link>
@@ -21,23 +21,6 @@ output.prompt
 &#x27;]~!b[]~b]system\nYou are a helpful assistant.\n\n# Tools\nYou may call one or more tools to assist with the user query.\nHere are the tools available in JSONSchema format:\n\n&lt;tools&gt;\n&lt;tool&gt;{&quot;server_label&quot;: &quot;code_interpreter&quot;, &quot;type&quot;: &quot;mcp&quot;, &quot;allowed_tools&quot;: null, &quot;authorization&quot;: null, &quot;connector_id&quot;: null, &quot;headers&quot;: {&quot;test&quot;: &quot;test&quot;}, &quot;require_approval&quot;: null, &quot;server_description&quot;: null, &quot;server_url&quot;: &quot;IGNORED&quot;}&lt;/tool&gt;\n&lt;/tools&gt;\n\nWhen making tool calls, use XML format to invoke tools and pass parameters:\n\n&lt;minimax:tool_call&gt;\n&lt;invoke name=&quot;tool-name-1&quot;&gt;\n&lt;parameter name=&quot;param-key-1&quot;&gt;param-value-1&lt;/parameter&gt;\n&lt;paramet
 
 ...</description>
-  </item>
-  <item>
-    <title>[ez] move harmony utils to parser folder</title>
-    <link>https://github.com/vllm-project/vllm/pull/30117</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30117</guid>
-    <pubDate>Fri, 05 Dec 2025 07:03:04 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-Refactor so we centralize all the files related to parsing for MCP
-
-## Test Plan
-No functional changes, existing unit tests should pass
-
-## Test Result
-
-</description>
   </item>
   <item>
     <title>[Bugfix] Use PIECEWISE cudagraph with gpt-oss on Ampere</title>
@@ -1104,6 +1087,38 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
+  </item>
+  <item>
+    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
+    <link>https://github.com/vllm-project/vllm/pull/24998</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
+    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
+    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
+
+This PR also handles several variations of enabling or disabling thinking in the prompt.
+
+Thinking enabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+
+&lt;think&gt;&lt;/think&gt;
+```
+
+Thinking disabled:
+```
+You are a helpful agent...
+```
+
+
+
+cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
