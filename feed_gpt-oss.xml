@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 19:08:45 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 19:21:13 +0000</lastBuildDate>
   <item>
     <title>[gpt-oss] Fix harmony parser in streaming responses</title>
     <link>https://github.com/vllm-project/vllm/pull/30205</link>
