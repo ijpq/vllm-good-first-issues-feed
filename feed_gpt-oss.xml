@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 12:13:22 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 12:30:54 +0000</lastBuildDate>
+  <item>
+    <title>[gpt-oss] Fix harmony parser in streaming responses</title>
+    <link>https://github.com/vllm-project/vllm/pull/30205</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30205</guid>
+    <pubDate>Sun, 07 Dec 2025 12:14:24 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+Fix missed final streaming tokens in speculative decoding (https://github.com/vllm-project/vllm/issues/30204)
+## Test Plan
+Rerun the reproducer after fix is implemented.
+## Test Result
+Final tokens are indeed returned as expected.
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [*] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [*] The test plan, such as providing test command.
+- [*] The test results, such as pasting the results comparison before and after, or e2e results
+- [*] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [*] (Optional) Release notes update. If your change is u
+
+...</description>
+  </item>
   <item>
     <title>[DO NOT MERGE] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
     <link>https://github.com/vllm-project/vllm/pull/30200</link>
@@ -1102,13 +1128,6 @@ Currently when no new blocks available from each step, we already record this as
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[Rocm] [quantization] support quark wmxfp4 for gptoss</title>
-    <link>https://github.com/vllm-project/vllm/pull/25159</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
-    <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
-    <description></description>
   </item>
 </channel>
 </rss>
