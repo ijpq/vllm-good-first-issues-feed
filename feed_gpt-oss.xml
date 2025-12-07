@@ -5,19 +5,18 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 08:18:56 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 08:34:41 +0000</lastBuildDate>
   <item>
-    <title>[Renderer] Introduce Renderer for processing chat messages</title>
-    <link>https://github.com/vllm-project/vllm/pull/30198</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30198</guid>
-    <pubDate>Sun, 07 Dec 2025 07:17:59 +0000</pubDate>
-    <description>
-## Purpose
+    <title>[Renderer] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
+    <link>https://github.com/vllm-project/vllm/pull/30200</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30200</guid>
+    <pubDate>Sun, 07 Dec 2025 08:30:34 +0000</pubDate>
+    <description>## Purpose
 
 - Prototype an interface, `vllm.renderers.RendererLike`, to process chat messages into engine inputs.
-- Introduce `RendererRegistry` which lazily registers renderers to avoid circular import problem..
+- Introduce `RendererRegistry` which lazily registers renderers to avoid circular import problem.
 - Move implementation-specific chat utils to the corresponding renderer in `vllm.renderers`.
-- TODO: Migrate `tokenizer_mode` to `renderer_mode`, and use a specific tokenizer implementation for each renderer, deprecating `TokenizerRegistry` in the process.
+- Initialize the renderer in `InputPreprocessor`, replacing the tokenizer initialization inside `LLMEngine` and `AsyncLLM`.
 
 Towards #22880 and #23873
 
@@ -31,7 +30,7 @@ Towards #22880 and #23873
 
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
-- [ ] The test results,
+- [ ] The test results, such as pasting the results comparison be
 
 ...</description>
   </item>
