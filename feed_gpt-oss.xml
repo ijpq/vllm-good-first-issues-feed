@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 07:45:34 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 07:54:08 +0000</lastBuildDate>
   <item>
     <title>[Renderer] Introduce Renderer for processing chat messages</title>
     <link>https://github.com/vllm-project/vllm/pull/30198</link>
