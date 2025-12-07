@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 13:07:44 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 13:22:17 +0000</lastBuildDate>
   <item>
     <title>[gpt-oss] Fix harmony parser in streaming responses</title>
     <link>https://github.com/vllm-project/vllm/pull/30205</link>
@@ -40,7 +40,7 @@ Final tokens are indeed returned as expected.
     <description>## Purpose
 
 - Prototype an interface, `vllm.renderers.RendererLike`, to process chat messages into engine inputs.
-- Introduce `RendererRegistry` which lazily registers renderers to avoid circular import problem.
+- Introduce `RENDERER_REGISTRY` which lazily registers renderers to avoid circular import problem.
 - Move implementation-specific chat utils to the corresponding renderer in `vllm.renderers`.
 - Merge `init_tokenizer_from_config` implementation into `cached_tokenizer_from_config`.
 - Update `TokenizerRegistry` to only use lazy imports, even for in-tree tokenizers.
@@ -51,7 +51,7 @@ Towards #22880 and #23873
 
 Future work:
 
-- Merge `CompletionRenderer` with this imp
+- Merge `CompletionRenderer` with this im
 
 ...</description>
   </item>
