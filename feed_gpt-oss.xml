@@ -5,9 +5,9 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 10:51:53 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 10:59:53 +0000</lastBuildDate>
   <item>
-    <title>[Renderer] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
+    <title>[DO NOT MERGE] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
     <link>https://github.com/vllm-project/vllm/pull/30200</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30200</guid>
     <pubDate>Sun, 07 Dec 2025 08:30:34 +0000</pubDate>
