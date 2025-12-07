@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 01:58:33 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 02:47:41 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
     <link>https://github.com/vllm-project/vllm/issues/30075</link>
@@ -1019,23 +1019,6 @@ _No response_
 ### Before submitting a new issue...
 
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Usage]: [V1] Misleading Error Messages</title>
-    <link>https://github.com/vllm-project/vllm/issues/13510</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/13510</guid>
-    <pubDate>Wed, 19 Feb 2025 03:48:22 +0000</pubDate>
-    <description>Looking for help to improve error messages during startup!
-
-Running a model that does not exist (e.g. `MODEL=neuralmagic/Meta-Llama-3-8B-Instruct-FP8-dynamic` &lt;&lt; this does not exist), gives the following stack trace:
-
-```bash
-(venv-nm-vllm-abi3) rshaw@beaker:~$ VLLM_USE_V1=1 vllm serve $MODEL --disable-log-requests --no-enable-prefix-caching
-INFO 02-19 03:45:16 __init__.py:190] Automatically detected platform cuda.
-INFO 02-19 03:45:18 api_server.py:840] vLLM API server version 0.7.2.0
-INFO 02-19 03:45:18 api_server.py:841] args: Namespace(subparser=&#x27;serve&#x27;, model_tag=&#x27;neuralmagic/Meta-Llama-3-8B-Instruct-FP8-dynamic&#x27;, config=&#x27;&#x27;, host=None, port=8000, uvicorn_log_level=&#x27;info&#x27;, allow_credentials=False, allowed_origins=[&#x27;*&#x27;], allowed_methods=[&#x27;*&#x27;], allowed_headers=[&#x27;*&#x27;], api_key=None, lora_mo
-
-...</description>
   </item>
   <item>
     <title>[Misc]: CMake Clean-up / Refactor Tasks</title>
