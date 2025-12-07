@@ -5,7 +5,34 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 04:43:10 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 04:54:13 +0000</lastBuildDate>
+  <item>
+    <title>[Frontend] Add MCP tool streaming support to Responses API</title>
+    <link>https://github.com/vllm-project/vllm/pull/30192</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30192</guid>
+    <pubDate>Sun, 07 Dec 2025 04:46:48 +0000</pubDate>
+    <description>Purpose
+This change enables streaming support for MCP tools when using GPT OSS. It extends the harmony utilities and response serving infrastructure to handle tool streaming, allowing tool calls and their results to be incrementally streamed back to clients rather than returned as a single batch.
+
+Test Plan
+curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer dummy-api-key&quot;   -d &#x27;{
+    &quot;model&quot;: &quot;default&quot;,
+    &quot;input&quot;: &quot;Multiply 123*456 using the mcp.code_interpreter tool.&quot;,
+    &quot;tools&quot;: [{
+      &quot;type&quot;: &quot;mcp&quot;,
+      &quot;server_label&quot;: &quot;code_interpreter&quot;,
+      &quot;headers&quot;: {&quot;test&quot;: &quot;test&quot;},
+      &quot;server_url&quot;: &quot;IGNORED&quot;
+    }],
+    &quot;stream&quot;: true,
+    &quot;enable_response_messages&quot;: true
+  }&#x27;
+Test Result
+event: response.created
+data: {&quot;
+
+...</description>
+  </item>
   <item>
     <title>[responsesAPI][6] input/output messages for ResponsesParser</title>
     <link>https://github.com/vllm-project/vllm/pull/30158</link>
@@ -1087,38 +1114,6 @@ tested by CI
 - [ ] The test results, such as pasting the results comparison before a
 
 ...</description>
-  </item>
-  <item>
-    <title>[Frontend]: Allow the qwen reasoning parser to work without think tokens</title>
-    <link>https://github.com/vllm-project/vllm/pull/24998</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/24998</guid>
-    <pubDate>Tue, 16 Sep 2025 21:47:12 +0000</pubDate>
-    <description>Copying the approach of PR https://github.com/vllm-project/vllm/pull/16890 , this PR enables models which don&#x27;t have special `&lt;think&gt;` and `&lt;/think&gt;` tokens to work with the Qwen3 reasoning parser. This is a bit tricky as in some tokenizers `&gt;\n` is a token as well as `&gt;`. So we can&#x27;t full rely on finding the encoded sequences of `&lt;think&gt;` in the model output tokens or in the prompt tokens. In the case of a failed match, we need to decode the tokens to fall back on text search.
-
-This PR also handles several variations of enabling or disabling thinking in the prompt.
-
-Thinking enabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-
-&lt;think&gt;&lt;/think&gt;
-```
-
-Thinking disabled:
-```
-You are a helpful agent...
-```
-
-
-
-cc: @DarkLight1337 </description>
   </item>
 </channel>
 </rss>
