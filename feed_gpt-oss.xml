@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 07 Dec 2025 10:33:33 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 07 Dec 2025 10:43:14 +0000</lastBuildDate>
   <item>
     <title>[Renderer] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
     <link>https://github.com/vllm-project/vllm/pull/30200</link>
@@ -21,16 +21,10 @@
 
 Towards #22880 and #23873
 
-## Test Plan
+Future work:
 
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ 
+- Merge `CompletionRenderer` with this implementation of `Renderer`.
+- Since each renderer uses a specific tokenizer, we can deprecate `TokenizerRegistry` in favor of `RENDERER_REGISTRY` and rename `tok
 
 ...</description>
   </item>
