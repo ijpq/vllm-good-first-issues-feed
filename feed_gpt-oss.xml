@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 07:15:39 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 07:31:41 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] fix streaming final output for non harmony</title>
     <link>https://github.com/vllm-project/vllm/pull/30237</link>
@@ -101,7 +101,7 @@ Final tokens are indeed returned as expected.
 - Update `TokenizerRegistry` to only use lazy imports, even for in-tree tokenizers.
 - Initialize the renderer in `InputPreprocessor`, replacing the tokenizer initialization inside `LLMEngine` and `AsyncLLM`.
 - Replace `EngineClient.get_tokenizer()` with `EngineClient.renderer.get_tokenizer()` to avoid unnecessary async.
-- Replace `RequestPrompt` in online server with the prompt formats in `vll
+- Replace `RequestPrompt` in online server with the prompt formats in `vllm.inputs`
 
 ...</description>
   </item>
