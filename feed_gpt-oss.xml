@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 03:44:47 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 04:05:07 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][8] Fix multi turn MCP tokenization</title>
     <link>https://github.com/vllm-project/vllm/pull/30230</link>
@@ -15,25 +15,19 @@
 
 ## Purpose
 
-Minimax
+As we are enabling MCP for non harmony models #30115, this PR addresses a previous shortcoming where we use a responsesParser, and the construct_input_messages maintains a 1:1 mapping between response items and chatCompletion inputs which become model sentences. However in reality the model sentence can have both a tool call and reasoning (https://huggingface.co/MiniMaxAI/MiniMax-M2/blob/main/chat_template.jinja#L105). Essentially, we change the following:
+
 ```
-# TODO: can strip out the &lt;/think&gt;\n\n[e~[\n]~b]ai\n\n&lt;minimax:tool_call&gt;
-# to become &lt;/think&gt;\n\n\n&lt;minimax:tool_call&gt;
+&lt;/think&gt;\n\n[e~[\n]~b]ai\n\n&lt;minimax:tool_call&gt; # before
+&lt;/think&gt;\n\n\n&lt;minimax:tool_call&gt; # after this PR
 ```
 
 ## Test Plan
 
-## Test Result
+added unit tests
 
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google
+```
+ CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4
 
 ...</description>
   </item>
