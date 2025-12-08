@@ -5,7 +5,38 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 02:42:09 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 03:14:58 +0000</lastBuildDate>
+  <item>
+    <title>[responsesAPI][8] Fix multi turn MCP tokenization</title>
+    <link>https://github.com/vllm-project/vllm/pull/30230</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30230</guid>
+    <pubDate>Mon, 08 Dec 2025 03:08:53 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+PLEASE FILL IN THE PR DESCRIPTION HERE ENSURING ALL CHECKLIST ITEMS (AT THE BOTTOM) HAVE BEEN CONSIDERED.
+
+## Purpose
+
+Minimax
+```
+# TODO: can strip out the &lt;/think&gt;\n\n[e~[\n]~b]ai\n\n&lt;minimax:tool_call&gt;
+# to become &lt;/think&gt;\n\n\n&lt;minimax:tool_call&gt;
+```
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new m
+
+...</description>
+  </item>
   <item>
     <title>[gpt-oss] Fix harmony parser in streaming responses</title>
     <link>https://github.com/vllm-project/vllm/pull/30205</link>
@@ -1083,33 +1114,6 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
-  </item>
-  <item>
-    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
-    <link>https://github.com/vllm-project/vllm/pull/25052</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
-    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
-    <description>## Purpose
-
-Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
-
-## Test Plan
-
-tested by CI
-
-## Test Result
-
-tested by CI 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before a
-
-...</description>
   </item>
 </channel>
 </rss>
