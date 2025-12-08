@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 04:54:37 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 05:07:12 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][6] Fix multi turn MCP tokenization</title>
     <link>https://github.com/vllm-project/vllm/pull/30230</link>
