@@ -5,28 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 17:24:50 +0000</lastBuildDate>
-  <item>
-    <title>Add latent MoE support</title>
-    <link>https://github.com/vllm-project/vllm/pull/30203</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30203</guid>
-    <pubDate>Sun, 07 Dec 2025 12:08:43 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-This PR updates the `NemotronH` model implementation to support the latest architecture changes and fix configuration issues:
-
-1. MTP Weight Skipping: Updated `load_weights` to explicitly ignore MTP weights which are present in some checkpoints but not used in this inference implementation.
-2. Latent MoE Support: Implemented support for Latent MoE architecture:
-    - Added `moe_latent_size` to `NemotronHConfig`.
-    - Added `fc1_latent_proj` and `fc2_latent_proj` layers when latent size is specified.
-    - Updated the forward pass to project hidden states to the latent space before the expert layer and project back afterwards, while handling shared experts correctly in the original space.
-
-## Test Plan
-Validated locally with a private `NemotroH` HF
-
-...</description>
-  </item>
+  <lastBuildDate>Mon, 08 Dec 2025 17:37:40 +0000</lastBuildDate>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
