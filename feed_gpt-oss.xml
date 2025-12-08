@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 05:20:55 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 05:35:51 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][6] Fix multi turn MCP tokenization</title>
     <link>https://github.com/vllm-project/vllm/pull/30230</link>
@@ -113,18 +113,17 @@ data: {&quot;
     <pubDate>Fri, 05 Dec 2025 22:09:21 +0000</pubDate>
     <description>## Purpose
 
-add input/output messages to ResponsesParser. If we have a 2 turn conversation (user input 1, output 1, MCP call, input 2, output 2), we&#x27;ll have user input 1 in response.input_messages, and [output 1, input 2, output 2] in response.output_messages).
+- add input/output messages to ResponsesParser. If we have a 2 turn conversation (user input 1, output 1, MCP call, input 2, output 2), we&#x27;ll have user input 1 in response.input_messages, and [output 1, input 2, output 2] in response.output_messages).
+- refactor make_response_output_items_from_parsable_context to be a class function of ResponsesParser.
+
+NOTE: This PR must be merged in after #30230.
 
 ## Test Plan
 
 
 ```
  CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
- ./vllm/fb/scripts/gptoss/run_mcp_server.sh
-```
-
-```
- curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer dummy-api-key&quot;   -d &#x27;{
+ ./vllm/fb/scripts/gptoss/run_mcp_server
 
 ...</description>
   </item>
@@ -508,34 +507,6 @@ To fix this, a non-strict mode was added to the openai-harmony library to allow 
 
 This will resolve some cases where the error
 `openai_harmony.HarmonyError: unexpected tokens remaining in message header` was previously thrown. It will not resolve all of those, as not every malformed message output can be recovered. Other ongoing work around using structured output for the Harmony format c
-
-...</description>
-  </item>
-  <item>
-    <title>[3/n] ParsableContext initial implementation</title>
-    <link>https://github.com/vllm-project/vllm/pull/28154</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28154</guid>
-    <pubDate>Wed, 05 Nov 2025 19:45:04 +0000</pubDate>
-    <description>## Purpose
-
-Copied over from my draft version in https://github.com/qandrew/vllm/pull/5
-
-- Adds the concept of sentences &amp; textContent, similar to openaiHarmony
-- Add a ParsableContext, which will use the ParsableStreamer and have structured sentences
-- Add a function _make_response_output_items_from_parsable_context to parse out the final output.
-- This is all gated behind an env var so it should be safe to merge
-
-this PR does not cover the following, which we&#x27;ll add later
-- streaming
-- tool calling
-
-## Test Plan
-
-this generates one sentence with 2 textContents.
-
-server: `VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1  vllm serve MiniMaxAI/MiniMax-M2     --tensor-parallel-size 4     --tool-call-parser minimax_m2     --reasoning-parser minimax_m2     --enable-auto-tool-choice     --port 8000`
-
-```
 
 ...</description>
   </item>
@@ -1113,6 +1084,33 @@ Currently when no new blocks available from each step, we already record this as
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25159</guid>
     <pubDate>Thu, 18 Sep 2025 10:45:15 +0000</pubDate>
     <description></description>
+  </item>
+  <item>
+    <title>[Kernel] Add prefix arg to RMSNorm and adapt existing models</title>
+    <link>https://github.com/vllm-project/vllm/pull/25052</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25052</guid>
+    <pubDate>Wed, 17 Sep 2025 07:47:11 +0000</pubDate>
+    <description>## Purpose
+
+Like other ops, this PR pass `prefix` to RMSNorm ops to indicate which decode layer it&#x27;s from. The prefix is very useful for custom ops do kernel fusion to improve performance. For example in vllm-ascend, there is a op called `npu_add_rms_norm_quant`, it combine `RMSNorm` with the `ColumnParallelLinear` in self-attention/mlp layer.  I think other backend can do more thing once the prefix is added as well.
+
+## Test Plan
+
+tested by CI
+
+## Test Result
+
+tested by CI 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before a
+
+...</description>
   </item>
 </channel>
 </rss>
