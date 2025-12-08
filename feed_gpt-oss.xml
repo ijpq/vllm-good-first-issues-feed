@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 08:59:57 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 09:14:50 +0000</lastBuildDate>
   <item>
     <title>[gpt-oss] Add model_identity to system message retrieval for harmony chat template</title>
     <link>https://github.com/vllm-project/vllm/pull/30247</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30247</guid>
     <pubDate>Mon, 08 Dec 2025 08:43:55 +0000</pubDate>
     <description>&lt;!-- markdownlint-disable --&gt;
-PLEASE FILL IN THE PR DESCRIPTION HERE ENSURING ALL CHECKLIST ITEMS (AT THE BOTTOM) HAVE BEEN CONSIDERED.
 
 ## Purpose
 When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is not being used to adjust model&#x27;s identity. This PR is to pass the `model_identity` from chat/completion to the system message formatter.
@@ -27,7 +26,8 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation up
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If you
 
 ...</description>
   </item>
