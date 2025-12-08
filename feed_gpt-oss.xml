@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 04:22:01 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 08 Dec 2025 04:40:24 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI][6] Fix multi turn MCP tokenization</title>
     <link>https://github.com/vllm-project/vllm/pull/30230</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30230</guid>
     <pubDate>Mon, 08 Dec 2025 03:08:53 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
 
 As we are enabling MCP for non harmony models #30115, this PR addresses a previous shortcoming where we use a responsesParser, and the construct_input_messages maintains a 1:1 mapping between response items and chatCompletion inputs which become model sentences. However in reality the model sentence can have both a tool call and reasoning (https://huggingface.co/MiniMaxAI/MiniMax-M2/blob/main/chat_template.jinja#L105). Essentially, we change the following:
@@ -27,7 +26,7 @@ As we are enabling MCP for non harmony models #30115, this PR addresses a previo
 added unit tests
 
 ```
- CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4
+ CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning
 
 ...</description>
   </item>
