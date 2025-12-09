@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 23:41:18 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 23:50:06 +0000</lastBuildDate>
   <item>
     <title>Upstream fp8 with static scales gpt oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30357</link>
