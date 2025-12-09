@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 21:43:34 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 21:51:28 +0000</lastBuildDate>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
@@ -57,32 +57,6 @@ Similar to other quant methods like gptq_marlin.py or fp8.py, I&#x27;d like to c
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary d
-
-...</description>
-  </item>
-  <item>
-    <title>[MoE][Refactor] Remove most arguments to FusedMoEMethodBase.apply</title>
-    <link>https://github.com/vllm-project/vllm/pull/29066</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29066</guid>
-    <pubDate>Thu, 20 Nov 2025 03:56:29 +0000</pubDate>
-    <description>## Purpose
-After making `select_experts` a non-static method (https://github.com/vllm-project/vllm/pull/29067), we can avoid passing most of the arguments to `FusedMoEMethodBase.apply` and get them from the layer directly.
-
-This doesn&#x27;t really decrease flexibility, the MoE quantization methods were already fairly tightly coupled with `FusedMoE`.  A further step could be making `FusedMoE` an abstract base class that simply provides the `quant_method` parameters.  Then the current `FusedMoE` class would become a subclass of that.
-
-## Test Plan
-CI
-
-## Test Result
-Blackwell failure is known bug fixed by https://github.com/vllm-project/vllm/pull/30336
-
-cc @varun-sundar-rabindranath 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpos
 
 ...</description>
   </item>
