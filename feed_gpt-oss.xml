@@ -5,7 +5,14 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 19:45:42 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 19:54:25 +0000</lastBuildDate>
+  <item>
+    <title>Upstream fp8 with static scales gpt oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/30357</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30357</guid>
+    <pubDate>Tue, 09 Dec 2025 19:49:32 +0000</pubDate>
+    <description></description>
+  </item>
   <item>
     <title>[ResponsesAPI] Add GPTOSS MCP tool streaming</title>
     <link>https://github.com/vllm-project/vllm/pull/30301</link>
@@ -1107,23 +1114,6 @@ class HarmonyContextFB(HarmonyContext):
 
     async def call_search_tool(
         self, tool_session
-
-...</description>
-  </item>
-  <item>
-    <title>[Misc][Metrics] expose requests preemptions in logger</title>
-    <link>https://github.com/vllm-project/vllm/pull/25303</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25303</guid>
-    <pubDate>Sat, 20 Sep 2025 05:22:36 +0000</pubDate>
-    <description>### Summary
-The purpose of this PR is to store the num preemptions per step in the logger class locally thus it can be leveraged in children classes.
-
-Currently when no new blocks available from each step, we already record this as [request events](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/core/sched/scheduler.py#L279) and set it back to engine client by EngineCoreResponses which later got [aggregated](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/metrics/stats.py#L156) in the [iteration stats](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/engine/async_llm.py#L458). 
-
-
-### Test Plan
-1. Added a simple unit tests for iteration stats. 
-2. Run locally, satu
 
 ...</description>
   </item>
