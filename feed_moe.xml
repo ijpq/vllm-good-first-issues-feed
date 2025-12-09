@@ -5,39 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 00:38:36 +0000</lastBuildDate>
-  <item>
-    <title>[Perf] Optimize `group_topk` kernel, 1.9% Throughput improvement, 2.1% TPOT improvemnt</title>
-    <link>https://github.com/vllm-project/vllm/pull/30159</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30159</guid>
-    <pubDate>Fri, 05 Dec 2025 22:25:21 +0000</pubDate>
-    <description>## Purpose
-
-We are trying to optimize the GLMv4.6 model, this kernel takes a lot of time and we try to reduce this first.
-
-This optimization could be also used for other models like V3.2 etc.
-
-Optimize the kernel, mainly:
-1. Use template for the scoring function
-2. unroll some usual ngroup
-
-## Test
-
-`export MODEL=&quot;zai-org/GLM-4.6-FP8&quot;`
-
-### Acc
-
-```bash
-lm_eval --model local-completions --model_args &quot;base_url=http://127.0.0.1:9256/v1/completions,model=$MODEL,num_concurrent=1024&quot; --tasks gsm8k
-Now
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value |   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|-----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.9356|±  |0.0068|
-|     |       |strict-match    |     5|exact_match|↑  |0.9310|±  |0.0070|
-ma
-
-...</description>
-  </item>
+  <lastBuildDate>Tue, 09 Dec 2025 01:09:07 +0000</lastBuildDate>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
