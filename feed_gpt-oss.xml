@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 02:33:17 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 03:08:53 +0000</lastBuildDate>
   <item>
     <title>[gpt-oss] Add model_identity to system message retrieval for harmony chat template</title>
     <link>https://github.com/vllm-project/vllm/pull/30247</link>
@@ -309,22 +309,6 @@ See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecommen
 
 2. Extend _load_weights_other to:
 	•	Detect W4A8 (int4 weights, int8
-
-...</description>
-  </item>
-  <item>
-    <title>Lora MoE Align Improvements</title>
-    <link>https://github.com/vllm-project/vllm/pull/29257</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29257</guid>
-    <pubDate>Sun, 23 Nov 2025 04:43:51 +0000</pubDate>
-    <description>## Purpose
-This PR includes the following changes to the MoE LoRA Align kernel:
-- Adds a global memory variant of `moe_lora_align_sum_kernel` (following the `moe_align_block_size_kernel` implementation). Previously only the shared memory variant was implemented, which led to worse performance for models with larger num_experts.
-- ~Uses two cuda streams to execute `moe_lora_align_sum_kernel` and `moe_align_block_size_kernel` in parallel~
-- Refactors `moe_lora_align_sum_kernel` and `moe_align_block_size_kernel` to reduce duplicate logic between LoRA and non-LoRA cases (e.g. `moe_align_block_size_kernel` and `moe_lora_align_block_size_kernel` now call a common `_moe_align_block_size` function which supports both LoRA and non-LoRA cases).
-
-FIX https://github.com/vllm-project/vllm/issues/30026
-
 
 ...</description>
   </item>
@@ -1116,6 +1100,31 @@ Currently when no new blocks available from each step, we already record this as
 2. Run locally, satu
 
 ...</description>
+  </item>
+  <item>
+    <title>[Kernels] Move shared/fused expert sum and final reduce into FusedMoE layer</title>
+    <link>https://github.com/vllm-project/vllm/pull/25200</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25200</guid>
+    <pubDate>Thu, 18 Sep 2025 20:01:35 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
