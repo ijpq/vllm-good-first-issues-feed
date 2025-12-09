@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 08 Dec 2025 23:59:20 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 00:38:36 +0000</lastBuildDate>
   <item>
     <title>[gpt-oss] Add model_identity to system message retrieval for harmony chat template</title>
     <link>https://github.com/vllm-project/vllm/pull/30247</link>
@@ -167,14 +167,13 @@ data: {&quot;
 - add input/output messages to ResponsesParser. If we have a 2 turn conversation (user input 1, output 1, MCP call, input 2, output 2), we&#x27;ll have user input 1 in response.input_messages, and [output 1, input 2, output 2] in response.output_messages).
 - refactor make_response_output_items_from_parsable_context to be a class function of ResponsesParser.
 
-NOTE: This PR must be merged in after #30230.
+NOTE: This PR must be merged in after #30230, this builds on top of https://github.com/vllm-project/vllm/issues/30115
 
 ## Test Plan
 
 
 ```
- CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
- ./vllm/fb/scripts/gptoss/run_mcp_server
+ CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:808
 
 ...</description>
   </item>
