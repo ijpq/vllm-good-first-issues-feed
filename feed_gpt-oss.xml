@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 05:37:04 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 05:47:22 +0000</lastBuildDate>
   <item>
     <title>[ResponsesAPI] Add GPTOSS MCP tool streaming</title>
     <link>https://github.com/vllm-project/vllm/pull/30301</link>
@@ -421,32 +421,6 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <description>This PR fixes tests for labels:
 - `Python-only Installation Test`
 - `Entrypoints Integration Test (API Server)`</description>
-  </item>
-  <item>
-    <title>[DNM] kimi k2 thinking tool calling</title>
-    <link>https://github.com/vllm-project/vllm/pull/28794</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28794</guid>
-    <pubDate>Sun, 16 Nov 2025 02:32:29 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
   <item>
     <title>[Bugfix] Multiple fixes for gpt-oss Chat Completion prompting</title>
@@ -1121,6 +1095,31 @@ Currently when no new blocks available from each step, we already record this as
 2. Run locally, satu
 
 ...</description>
+  </item>
+  <item>
+    <title>[Kernels] Move shared/fused expert sum and final reduce into FusedMoE layer</title>
+    <link>https://github.com/vllm-project/vllm/pull/25200</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25200</guid>
+    <pubDate>Thu, 18 Sep 2025 20:01:35 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
