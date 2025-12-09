@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 09 Dec 2025 06:59:13 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 09 Dec 2025 07:12:11 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
     <link>https://github.com/vllm-project/vllm/issues/30075</link>
