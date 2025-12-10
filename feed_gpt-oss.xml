@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 15:50:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 15:59:54 +0000</lastBuildDate>
   <item>
     <title>Standardise `get_rope` to use `rope_parameters[&quot;partial_rotary_factor&quot;]`, not `rotary_dim`</title>
     <link>https://github.com/vllm-project/vllm/pull/30389</link>
