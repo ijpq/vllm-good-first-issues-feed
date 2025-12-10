@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 01:54:33 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 02:38:11 +0000</lastBuildDate>
   <item>
     <title>Upstream fp8 with static scales gpt oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30357</link>
@@ -87,30 +87,6 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 
   In _process_simple_streaming_events, each iteration overwrites context.last_output with only the latest incremental
   output (delta). When responses_full_generator builds the final r
-
-...</description>
-  </item>
-  <item>
-    <title>[responsesAPI][6] Fix multi turn MCP tokenization</title>
-    <link>https://github.com/vllm-project/vllm/pull/30230</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30230</guid>
-    <pubDate>Mon, 08 Dec 2025 03:08:53 +0000</pubDate>
-    <description>
-## Purpose
-
-As we are enabling MCP for non harmony models #30115, this PR addresses a previous shortcoming where we use a responsesParser, and the construct_input_messages maintains a 1:1 mapping between response items and chatCompletion inputs which become model sentences. However in reality the model sentence can have both a tool call and reasoning (https://huggingface.co/MiniMaxAI/MiniMax-M2/blob/main/chat_template.jinja#L105). Essentially, we change the following:
-
-```
-&lt;/think&gt;\n\n[e~[\n]~b]ai\n\n&lt;minimax:tool_call&gt; # before
-&lt;/think&gt;\n\n\n&lt;minimax:tool_call&gt; # after this PR
-```
-
-## Test Plan
-
-added unit tests
-
-```
- CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning
 
 ...</description>
   </item>
@@ -1114,6 +1090,23 @@ class HarmonyContextFB(HarmonyContext):
 
     async def call_search_tool(
         self, tool_session
+
+...</description>
+  </item>
+  <item>
+    <title>[Misc][Metrics] expose requests preemptions in logger</title>
+    <link>https://github.com/vllm-project/vllm/pull/25303</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25303</guid>
+    <pubDate>Sat, 20 Sep 2025 05:22:36 +0000</pubDate>
+    <description>### Summary
+The purpose of this PR is to store the num preemptions per step in the logger class locally thus it can be leveraged in children classes.
+
+Currently when no new blocks available from each step, we already record this as [request events](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/core/sched/scheduler.py#L279) and set it back to engine client by EngineCoreResponses which later got [aggregated](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/metrics/stats.py#L156) in the [iteration stats](https://github.com/vllm-project/vllm/blob/6d0b827cbd0510173f6a9e77549d917828e80c76/vllm/v1/engine/async_llm.py#L458). 
+
+
+### Test Plan
+1. Added a simple unit tests for iteration stats. 
+2. Run locally, satu
 
 ...</description>
   </item>
