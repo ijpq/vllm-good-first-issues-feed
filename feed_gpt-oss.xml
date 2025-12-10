@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 21:06:14 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 21:22:11 +0000</lastBuildDate>
   <item>
     <title>Standardise `get_rope` to use `rope_parameters[&quot;partial_rotary_factor&quot;]`, not `rotary_dim`</title>
     <link>https://github.com/vllm-project/vllm/pull/30389</link>
@@ -690,6 +690,36 @@ Allows collection of timing metrics for the Offloading Connector, which is essen
 </description>
   </item>
   <item>
+    <title>[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2</title>
+    <link>https://github.com/vllm-project/vllm/pull/27532</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27532</guid>
+    <pubDate>Sun, 26 Oct 2025 13:30:51 +0000</pubDate>
+    <description>When doing prefill up-convert the kv-cache from fp8 to bf16 and call the bf16 prefill kernel instead of the decode kernel. This PR introduce global workspace management to have the bf16 workspace overlap with the MoE workspace buffers.
+
+## GSM8K Accuracy (DeepSeek-V3.2, FP8 KV-cache, TP=8)
+
+| Branch | Accuracy |
+|--------|----------|
+| Main | 95.30% ± 0.58% |
+| PR (Hybrid) | **95.53% ± 0.57%** |
+
+## Benchmark Results (4096 in, 512 out, 100 prompts)
+
+| Config | Branch | Req/s | Tok/s | Delta |
+|--------|--------|-------|-------|-------|
+| TP=8, FP8 | Main | 1.58 | 806 | — |
+| TP=8, FP8 | PR | 1.58 | 806 | **0%** |
+| DP=8+EP, FP8 | Main | 2.36 | 1207 | — |
+| DP=8+EP, FP8 | PR | **2.53** | **1293** | **+7%** |
+
+## Hybrid Approach
+
+Uses `MIN_HEADS_FOR_BF16_PREFILL = 32` threshold:
+- **TP=8** (
+
+...</description>
+  </item>
+  <item>
     <title>[WIP] [GPT-OSS] customized symm_mem based EP comm kernel integration</title>
     <link>https://github.com/vllm-project/vllm/pull/27495</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27495</guid>
@@ -1086,32 +1116,6 @@ This PR has only tested weight syncing when the quantization method is of type `
 ## Test Plan
 
 I modified the existing example `examples/offline_inference/rlhf.py` to use gpt-oss and simply re
-
-...</description>
-  </item>
-  <item>
-    <title>[Core] Support openai HarmonyContext plugin</title>
-    <link>https://github.com/vllm-project/vllm/pull/25594</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25594</guid>
-    <pubDate>Wed, 24 Sep 2025 16:31:54 +0000</pubDate>
-    <description>## Purpose
-In some gpt-oss use cases, especially internal scenarios, we need to customize the HarmonyContext class. However, the current implementation does not allow this in OSS. I believe other users may also want similar flexibility to define their own class methods.
-This PR introduces custom plugin registration for HarmonyContext, making it more extensible by allowing users to register and load their own implementations.
-
-Example:
-```
-from vllm.entrypoints.harmony_utils import register_context_loader
-
-@register_context_loader(&quot;HarmonyContextFB&quot;)
-class HarmonyContextFB(HarmonyContext):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    async def call_tool(self) -&gt; list[Message]:
-        pass
-
-    async def call_search_tool(
-        self, tool_session
 
 ...</description>
   </item>
