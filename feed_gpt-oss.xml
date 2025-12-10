@@ -5,7 +5,36 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 23:27:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 23:37:35 +0000</lastBuildDate>
+  <item>
+    <title>[Bugfix] missing tokens occur in harmony streaming</title>
+    <link>https://github.com/vllm-project/vllm/pull/30437</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30437</guid>
+    <pubDate>Wed, 10 Dec 2025 23:36:17 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+Fixed an issue where in harmony streaming mode, when the engine yields more than one token at a time, only the last token is used. #28635 #30099
+## Test Plan
+```text
+uv run api_server.py --model openai/gpt-oss-120b --gpu-memory-utilization 0.95 --port 8000 --served-model-name gptoss120b --disable-log-request --tool-call-parser openai --enable-auto-tool-choice
+```
+```python
+from openai import AsyncOpenAI
+import asyncio
+import json
+
+client = AsyncOpenAI(base_url=&#x27;http://127.0.0.1:8000/v1&#x27;, api_key=&#x27;empty&#x27;)
+
+async def run(semaphore, i):
+    async with semaphore:
+        for count in range(100):
+            print(f&#x27;{i}: {count}&#x27;)
+            a = []
+            stream = await client.responses.create(model=&#x27;gptoss120b&#x27;, input=&#x27;say something long.&#x27;, strea
+
+...</description>
+  </item>
   <item>
     <title>Standardise `get_rope` to use `rope_parameters[&quot;partial_rotary_factor&quot;]`, not `rotary_dim`</title>
     <link>https://github.com/vllm-project/vllm/pull/30389</link>
@@ -1095,27 +1124,6 @@ Next, tested with the following relevant tests:
 ## Test Result
 
 
-
-...</description>
-  </item>
-  <item>
-    <title>[GPT-OSS] Save `extra_weight_attrs` and use at `load_weights` time for Marlin kernel</title>
-    <link>https://github.com/vllm-project/vllm/pull/25694</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25694</guid>
-    <pubDate>Thu, 25 Sep 2025 17:22:44 +0000</pubDate>
-    <description>
-## Purpose
-Weight loading with GPT-OSS is broken : #23577 
-
-The issue is that we assign `weight_loader` attributes to the parameters in `GPTOSSModule` at init time, but while loading new weights, we create a new `Parameter` object which no longer has this attribute. 
-
-This PR resolves the above issue, and weights can be loaded successfully now. However, the responses are garbage because weight loading for the bias terms in experts `gate_up_proj_bias` and `down_proj_bias` are broken. 
-
-This PR has only tested weight syncing when the quantization method is of type `Mxfp4MoEMethod` with `use_marlin` True, since that seems to be the default path on Hopper. (correct me if I&#x27;m wrong)
-
-## Test Plan
-
-I modified the existing example `examples/offline_inference/rlhf.py` to use gpt-oss and simply re
 
 ...</description>
   </item>
