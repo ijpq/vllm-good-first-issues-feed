@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 23:15:04 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 23:27:34 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
     <link>https://github.com/vllm-project/vllm/issues/30075</link>
@@ -991,34 +991,6 @@ CUDA_MODULE_LOADING set to: LAZY
 GPU models and configuration:
 
 ...</description>
-  </item>
-  <item>
-    <title>[Feature]: Improve Logging for Error Messages</title>
-    <link>https://github.com/vllm-project/vllm/issues/14083</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14083</guid>
-    <pubDate>Sat, 01 Mar 2025 17:14:04 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Improve logging on VLLM V1 for common errors in initialization.
-
-For example:
-- not enough memory to fit the model
-- not enough kv cache space to fit the model
-- ...
-
-Currently we have decently logging of the exceptions that arise. It would be better however if we could explicitly catch these issues and return clearer error messages
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
     <title>[Misc]: CMake Clean-up / Refactor Tasks</title>
