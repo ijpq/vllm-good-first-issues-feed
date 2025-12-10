@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 18:58:38 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 19:10:10 +0000</lastBuildDate>
   <item>
     <title>Standardise `get_rope` to use `rope_parameters[&quot;partial_rotary_factor&quot;]`, not `rotary_dim`</title>
     <link>https://github.com/vllm-project/vllm/pull/30389</link>
@@ -470,7 +470,7 @@ This fixes multiple issues with how we were prompting gpt-oss models for Chat Co
 - We were not setting the recipient to &quot;assistant&quot; on tool responses
 - We were not mapping the tool_call_id to the proper function name on tool responses, resulting in the model getting confused about which tool response matched which tool call.
 - When the model generates tool calls during a turn, we return any model output to the commentary channel as the `content` of that tool call response. We were not properly restoring this content as a commentary message when those tool calls were passed back in via Chat Completion messages.
-- When the model generates reasoning messages during a tool call turn, we return that as a `reasoning` properly on the C
+- When the model generates reasoning messages during a tool call turn, we return that as a `reasoning` properly on the Chat Com
 
 ...</description>
   </item>
