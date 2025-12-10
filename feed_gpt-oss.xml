@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 10 Dec 2025 12:36:24 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 10 Dec 2025 13:02:20 +0000</lastBuildDate>
   <item>
     <title>Standardise `get_rope` to use `rope_parameters[&quot;partial_rotary_factor&quot;]`, not `rotary_dim`</title>
     <link>https://github.com/vllm-project/vllm/pull/30389</link>
@@ -19,11 +19,14 @@ Globally applies the fix from https://github.com/vllm-project/vllm/pull/30384.
 
 `rotary_dim` as a config field only exists in GPT-J and a few custom models (Minimax for example). The Transformers library has standardised on `partial_rotary_factor` which lives in `rope_parameters`.
 
-This PR removes the `rotary_dim` argument from `get_rope` so that there is now only one way to set the `rotary_dim` for RoPE, `head_dim * partial_rotary_factor`.
+This PR removes the `rotary_dim` argument from `get_rope` so that there is now only one way to set the `rotary_dim` for RoPE:
 
-For the few edge cases that did not set `config.rope_parameters[&quot;partial_rotary_factor&quot;]` it has been reverse engineered from `config.rotary_dim`.
+- Pass `rope_parameters` with `partial_rotary_factors` populated
+- `get_rope` does `rotary_dim = head_dim * partial_rotary_factor` internally
 
-</description>
+For the few edge cases that did not set `config.rope_parameters[&quot;partial_rotary_factor&quot;]` it has been reverse engineered from `config.rotary_dim
+
+...</description>
   </item>
   <item>
     <title>Upstream fp8 with static scales gpt oss</title>
