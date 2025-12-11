@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 02:03:10 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 02:46:57 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] missing tokens occur in harmony streaming</title>
     <link>https://github.com/vllm-project/vllm/pull/30437</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30437</guid>
     <pubDate>Wed, 10 Dec 2025 23:36:17 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
 Fixed an issue where in harmony streaming mode, when the engine yields more than one token at a time, only the last token is used. #28635 #30099
 ## Test Plan
@@ -31,7 +30,8 @@ async def run(semaphore, i):
         for count in range(100):
             print(f&#x27;{i}: {count}&#x27;)
             a = []
-            stream = await client.responses.create(model=&#x27;gptoss120b&#x27;, input=&#x27;say something long.&#x27;, strea
+            stream = await client.responses.create(model=&#x27;gptoss120b&#x27;, input=&#x27;say something long.&#x27;, stream=True)
+            async for 
 
 ...</description>
   </item>
