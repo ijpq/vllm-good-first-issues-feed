@@ -5,7 +5,22 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 10:16:31 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 10:33:47 +0000</lastBuildDate>
+  <item>
+    <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
+    <link>https://github.com/vllm-project/vllm/pull/30482</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30482</guid>
+    <pubDate>Thu, 11 Dec 2025 10:23:37 +0000</pubDate>
+    <description>## Summary
+- allow server-level chat_template to be applied even in Harmony (gpt-oss) paths for chat and responses
+- pass tokenizer into Harmony preprocessing and render via apply_hf_chat_template when provided, with safe fallback to Harmony default on errors
+- tighten typing/formatting to satisfy linters and mypy; keep existing Harmony stop tokens and tool handling unchanged
+
+## Testing
+- pre-commit run -a
+- manual: gpt-oss-120b chat completion with custom --chat-template (no errors, template applied)
+</description>
+  </item>
   <item>
     <title>[Optimization]: Add fused router for GPTOSS</title>
     <link>https://github.com/vllm-project/vllm/pull/30471</link>
@@ -1091,43 +1106,6 @@ This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quo
   - `vllm/entrypoints/openai/serving_responses.py:1830`
   - `vllm/entrypoints/openai/serving_responses.py:1879`
 - Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
-
-...</description>
-  </item>
-  <item>
-    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
-    <link>https://github.com/vllm-project/vllm/pull/26291</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
-    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
-    <description>Hi team!
-
-## Purpose
-
-We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
-
-## Test Plan
-
-Server command:
-
-```
-vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
-```
-
-Test script `streaming_client.py`:
-
-```
-#!/usr/bin/env python3
-
-import asyncio
-import sys
-from typing import List, Dict
-
-import httpx
-from openai import AsyncOpenAI
-
-
-class StreamingClient:
-    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
   </item>
