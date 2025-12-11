@@ -5,21 +5,22 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 10:57:13 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 11:09:03 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
     <link>https://github.com/vllm-project/vllm/pull/30482</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30482</guid>
     <pubDate>Thu, 11 Dec 2025 10:23:37 +0000</pubDate>
-    <description>## Summary
+    <description>## Issue
+- For gpt-oss models, --chat-template (and tokenizer/chat_template_kwargs) are ignored; prompts are rendered via Harmony instead of the normal chat-template pipeline.
+## Reason
+- When hf_config.model_type == &quot;gpt_oss&quot;, vLLM sets use_harmony and routes requests through _make_request_with_harmony(...), which directly constructs Harmony system/developer/user messages and calls render_for_completion. That path never calls _preprocess_chat / apply_hf_chat_template, so any chat template settings are bypassed.
+## Summary
 - allow server-level chat_template to be applied even in Harmony (gpt-oss) paths for chat and responses
 - pass tokenizer into Harmony preprocessing and render via apply_hf_chat_template when provided, with safe fallback to Harmony default on errors
-- tighten typing/formatting to satisfy linters and mypy; keep existing Harmony stop tokens and tool handling unchanged
+- tighten typin
 
-## Testing
-- pre-commit run -a
-- manual: gpt-oss-120b chat completion with custom --chat-template (no errors, template applied)
-</description>
+...</description>
   </item>
   <item>
     <title>[Optimization]: Add fused router for GPTOSS</title>
