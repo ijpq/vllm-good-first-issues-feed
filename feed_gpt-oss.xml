@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 12:45:58 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 13:08:49 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
     <link>https://github.com/vllm-project/vllm/pull/30482</link>
@@ -29,24 +29,31 @@
     <pubDate>Thu, 11 Dec 2025 07:55:47 +0000</pubDate>
     <description>&lt;!-- markdownlint-disable --&gt;
 
-## Purpose
-Add fused topk+softmax. But I suppose we should integrate bitmatrix process into this kernel, in order to align with sematic of triton_kernels&#x27; routing 
-
-Only consider GPTOSS model&#x27;s num_experts and topk
-
-## Test Plan
-Add GPTOSS20B config to existed unittest
-## Test Result
-
----
 &lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+&lt;summary&gt; output collect_env &lt;/summary&gt;
 
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional
+```
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 24.04.3 LTS (x86_64)
+GCC version                  : (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Clang version                : Could not collect
+CMake version                : version 3.28.3
+Libc version                 : glibc-2.39
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+============
 
 ...</description>
   </item>
