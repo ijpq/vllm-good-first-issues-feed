@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 11:23:07 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 11:34:32 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
     <link>https://github.com/vllm-project/vllm/pull/30482</link>
@@ -18,7 +18,7 @@
 ## Summary
 - allow server-level chat_template to be applied even in Harmony (gpt-oss) paths for chat and responses
 - pass tokenizer into Harmony preprocessing and render via apply_hf_chat_template when provided, with safe fallback to Harmony default on errors
-- tighten typin
+- tighten typing/forma
 
 ...</description>
   </item>
