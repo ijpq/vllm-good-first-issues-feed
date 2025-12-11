@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 05:11:31 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 11 Dec 2025 05:26:43 +0000</lastBuildDate>
   <item>
     <title>[Optimization]: Add fused router for GPTOSS</title>
     <link>https://github.com/vllm-project/vllm/pull/30454</link>
