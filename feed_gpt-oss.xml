@@ -5,37 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 11 Dec 2025 07:31:53 +0000</lastBuildDate>
-  <item>
-    <title>[Optimization]: Add fused router for GPTOSS</title>
-    <link>https://github.com/vllm-project/vllm/pull/30467</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30467</guid>
-    <pubDate>Thu, 11 Dec 2025 07:30:10 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-PLEASE FILL IN THE PR DESCRIPTION HERE ENSURING ALL CHECKLIST ITEMS (AT THE BOTTOM) HAVE BEEN CONSIDERED.
-
-## Purpose
-add fused topk+softmax for gptoss model. 
-
-one thing to simplify code
-1. only consider num_experts (128 and 32), topk is 4.
-
-i suppose we should integrate bitmatrix generating into this kernel, in order to align it with original triton_kernels&#x27; routing 
-
-## Test Plan
-add gptoss20b config to existed unittest.
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results compa
-
-...</description>
-  </item>
+  <lastBuildDate>Thu, 11 Dec 2025 07:43:14 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] missing tokens occur in harmony streaming</title>
     <link>https://github.com/vllm-project/vllm/pull/30437</link>
@@ -1132,6 +1102,29 @@ class StreamingClient:
     def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
+  </item>
+  <item>
+    <title>[EPLB] Offline eplb support</title>
+    <link>https://github.com/vllm-project/vllm/pull/26176</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26176</guid>
+    <pubDate>Fri, 03 Oct 2025 15:30:00 +0000</pubDate>
+    <description>## Purpose
+Offline eplb- make it possible to rearrange experts once at the start time.
+This allows rebalancing experts when engine starts. With `static` experts are rebalanced only once when engine starts,
+this allows better experts balancedness without metrics tracking/rearrangement overhead.
+
+EPLB has more options now:
+- `load_initial_load_window` and `load_path`:
+Whether to use initial load window and corresponding path.
+- `save_load_window` and `load_path`:
+Whether to save load window and corresponding path.
+- `static`:
+Whether to actively rebalance experts during runtime.
+
+## Test Plan
+Integration test test_eplb_offline.py added.
+## Test Result
+Tests pass</description>
   </item>
 </channel>
 </rss>
