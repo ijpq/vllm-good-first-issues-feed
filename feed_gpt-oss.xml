@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 15:27:07 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 15:40:11 +0000</lastBuildDate>
   <item>
     <title>[GPT OSS] Fix tool_choice required</title>
     <link>https://github.com/vllm-project/vllm/pull/30557</link>
@@ -25,12 +25,17 @@
 This PR implements beam search for encoder-decoder models, specifically optimized for Whisper transcription. It addresses the performance challenges of beam search on encoder-decoder architectures where encoder computation is expensive.
 
 **Key optimizations:**
-- **Encoder deduplication**: Encoder computed once per unique input, shared across all beams (~2x speedup)
-- **Request batching**: Multiple beams processed together in single forward pass (~1.5x speedup)  
+- **Encoder deduplication**: Encoder computed once per unique input, shared across all beams
+- **Request batching**: Multiple beams processed together in single forward pass  
 - **Early stopping**: Terminates when completed beams outperform active ones
-- **Cross-attention block sharing**: Deduplicated requests share KV cache blocks (memory efficient)
+- **Cross-attention block sharing**: Deduplicated requests share KV cache blocks
 
-**Performance improvement: ~3.2x faster** (18s → 5.6s for beam_width=3 on 30-se
+## Test Plan
+
+### Test Environment
+- Model: Whisper-large-v3
+- Hardware: H100 GPU
+- Test files: 30-second and 60-second audio cl
 
 ...</description>
   </item>
@@ -68,9 +73,9 @@ Co-Authored-By: Claude Opus 4.5 &lt;noreply@ant
     <description>## Purpose
 
 This PR set split_k to 1 for triton_kernels:
-* It&#x27;s reported that triton has worse performance than marlin for small batch size, see https://github.com/vllm-project/vllm/issues/28894. This is because the computed split_k become greater than 1 for small batch size, then triton_kernels will use torch.float32 dtype, see https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs.py#L169
-  * split_k computation: `split_k = max(n_sms // grid_size, 1)`, see https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs_details/opt_flags_details/opt_flags_nvidia.py#L45-L54
-  * split_k become smaller when grid_size become bigger (Since n_sms =132 for Hopper, if grid_size is &gt; 66, split_k start to become 1). grid_s
+* It&#x27;s reported that triton has worse performance than marlin for small batch size, see https://github.com/vllm-project/vllm/issues/28894. This is because the computed split_k become greater than 1 for small batch size, then triton_kernels will use torch.float32 dtype, see [here](https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs.py#L169)
+  * split_k computation: `split_k = max(n_sms // grid_size, 1)`, see [here](https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs_details/opt_flags_details/opt_flags_nvidia.py#L45-L54)
+  * split_k become smaller when grid_size become bigger (For example, n_sms =132 for H200, if grid_size is &gt; 66, split_k start
 
 ...</description>
   </item>
