@@ -5,21 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 18:59:14 +0000</lastBuildDate>
-  <item>
-    <title>[Perf] Set split_k to 1 for triton_kernels</title>
-    <link>https://github.com/vllm-project/vllm/pull/30528</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30528</guid>
-    <pubDate>Fri, 12 Dec 2025 01:15:38 +0000</pubDate>
-    <description>## Purpose
-
-This PR set split_k to 1 for triton_kernels:
-* It&#x27;s reported that triton has worse performance than marlin for small batch size, see https://github.com/vllm-project/vllm/issues/28894. This is because the computed split_k become greater than 1 for small batch size, then triton_kernels will use torch.float32 dtype, see [here](https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs.py#L169)
-  * split_k computation: `split_k = max(n_sms // grid_size, 1)`, see [here](https://github.com/triton-lang/triton/blob/v3.5.1/python/triton_kernels/triton_kernels/matmul_ogs_details/opt_flags_details/opt_flags_nvidia.py#L45-L54)
-  * split_k become smaller when grid_size become bigger (For example, n_sms =132 for H200, if grid_size is &gt; 66, split_k start
-
-...</description>
-  </item>
+  <lastBuildDate>Fri, 12 Dec 2025 19:10:59 +0000</lastBuildDate>
   <item>
     <title>[Perf] Do FP4 quant before All gather on flashinfer trtllmgen MOE </title>
     <link>https://github.com/vllm-project/vllm/pull/30014</link>
