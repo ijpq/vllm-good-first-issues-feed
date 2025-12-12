@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 04:55:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 05:08:04 +0000</lastBuildDate>
   <item>
     <title>[Perf] Set split_k to 1 for triton_kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/30528</link>
@@ -486,22 +486,6 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <description>This PR fixes tests for labels:
 - `Python-only Installation Test`
 - `Entrypoints Integration Test (API Server)`</description>
-  </item>
-  <item>
-    <title>[Bugfix] Multiple fixes for gpt-oss Chat Completion prompting</title>
-    <link>https://github.com/vllm-project/vllm/pull/28729</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28729</guid>
-    <pubDate>Fri, 14 Nov 2025 15:22:04 +0000</pubDate>
-    <description>## Purpose
-
-This fixes multiple issues with how we were prompting gpt-oss models for Chat Completion requests. A summary of the fixes:
-
-- We were not setting the recipient to &quot;assistant&quot; on tool responses
-- We were not mapping the tool_call_id to the proper function name on tool responses, resulting in the model getting confused about which tool response matched which tool call.
-- When the model generates tool calls during a turn, we return any model output to the commentary channel as the `content` of that tool call response. We were not properly restoring this content as a commentary message when those tool calls were passed back in via Chat Completion messages.
-- When the model generates reasoning messages during a tool call turn, we return that as a `reasoning` properly on the Chat Com
-
-...</description>
   </item>
   <item>
     <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
@@ -1099,6 +1083,33 @@ Whether to actively rebalance experts during runtime.
 Integration test test_eplb_offline.py added.
 ## Test Result
 Tests pass</description>
+  </item>
+  <item>
+    <title>[Bugfix] fixing streaming issues and tool call output for gpt-oss (#22704)</title>
+    <link>https://github.com/vllm-project/vllm/pull/25728</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25728</guid>
+    <pubDate>Fri, 26 Sep 2025 00:32:21 +0000</pubDate>
+    <description>## Purpose
+Closely related to bugs associated with streaming for gpt-oss response API (#22704):
+
+Harmony’s streaming didn’t support `functions.*` tool calls at all. We handled reasoning on `analysis`, final text on `final`, and built-ins like code/web—but `&quot;commentary&quot;` messages with a `recipient=&quot;functions.NAME&quot;` had a no-op branch.
+
+## Test Plan
+
+First, tested GPT-OSS with a basic set of instructions, few-shot examples, a function definition, and a prompt to find the weather in San Francisco, using the get_weather function call as input.
+
+Next, tested with the following relevant tests:
+```
+- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_simple_input
+- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_streaming
+
+```
+
+## Test Result
+
+
+
+...</description>
   </item>
 </channel>
 </rss>
