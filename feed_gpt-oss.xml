@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 13:21:12 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 13:40:02 +0000</lastBuildDate>
+  <item>
+    <title>typing: Add type hints to TurnMetrics class in context.py</title>
+    <link>https://github.com/vllm-project/vllm/pull/30552</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30552</guid>
+    <pubDate>Fri, 12 Dec 2025 13:38:08 +0000</pubDate>
+    <description>## Summary
+- Adds comprehensive type hints to the `TurnMetrics` class in `vllm/entrypoints/context.py`
+- Improves code clarity, IDE support, and type checking capabilities
+
+## Changes
+- Added type hints to `__init__` parameters: `input_tokens: int`, `output_tokens: int`, `cached_input_tokens: int`, `tool_output_tokens: int`
+- Added return type `-&gt; None` to `__init__` and `reset` methods
+- Added return type `-&gt; &quot;TurnMetrics&quot;` (forward reference) to `copy` method
+- Added descriptive docstrings to `reset` and `copy` methods
+
+## Test plan
+- [x] Type hints only, no functional changes
+- [x] Used forward reference for self-referencing return type
+- [x] Follows Python typing best practices
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 &lt;noreply@ant
+
+...</description>
+  </item>
   <item>
     <title>[Perf] Set split_k to 1 for triton_kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/30528</link>
@@ -1083,33 +1109,6 @@ Whether to actively rebalance experts during runtime.
 Integration test test_eplb_offline.py added.
 ## Test Result
 Tests pass</description>
-  </item>
-  <item>
-    <title>[Bugfix] fixing streaming issues and tool call output for gpt-oss (#22704)</title>
-    <link>https://github.com/vllm-project/vllm/pull/25728</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/25728</guid>
-    <pubDate>Fri, 26 Sep 2025 00:32:21 +0000</pubDate>
-    <description>## Purpose
-Closely related to bugs associated with streaming for gpt-oss response API (#22704):
-
-Harmony’s streaming didn’t support `functions.*` tool calls at all. We handled reasoning on `analysis`, final text on `final`, and built-ins like code/web—but `&quot;commentary&quot;` messages with a `recipient=&quot;functions.NAME&quot;` had a no-op branch.
-
-## Test Plan
-
-First, tested GPT-OSS with a basic set of instructions, few-shot examples, a function definition, and a prompt to find the weather in San Francisco, using the get_weather function call as input.
-
-Next, tested with the following relevant tests:
-```
-- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_simple_input
-- pytest -s -v vllm/tests/v1/entrypoints/openai/responses/test_basic.py::test_streaming
-
-```
-
-## Test Result
-
-
-
-...</description>
   </item>
 </channel>
 </rss>
