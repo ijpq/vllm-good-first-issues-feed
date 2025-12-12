@@ -5,13 +5,34 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 15:11:45 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 15:27:07 +0000</lastBuildDate>
   <item>
     <title>[GPT OSS] Fix tool_choice required</title>
     <link>https://github.com/vllm-project/vllm/pull/30557</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30557</guid>
     <pubDate>Fri, 12 Dec 2025 14:30:24 +0000</pubDate>
     <description></description>
+  </item>
+  <item>
+    <title>feat: batched shared encoder for whisper beam search</title>
+    <link>https://github.com/vllm-project/vllm/pull/30556</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30556</guid>
+    <pubDate>Fri, 12 Dec 2025 14:23:44 +0000</pubDate>
+    <description># Add Beam Search Support for Encoder-Decoder Models (Whisper)
+
+## Purpose
+
+This PR implements beam search for encoder-decoder models, specifically optimized for Whisper transcription. It addresses the performance challenges of beam search on encoder-decoder architectures where encoder computation is expensive.
+
+**Key optimizations:**
+- **Encoder deduplication**: Encoder computed once per unique input, shared across all beams (~2x speedup)
+- **Request batching**: Multiple beams processed together in single forward pass (~1.5x speedup)  
+- **Early stopping**: Terminates when completed beams outperform active ones
+- **Cross-attention block sharing**: Deduplicated requests share KV cache blocks (memory efficient)
+
+**Performance improvement: ~3.2x faster** (18s → 5.6s for beam_width=3 on 30-se
+
+...</description>
   </item>
   <item>
     <title>typing: Add type hints to TurnMetrics class in context.py</title>
@@ -1063,29 +1084,6 @@ class StreamingClient:
     def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
-  </item>
-  <item>
-    <title>[EPLB] Offline eplb support</title>
-    <link>https://github.com/vllm-project/vllm/pull/26176</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26176</guid>
-    <pubDate>Fri, 03 Oct 2025 15:30:00 +0000</pubDate>
-    <description>## Purpose
-Offline eplb- make it possible to rearrange experts once at the start time.
-This allows rebalancing experts when engine starts. With `static` experts are rebalanced only once when engine starts,
-this allows better experts balancedness without metrics tracking/rearrangement overhead.
-
-EPLB has more options now:
-- `load_initial_load_window` and `load_path`:
-Whether to use initial load window and corresponding path.
-- `save_load_window` and `load_path`:
-Whether to save load window and corresponding path.
-- `static`:
-Whether to actively rebalance experts during runtime.
-
-## Test Plan
-Integration test test_eplb_offline.py added.
-## Test Result
-Tests pass</description>
   </item>
 </channel>
 </rss>
