@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 08:59:01 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 09:12:45 +0000</lastBuildDate>
   <item>
     <title>[Perf] Set split_k to 1 for triton_kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/30528</link>
