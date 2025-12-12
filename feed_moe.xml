@@ -5,7 +5,34 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 02:34:19 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 03:13:08 +0000</lastBuildDate>
+  <item>
+    <title>[Perf] Do FP4 quant before All gather on flashinfer trtllmgen MOE </title>
+    <link>https://github.com/vllm-project/vllm/pull/30014</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30014</guid>
+    <pubDate>Thu, 04 Dec 2025 01:45:51 +0000</pubDate>
+    <description>## Purpose
+Move the FP4 quant before All Gather when Flashinfer TRTLLMGEN MOE is used on DP + EP enabled. This reduce the message size in All gather thus speed up All gather kernel time.
+Blocked by https://github.com/vllm-project/vllm/pull/29804, will add same opt to flashinfer_trtllm_fp4_routed_moe after merged.
+Original size
+```
+hidden_states (num_tokens, hidden_size), dtype bf16
+routing_logits (num_tokens, num_experts), dtype fp32
+```
+After change
+```
+hidden_state (num_tokens, hidden_size/2), dtype unit8
+hidden_state_sf (num_tokens , hidden_size/16), dtype fp8
+routing_logits (num_tokens, num_experts), dtype fp32
+```
+On DeepSeek-R1 case, it is a **2.4x** less message size
+
+## Test Plan
+```
+python3 -m vllm.entrypoints.openai.api_server --model nvidia/DeepSeek-R1-0528-FP4-v2 --tokenizer nv
+
+...</description>
+  </item>
   <item>
     <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
     <link>https://github.com/vllm-project/vllm/pull/29512</link>
