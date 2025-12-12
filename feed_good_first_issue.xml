@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 12 Dec 2025 18:13:38 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 12 Dec 2025 18:30:55 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
     <link>https://github.com/vllm-project/vllm/issues/30075</link>
@@ -958,39 +958,6 @@ _No response_
 ### Before submitting a new issue...
 
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
-    <title>[Bug]: `triton_scaled_mm` never used on ROCm</title>
-    <link>https://github.com/vllm-project/vllm/issues/14397</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14397</guid>
-    <pubDate>Fri, 07 Mar 2025 02:04:44 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of `python collect_env.py`&lt;/summary&gt;
-
-```text
-INFO 03-07 02:02:58 [__init__.py:207] Automatically detected platform rocm.
-Collecting environment information...
-PyTorch version: 2.5.1+rocm6.2
-Is debug build: False
-CUDA used to build PyTorch: N/A
-ROCM used to build PyTorch: 6.2.41133-dd7f95766
-
-OS: Ubuntu 22.04.5 LTS (x86_64)
-GCC version: (Ubuntu 10.5.0-1ubuntu1~22.04) 10.5.0
-Clang version: Could not collect
-CMake version: version 3.31.6
-Libc version: glibc-2.35
-
-Python version: 3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0] (64-bit runtime)
-Python platform: Linux-5.15.0-131-generic-x86_64-with-glibc2.35
-Is CUDA available: True
-CUDA runtime version: Could not collect
-CUDA_MODULE_LOADING set to: LAZY
-GPU models and configuration:
-
-...</description>
   </item>
   <item>
     <title>[Misc]: CMake Clean-up / Refactor Tasks</title>
