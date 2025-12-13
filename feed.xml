@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 18:26:43 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 18:41:47 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Remove MXFP4 Logic From `fused_experts`</title>
+    <link>https://github.com/vllm-project/vllm/issues/30621</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30621</guid>
+    <pubDate>Sat, 13 Dec 2025 18:30:30 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+SUMMARY:
+* as part of effort to refactor MoE, trying to reduce cruft
+* we currently only have MX emulation in vLLM
+* the logic for this emulation should be moved into quark
+
+https://github.com/vllm-project/vllm/blame/main/vllm/model_executor/layers/fused_moe/fused_moe.py#L1866-L1899
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_
+
+### Before submitting a new issue...
+
+- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
+  </item>
   <item>
     <title>[Feature]: Remove Chunking From FusedMoE</title>
     <link>https://github.com/vllm-project/vllm/issues/30620</link>
