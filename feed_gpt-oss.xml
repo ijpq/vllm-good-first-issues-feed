@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 06:13:10 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 06:29:53 +0000</lastBuildDate>
   <item>
     <title>[GPT OSS] Fix tool_choice required</title>
     <link>https://github.com/vllm-project/vllm/pull/30557</link>
