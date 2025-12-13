@@ -5,7 +5,19 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 12:32:36 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 12:55:35 +0000</lastBuildDate>
+  <item>
+    <title>[FixBug]fix gpt-oss v1/completions response bug</title>
+    <link>https://github.com/vllm-project/vllm/pull/30608</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30608</guid>
+    <pubDate>Sat, 13 Dec 2025 12:49:45 +0000</pubDate>
+    <description>## Purpose
+Fix https://github.com/vllm-project/vllm/issues/29641
+1.  **Fix `content: null` on truncation**: The `OpenAIToolParser` (used by default for logic-enabled models) was discarding partial content when the generation stopped mid-way (e.g., hit `max_tokens`). This PR updates `extract_tool_calls` to correctly extract `current_content` from the parser state when the channel is `final` but the message object hasn&#x27;t been finalized yet.
+2.  **Fix Prompt Inconsistency**: `serving_chat.py` was unconditionally appending an empty Developer message to the prompt, whereas `serving_responses.py` only added it if tools were requested https://github.com/vllm-project/vllm/blob/64251f48df0ed16fb67f12ece26ab6c7ea730e74/vllm/entrypoints/openai/serving_responses.py#L1013-L1017. This caused inconsisten
+
+...</description>
+  </item>
   <item>
     <title>[GPT OSS] Fix tool_choice required</title>
     <link>https://github.com/vllm-project/vllm/pull/30557</link>
@@ -1076,29 +1088,6 @@ class StreamingClient:
     def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
-  </item>
-  <item>
-    <title>[EPLB] Offline eplb support</title>
-    <link>https://github.com/vllm-project/vllm/pull/26176</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26176</guid>
-    <pubDate>Fri, 03 Oct 2025 15:30:00 +0000</pubDate>
-    <description>## Purpose
-Offline eplb- make it possible to rearrange experts once at the start time.
-This allows rebalancing experts when engine starts. With `static` experts are rebalanced only once when engine starts,
-this allows better experts balancedness without metrics tracking/rearrangement overhead.
-
-EPLB has more options now:
-- `load_initial_load_window` and `load_path`:
-Whether to use initial load window and corresponding path.
-- `save_load_window` and `load_path`:
-Whether to save load window and corresponding path.
-- `static`:
-Whether to actively rebalance experts during runtime.
-
-## Test Plan
-Integration test test_eplb_offline.py added.
-## Test Result
-Tests pass</description>
   </item>
 </channel>
 </rss>
