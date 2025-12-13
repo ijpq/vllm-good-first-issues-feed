@@ -5,7 +5,32 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 18:11:07 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 18:26:43 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Remove Chunking From FusedMoE</title>
+    <link>https://github.com/vllm-project/vllm/issues/30620</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30620</guid>
+    <pubDate>Sat, 13 Dec 2025 18:22:30 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+* we have some chunking logic in the triton kernels to avoid IMA: https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/layers/fused_moe/fused_moe.py#L1807
+* we chunk in ~65k tokens
+* this case does not happen anymore because of chunked prefill
+
+We should remove this
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_
+
+### Before submitting a new issue...
+
+- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
+  </item>
   <item>
     <title>[Feature]: Default eplb num_redundant_experts to the lowest valid value if unspecified</title>
     <link>https://github.com/vllm-project/vllm/issues/30075</link>
