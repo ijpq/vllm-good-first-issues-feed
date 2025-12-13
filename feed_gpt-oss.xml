@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 19:32:13 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 19:40:50 +0000</lastBuildDate>
   <item>
     <title>[FixBug]fix gpt-oss v1/completions response bug</title>
     <link>https://github.com/vllm-project/vllm/pull/30608</link>
@@ -356,21 +356,6 @@ NOTE: This PR must be merged in after #30230, this builds on top of https://gith
 
 ```
  CUDA_VISIBLE_DEVICES=4,5,6,7 VLLM_USE_EXPERIMENTAL_PARSER_CONTEXT=1 vllm serve MiniMaxAI/MiniMax-M2   --tensor-parallel-size 4   --tool-call-parser minimax_m2   --reasoning-parser minimax_m2    --enable-auto-tool-choice --trust-remote-code  --tool-server=localhost:8081/container,localhost:808
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Use PIECEWISE cudagraph with gpt-oss on Ampere</title>
-    <link>https://github.com/vllm-project/vllm/pull/30096</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30096</guid>
-    <pubDate>Fri, 05 Dec 2025 02:01:30 +0000</pubDate>
-    <description>## Purpose
-
-Multiple user reports have come in about repeated, infinite generations by gpt-oss models on Ampere hardware. After reproducing this on Ampere hardware, I was able to workaround it by downgrading to PIECEWISE cudagraphs. FULL and FULL_AND_PIECEWISE can reliably reproduce infinite generation on the 2nd and later requests.
-
-The check here to downgrade only triggers for gpt-oss models on Ampere or older CUDA GPUs. This matches where I was able to reproduce the issue and with what appears to be the largest number of user reports.
-
-There could potentially be problems on more MoE models or with a slightly larger range of GPUs, but thought it best to make the most targeted fix for now just to get these models working reliably again on Ampere GPUs. It&#x27;s probably worth auditing the enti
 
 ...</description>
   </item>
@@ -1092,6 +1077,29 @@ class StreamingClient:
     def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
+  </item>
+  <item>
+    <title>[EPLB] Offline eplb support</title>
+    <link>https://github.com/vllm-project/vllm/pull/26176</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26176</guid>
+    <pubDate>Fri, 03 Oct 2025 15:30:00 +0000</pubDate>
+    <description>## Purpose
+Offline eplb- make it possible to rearrange experts once at the start time.
+This allows rebalancing experts when engine starts. With `static` experts are rebalanced only once when engine starts,
+this allows better experts balancedness without metrics tracking/rearrangement overhead.
+
+EPLB has more options now:
+- `load_initial_load_window` and `load_path`:
+Whether to use initial load window and corresponding path.
+- `save_load_window` and `load_path`:
+Whether to save load window and corresponding path.
+- `static`:
+Whether to actively rebalance experts during runtime.
+
+## Test Plan
+Integration test test_eplb_offline.py added.
+## Test Result
+Tests pass</description>
   </item>
 </channel>
 </rss>
