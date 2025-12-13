@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 12:55:35 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 13:12:51 +0000</lastBuildDate>
   <item>
     <title>[FixBug]fix gpt-oss v1/completions response bug</title>
     <link>https://github.com/vllm-project/vllm/pull/30608</link>
@@ -269,11 +269,12 @@ Final tokens are indeed returned as expected.
 - Prototype an interface, `vllm.renderers.RendererLike`, to process chat messages into engine inputs.
 - Introduce `RENDERER_REGISTRY` which lazily registers renderers to avoid circular import problem.
 - Move implementation-specific chat utils to the corresponding renderer in `vllm.renderers`.
-- Merge `init_tokenizer_from_config` implementation into `cached_tokenizer_from_config`.
-- Update `TokenizerRegistry` to only use lazy imports, even for in-tree tokenizers.
 - Initialize the renderer in `InputPreprocessor`, replacing the tokenizer initialization inside `LLMEngine` and `AsyncLLM`.
 - Replace `EngineClient.get_tokenizer()` with `EngineClient.renderer.get_tokenizer()` to avoid unnecessary async.
-- Replace `RequestPrompt` in online server with the prompt formats in `vllm.inputs`
+- Replace `RequestPrompt` in online server with the prompt formats in `vllm.inputs`.
+- Update tests accordingly, and move some tests into a new directory `tests/renderers` that is run under `Async Engine, Inputs, Utils, Worker, Config Test (CPU)`.
+
+Towards
 
 ...</description>
   </item>
