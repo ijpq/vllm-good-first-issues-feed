@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 13 Dec 2025 20:45:19 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 13 Dec 2025 20:54:12 +0000</lastBuildDate>
   <item>
     <title>[FixBug]fix gpt-oss v1/completions response bug</title>
     <link>https://github.com/vllm-project/vllm/pull/30608</link>
