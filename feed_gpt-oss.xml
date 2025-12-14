@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 14 Dec 2025 13:31:10 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 14 Dec 2025 13:42:41 +0000</lastBuildDate>
+  <item>
+    <title>[Perf] Eliminate padding and slicing op for GPT-OSS with Flashinfer MXFP4 MXFP8 MoE</title>
+    <link>https://github.com/vllm-project/vllm/pull/30647</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30647</guid>
+    <pubDate>Sun, 14 Dec 2025 13:40:05 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+- Eliminated padding op before the MoE: by setting the alignment in flashinfer mxfp8 quant, the output quantized tensor will be padded.
+- Eliminated slicing op after the MoE: by passing the output tensor with unpadded hidden size to MoE kernel, **this depends on a Flashinfer PR**:
+  - https://github.com/flashinfer-ai/flashinfer/pull/2217
+  - This will also resolve the previous AR+Norm fusion broken by slice op issue: #28841
+- Cleaned up the padding logic: for mxfp4 quant, the padded hidden size is calculated in `create_weights()`, the `maybe_roundup_hidden_size()` in `vllm/model_executor/layers/fused_moe/layer.py` seems like a dup.
+
+
+## Test Plan &amp;&amp; Test Result(GPT-OSS-120b TP8)
+
+### Accuracy
+
+PR:
+```
+[{&#x27;eval_name&#x27;: &#x27;gpqa&#x27;, &#x27;model_name&#x27;: &#x27;gpt-oss-
+
+...</description>
+  </item>
   <item>
     <title>[FixBug]fix gpt-oss v1/completions response bug</title>
     <link>https://github.com/vllm-project/vllm/pull/30608</link>
@@ -1051,43 +1077,6 @@ This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quo
   - `vllm/entrypoints/openai/serving_responses.py:1830`
   - `vllm/entrypoints/openai/serving_responses.py:1879`
 - Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
-
-...</description>
-  </item>
-  <item>
-    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
-    <link>https://github.com/vllm-project/vllm/pull/26291</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
-    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
-    <description>Hi team!
-
-## Purpose
-
-We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
-
-## Test Plan
-
-Server command:
-
-```
-vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
-```
-
-Test script `streaming_client.py`:
-
-```
-#!/usr/bin/env python3
-
-import asyncio
-import sys
-from typing import List, Dict
-
-import httpx
-from openai import AsyncOpenAI
-
-
-class StreamingClient:
-    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
   </item>
