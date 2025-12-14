@@ -5,7 +5,22 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 14 Dec 2025 17:33:44 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 14 Dec 2025 17:43:31 +0000</lastBuildDate>
+  <item>
+    <title>[Bugfix] CustomAR + TritonAttn[AMPERE] + FULL_CG - gpt-oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/30650</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30650</guid>
+    <pubDate>Sun, 14 Dec 2025 15:12:37 +0000</pubDate>
+    <description>## Purpose
+
+Full CUDA graph capture + replay (the default since vLLM v0.11.0) could lead to memory correctness issues in the custom_all_reduce implementation due to previous logic that skipped running the actual all_reduce operation during the compile and warmup phase. This resulted in compile and warmup seeing a memory allocation, but not observing the custom op call or the actual reduce operation which could lead to optmizations being taken assuming purely functional code with no side-effects when in fact the reduce operation inherently has side effects.
+
+To fix this, instead of allocating an empty tensor to mimic the reduce operation, we now call the actual all_reduce during compile and warmup as well.
+
+Multiple users reported an issue that tracks back to this root cause on Ampere hardw
+
+...</description>
+  </item>
   <item>
     <title>[Perf] Eliminate padding and slicing op for GPT-OSS with Flashinfer MXFP4 MXFP8 MoE</title>
     <link>https://github.com/vllm-project/vllm/pull/30647</link>
@@ -1056,27 +1071,6 @@ There are three main motivations:
 ```
 # What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
 class ActionOp
-
-...</description>
-  </item>
-  <item>
-    <title>fix json schema alias serializing when streaming</title>
-    <link>https://github.com/vllm-project/vllm/pull/26356</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26356</guid>
-    <pubDate>Tue, 07 Oct 2025 14:12:21 +0000</pubDate>
-    <description>## Purpose
-
-Fix a serialization bug in streaming responses where Pydantic field aliases (e.g. `schema` → `schema_`) were not preserved during `.model_dump()` calls.
-
-This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quot;` in streamed response events for JSON schema output formats, breaking compatibility with the OpenAI SDK’s `ResponseFormatTextJSONSchemaConfig` parsing.
-
-**Related issue:** [vllm-project/vllm#26288](https://github.com/vllm-project/vllm/issues/26288)
-
-### Root Cause
-- `ResponsesResponse.from_request(...).model_dump()` was called without `by_alias=True` at:
-  - `vllm/entrypoints/openai/serving_responses.py:1830`
-  - `vllm/entrypoints/openai/serving_responses.py:1879`
-- Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
 
 ...</description>
   </item>
