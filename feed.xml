@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 14 Dec 2025 18:00:11 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 14 Dec 2025 18:12:39 +0000</lastBuildDate>
+  <item>
+    <title>[Feature][Attention][UX]: Incorporate Features into Attention Selection</title>
+    <link>https://github.com/vllm-project/vllm/issues/30654</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30654</guid>
+    <pubDate>Sun, 14 Dec 2025 18:04:14 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+SUMMARY:
+* we have default attention backends by priority and a notion of which backend supports what hw
+* however, certain features are not considered in this (e.g. fp8 kv cache, e.g. attention sinks)
+
+Recent example, we had test failures because we updated the logic to load kv cache quantization from the model config. But since CUTLASS_MLA is the default backend on B200, we started seeing test failures (since CUTLASS MLA does not support fp8 kv cache) because we were not automatically falling back to FLASHINFER_MLA (which does)
+
+
+So the proposal is to:
+- make sure all attention backends report what features are supported
+- update the attention selector to consider these features in the selection
+
+### Alternatives
+
+_No response_
+
+### Additional con
+
+...</description>
+  </item>
   <item>
     <title>[Feature]: Remove MXFP4 Logic From `fused_experts`</title>
     <link>https://github.com/vllm-project/vllm/issues/30621</link>
