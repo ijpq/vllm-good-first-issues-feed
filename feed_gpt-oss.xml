@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 15 Dec 2025 10:10:54 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 15 Dec 2025 10:26:40 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [2/N] Move tool parsers into the vLLM main directory</title>
     <link>https://github.com/vllm-project/vllm/pull/30675</link>
@@ -24,7 +24,10 @@ vllm serve /home/jovyan/qwen3-8b --enable-auto-tool-choice  --tool-call-parser h
 (APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /pooling, Methods: POST
 (APIServer pid=95682) INFO:     Started server process [95682]
 (APIServer pid=95682) INFO:     Waiting for application startup.
-(APIServer pid=95682) INFO:     Application startup comple
+(APIServer pid=95682) INFO:     Application startup complet
+```
+```
+╰─➤
 
 ...</description>
   </item>
