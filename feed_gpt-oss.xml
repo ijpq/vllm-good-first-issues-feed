@@ -5,32 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 15 Dec 2025 12:38:08 +0000</lastBuildDate>
-  <item>
-    <title>[Refactor] [2/N] Move tool parsers into the vLLM main directory</title>
-    <link>https://github.com/vllm-project/vllm/pull/30675</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30675</guid>
-    <pubDate>Mon, 15 Dec 2025 08:04:38 +0000</pubDate>
-    <description>## Purpose
-
-## Test Plan
-```
-vllm serve /home/jovyan/qwen3-8b --enable-auto-tool-choice  --tool-call-parser hermes --reasoning-parser qwen3   
-...
-(APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /v1/score, Methods: POST
-(APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /rerank, Methods: POST
-(APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /v1/rerank, Methods: POST
-(APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /v2/rerank, Methods: POST
-(APIServer pid=95682) INFO 12-15 08:10:07 [launcher.py:46] Route: /pooling, Methods: POST
-(APIServer pid=95682) INFO:     Started server process [95682]
-(APIServer pid=95682) INFO:     Waiting for application startup.
-(APIServer pid=95682) INFO:     Application startup complet
-```
-```
-╰─➤
-
-...</description>
-  </item>
+  <lastBuildDate>Mon, 15 Dec 2025 13:04:48 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] CustomAR + TritonAttn[AMPERE] + FULL_CG - gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30650</link>
@@ -1089,6 +1064,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
