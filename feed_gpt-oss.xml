@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 15 Dec 2025 14:46:33 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 15 Dec 2025 14:58:52 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] CustomAR + TritonAttn[AMPERE] + FULL_CG - gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30650</link>
@@ -118,33 +118,6 @@ This PR is to fix NaN issue with fused_moe_lora. Currently running `test_gptoss_
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30557</guid>
     <pubDate>Fri, 12 Dec 2025 14:30:24 +0000</pubDate>
     <description></description>
-  </item>
-  <item>
-    <title>feat: batched shared encoder for whisper beam search</title>
-    <link>https://github.com/vllm-project/vllm/pull/30556</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30556</guid>
-    <pubDate>Fri, 12 Dec 2025 14:23:44 +0000</pubDate>
-    <description># Add Beam Search Support for Encoder-Decoder Models (Whisper)
-
-Related work https://github.com/vllm-project/vllm/pull/13758
-
-## Purpose
-
-This PR implements beam search for encoder-decoder models, specifically optimized for Whisper transcription. It addresses the performance challenges of beam search on encoder-decoder architectures where encoder computation is expensive.
-
-**Key optimizations:**
-- **Encoder deduplication**: Encoder computed once per unique input, shared across all beams
-- **Request batching**: Multiple beams processed together in single forward pass  
-- **Early stopping**: Terminates when completed beams outperform active ones
-- **Cross-attention block sharing**: Deduplicated requests share KV cache blocks
-
-## Test Plan
-
-### Test Environment
-- Model: Whisper-large-v3
-- Har
-
-...</description>
   </item>
   <item>
     <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
@@ -1081,6 +1054,31 @@ Tested with gpt-oss and enabling the expert parallelism
 ## Test Result
 Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Support all MCP servers for gpt-oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/26704</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26704</guid>
+    <pubDate>Mon, 13 Oct 2025 12:51:59 +0000</pubDate>
+    <description>## Purpose
+This PR is an implementation of #26703 
+
+Note: This PR is really big, but there was a lot that had to be cleaned up at the same time. A large amount of the code is from adding tests to existing code and a MCP server to test with and new MCP tests.
+
+There are three main motivations:
+- vLLM should support integrating with all MCP servers
+  - TODO: Test with enterprise ones like Github
+- Clean up gpt-oss tool specific code paths in vLLM
+  - Tools and models change, but MCP is a protocol meant to support all models
+  - Sets the stage for full MCP integration for all tool calling models
+- Avoid losing information due to lossy OpenAI types for output
+  - An example below
+
+```
+# What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
+class ActionOp
+
+...</description>
   </item>
 </channel>
 </rss>
