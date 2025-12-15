@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 15 Dec 2025 16:43:17 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 15 Dec 2025 16:58:49 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] CustomAR + TritonAttn[AMPERE] + FULL_CG - gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30650</link>
@@ -305,7 +305,9 @@ Final tokens are indeed returned as expected.
     <link>https://github.com/vllm-project/vllm/pull/30200</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30200</guid>
     <pubDate>Sun, 07 Dec 2025 08:30:34 +0000</pubDate>
-    <description>## Purpose
+    <description>Ready for review.
+
+## Purpose
 
 - Prototype an interface, `vllm.renderers.RendererLike`, to process chat messages into engine inputs.
 - Introduce `RENDERER_REGISTRY` which lazily registers renderers to avoid circular import problem.
@@ -318,7 +320,7 @@ Towards #22880 and #23873
 
 Future work:
 
-- Merge `CompletionRenderer` with this implementati
+- Merge `CompletionRenderer` wit
 
 ...</description>
   </item>
