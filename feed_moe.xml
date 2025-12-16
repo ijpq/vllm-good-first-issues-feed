@@ -5,35 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 22:53:56 +0000</lastBuildDate>
-  <item>
-    <title>[Perf][Kernels] Vectorize `csrc/activations_kernels.cu`</title>
-    <link>https://github.com/vllm-project/vllm/pull/29512</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29512</guid>
-    <pubDate>Wed, 26 Nov 2025 17:38:56 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-We have been using `silu_and_mul`, `swigluoai_and_mul`, etc as unvectorized kernels for essentially all of the fused moe methods, so there are free gains to be had there, especially for large batch sizes. This PR expands all of them to 128 bit vectorized loads.
-
-## Traces
-
-```
-vllm serve RedHatAI/Qwen3-30B-A3B-FP8-dynamic
-vllm bench serve --model RedHatAI/Qwen3-30B-A3B-FP8-dynamic --num-prompts 10 --random-input-len 512 --random-output-len 10 --profile
-```
-
-Profiles below are for the prefill
-
-Before:
-&lt;img width=&quot;1353&quot; height=&quot;689&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/d642e8bc-aeba-451e-9f3a-d8f0ae4ea8d2&quot; /&gt;
-
-After:
-&lt;img width=&quot;1355&quot; height=&quot;666&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/91d5f750-e28d-4dcd-b
-
-...</description>
-  </item>
+  <lastBuildDate>Tue, 16 Dec 2025 23:04:00 +0000</lastBuildDate>
   <item>
     <title>[Refactor] Split up compressed_tensors_moe.py into separate files per method</title>
     <link>https://github.com/vllm-project/vllm/pull/29427</link>
