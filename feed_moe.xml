@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 04:57:58 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 05:11:28 +0000</lastBuildDate>
   <item>
     <title>[Feat] Enable eplb with default all2all backend</title>
     <link>https://github.com/vllm-project/vllm/pull/30559</link>
