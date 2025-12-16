@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 04:08:23 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 04:25:15 +0000</lastBuildDate>
   <item>
     <title>[Do not merge][Test] Revert &quot;[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/30715</link>
@@ -180,20 +180,8 @@ async def run(semaphore, i):
 This draft PR adds an experimental LoRA slab optimization that builds one contiguous CPU slab for all LoRA adapters and performs a single host-to-device copy, reducing fragmented cudaMemcpy operations in multi-LoRA inference.
 
 ## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes up
+This PR aims to optimize the host-to-device transfer of LoRA weights by using a slab-based method. Instead of sending fragmented chunks, we perform a single consolidated host-to-device transfer. This approach significantly reduces overhead. For example, with max-lora=128, the host-to-device transfer and activation now takes about **17ms** in total, compared to around **200ms** on the main branch.
+Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs an
 
 ...</description>
   </item>
