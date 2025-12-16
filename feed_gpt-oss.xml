@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 19:42:17 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 19:50:32 +0000</lastBuildDate>
   <item>
     <title>[Do not merge][Test] Revert &quot;[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/30715</link>
@@ -74,7 +74,7 @@ Fix https://github.com/vllm-project/vllm/issues/29641
     <description>## Purpose
 
 This PR is to fix NaN issue with fused_moe_lora. Currently running `test_gptoss_tp.py` will fail. We found it&#x27;s because NaN values in tensor causing with `triton_kernels` having wrong `gather_indx`.
-* attention `output` tensor is created as `output = torch.empty(output_shape, dtype=output_dtype, device=query.device)` in [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/attention/layer.py#L346), which was changed from `output = torch.zeros(output_shape, dtype=output_dtype, device=query.device)` by https://github.com/vllm-project/vllm/pull/26680. `torch.empty()` allocates uninitialized memory and may contain NaNs. Then in `torch.ops.vllm.unified_attention_with_output` it writes `output[:num_actual_tokens]` [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/
+* attention `output` tensor is created as `output = torch.empty(output_shape, dtype=output_dtype, device=query.device)` in [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/attention/layer.py#L346), which was changed from `output = torch.zeros(output_shape, dtype=output_dtype, device=query.device)` by #26680. `torch.empty()` allocates uninitialized memory and may contain NaNs. Then in `torch.ops.vllm.unified_attention_with_output` it writes `output[:num_actual_tokens]` [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/v1/attention/backends/flash_attn.py#L678)
 
 ...</description>
   </item>
