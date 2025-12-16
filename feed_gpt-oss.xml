@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 09:14:17 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 09:30:54 +0000</lastBuildDate>
   <item>
     <title>[Do not merge][Test] Revert &quot;[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/30715</link>
@@ -387,7 +387,7 @@ Design doc with details drafted by @KuntaiDu: [link](https://docs.google.com/doc
 
 In short, the current hybrid KV cache manager will try to allocate all tokens for sliding window layers similar to full attention layers, and then in the next scheduling step, the manager will free unuseful tokens (those outside the sliding window) and turn them into prefix cache in GRAM. This PR, instead, aims to allocate KV cache only for tokens in the sliding window for sliding window layers. This addresses two issues:
 
-1. When using with an external KV cache layer (e.g., LMCache), ove
+1. When using with an external KV cache layer (e.g., LMCache), over-allocati
 
 ...</description>
   </item>
