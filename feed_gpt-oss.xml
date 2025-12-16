@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 04:25:15 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 04:44:22 +0000</lastBuildDate>
   <item>
     <title>[Do not merge][Test] Revert &quot;[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/30715</link>
@@ -181,7 +181,7 @@ This draft PR adds an experimental LoRA slab optimization that builds one contig
 
 ## Purpose
 This PR aims to optimize the host-to-device transfer of LoRA weights by using a slab-based method. Instead of sending fragmented chunks, we perform a single consolidated host-to-device transfer. This approach significantly reduces overhead. For example, with max-lora=128, the host-to-device transfer and activation now takes about **17ms** in total, compared to around **200ms** on the main branch.
-Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs an
+Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and all
 
 ...</description>
   </item>
