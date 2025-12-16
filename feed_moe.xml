@@ -5,35 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 15:25:01 +0000</lastBuildDate>
-  <item>
-    <title>[Feat] Enable eplb with default all2all backend</title>
-    <link>https://github.com/vllm-project/vllm/pull/30559</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30559</guid>
-    <pubDate>Fri, 12 Dec 2025 16:31:38 +0000</pubDate>
-    <description>## Purpose
-
-A follow up PR for https://github.com/vllm-project/vllm/pull/28377
-
-EPLB can&#x27;t be compatible with deepep or pplx since we are using the wrong physical/logical mapping, but for default all2all it is supported.
-
-## Test
-
-`export MODEL=&quot;deepseek-ai/DeepSeek-V2-lite&quot;`
-
-`vllm serve $MODEL -dp 2  --port 9256 --enable-expert-parallel --enable-eplb --eplb-config &#x27;{&quot;window_size&quot;:100,&quot;step_interval&quot;:100}&#x27; `
-
-`lm_eval --model local-completions --model_args &quot;base_url=http://127.0.0.1:9256/v1/completions,model=$MODEL,num_concurrent=1024&quot; --tasks gsm8k`
-
-
-```bash
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value |   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|-----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.3798|±  |0.0134|
-|     |   
-
-...</description>
-  </item>
+  <lastBuildDate>Tue, 16 Dec 2025 15:39:09 +0000</lastBuildDate>
   <item>
     <title>[Perf] Do FP4 quant before All gather on flashinfer trtllmgen MOE </title>
     <link>https://github.com/vllm-project/vllm/pull/30014</link>
