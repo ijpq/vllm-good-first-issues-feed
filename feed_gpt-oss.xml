@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 16 Dec 2025 00:40:53 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 16 Dec 2025 01:12:37 +0000</lastBuildDate>
   <item>
     <title>[Do not merge][Test] Revert &quot;[Attention] Use sparse prefill kernel for fp8 kv-cache in DeepSeek-v3.2&quot;</title>
     <link>https://github.com/vllm-project/vllm/pull/30715</link>
@@ -247,37 +247,6 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optional) Release notes update. If you
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] fix streaming final output for non harmony</title>
-    <link>https://github.com/vllm-project/vllm/pull/30237</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30237</guid>
-    <pubDate>Mon, 08 Dec 2025 05:58:33 +0000</pubDate>
-    <description># Summary
-
-  Fixed a bug where the output field in response.completed event was empty when using streaming mode with non-Harmony
-  models (e.g., Qwen), even though the streaming delta events contained correct content.
-
-# Problem
-
-  When using the Responses API with stream=True, the streaming events (response.output_text.delta) correctly returned
-  text deltas, but the final response.completed event had an empty output array:
-```json
-  {
-    &quot;type&quot;: &quot;response.completed&quot;,
-    &quot;response&quot;: {
-      &quot;output&quot;: [],  // Should contain the message with full text
-      &quot;status&quot;: &quot;completed&quot;
-    }
-  }
-```
-
-# Root Cause
-
-  In _process_simple_streaming_events, each iteration overwrites context.last_output with only the latest incremental
-  output (delta). When responses_full_generator builds the final r
 
 ...</description>
   </item>
@@ -1072,6 +1041,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
