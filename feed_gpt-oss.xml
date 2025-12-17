@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 08:59:38 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 09:14:08 +0000</lastBuildDate>
   <item>
     <title>[Refactor][TPU] Remove torch_xla path and use tpu-inference</title>
     <link>https://github.com/vllm-project/vllm/pull/30808</link>
@@ -129,6 +129,40 @@ This PR is to fix NaN issue with fused_moe_lora. Currently running `test_gptoss_
 - allow server-level chat_template to be applied even in Harmony (gpt-oss) paths for chat and responses
 - pass tokenizer into Harmony preprocessing and render via apply_hf_chat_template when provided, with safe fallback to Harmony default on errors
 - tighten typing/forma
+
+...</description>
+  </item>
+  <item>
+    <title>[Optimization]: Add fused router for GPTOSS</title>
+    <link>https://github.com/vllm-project/vllm/pull/30471</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30471</guid>
+    <pubDate>Thu, 11 Dec 2025 07:55:47 +0000</pubDate>
+    <description>&lt;details&gt;
+&lt;summary&gt; output collect_env &lt;/summary&gt;
+
+```
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 24.04.3 LTS (x86_64)
+GCC version                  : (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Clang version                : Could not collect
+CMake version                : version 3.28.3
+Libc version                 : glibc-2.39
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+==============================
+Python version               : 3.12.11
 
 ...</description>
   </item>
@@ -1032,22 +1066,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
