@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'moe' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 22:16:56 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 22:32:22 +0000</lastBuildDate>
   <item>
     <title>[Refactor] Split up compressed_tensors_moe.py into separate files per method</title>
     <link>https://github.com/vllm-project/vllm/pull/29427</link>
