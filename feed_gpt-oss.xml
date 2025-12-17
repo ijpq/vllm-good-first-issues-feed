@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 14:11:51 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 14:27:16 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix tool_choice=&quot;none&quot; being ignored by GPT-OSS/harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/30867</link>
