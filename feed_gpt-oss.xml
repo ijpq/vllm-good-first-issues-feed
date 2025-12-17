@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 13:59:42 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 14:11:51 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix tool_choice=&quot;none&quot; being ignored by GPT-OSS/harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/30867</link>
@@ -1018,17 +1018,20 @@ VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-
 ```
 ## Test Result
 
-t.b.a.
+Performance see upcoming publications. 
+Correctness:
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
+```
+results in 
+```
+|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
+|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
+```
 
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in 
+-
 
 ...</description>
   </item>
