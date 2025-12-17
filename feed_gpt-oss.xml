@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 09:14:08 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 09:30:58 +0000</lastBuildDate>
   <item>
     <title>[Refactor][TPU] Remove torch_xla path and use tpu-inference</title>
     <link>https://github.com/vllm-project/vllm/pull/30808</link>
