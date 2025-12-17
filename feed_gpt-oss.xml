@@ -5,7 +5,23 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 12:31:14 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 12:56:01 +0000</lastBuildDate>
+  <item>
+    <title>[Bugfix] Fix tool_choice=&quot;none&quot; being ignored by GPT-OSS/harmony models</title>
+    <link>https://github.com/vllm-project/vllm/pull/30867</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30867</guid>
+    <pubDate>Wed, 17 Dec 2025 12:52:07 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+GPT-OSS models using the harmony format were ignoring the `tool_choice=&quot;none&quot;` parameter and could still trigger tool calls when tools were provided in the request. This issue arose because the `_make_request_with_harmony` method only checked for the existence of `request.tools`, without accounting for the `tool_choice` setting or the `exclude_tools_when_tool_choice_none` flag.
+This fix ensures that harmony models respect the `exclude_tools_when_tool_choice_none` flag, aligning their behavior with other model types and OpenAI API standards. When tool_choice=&quot;none&quot; and the flag is enabled, tool definitions are no longer included in the system message.
+
+## Purpose
+
+Modified _make_request_with_harmony to incorporate checks for tool_choice and exclude_tool
+
+...</description>
+  </item>
   <item>
     <title>[Refactor][TPU] Remove torch_xla path and use tpu-inference</title>
     <link>https://github.com/vllm-project/vllm/pull/30808</link>
@@ -1047,22 +1063,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
