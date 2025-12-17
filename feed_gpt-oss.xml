@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 20:57:20 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 21:09:00 +0000</lastBuildDate>
   <item>
     <title>[Fix] pass chat_template_kwargs to get_system_message in gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30873</link>
@@ -45,8 +45,7 @@ Modified _make_request_with_harmony to incorporate checks for tool_choice and ex
     <link>https://github.com/vllm-project/vllm/pull/30808</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30808</guid>
     <pubDate>Tue, 16 Dec 2025 18:32:26 +0000</pubDate>
-    <description>
-## Purpose
+    <description>## Purpose
 Removes torch_xla related code paths as this backend is now deprecated. To run vLLM on TPU, users should now install and use tpu-inference.
 
 ## Test Plan
@@ -54,7 +53,7 @@ Removes torch_xla related code paths as this backend is now deprecated. To run v
 - Verified that removal does not impact non-TPU backends.
 
 ## Test Result
-- tpu-inference CI/CD: https://buildkite.com/tpu-commons/tpu-inference-ci/builds/7032/summary 
+- tpu-inference CI/CD: https://buildkite.com/tpu-commons/tpu-inference-ci/builds/71
 ---
 &lt;details&gt;
 &lt;summary&gt; What has been removed &lt;/summary&gt;
@@ -65,7 +64,7 @@ Removes torch_xla related code paths as this backend is now deprecated. To run v
 
 &lt;details&gt;
 &lt;summary&gt; Pending Removal &lt;/summary&gt;
-- PallasAttentionBackend in pallas.py 
+- Update README.md
 - Update Dockerfile.tpu
 &lt;/details&gt;
 
