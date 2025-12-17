@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 05:18:18 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 05:34:22 +0000</lastBuildDate>
   <item>
     <title>[Refactor][TPU] Remove torch_xla path and use tpu-inference</title>
     <link>https://github.com/vllm-project/vllm/pull/30808</link>
@@ -180,7 +180,21 @@ Additionally, this PR implements caching of the LoRA weights after the initial b
     <link>https://github.com/vllm-project/vllm/pull/30357</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30357</guid>
     <pubDate>Tue, 09 Dec 2025 19:49:32 +0000</pubDate>
-    <description></description>
+    <description>server:
+&gt; HIP_VISIBLE_DEVICES=1 VLLM_USE_AITER_UNIFIED_ATTENTION=1 VLLM_ROCM_USE_AITER_MHA=0 VLLM_ROCM_USE_AITER_FUSED_MOE_A16W4=0 vllm serve /data/models/gpt-oss120b-w-mxfp4-a-fp8     --port 8000     --swap-space 64     --max-model-len 10368     --tensor-parallel-size 1     --max-num-seqs 1024     --gpu-memory-utilization 0.95     --no-enable-prefix-caching     --enforce-eager
+
+client:
+&gt; curl http://localhost:8000/v1/completions -H &quot;Content-Type: application/json&quot; -d &#x27;{
+    &quot;model&quot;: &quot;/data/models/gpt-oss120b-w-mxfp4-a-fp8&quot;,
+    &quot;prompt&quot;: &quot;San Francisco is a&quot;,
+    &quot;max_tokens&quot;: 16,
+    &quot;temperature&quot;: 0
+}&#x27;
+
+output:
+&gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765949222,&quot;model&quot;:&quot;/data/models/gpt-oss120b-w-mxfp4-a-fp8&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;text&quot;:&quot; city in California
+
+...</description>
   </item>
   <item>
     <title>[ResponsesAPI] Add GPTOSS MCP tool streaming</title>
