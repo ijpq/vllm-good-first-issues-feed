@@ -5,7 +5,48 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 17 Dec 2025 15:49:05 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 17 Dec 2025 15:59:10 +0000</lastBuildDate>
+  <item>
+    <title>[Bug]: Marlin Fp8 Block Quant Failure</title>
+    <link>https://github.com/vllm-project/vllm/issues/30882</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30882</guid>
+    <pubDate>Wed, 17 Dec 2025 15:55:18 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+Your output of `python collect_env.py` here
+```
+
+&lt;/details&gt;
+
+
+### 🐛 Describe the bug
+
+```bash
+MODEL := &quot;Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8&quot;
+#MODEL := &quot;RedHatAI/Mixtral-8x7B-Instruct-v0.1-FP8&quot;
+
+launch_marlin:
+	VLLM_TEST_FORCE_FP8_MARLIN=1 VLLM_USE_DEEPGEMM=0 chg run --gpus 1 -- vllm serve {{MODEL}} --enforce-eager --max-model-len 8192
+
+eval:
+	lm_eval \
+		--model local-completions \
+		--tasks gsm8k \
+		--model_args &quot;model={{MODEL}},base_url=http://localhost:8000/v1/completions,num_concurrent=1000,tokenized_requests=False&quot;
+```
+
+Result:
+
+```bash
+(vllm) [robertgshaw2-redhat@nm-automation-h100-standalone-1-preserve vllm]$ just launch_marlin
+VLLM_TEST_FORCE_FP8_MARLIN=1 VLLM_USE
+
+...</description>
+  </item>
   <item>
     <title>[Feature][Attention][UX]: Incorporate Features into Attention Selection</title>
     <link>https://github.com/vllm-project/vllm/issues/30654</link>
