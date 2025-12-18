@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 18 Dec 2025 13:26:20 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 18 Dec 2025 13:46:05 +0000</lastBuildDate>
   <item>
     <title>[Fix] pass chat_template_kwargs to get_system_message in gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30873</link>
@@ -601,13 +601,35 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <link>https://github.com/vllm-project/vllm/pull/29008</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29008</guid>
     <pubDate>Wed, 19 Nov 2025 11:21:15 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
+
+This PR aims for:
+- quark model loading
+- OCPMX_W4A16, OCPMX_W4AFP8 MoE scheme and emulation forward
 
 ## Test Plan
 
+- Models:
+  - [x] GPT_OSS_20B
+  - [x] GPT_OSS_120B
+- Quantization schemes:
+  - [x] W: MXFP4, A: BF16
+  - [x] W: MXFP4, A: FP8
+  - [x] W: MXFP4, A: MXFP4
+  - [x] W: MXFP4, A: MXFP4, KV: FP8
+- TP:
+  - [x] TP1
+  - [x] TP2
+  - [ ] TP4
+  - [ ] TP8
+
+See results below.
+
 ## Test Result
+
+&lt;img width=&quot;1120&quot; height=&quot;266&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/ae9d47f8-9a93-4c09-8b44-8965492419f9&quot; /&gt;
+
 
 ---
 &lt;details&gt;
@@ -615,12 +637,9 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
 
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
+- [ ] The
 
-</description>
+...</description>
   </item>
   <item>
     <title>[ROCm][CI] Fixes tests for pytorch nightly and python only builds</title>
