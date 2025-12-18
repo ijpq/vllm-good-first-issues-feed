@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 18 Dec 2025 16:25:31 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 18 Dec 2025 16:57:55 +0000</lastBuildDate>
   <item>
     <title>[Fix] pass chat_template_kwargs to get_system_message in gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30873</link>
