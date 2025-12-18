@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 18 Dec 2025 17:41:27 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 18 Dec 2025 17:51:53 +0000</lastBuildDate>
   <item>
     <title>Use aiter triton fused_add_rmsnorm_pad for gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30976</link>
@@ -17,19 +17,22 @@
 
 Adds fused padding op before router GEMM on ROCm, eliminating this unfused pad after the GEMM before the fused_moe: https://github.com/ROCm/vllm/blob/main/vllm/model_executor/layers/fused_moe/layer.py#1603
 
+Before:
+&lt;img width=&quot;1370&quot; height=&quot;30&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/11db1bf1-e8b0-49c5-b180-3d1c730f07ca&quot; /&gt;
+After:
+&lt;img width=&quot;1462&quot; height=&quot;34&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/e5979f88-03c0-4173-adbd-8227786e929f&quot; /&gt;
+
+Follow-up is to replace this with a single `F.pad` and use pattern matching to fuse AITER rmsnorm and pad instead of manually calling this kernel.
+
+See also #30357
+
 ## Test Plan
 
 ## Test Result
 
 ---
 &lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your chang
+&lt;summary&gt; Essential Elements of an Effective PR Description Che
 
 ...</description>
   </item>
