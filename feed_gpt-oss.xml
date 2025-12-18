@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 18 Dec 2025 02:27:37 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 18 Dec 2025 03:06:56 +0000</lastBuildDate>
   <item>
     <title>[Fix] pass chat_template_kwargs to get_system_message in gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30873</link>
@@ -29,14 +29,15 @@ This fix imple
     <link>https://github.com/vllm-project/vllm/pull/30867</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30867</guid>
     <pubDate>Wed, 17 Dec 2025 12:52:07 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 GPT-OSS models using the harmony format were ignoring the `tool_choice=&quot;none&quot;` parameter and could still trigger tool calls when tools were provided in the request. This issue arose because the `_make_request_with_harmony` method only checked for the existence of `request.tools`, without accounting for the `tool_choice` setting or the `exclude_tools_when_tool_choice_none` flag.
 This fix ensures that harmony models respect the `exclude_tools_when_tool_choice_none` flag, aligning their behavior with other model types and OpenAI API standards. When tool_choice=&quot;none&quot; and the flag is enabled, tool definitions are no longer included in the system message.
 
 ## Purpose
 
-Modified _make_request_with_harmony to incorporate checks for tool_choice and exclude_tools_when_
+Modified _make_request_with_harmony to incorporate checks for tool_choice and exclude_tools_when_tool_choice_none.
+
+## Test Pla
 
 ...</description>
   </item>
