@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 18 Dec 2025 20:11:38 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 18 Dec 2025 20:26:35 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -698,13 +698,21 @@ See results below.
 ...</description>
   </item>
   <item>
-    <title>[ROCm][CI] Fixes tests for pytorch nightly and python only builds</title>
+    <title>[ROCm][CI] Fix entrypoints tests and Python-only installation test on ROCm</title>
     <link>https://github.com/vllm-project/vllm/pull/28979</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28979</guid>
     <pubDate>Wed, 19 Nov 2025 01:26:03 +0000</pubDate>
-    <description>This PR fixes tests for labels:
-- `Python-only Installation Test`
-- `Entrypoints Integration Test (API Server)`</description>
+    <description>This PR fixes ROCm CI failures by:
+
+1. **Setting correct attention backends for entrypoints tests on ROCm**
+   - Encoder-only models (embeddings/pooling) require `FLEX_ATTENTION` backend as it&#x27;s the only attention backend that supports encoder-only self-attention on ROCm
+   - Audio transcription/translation tests require `ROCM_AITER_FA` backend
+
+2. **Fixing Python-only installation test on ROCm**
+
+## Test Plan
+
+ROCm CI tests should pass after this PR.</description>
   </item>
   <item>
     <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
