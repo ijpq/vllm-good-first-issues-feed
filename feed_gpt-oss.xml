@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 14:47:00 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 14:56:32 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -109,21 +109,6 @@ Removes torch_xla related code paths as this backend is now deprecated. To run v
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[Bugfix] CustomAR + TritonAttn[AMPERE] + FULL_CG - gpt-oss</title>
-    <link>https://github.com/vllm-project/vllm/pull/30650</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30650</guid>
-    <pubDate>Sun, 14 Dec 2025 15:12:37 +0000</pubDate>
-    <description>## Purpose
-
-Full CUDA graph capture + replay (the default since vLLM v0.11.0) could lead to memory correctness issues in the custom_all_reduce implementation due to previous logic that skipped running the actual all_reduce operation during the compile and warmup phase. This resulted in compile and warmup seeing a memory allocation, but not observing the custom op call or the actual reduce operation which could lead to optmizations being taken assuming purely functional code with no side-effects when in fact the reduce operation inherently has side effects.
-
-To fix this, instead of allocating an empty tensor to mimic the reduce operation, we now call the actual all_reduce during compile and warmup as well.
-
-Multiple users reported an issue that tracks back to this root cause on Ampere hardw
-
-...</description>
   </item>
   <item>
     <title>[Perf] Eliminate padding and slicing op for GPT-OSS with Flashinfer MXFP4 MXFP8 MoE</title>
@@ -657,10 +642,7 @@ See results below.
 
 ## TODO
 
-- [x] fix derived issue due to issues [#30621](https://github.com/vllm-project/vllm/issues/30621) , c.c. @fxmarty-amd @BowenBao : done in commit c4a05ed90c992d4f9062a1e9342e38e3787e8363
-- [ ] refactor `quark_moe.py` 
-- [ ] `W-MXFP4-A-MXFP8` scheme
-- 
+- [ ] unify `mxfp4` format model loading with `quark` format model loading, specifically `FIXME` [here](https://github.com/vllm-project/vllm/blob/23a1946e3b1b2dd45a98c3dfd86556563543c91b/vllm/model_executor/layers/fused_
 
 ...</description>
   </item>
@@ -1129,6 +1111,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
