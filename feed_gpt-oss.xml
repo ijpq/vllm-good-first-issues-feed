@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 09:51:11 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 09:59:59 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -641,8 +641,7 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <link>https://github.com/vllm-project/vllm/pull/29008</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29008</guid>
     <pubDate>Wed, 19 Nov 2025 11:21:15 +0000</pubDate>
-    <description>
-## Purpose
+    <description>## Purpose
 
 This PR aims for:
 - quark model loading
@@ -670,13 +669,16 @@ See results below.
 
 &lt;img width=&quot;1120&quot; height=&quot;266&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/ae9d47f8-9a93-4c09-8b44-8965492419f9&quot; /&gt;
 
+## TODO
+
+- [ ] refactor `quark_moe.py` 
+- [ ] `W-MXFP4-A-MXFP8` scheme
+- [ ] `W-FP8-AFP8` quantization for gpt_oss
 
 ---
 &lt;details&gt;
 &lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
 
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
 - [ ] The
 
 ...</description>
