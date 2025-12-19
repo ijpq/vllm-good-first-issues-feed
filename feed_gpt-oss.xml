@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 14:56:32 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 15:09:38 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -642,7 +642,8 @@ See results below.
 
 ## TODO
 
-- [ ] unify `mxfp4` format model loading with `quark` format model loading, specifically `FIXME` [here](https://github.com/vllm-project/vllm/blob/23a1946e3b1b2dd45a98c3dfd86556563543c91b/vllm/model_executor/layers/fused_
+- [ ] unify `mxfp4` format model loading with `quark` format model loading, specifically `FIXME` [here](https://github.com/vllm-project/vllm/blob/23a1946e3b1b2dd45a98c3dfd86556563543c91b/vllm/model_executor/layers/fused_moe/layer.py#L1120)
+- [x] fix 
 
 ...</description>
   </item>
