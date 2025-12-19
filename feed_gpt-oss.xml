@@ -5,7 +5,42 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 15:09:38 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 15:24:23 +0000</lastBuildDate>
+  <item>
+    <title>[Bug]: gpt-oss-20b fails to start when using W4A8 Marlin with VLLM_MARLIN_INPUT_DTYPE=int8</title>
+    <link>https://github.com/vllm-project/vllm/issues/31033</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/31033</guid>
+    <pubDate>Fri, 19 Dec 2025 15:19:53 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+vllm collect-env
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 22.04.4 LTS (x86_64)
+GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
+Clang version                : Could not collect
+CMake version                : version 4.0.3
+Libc version                 : glibc-2.35
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python E
+
+...</description>
+  </item>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -1112,22 +1147,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
