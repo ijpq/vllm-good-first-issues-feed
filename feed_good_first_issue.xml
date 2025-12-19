@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 22:48:53 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 22:57:01 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate Sonic MoE</title>
     <link>https://github.com/vllm-project/vllm/issues/31039</link>
@@ -31,7 +31,42 @@ _No response_
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
-    <title>[Bug]: SmolLM3-3B FP8 models fail to load in v0.11.1 with &quot;Unable to find matching target&quot; error in compressed-tensors config</title>
+    <title>[Bug]: Qwen3-VL 2:4 sparsity llm-compressor RuntimeError: shape mismatch (0.12, 0.13rc2)</title>
+    <link>https://github.com/vllm-project/vllm/issues/31019</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/31019</guid>
+    <pubDate>Fri, 19 Dec 2025 09:18:00 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+Collecting environment information...
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 24.04.3 LTS (x86_64)
+GCC version                  : (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Clang version                : Could not collect
+CMake version                : Could not collect
+Libc version                 : glibc-2.39
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.9.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+====
+
+...</description>
+  </item>
+  <item>
+    <title>[Bug]: SmolLM3-3B FP8 Fails to Load [`compressed-tensors` and `transformers-impl` compatibility issue]</title>
     <link>https://github.com/vllm-project/vllm/issues/30969</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30969</guid>
     <pubDate>Thu, 18 Dec 2025 14:36:30 +0000</pubDate>
