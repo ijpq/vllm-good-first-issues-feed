@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 22:57:02 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 23:09:18 +0000</lastBuildDate>
   <item>
     <title>[Bug]: gpt-oss-20b fails to start when using W4A8 Marlin with VLLM_MARLIN_INPUT_DTYPE=int8</title>
     <link>https://github.com/vllm-project/vllm/issues/31033</link>
@@ -129,16 +129,18 @@ Removes torch_xla related code paths as this backend is now deprecated. To run v
 
 ## Test Result
 - tpu-inference CI/CD: https://buildkite.com/tpu-commons/tpu-inference-ci/builds/71
----
+
 &lt;details&gt;
 &lt;summary&gt; What has been removed &lt;/summary&gt;
-- Classes previously implemented in tpu-inference.
-- Functions explicitly used by torch_xla.
+
+- Classes previously migrated to tpu-inference, this is guarded by USE_TPU_INFERENCE before.
+- Functions explicitly used torch_xla.
 - All TPU-related test files (migrated to tpu-inference repo)
 &lt;/details&gt;
 
 &lt;details&gt;
 &lt;summary&gt; Pending Removal &lt;/summary&gt;
+
 - Update README.md
 - Update Dockerfile.tpu
 &lt;/details&gt;
