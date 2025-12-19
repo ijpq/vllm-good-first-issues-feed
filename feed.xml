@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 10:11:56 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 10:27:20 +0000</lastBuildDate>
   <item>
     <title>[Feature][Attention][UX]: Incorporate Features into Attention Selection</title>
     <link>https://github.com/vllm-project/vllm/issues/30654</link>
@@ -107,20 +107,6 @@ _No response_
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bo
 
 ...</description>
-  </item>
-  <item>
-    <title>[Bug]: Add validation for tool requests that the tool is available</title>
-    <link>https://github.com/vllm-project/vllm/issues/29432</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29432</guid>
-    <pubDate>Tue, 25 Nov 2025 19:04:15 +0000</pubDate>
-    <description>### 🐛 Describe the bug
-
-Currently there is no check for this, vLLM will just respond sub-optimally in a &quot;silent&quot; way. We should fail the individual request in this case with appropriate error message.
-
-This is a problem in particular for example when using the demo tool server without the `gpt-oss` package installed.
-
-See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecomment-3573053391
-</description>
   </item>
   <item>
     <title>[Feature]: Qwen3 Omni Transcriptions</title>

@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 10:11:57 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 10:27:21 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -588,20 +588,6 @@ https://github.com/vllm-project/vllm/issues/29432
 ...</description>
   </item>
   <item>
-    <title>[Bug]: Add validation for tool requests that the tool is available</title>
-    <link>https://github.com/vllm-project/vllm/issues/29432</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/29432</guid>
-    <pubDate>Tue, 25 Nov 2025 19:04:15 +0000</pubDate>
-    <description>### 🐛 Describe the bug
-
-Currently there is no check for this, vLLM will just respond sub-optimally in a &quot;silent&quot; way. We should fail the individual request in this case with appropriate error message.
-
-This is a problem in particular for example when using the demo tool server without the `gpt-oss` package installed.
-
-See discussion here: https://github.com/vllm-project/vllm/pull/29336#issuecomment-3573053391
-</description>
-  </item>
-  <item>
     <title>Support compressed-tensors W4A8 MoE checkpoints in GptOssModel weight loader for CPU</title>
     <link>https://github.com/vllm-project/vllm/pull/29315</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29315</guid>
@@ -1124,6 +1110,31 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
+  </item>
+  <item>
+    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
+    <link>https://github.com/vllm-project/vllm/pull/27100</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
+    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
