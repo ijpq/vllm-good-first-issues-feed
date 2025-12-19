@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 19 Dec 2025 01:11:49 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 19 Dec 2025 01:57:02 +0000</lastBuildDate>
   <item>
     <title>Add positional embedding and kv_cache fusion for llama and gpt-oss</title>
     <link>https://github.com/vllm-project/vllm/pull/30978</link>
@@ -77,23 +77,6 @@ Currently, `gpt-oss` models use a custom request handling method `_make_request_
 This fix passes `chat_template_kwargs` to `get_system_message` in `vllm/entrypoints/openai/serving_chat.py`, allowing users to override the default model identity and other parameters supported by the harmony library.
 
 This fix imple
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Fix tool_choice=&quot;none&quot; being ignored by GPT-OSS/harmony models</title>
-    <link>https://github.com/vllm-project/vllm/pull/30867</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30867</guid>
-    <pubDate>Wed, 17 Dec 2025 12:52:07 +0000</pubDate>
-    <description>
-GPT-OSS models using the harmony format were ignoring the `tool_choice=&quot;none&quot;` parameter and could still trigger tool calls when tools were provided in the request. This issue arose because the `_make_request_with_harmony` method only checked for the existence of `request.tools`, without accounting for the `tool_choice` setting or the `exclude_tools_when_tool_choice_none` flag.
-This fix ensures that harmony models respect the `exclude_tools_when_tool_choice_none` flag, aligning their behavior with other model types and OpenAI API standards. When tool_choice=&quot;none&quot; and the flag is enabled, tool definitions are no longer included in the system message.
-
-## Purpose
-
-Modified _make_request_with_harmony to incorporate checks for tool_choice and exclude_tools_when_tool_choice_none.
-
-## Test Pla
 
 ...</description>
   </item>
@@ -1107,6 +1090,36 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
 
 ...</description>
   </item>
