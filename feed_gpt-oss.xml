@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 20 Dec 2025 01:07:36 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 20 Dec 2025 01:50:43 +0000</lastBuildDate>
   <item>
     <title>[Bug]: gpt-oss-20b fails to start when using W4A8 Marlin with VLLM_MARLIN_INPUT_DTYPE=int8</title>
     <link>https://github.com/vllm-project/vllm/issues/31033</link>
