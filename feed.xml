@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 20 Dec 2025 21:52:43 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 20 Dec 2025 22:01:34 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate Sonic MoE</title>
     <link>https://github.com/vllm-project/vllm/issues/31039</link>
@@ -62,40 +62,6 @@ ROCM used to build PyTorch   : N/A
 ==============================
       Python Environment
 ====
-
-...</description>
-  </item>
-  <item>
-    <title>[Bug]: SmolLM3-3B FP8 Fails to Load [`compressed-tensors` and `transformers-impl` compatibility issue]</title>
-    <link>https://github.com/vllm-project/vllm/issues/30969</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30969</guid>
-    <pubDate>Thu, 18 Dec 2025 14:36:30 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-Running in official Docker image: vllm/vllm-openai:v0.11.1
-GPU: NVIDIA L4 (GCP g2-standard-8)
-`| NVIDIA-SMI 570.195.03             Driver Version: 570.195.03     CUDA Version: 12.9     |`
-vLLM version: 0.11.1
-
-```text
-0.11.1
-```
-
-&lt;/details&gt;
-
-
-### 🐛 Describe the bug
-
-vLLM v0.11.1 fails to load SmolLM3-3B FP8 quantized models with llm-compressor using compressed-tensors.
-Same models work on v0.11.0.
-
-Tested with:
-- [huggingface.co/RedHatAI/SmolLM3-3B-FP8-dynamic](https://huggingface.co/RedHatAI/SmolLM3-3B-FP8-dynamic)
-- Manually quantized fine tuned [SmolLM3-3B](https://huggingface.co/HuggingFaceTB/SmolLM3-3B) using llmcompressor==0.7 (compressed-tensors==0.12.2) in FP8-dynamic
-- Manu
 
 ...</description>
   </item>
