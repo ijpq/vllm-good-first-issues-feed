@@ -5,9 +5,9 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 21 Dec 2025 11:18:52 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 21 Dec 2025 11:29:17 +0000</lastBuildDate>
   <item>
-    <title>Issue 30759</title>
+    <title>[Feature] add StreamableResponsesParser and token usage counting for ParsableContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31094</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31094</guid>
     <pubDate>Sun, 21 Dec 2025 11:11:46 +0000</pubDate>
