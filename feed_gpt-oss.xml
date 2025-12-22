@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 19:28:01 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 19:37:21 +0000</lastBuildDate>
   <item>
     <title>[BugFix] LoRA: Support loading base_layer of experts</title>
     <link>https://github.com/vllm-project/vllm/pull/31104</link>
@@ -68,6 +68,33 @@ A new streaming parser that processes tokens incrementally:
   - `&#x27;analysis&#x27;`: reasoning token
   - `&#x27;commentary&#x27;`: tool call token
   - `&#x27;final&#x27;`: regul
+
+...</description>
+  </item>
+  <item>
+    <title>Grid construction based on num_active_lora and support CUDA graph capture across various num_active_lora</title>
+    <link>https://github.com/vllm-project/vllm/pull/30984</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30984</guid>
+    <pubDate>Thu, 18 Dec 2025 19:53:44 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Reduce overhead of idle kernel launch due to max-loras in grid construction
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8
 
 ...</description>
   </item>
@@ -1141,22 +1168,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
