@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 23:51:07 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 23:59:17 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate Sonic MoE</title>
     <link>https://github.com/vllm-project/vllm/issues/31039</link>
@@ -1088,9 +1088,9 @@ _No response_
     <pubDate>Mon, 07 Oct 2024 16:07:04 +0000</pubDate>
     <description>In an effort to make the CMake more readable, stable and easy to use we have a few tasks we&#x27;d like to work on, creating a GitHub issue here to track that progress, some planned changes/investigations:
 
-- [ ]  Have vllm-flash-attn use [ExternalProject](https://cmake.org/cmake/help/latest/module/ExternalProject.html) currently vllm-flash-attn uses the parent CMake scope which creates many footguns since it is in a separate repo, using `ExternalProject` will mean that the vllm-flash-attn will be run in a separate CMake scope/process
-  - [ ] It might be even better to revert to the FlashMLA approach, where CMake code lives in vllm.
-- [ ]  Warn that PTX builds are not currently supported (post https://github.com/vllm-project/vllm/pull/8845), currently if there is a `+PTX` in `TORCH_CUDA_ARCH_LI
+- [ ] Rename `define_gpu_extension_target`, currently this is used for CPU extensions too so the name is now misleading
+- [ ] Add a CI test of local builds, i.e. `pip install -e .`
+- [ ]  Warn that PTX builds are not currently supported (post https://github.com/vllm-project/vllm/pull/8845), currently if there is a `+PTX` in `TORCH_CUDA_ARCH_LIST` this will be ignored. We should warn when this is the case. Alternatively we can add support for PTX builds although this is generally not desirable since PTX increases the wheel size by quite a bit (PTX is larger than SASS), and we already build fo
 
 ...</description>
   </item>
