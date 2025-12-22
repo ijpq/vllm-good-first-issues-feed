@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 16:13:48 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 16:30:10 +0000</lastBuildDate>
   <item>
     <title>[ROCm][CI/Build] Fix triton version to one that has triton_kernels required for gpt-oss to run</title>
     <link>https://github.com/vllm-project/vllm/pull/31159</link>
