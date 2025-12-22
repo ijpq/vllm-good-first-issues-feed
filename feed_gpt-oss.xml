@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 10:40:43 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 10:51:55 +0000</lastBuildDate>
   <item>
     <title>[BugFix] LoRA: FusedMoE make_expert_params_mapping supports base_layer</title>
     <link>https://github.com/vllm-project/vllm/pull/31104</link>
@@ -697,6 +697,9 @@ See results below.
 &lt;img width=&quot;1293&quot; height=&quot;265&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/a531f52b-3c56-4854-a6b1-04ac337f3649&quot; /&gt;
 
 
+## TODO
+
+- [x] unify `mxfp4
 
 ...</description>
   </item>
