@@ -5,7 +5,42 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 00:40:35 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 01:12:11 +0000</lastBuildDate>
+  <item>
+    <title>[BugFix] LoRA: FusedMoE make_expert_params_mapping supports base_layer</title>
+    <link>https://github.com/vllm-project/vllm/pull/31104</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31104</guid>
+    <pubDate>Mon, 22 Dec 2025 00:44:31 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+This PR fixes weight loading when LoRA is enabled, i.e., we have `base_layer` added to the:
+
+`model.layers.0.mlp.experts.0.up_proj.weight` -&gt; `model.layers.0.mlp.experts.0.up_proj.base_layer.weight`
+
+Currently before this fix, the patched code will handled this as:
+`model.layers.0.mlp.experts.w13_base_layer.weight`, which is wrong and
+it should actually be `model.layers.0.mlp.experts.base_layer.w13_weight`
+
+## Test Plan
+
+Test on Qwen3 30B A3B
+
+## Test Result
+
+Looks good.
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [X] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [X] The test plan, such as providing test command.
+- [X] The test results, such as 
+
+...</description>
+  </item>
   <item>
     <title>[Feature] add StreamableResponsesParser and token usage counting for ParsableContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31094</link>
@@ -1133,22 +1168,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
