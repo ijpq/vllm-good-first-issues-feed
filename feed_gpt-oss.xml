@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 10:25:23 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 10:40:43 +0000</lastBuildDate>
   <item>
     <title>[BugFix] LoRA: FusedMoE make_expert_params_mapping supports base_layer</title>
     <link>https://github.com/vllm-project/vllm/pull/31104</link>
@@ -671,8 +671,8 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <description>## Purpose
 
 This PR aims for:
-- [ ] quark model loading, combined with original `mxfp4` loading [function ](https://github.com/vllm-project/vllm/blob/256a33ecb4923a4bfa6e1a9adbc69f5255a5aa6d/vllm/model_executor/models/gpt_oss.py#L309)
-- [ ] OCPMX_W4A16, OCPMX_W4AFP8 MoE scheme and emulation forward, unified into class `QuarkOCP_MX_MoEMethod`
+- [x] quark model loading, combined with original `mxfp4` loading [function ](https://github.com/vllm-project/vllm/blob/256a33ecb4923a4bfa6e1a9adbc69f5255a5aa6d/vllm/model_executor/models/gpt_oss.py#L309)
+- [x] OCPMX_W4A16, OCPMX_W4AFP8 MoE scheme and emulation forward, unified into class `QuarkOCP_MX_MoEMethod`
 
 ## Test Plan
 
