@@ -5,9 +5,9 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 12:39:03 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 13:02:29 +0000</lastBuildDate>
   <item>
-    <title>[BugFix] LoRA: FusedMoE make_expert_params_mapping supports base_layer</title>
+    <title>[BugFix] LoRA: Support loading base_layer of experts</title>
     <link>https://github.com/vllm-project/vllm/pull/31104</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31104</guid>
     <pubDate>Mon, 22 Dec 2025 00:44:31 +0000</pubDate>
@@ -409,32 +409,6 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[gpt-oss] Fix harmony parser in streaming responses</title>
-    <link>https://github.com/vllm-project/vllm/pull/30205</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30205</guid>
-    <pubDate>Sun, 07 Dec 2025 12:14:24 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-Fix missed final streaming tokens in speculative decoding (https://github.com/vllm-project/vllm/issues/30204)
-## Test Plan
-Rerun the reproducer after fix is implemented.
-## Test Result
-Final tokens are indeed returned as expected.
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [*] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [*] The test plan, such as providing test command.
-- [*] The test results, such as pasting the results comparison before and after, or e2e results
-- [*] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [*] (Optional) Release notes update. If your change is u
-
-...</description>
   </item>
   <item>
     <title>[DO NOT MERGE] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
@@ -1168,6 +1142,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
