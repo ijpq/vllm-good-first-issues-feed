@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 22 Dec 2025 13:02:29 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Dec 2025 13:22:12 +0000</lastBuildDate>
   <item>
     <title>[BugFix] LoRA: Support loading base_layer of experts</title>
     <link>https://github.com/vllm-project/vllm/pull/31104</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31104</guid>
     <pubDate>Mon, 22 Dec 2025 00:44:31 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
 
 This PR fixes weight loading when LoRA is enabled, i.e., we have `base_layer` added to the:
@@ -37,7 +36,7 @@ Looks good.
 
 - [X] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [X] The test plan, such as providing test command.
-- [X] The test results, such as 
+- [X] The test results, such as pasting the results comparison
 
 ...</description>
   </item>
