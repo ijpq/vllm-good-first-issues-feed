@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 23 Dec 2025 11:49:53 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 23 Dec 2025 11:58:02 +0000</lastBuildDate>
   <item>
     <title>[Doc] Add tool call parser documentation for GPT-OSS models</title>
     <link>https://github.com/vllm-project/vllm/pull/31212</link>
@@ -708,6 +708,9 @@ See results below.
 &lt;img width=&quot;1293&quot; height=&quot;265&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/a531f52b-3c56-4854-a6b1-04ac337f3649&quot; /&gt;
 
 
+## TODO
+
+- [x] unify `mxfp4
 
 ...</description>
   </item>
