@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 24 Dec 2025 10:11:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 24 Dec 2025 10:26:36 +0000</lastBuildDate>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -66,6 +66,17 @@ This PR aims to optimize the host-to-device transfer of LoRA weights by using a 
 Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and all
 
 ...</description>
+  </item>
+  <item>
+    <title>Cleanup basic and entrypoint test organisation</title>
+    <link>https://github.com/vllm-project/vllm/pull/31228</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31228</guid>
+    <pubDate>Tue, 23 Dec 2025 17:33:22 +0000</pubDate>
+    <description>Supersedes https://github.com/vllm-project/vllm/pull/27747:
+
+- Don&#x27;t call basic test files individually
+- Move the unit tests into a `unit` directory so we don&#x27;t have to manually ignore everything else
+- Move `openai/tool_parsers` into the `unit` tests because that&#x27;s what they are</description>
   </item>
   <item>
     <title>[Doc] Add tool call parser documentation for GPT-OSS models</title>
@@ -1138,31 +1149,6 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
-  </item>
-  <item>
-    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
-    <link>https://github.com/vllm-project/vllm/pull/27100</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
-    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
-    <description>
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
