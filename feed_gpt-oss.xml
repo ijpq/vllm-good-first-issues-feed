@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 24 Dec 2025 13:50:28 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 24 Dec 2025 13:58:40 +0000</lastBuildDate>
+  <item>
+    <title>[Doc] Add GPT-OSS (openai) tool parser documentation</title>
+    <link>https://github.com/vllm-project/vllm/pull/31284</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31284</guid>
+    <pubDate>Wed, 24 Dec 2025 13:55:51 +0000</pubDate>
+    <description>## Summary
+
+Adds documentation for the `openai` tool call parser that supports GPT-OSS models. This parser was previously only documented in the cookbook but was missing from the main tool calling documentation.
+
+Fixes #31211
+
+## Changes
+
+Added a new section in `docs/features/tool_calling.md` for GPT-OSS models that includes:
+- Supported models (`openai/gpt-oss-120b`, `openai/gpt-oss-20b`)
+- Known limitations (only `tool_choice=&#x27;auto&#x27;`, limited streaming support)
+- Required flags (`--tool-call-parser openai --enable-auto-tool-choice`)
+- Link to the cookbook for more examples
+
+## Test plan
+
+- [x] Documentation builds correctly (no broken links)
+- [ ] ReadTheDocs preview shows the new section correctly
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)</description>
+  </item>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -1117,36 +1143,6 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
-
-...</description>
-  </item>
-  <item>
-    <title>Add process pool support fro tokenizer</title>
-    <link>https://github.com/vllm-project/vllm/pull/27180</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
-    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-
-## Purpose
-The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
-
-Related PR: #25301
-
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Rel
 
 ...</description>
   </item>
