@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 24 Dec 2025 16:23:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 24 Dec 2025 16:39:00 +0000</lastBuildDate>
   <item>
     <title>[Chore][1/2] Drop `v0.14` deprecations</title>
     <link>https://github.com/vllm-project/vllm/pull/31285</link>
