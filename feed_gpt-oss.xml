@@ -5,7 +5,21 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 23 Dec 2025 23:59:39 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 24 Dec 2025 00:39:37 +0000</lastBuildDate>
+  <item>
+    <title>LoRA Slab Optimization</title>
+    <link>https://github.com/vllm-project/vllm/pull/31250</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31250</guid>
+    <pubDate>Wed, 24 Dec 2025 00:18:46 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+This draft PR adds an experimental LoRA slab optimization that builds one contiguous CPU slab for all LoRA adapters and performs a single host-to-device copy, reducing fragmented cudaMemcpy operations in multi-LoRA inference.
+
+## Purpose
+This PR aims to optimize the host-to-device transfer of LoRA weights by using a slab-based method. Instead of sending fragmented chunks, we perform a single consolidated host-to-device transfer. This approach significantly reduces overhead. For example, with max-lora=128, the host-to-device transfer and activation now takes about **17ms** in total, compared to around **200ms** on the main branch.
+Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and all
+
+...</description>
+  </item>
   <item>
     <title>LoRA Slab Optimization</title>
     <link>https://github.com/vllm-project/vllm/pull/31247</link>
@@ -1132,22 +1146,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
