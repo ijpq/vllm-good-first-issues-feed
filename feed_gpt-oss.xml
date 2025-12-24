@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 24 Dec 2025 06:35:01 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 24 Dec 2025 06:52:21 +0000</lastBuildDate>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -735,23 +735,6 @@ See results below.
 ...</description>
   </item>
   <item>
-    <title>[ROCm][CI] Fix entrypoints tests and Python-only installation test on ROCm</title>
-    <link>https://github.com/vllm-project/vllm/pull/28979</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28979</guid>
-    <pubDate>Wed, 19 Nov 2025 01:26:03 +0000</pubDate>
-    <description>This PR fixes ROCm CI failures by:
-
-1. **Setting correct attention backends for entrypoints tests on ROCm**
-   - Encoder-only models (embeddings/pooling) require `FLEX_ATTENTION` backend as it&#x27;s the only attention backend that supports encoder-only self-attention on ROCm
-   - Audio transcription/translation tests require `ROCM_AITER_FA` backend
-
-2. **Fixing Python-only installation test on ROCm**
-
-## Test Plan
-
-ROCm CI tests should pass after this PR.</description>
-  </item>
-  <item>
     <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
     <link>https://github.com/vllm-project/vllm/pull/28685</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28685</guid>
@@ -1155,6 +1138,31 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
+  </item>
+  <item>
+    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
+    <link>https://github.com/vllm-project/vllm/pull/27100</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
+    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
+    <description>
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
