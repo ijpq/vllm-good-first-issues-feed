@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 26 Dec 2025 01:57:21 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 26 Dec 2025 02:44:33 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate Sonic MoE</title>
     <link>https://github.com/vllm-project/vllm/issues/31039</link>
@@ -917,43 +917,6 @@ Currently we only have NVFP4 GEMMs written in CUTLASS for SM100, which means we 
 It seems Triton has supported FP4 formats for several months so we should have a new enough version of Triton https://github.com/triton-lang/triton/blob/620237edd282d3fa275e7f931af2018423108c4a/python/test/unit/language/test_matmul.py#L652
 
 A good starting point would be to add the triton kernel directly to https://github.com/vllm-project/vllm/blob/main/benchmarks/kernels/bench_nvfp4_gemm.py and compare the performance to the CUTLASS kernel, before int
-
-...</description>
-  </item>
-  <item>
-    <title>[Usage]: How am I suppose to pass images to /tokenize?</title>
-    <link>https://github.com/vllm-project/vllm/issues/20778</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/20778</guid>
-    <pubDate>Thu, 10 Jul 2025 18:12:17 +0000</pubDate>
-    <description>### Your current environment
-
-I believe this is env-independent.
-
-### How would you like to use vllm
-
-I&#x27;m trying to figure out how I successfully get the token-counts for an image when working with a VLM.
-
-Every time I try to pass a messages array like:
-```
-&quot;messages&quot;: [
-      {
-        &quot;role&quot;: &quot;user&quot;,
-        &quot;content&quot;: [
-          {
-            &quot;type&quot;: &quot;text&quot;,
-            &quot;text&quot;: &quot;What is in this image?&quot;
-          },
-          {
-            &quot;type&quot;: &quot;image_url&quot;,
-            &quot;image_url&quot;: {
-              &quot;url&quot;: &quot;https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg&quot;
-            }
-          }
-        ]
-```
-I just get the tokens of the string-literal text inside `content`.
-
-Same with like:
 
 ...</description>
   </item>
