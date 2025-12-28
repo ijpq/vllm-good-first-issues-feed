@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 28 Dec 2025 05:48:38 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 28 Dec 2025 05:56:47 +0000</lastBuildDate>
   <item>
     <title>[Doc] Add GPT-OSS (openai) tool parser documentation</title>
     <link>https://github.com/vllm-project/vllm/pull/31284</link>
@@ -103,6 +103,33 @@ Additionally, this PR implements caching of the LoRA weights after the initial b
 - Don&#x27;t call basic test files individually
 - Move the unit tests into a `unit` directory so we don&#x27;t have to manually ignore everything else
 - Move `openai/tool_parsers` into the `unit` tests because that&#x27;s what they are</description>
+  </item>
+  <item>
+    <title>[Bugfix][Frontend] Fix Jina reranker multimodal input compatibility</title>
+    <link>https://github.com/vllm-project/vllm/pull/31224</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31224</guid>
+    <pubDate>Tue, 23 Dec 2025 15:49:59 +0000</pubDate>
+    <description>vLLM supports jinaai/jina-reranker-m0, but currently only accepts image_url, not mixed text+image inputs as in Jina’s official multimodal API.
+
+Fix https://github.com/vllm-project/vllm/issues/26823
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the rel
+
+...</description>
   </item>
   <item>
     <title>[BugFix] LoRA: Support loading base_layer of experts</title>
@@ -1141,36 +1168,6 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
-
-...</description>
-  </item>
-  <item>
-    <title>Add process pool support fro tokenizer</title>
-    <link>https://github.com/vllm-project/vllm/pull/27180</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
-    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-
-## Purpose
-The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
-
-Related PR: #25301
-
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Rel
 
 ...</description>
   </item>
