@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 28 Dec 2025 02:05:27 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 28 Dec 2025 02:56:58 +0000</lastBuildDate>
   <item>
     <title>[Feature][Cleanup]: Unify `vllm.utils.flashinfer` and `vllm.model_executor.layers.quantization.utils.flashinfer_utils`</title>
     <link>https://github.com/vllm-project/vllm/issues/31414</link>
@@ -686,85 +686,6 @@ _No response_
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked que
 
 ...</description>
-  </item>
-  <item>
-    <title>[MM Encoder] General encoder performance improvement</title>
-    <link>https://github.com/vllm-project/vllm/issues/23884</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23884</guid>
-    <pubDate>Fri, 29 Aug 2025 01:53:02 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-On vLLM, most multimodal model support was directly contributed by the model vendors, but sometimes the implementation can still be improved in terms of inference performance (e.g, by leveraging fused operations or avoid cumemcpy). 
-
-Two examples are 
-- https://github.com/vllm-project/vllm/pull/22792
-- https://github.com/vllm-project/vllm/pull/22184
-
-We should more actively hunt for such improvement, in particular for more popular models such as Qwen2.5VL, InternVL, GLM4.5V, etc. It should be also made sure that such improvement does not result in accuracy regression.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the c
-
-...</description>
-  </item>
-  <item>
-    <title>[MM Encoder] ViT attention performance and consolidation</title>
-    <link>https://github.com/vllm-project/vllm/issues/23880</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23880</guid>
-    <pubDate>Fri, 29 Aug 2025 01:17:21 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Today many vision transformers on vLLM leverage standard `F.scaled_dot_product_attention` to compute attention scores.
-
-While there has been some effort in [vision.py](https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/vision.py) to help developers easily choose which backend to use, it would be great if vLLM can consolidate non-mask MHA implementations with different backends without caching so that developers can easily plug them in.
-
-We should also investigate integrating FA3 for a few vision models we have and make sure there&#x27;s no accuracy  regression.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and 
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature][P/D]: Optimize NIXL Connector xfer Launch</title>
-    <link>https://github.com/vllm-project/vllm/issues/23780</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/23780</guid>
-    <pubDate>Wed, 27 Aug 2025 22:45:32 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-NIXL Connector takes ~3ms to launch a transfer per request due to the `_get_block_desc_ids` We can optimize this by leveraging the numpy bindings for nixl
-
-&lt;img width=&quot;1073&quot; height=&quot;700&quot; alt=&quot;Image&quot; src=&quot;https://github.com/user-attachments/assets/407c1c3f-4772-4599-996c-8c02d324f15c&quot; /&gt;
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
     <title>[New Model]: Grok 2</title>
