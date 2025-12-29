@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 29 Dec 2025 10:26:43 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 29 Dec 2025 10:42:47 +0000</lastBuildDate>
   <item>
     <title>[CI] fix test_chat_truncation_content_not_null test</title>
     <link>https://github.com/vllm-project/vllm/pull/31488</link>
@@ -30,7 +30,7 @@ The generated reasoning content is too long and has reached the max_tokens limit
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `exampl
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model
 
 ...</description>
   </item>
