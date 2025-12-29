@@ -5,7 +5,35 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 29 Dec 2025 09:47:39 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 29 Dec 2025 09:57:36 +0000</lastBuildDate>
+  <item>
+    <title>[CI] fix test_chat_truncation_content_not_null test</title>
+    <link>https://github.com/vllm-project/vllm/pull/31488</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31488</guid>
+    <pubDate>Mon, 29 Dec 2025 09:53:05 +0000</pubDate>
+    <description>
+
+## Purpose
+FIX 
+https://buildkite.com/vllm/ci/builds/45061#019b68e1-eb93-46f0-8a9c-b8ef2f779d0b
+https://buildkite.com/vllm/ci/builds/45064#019b68a9-821c-4e1c-a29d-814f0029341e
+
+The generated reasoning content is too long and has reached the max_tokens limit. Therefore, increase the max_tokens length.
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `exampl
+
+...</description>
+  </item>
   <item>
     <title>[Doc] Add GPT-OSS (openai) tool parser documentation</title>
     <link>https://github.com/vllm-project/vllm/pull/31284</link>
@@ -1141,36 +1169,6 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
-
-...</description>
-  </item>
-  <item>
-    <title>Add process pool support fro tokenizer</title>
-    <link>https://github.com/vllm-project/vllm/pull/27180</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
-    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-
-## Purpose
-The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
-
-Related PR: #25301
-
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Rel
 
 ...</description>
   </item>
