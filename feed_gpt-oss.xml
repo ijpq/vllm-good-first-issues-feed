@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 30 Dec 2025 15:37:50 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 30 Dec 2025 15:48:38 +0000</lastBuildDate>
   <item>
     <title>[Fix] Align fused moe lora_b shape with peft</title>
     <link>https://github.com/vllm-project/vllm/pull/31534</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31534</guid>
     <pubDate>Tue, 30 Dec 2025 13:44:26 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-This PR fixes an incorrect LoRA B weight loading in fused_moe.py that caused vLLM LoRA outputs to diverge from PEFT/Transformers.
+    <description>This PR fixes an incorrect LoRA B weight loading in fused_moe.py that caused vLLM LoRA outputs to diverge from PEFT/Transformers.
 
 ## Purpose
 
@@ -22,7 +21,7 @@ This PR fixes the mismatch in `fused_moe` LoRA layers. Specifically, it corrects
 
 ## Test Plan
 
-I conducted a test using the `gpt-oss-20b` mode
+I conducted a test using the `gpt-oss-20b` model with the `jeeejeee/gpt-oss-2
 
 ...</description>
   </item>
