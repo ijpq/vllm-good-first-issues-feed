@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 30 Dec 2025 14:35:18 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 30 Dec 2025 14:47:48 +0000</lastBuildDate>
   <item>
     <title>[Fix] Align fused moe lora_b shape with peft</title>
     <link>https://github.com/vllm-project/vllm/pull/31534</link>
@@ -16,18 +16,13 @@ This PR fixes an incorrect LoRA B weight loading in fused_moe.py that caused vLL
 
 ## Purpose
 
-In vLLM, the LoRA B weight for MoE layers was assumed to have shape (output_dim, num_experts, rank), while PEFT defines it as (output_dim, rank, num_experts).
-This mismatch prevents vLLM results from fully aligning with Transformers when loading PEFT-trained adapters.
+In vLLM, the LoRA B weight for MoE layers was assumed to have shape (output_dim, num_experts, rank), while PEFT defines it as (output_dim, rank, num_experts). This mismatch prevents vLLM results from fully aligning with Transformers when loading PEFT-trained adapters.
+
+This PR fixes the mismatch in `fused_moe` LoRA layers. Specifically, it corrects the expected shape of LoRA B weights to ensure vLLM is aligned with the [PEFT implementation](https://github.com/huggingface/peft/blob/261366de2e40cde64b702d6b9c527081ad850549/src/peft/tuners/lora/layer.py#L2094).
 
 ## Test Plan
 
-I conducted tests using `gpt-oss-20b` with the adapter `jeeejeee/gpt-oss-20b-lora-adapter-text2sql`.
-
-**Test Cases (Text2SQL):**
-
-1. &quot;Give the average number of working horses on farms with more than 5000 total horses.&quot;
-2. &quot;What are the maximum and minimum number of cows across all farms.&quot;
-3. &quot;Return the maximum and minimum n
+I conducted a test using the `gpt-os
 
 ...</description>
   </item>
