@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 30 Dec 2025 21:24:15 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 30 Dec 2025 21:35:28 +0000</lastBuildDate>
   <item>
     <title>[Fix] Align fused moe lora_b shape with peft</title>
     <link>https://github.com/vllm-project/vllm/pull/31534</link>
