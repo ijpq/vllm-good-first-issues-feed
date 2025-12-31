@@ -5,7 +5,25 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 31 Dec 2025 17:26:19 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 31 Dec 2025 17:38:09 +0000</lastBuildDate>
+  <item>
+    <title>Remove unused `use_marlin` variable in `Mxfp4MoEMethod`</title>
+    <link>https://github.com/vllm-project/vllm/pull/31549</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31549</guid>
+    <pubDate>Tue, 30 Dec 2025 22:27:12 +0000</pubDate>
+    <description>
+## Purpose
+Remove unused  `use_marlin` variable from Mxfp4MoEMethod class. All cases with Marlin backend in this class use `self.mxfp4_backend == Mxfp4Backend.MARLIN`.
+
+## Test Plan
+
+None
+
+## Test Result
+
+None
+</description>
+  </item>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -1163,22 +1181,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
