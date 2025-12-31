@@ -5,26 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 31 Dec 2025 01:32:16 +0000</lastBuildDate>
-  <item>
-    <title>[Fix] Align fused moe lora_b shape with peft</title>
-    <link>https://github.com/vllm-project/vllm/pull/31534</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31534</guid>
-    <pubDate>Tue, 30 Dec 2025 13:44:26 +0000</pubDate>
-    <description>This PR fixes an incorrect LoRA B weight loading in fused_moe.py that caused vLLM LoRA outputs to diverge from PEFT/Transformers.
-
-## Purpose
-
-In vLLM, the LoRA B weight for MoE layers was assumed to have shape (output_dim, num_experts, rank), while PEFT defines it as (output_dim, rank, num_experts). This mismatch prevents vLLM results from fully aligning with Transformers when loading PEFT-trained adapters.
-
-This PR fixes the mismatch in `fused_moe` LoRA layers. Specifically, it corrects the expected shape of LoRA B weights to ensure vLLM is aligned with the [PEFT implementation](https://github.com/huggingface/peft/blob/261366de2e40cde64b702d6b9c527081ad850549/src/peft/tuners/lora/layer.py#L2094).
-
-## Test Plan
-
-I conducted a test using the `gpt-oss-20b` model with the `jeeejeee/gpt-oss-2
-
-...</description>
-  </item>
+  <lastBuildDate>Wed, 31 Dec 2025 02:23:56 +0000</lastBuildDate>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -1182,6 +1163,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
