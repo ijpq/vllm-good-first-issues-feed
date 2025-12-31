@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 31 Dec 2025 19:29:36 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 31 Dec 2025 19:38:39 +0000</lastBuildDate>
   <item>
     <title>Remove unused `use_marlin` variable in `Mxfp4MoEMethod`</title>
     <link>https://github.com/vllm-project/vllm/pull/31549</link>
