@@ -5,7 +5,26 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 02 Jan 2026 15:10:57 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 02 Jan 2026 15:25:48 +0000</lastBuildDate>
+  <item>
+    <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
+    <link>https://github.com/vllm-project/vllm/issues/31624</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/31624</guid>
+    <pubDate>Fri, 02 Jan 2026 15:18:14 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+In working on some MoE refactors, I discovered that L4 for ModelOpt takes 5+minutes to load weights even from CPU page cache. 
+- https://huggingface.co/nvidia/Llama-4-Scout-17B-16E-Instruct-FP8
+
+The root cause is basically this hack logic to load the state dict that ModelOpt uses
+- https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/llama4.py#L439-L523 [modelopt is the fused case] 
+
+What happens is that the CPU tensor (loaded weight) that we are going to load into the GPU tensor (param) becomes non-contiguous due to this logic. As a result, when we eventually call `_copy()` from CPU-&gt;GPU we are calling this on a non-contiguous cpu tensor which takes 3-4s per weight.
+
+To hack around this for local R&amp;D, I simply immediately move 
+
+...</description>
+  </item>
   <item>
     <title>[Feature][Cleanup]: Unify `vllm.utils.flashinfer` and `vllm.model_executor.layers.quantization.utils.flashinfer_utils`</title>
     <link>https://github.com/vllm-project/vllm/issues/31414</link>
