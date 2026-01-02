@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 02 Jan 2026 03:24:22 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 02 Jan 2026 03:55:26 +0000</lastBuildDate>
   <item>
     <title>[Feature][Cleanup]: Unify `vllm.utils.flashinfer` and `vllm.model_executor.layers.quantization.utils.flashinfer_utils`</title>
     <link>https://github.com/vllm-project/vllm/issues/31414</link>
@@ -589,29 +589,6 @@ CUDA used to build PyTorch   : 12.4
 ROCM used to build PyTor
 
 ...</description>
-  </item>
-  <item>
-    <title>[MM processor]: Benchmark mm processor&#x27;s performance</title>
-    <link>https://github.com/vllm-project/vllm/issues/24171</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24171</guid>
-    <pubDate>Wed, 03 Sep 2025 10:35:12 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Currently, we haven&#x27;t had scripts to benchmark mm_processor&#x27;s performance under complicated deploy environments (DP, multiple instances etc).
-
-Therefore, we should add some benchmark script to simulate it and identify the potential bottlenecks.
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-cc @DarkLight1337 @ywang96 
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
     <title>[Feature]: Support `Phi4Flash` model in V1</title>
