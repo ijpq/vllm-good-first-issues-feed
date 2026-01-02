@@ -5,25 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 02 Jan 2026 05:13:25 +0000</lastBuildDate>
-  <item>
-    <title>Remove unused `use_marlin` variable in `Mxfp4MoEMethod`</title>
-    <link>https://github.com/vllm-project/vllm/pull/31549</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31549</guid>
-    <pubDate>Tue, 30 Dec 2025 22:27:12 +0000</pubDate>
-    <description>
-## Purpose
-Remove unused  `use_marlin` variable from Mxfp4MoEMethod class. All cases with Marlin backend in this class use `self.mxfp4_backend == Mxfp4Backend.MARLIN`.
-
-## Test Plan
-
-None
-
-## Test Result
-
-None
-</description>
-  </item>
+  <lastBuildDate>Fri, 02 Jan 2026 05:29:39 +0000</lastBuildDate>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
@@ -1180,6 +1162,31 @@ Tested with gpt-oss and enabling the expert parallelism
 ## Test Result
 Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Support all MCP servers for gpt-oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/26704</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26704</guid>
+    <pubDate>Mon, 13 Oct 2025 12:51:59 +0000</pubDate>
+    <description>## Purpose
+This PR is an implementation of #26703 
+
+Note: This PR is really big, but there was a lot that had to be cleaned up at the same time. A large amount of the code is from adding tests to existing code and a MCP server to test with and new MCP tests.
+
+There are three main motivations:
+- vLLM should support integrating with all MCP servers
+  - TODO: Test with enterprise ones like Github
+- Clean up gpt-oss tool specific code paths in vLLM
+  - Tools and models change, but MCP is a protocol meant to support all models
+  - Sets the stage for full MCP integration for all tool calling models
+- Avoid losing information due to lossy OpenAI types for output
+  - An example below
+
+```
+# What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
+class ActionOp
+
+...</description>
   </item>
 </channel>
 </rss>
