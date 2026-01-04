@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 04 Jan 2026 06:25:30 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 04 Jan 2026 06:45:38 +0000</lastBuildDate>
   <item>
     <title>[Fix] Introduce audio channels spec</title>
     <link>https://github.com/vllm-project/vllm/pull/31595</link>
@@ -26,7 +26,7 @@ Key changes:
 - Enable mono normalization for Whisper-based models:
   - Qwen2 Audio, Qwen2.5 Omni (Qwen3 Omni inherits), Ultravox, Whisper
 
-The fra
+The framework is desig
 
 ...</description>
   </item>
