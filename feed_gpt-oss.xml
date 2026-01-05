@@ -5,7 +5,45 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 16:32:08 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 16:47:16 +0000</lastBuildDate>
+  <item>
+    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
+    <link>https://github.com/vllm-project/vllm/pull/31737</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31737</guid>
+    <pubDate>Mon, 05 Jan 2026 16:37:12 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+PLEASE FILL IN THE PR DESCRIPTION HERE ENSURING ALL CHECKLIST ITEMS (AT THE BOTTOM) HAVE BEEN CONSIDERED.
+
+## Purpose
+
+## Test Plan
+
+```
+CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;openai/gpt-oss-120b&quot; -tp 2     --trust-remote-code
+```
+
+```
+curl http://localhost:8000/v1/responses   -H &quot;Content-Type: application/json&quot;   -N   -d &#x27;{
+    &quot;model&quot;: &quot;openai/gpt-oss-120b&quot;,
+    &quot;input&quot;: [
+      {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;your name is John&quot;},
+      {&quot;role&quot;: &quot;developer&quot;, &quot;content&quot;: &quot;your name is Tom&quot;},
+      {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;what is your name&quot;}
+    ],
+    &quot;temperature&quot;: 0.7,
+    &quot;max_output_tokens&quot;: 1000
+  }&#x27; | jq
+
+```
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/su
+
+...</description>
+  </item>
   <item>
     <title>[Bugfix] Sanitize malformed tool call recipients in Harmony parser</title>
     <link>https://github.com/vllm-project/vllm/pull/31677</link>
@@ -1163,31 +1201,6 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
-  </item>
-  <item>
-    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
-    <link>https://github.com/vllm-project/vllm/pull/27100</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
-    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
-    <description>
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
