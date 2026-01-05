@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 07:46:46 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 07:56:52 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Sanitize malformed tool call recipients in Harmony parser</title>
     <link>https://github.com/vllm-project/vllm/pull/31677</link>
