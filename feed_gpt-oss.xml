@@ -5,13 +5,16 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 22:09:10 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 22:23:21 +0000</lastBuildDate>
   <item>
     <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
     <link>https://github.com/vllm-project/vllm/pull/31737</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31737</guid>
     <pubDate>Mon, 05 Jan 2026 16:37:12 +0000</pubDate>
     <description>## Purpose
+
+taking over from https://github.com/vllm-project/vllm/pull/27310
+We have use cases where we want to override the system prompt (and not have it fed to developer prompt).
 
 ## Test Plan
 
@@ -29,18 +32,7 @@ curl -X POST http://localhost:8000/v1/chat/completions \
     &quot;model&quot;: &quot;/data/users/axia/checkpoints/gpt-oss-120b&quot;,
     &quot;messages&quot;: [
       {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a pirate. Always respond like a pirate would, using pirate language and saying &#x27;\&#x27;&#x27;arrr&#x27;\&#x27;&#x27; frequently.&quot;},
-      {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;hello world&quot;}
-    ],
-    &quot;max_tokens&quot;: 100
-  }&#x27;
-```
-
-### Response
-```json
-{
-  &quot;id&quot;: &quot;chatcmpl-be75408c71cbf6fc&quot;,
-  &quot;object&quot;: &quot;chat.completion&quot;,
-  &quot;created&quot;: 1767
+      {&quot;role&quot;: &quot;user&quot;, &quot;c
 
 ...</description>
   </item>
