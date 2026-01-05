@@ -5,14 +5,13 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 21:38:52 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 21:48:37 +0000</lastBuildDate>
   <item>
     <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
     <link>https://github.com/vllm-project/vllm/pull/31737</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31737</guid>
     <pubDate>Mon, 05 Jan 2026 16:37:12 +0000</pubDate>
-    <description>
-## Purpose
+    <description>## Purpose
 
 ## Test Plan
 
@@ -20,29 +19,28 @@
 CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;openai/gpt-oss-120b&quot; -tp 2     --trust-remote-code
 ```
 
-```
-curl http://localhost:8000/v1/responses   -H &quot;Content-Type: application/json&quot;   -N   -d &#x27;{
-    &quot;model&quot;: &quot;openai/gpt-oss-120b&quot;,
-    &quot;input&quot;: [
-      {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;your name is John&quot;},
-      {&quot;role&quot;: &quot;developer&quot;, &quot;content&quot;: &quot;your name is Tom&quot;},
-      {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;what is your name&quot;}
+This change allows users to override the default system prompt by including a system message in their request.
+
+### Test Command
+```bash
+curl -X POST http://localhost:8000/v1/chat/completions \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{
+    &quot;model&quot;: &quot;/data/users/axia/checkpoints/gpt-oss-120b&quot;,
+    &quot;messages&quot;: [
+      {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a pirate. Always respond like a pirate would, using pirate language and saying &#x27;\&#x27;&#x27;arrr&#x27;\&#x27;&#x27; frequently.&quot;},
+      {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;hello world&quot;}
     ],
-    &quot;temperature&quot;: 0.7,
-    &quot;max_output_tokens&quot;: 1000
-  }&#x27; | jq
-
+    &quot;max_tokens&quot;: 100
+  }&#x27;
 ```
 
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ]
+### Response
+```json
+{
+  &quot;id&quot;: &quot;chatcmpl-be75408c71cbf6fc&quot;,
+  &quot;object&quot;: &quot;chat.completion&quot;,
+  &quot;created&quot;: 1767
 
 ...</description>
   </item>
