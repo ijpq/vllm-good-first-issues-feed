@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 23:23:00 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 23:34:50 +0000</lastBuildDate>
   <item>
     <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
     <link>https://github.com/vllm-project/vllm/pull/31737</link>
