@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 09:36:33 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 09:51:51 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Sanitize malformed tool call recipients in Harmony parser</title>
     <link>https://github.com/vllm-project/vllm/pull/31677</link>
@@ -46,6 +46,26 @@ Key changes:
 The framework is desig
 
 ...</description>
+  </item>
+  <item>
+    <title>[FIX] Add NO_MUL activation support for modular kernel path</title>
+    <link>https://github.com/vllm-project/vllm/pull/31528</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31528</guid>
+    <pubDate>Tue, 30 Dec 2025 10:38:02 +0000</pubDate>
+    <description>This PR adds support for `*_no_mul` activations (e.g., `relu2_no_mul`) in the modular 
+kernel MoE path (`TritonExperts`).
+
+### Problem
+The modular kernel path assumed all activations use gate/up multiplication (like SiLU, GELU),
+where output size is `N/2`. For `*_no_mul` activations, which apply activation directly 
+without gating, output size should equal input size (`N`). This caused assertion failures 
+and buffer size mismatches.
+
+
+
+Attional Change:
+`modular_kernel.py`: Updated abstract `workspace_shapes()` signature and `_allocate_buffers()` to accept and pass activation parameter
+All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activation parameter and use activation-aware workspace sizing where applicable</description>
   </item>
   <item>
     <title>[LoRA] Load gpt-oss w13_lora_b interleaved</title>
@@ -1165,22 +1185,6 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
-</description>
-  </item>
-  <item>
-    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
-    <link>https://github.com/vllm-project/vllm/pull/27025</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
-    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
-    <description>## Purpose
-- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
-- Fix to pass the correct parameters
-
-## Test Plan
-Tested with gpt-oss and enabling the expert parallelism
-
-## Test Result
-Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
