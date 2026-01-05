@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 05 Jan 2026 10:30:42 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 05 Jan 2026 10:46:23 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Sanitize malformed tool call recipients in Harmony parser</title>
     <link>https://github.com/vllm-project/vllm/pull/31677</link>
@@ -779,7 +779,9 @@ See results below.
 &lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/864eb338-f6cb-44ce-9bd9-78dc83585b69&quot; /&gt;
 
 
+## (Sub)-tasks
 
+- [x] unify 
 
 ...</description>
   </item>
