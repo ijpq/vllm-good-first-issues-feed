@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 06 Jan 2026 22:23:48 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 06 Jan 2026 22:38:02 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -154,8 +154,9 @@ All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activat
 
 ## Purpose
 
-This PR updates gpt-oss `w13_lora_b` weight loading to interleaved.
-* `swigluoai_and_mul` kernel expects interleaved gate and up. So need to load `w13_lora_b` weight interleaved.
+This PR updates gpt-oss `w13_lora_b` weight loading to be interleaved.
+
+Currently in `_slice_w13_b` `lora_b` is loaded de-interleaved `[w1_0, w3_0, w1_1, w3_1, ...]`, this PR updates to make `lora_b` loaded as the original interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. This is because `swigluoai_and_mul` kernel expects interleaved gate and up.
 
 ## Test Plan
 
@@ -172,9 +173,7 @@ Tests passed.
 
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optiona
+- [ ] The test results, such as pasting the results comparison
 
 ...</description>
   </item>
