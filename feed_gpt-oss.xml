@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 06 Jan 2026 18:14:18 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 06 Jan 2026 18:31:39 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP tool streaming support to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/31761</link>
