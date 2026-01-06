@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 06 Jan 2026 17:40:33 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 06 Jan 2026 17:51:34 +0000</lastBuildDate>
   <item>
     <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
     <link>https://github.com/vllm-project/vllm/issues/31624</link>
@@ -45,6 +45,24 @@ _No response_
 ### Before submitting a new issue...
 
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
+  </item>
+  <item>
+    <title>[RFC]: Improve environment variable declaration and handling</title>
+    <link>https://github.com/vllm-project/vllm/issues/31249</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/31249</guid>
+    <pubDate>Wed, 24 Dec 2025 00:05:13 +0000</pubDate>
+    <description>### Motivation.
+
+Currently, all environment variables are declared twice: the type definition and the custom getter lambda function (shown below). Due to the sheer amount of env vars, it is difficult to keep these in sync, often leading to incorrect type declarations and defaults. Documentation is usually in the form of comments near the getter instead of a docstring on the type declaration, making it unavailable to the IDE. Finally, apart from strings, most variables are ints, bools, or paths, reimplementing custom parser logic. While #25700 argues for limiting the use of envvars (which I agree with), we should still handle the env vars we do have in a robust way.
+
+&lt;details&gt;&lt;summary&gt; Current structure of &lt;code&gt;envs.py&lt;/code&gt; &lt;/summary&gt;
+
+```
+if TYPE_CHECKING:
+    VLLM_HOST_IP: str = &quot;&quot;
+   
+
+...</description>
   </item>
   <item>
     <title>[Feature]: Integrate Sonic MoE</title>
