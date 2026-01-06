@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 06 Jan 2026 10:05:49 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 06 Jan 2026 10:19:39 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP tool streaming support to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/31761</link>
@@ -781,7 +781,7 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
     <description>## Purpose
 
 This PR aims for:
-- [x] quark model loading, combined with original `mxfp4` loading [function ](https://github.com/vllm-project/vllm/blob/256a33ecb4923a4bfa6e1a9adbc69f5255a5aa6d/vllm/model_executor/models/gpt_oss.py#L309)
+- [x] quark model loading, combined with `mxfp4` loading [function ](https://github.com/vllm-project/vllm/blob/256a33ecb4923a4bfa6e1a9adbc69f5255a5aa6d/vllm/model_executor/models/gpt_oss.py#L309) for original openai/gpt-oss-20b &amp; openai/gpt-oss-120b
 - [x] OCPMX_W4A16, OCPMX_W4AFP8 MoE scheme and emulation forward, unified into class `QuarkOCP_MX_MoEMethod`
 
 ## Test Plan
@@ -803,12 +803,7 @@ This PR aims for:
 See results below.
 
 ## Test Result
-&lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/864eb338-f6cb-44ce-9bd9-78dc83585b69&quot; /&gt;
-
-
-## (Sub)-tasks
-
-- [x] unify 
+&lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/8
 
 ...</description>
   </item>
