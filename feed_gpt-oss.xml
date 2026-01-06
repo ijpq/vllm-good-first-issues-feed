@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 06 Jan 2026 11:35:32 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 06 Jan 2026 11:45:15 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add MCP tool streaming support to Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/31761</link>
@@ -803,7 +803,7 @@ This PR aims for:
 See results below.
 
 ## Test Result
-&lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/8
+&lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/864eb338-f6cb-44ce-9bd9-78
 
 ...</description>
   </item>
