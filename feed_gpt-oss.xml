@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 19:28:26 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 19:39:12 +0000</lastBuildDate>
   <item>
     <title>[Misc] Add VLLM_USE_FLASHINFER_ROPE to control the RoPE kernel for cuda</title>
     <link>https://github.com/vllm-project/vllm/pull/31893</link>
