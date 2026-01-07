@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 00:14:49 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 00:43:29 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -150,29 +150,31 @@ All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activat
     <link>https://github.com/vllm-project/vllm/pull/31255</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31255</guid>
     <pubDate>Wed, 24 Dec 2025 02:55:40 +0000</pubDate>
-    <description>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
 ## Purpose
 
-This PR updates gpt-oss `w13_lora_b` weight loading to be interleaved.
+This PR simplifies gpt-oss `w13_lora_b` weight loading code.
 
-Currently in `_slice_w13_b` `lora_b` is loaded de-interleaved `[w1_0, w3_0, w1_1, w3_1, ...]`, this PR updates to make `lora_b` loaded as the original interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. This is because `swigluoai_and_mul` kernel expects interleaved gate and up.
+gpt-oss `lora_b` weights is in interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. The current code load `lora_b` weights, then do de-interleaving, slicing, and re-interleaving. But the code can be simplified by directly returning a contiguous slice of the original interleaved dimension.
 
-## Test Plan
+Below is a short example of the original code:
 
 ```
-pytest -s -v tests/lora/test_gptoss_tp.py
-```
-## Test Result
-
-Tests passed.
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e resu
+&gt;&gt;&gt; start_idx = 0
+&gt;&gt;&gt; end_idx = 2
+&gt;&gt;&gt; w13_lora_b = torch.tensor([[[11], [21], [12], [22], [13], [23], [14], [24]]]) # shape [num_experts, output_size, rank]
+&gt;&gt;&gt; print(w13_lora_b)
+tensor([[[11],
+         [21],
+         [12],
+         [22],
+         [13],
+         [23],
+         [14],
+         [24]]])
+&gt;&gt;&gt; 
+&gt;&gt;&gt; w1_lora_b = w13_lora_b[:, ::2, :] # even po
 
 ...</description>
   </item>
