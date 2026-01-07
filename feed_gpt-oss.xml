@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 21:01:24 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 21:13:42 +0000</lastBuildDate>
   <item>
     <title>[1/N][Attention] Restructure attention: move files</title>
     <link>https://github.com/vllm-project/vllm/pull/31916</link>
@@ -406,10 +406,6 @@ This PR is to fix Triton fused_moe_lora.
 ## Test Plan
 
 ```
-pytest -s -v tests/kernels/moe/test_modular_oai_triton_moe.py
-```
-
-```
 pytest -s -v tests/lora/test_gptoss_tp.py
 ```
 
@@ -430,7 +426,10 @@ VLLM_MXFP4_USE_MARLIN=1 vllm serve openai/gpt-oss-20b \
   --no-enable-prefix-caching
 ```
 ```
-OPENAI_API_KEY=EMPTY python3 -m gpt_oss.evals --model lora1 --eva
+OPENAI_API_KEY=EMPTY python3 -m gpt_oss.evals --model lora1 --eval gpqa --n-threads 200 --reasoning-effort low
+```
+```
+Writing report to
 
 ...</description>
   </item>
