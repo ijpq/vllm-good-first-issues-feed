@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 02:03:45 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 02:49:48 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -400,14 +400,42 @@ PR:
 ...</description>
   </item>
   <item>
-    <title>[Bugfix] Fix NaN issue for Triton FusedMoE LoRA</title>
+    <title>[Bugfix] Fix Triton FusedMoE LoRA</title>
     <link>https://github.com/vllm-project/vllm/pull/30585</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30585</guid>
     <pubDate>Sat, 13 Dec 2025 01:35:10 +0000</pubDate>
     <description>## Purpose
 
-This PR is to fix NaN issue with fused_moe_lora. Currently running `test_gptoss_tp.py` will fail. We found it&#x27;s because NaN values in tensor causing with `triton_kernels` having wrong `gather_indx`.
-* attention `output` tensor is created as `output = torch.empty(output_shape, dtype=output_dtype, device=query.device)` in [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/attention/layer.py#L346), which was changed from `output = torch.zeros(output_shape, dtype=output_dtype, device=query.device)` by #26680. `torch.empty()` allocates uninitialized memory and may contain NaNs. Then in `torch.ops.vllm.unified_attention_with_output` it writes `output[:num_actual_tokens]` [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/v1/attention/backends/flash_attn.py#L678)
+This PR is to fix Triton fused_moe_lora.
+* Reorder `intermediate_cache1` to make sure LoRA weights is added to the correct rows [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/lora/ops/triton_ops/fused_moe_lora_op.py#L388).
+
+## Test Plan
+
+```
+pytest -s -v tests/kernels/moe/test_modular_oai_triton_moe.py
+```
+
+```
+export VLLM_MXFP4_USE_MARLIN=0
+pytest -s -v tests/lora/test_gptoss_tp.py
+```
+
+Tests passed.
+
+## Accuracy Testing
+
+Marlin:
+
+```
+VLLM_MXFP4_USE_MARLIN=1 vllm serve openai/gpt-oss-20b \
+  --tensor-parallel-size 1 \
+  --max-num-seqs 16 \
+  --compilation-config &#x27;{&quot;cudagraph_mode&quot;: &quot;PIECEWISE&quot;}&#x27; \
+  --enable-lora \
+  --max-loras 1 \
+  --lora-modules lora1=/opt/dlami/nvme/models/gpt-oss-20b-lora-gpqa/checkpoint-13 \
+  --max-lora-rank 32 \
+  --no-enable-prefix-cac
 
 ...</description>
   </item>
