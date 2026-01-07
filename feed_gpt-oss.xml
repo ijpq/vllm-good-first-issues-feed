@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 06:42:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 06:57:59 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -245,39 +245,6 @@ Additionally, this PR implements caching of the LoRA weights after the initial b
 - Don&#x27;t call basic test files individually
 - Move the unit tests into a `unit` directory so we don&#x27;t have to manually ignore everything else
 - Move `openai/tool_parsers` into the `unit` tests because that&#x27;s what they are</description>
-  </item>
-  <item>
-    <title>[BugFix] LoRA: Support loading base_layer of experts</title>
-    <link>https://github.com/vllm-project/vllm/pull/31104</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31104</guid>
-    <pubDate>Mon, 22 Dec 2025 00:44:31 +0000</pubDate>
-    <description>## Purpose
-
-This PR fixes weight loading when LoRA is enabled, i.e., we have `base_layer` added to the:
-
-`model.layers.0.mlp.experts.0.up_proj.weight` -&gt; `model.layers.0.mlp.experts.0.up_proj.base_layer.weight`
-
-Currently before this fix, the patched code will handled this as:
-`model.layers.0.mlp.experts.w13_base_layer.weight`, which is wrong and
-it should actually be `model.layers.0.mlp.experts.base_layer.w13_weight`
-
-## Test Plan
-
-Test on Qwen3 30B A3B
-
-## Test Result
-
-Looks good.
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [X] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [X] The test plan, such as providing test command.
-- [X] The test results, such as pasting the results comparison 
-
-...</description>
   </item>
   <item>
     <title>[Feature] add StreamableResponsesParser and token usage counting for ParsableContext</title>
@@ -1203,6 +1170,43 @@ Override
 &lt;/details&gt;
 
 </description>
+  </item>
+  <item>
+    <title>Experimental attention backend in helion</title>
+    <link>https://github.com/vllm-project/vllm/pull/27293</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
+    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+very experimental and draft PR so far
+
+## Test Plan
+
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
+```
+## Test Result
+
+Performance see upcoming publications. 
+Correctness:
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
+```
+results in 
+```
+|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
+|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
+```
+
+---
+&lt;details&gt;
+&lt;summary&gt; Ess
+
+...</description>
   </item>
 </channel>
 </rss>
