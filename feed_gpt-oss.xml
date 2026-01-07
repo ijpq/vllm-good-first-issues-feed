@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 03:25:34 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 03:54:46 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -98,6 +98,34 @@ This fix sanitizes the recipient string by stripping `&lt;|channel|&gt;` and eve
 - `serving_chat_stream_harmony.py`: /v1/chat/completions (streaming)
 
 The /v1/responses streaming endpoint already worked correctly because it captures the recipient before malformed tokens can
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix][Kernel] fix bias adding in triton kernel implemented fused moe</title>
+    <link>https://github.com/vllm-project/vllm/pull/31676</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31676</guid>
+    <pubDate>Sun, 04 Jan 2026 09:11:27 +0000</pubDate>
+    <description>## Purpose
+Since bias is typically not quantized, it should be added after the dequantization at last.
+y = s_x * s_w * (Wq - zw) * (xq - zx) **+ bias**
+where:
+  s_x, s_w: scaling factors for activation and weight 
+  Wq, xq: quantized weight and activation   
+  zw, zx: zero points for weight and activation
+
+## Test Plan
+- [x] (end-2-end): amd/gpt-oss-20b-WFP8-AFP8-KVFP8, see results below
+  - quantization scheme:
+    - all weights (both attention and moe): FP8 per-tensor
+    - all activation (both attention and moe): FP8 per-tensor
+    - kv cache: FP8 per-tensor
+- [ ] (TODO?) may need a unit test on triton implemented fused moe kernel
+
+## Test Result
+&lt;img width=&quot;1230&quot; height=&quot;111&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/1d994e2d-b919-4cd1-af3b-7d29aebac4c5&quot; /&gt;
+
+Example (
 
 ...</description>
   </item>
@@ -1175,43 +1203,6 @@ Override
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>Experimental attention backend in helion</title>
-    <link>https://github.com/vllm-project/vllm/pull/27293</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
-    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-very experimental and draft PR so far
-
-## Test Plan
-
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
-```
-## Test Result
-
-Performance see upcoming publications. 
-Correctness:
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
-```
-results in 
-```
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
-|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
-```
-
----
-&lt;details&gt;
-&lt;summary&gt; Ess
-
-...</description>
   </item>
 </channel>
 </rss>
