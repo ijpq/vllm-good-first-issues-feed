@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 07:29:01 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 07:42:19 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -98,34 +98,6 @@ This fix sanitizes the recipient string by stripping `&lt;|channel|&gt;` and eve
 - `serving_chat_stream_harmony.py`: /v1/chat/completions (streaming)
 
 The /v1/responses streaming endpoint already worked correctly because it captures the recipient before malformed tokens can
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix][Kernel] fix bias adding in triton kernel implemented fused moe</title>
-    <link>https://github.com/vllm-project/vllm/pull/31676</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31676</guid>
-    <pubDate>Sun, 04 Jan 2026 09:11:27 +0000</pubDate>
-    <description>## Purpose
-Since bias is typically not quantized, it should be added after the dequantization at last.
-y = s_x * s_w * (Wq - zw) * (xq - zx) **+ bias**
-where:
-  s_x, s_w: scaling factors for activation and weight 
-  Wq, xq: quantized weight and activation   
-  zw, zx: zero points for weight and activation
-
-## Test Plan
-- [x] (end-2-end): amd/gpt-oss-20b-WFP8-AFP8-KVFP8, see results below
-  - quantization scheme:
-    - all weights (both attention and moe): FP8 per-tensor
-    - all activation (both attention and moe): FP8 per-tensor
-    - kv cache: FP8 per-tensor
-- [ ] (TODO?) may need a unit test on triton implemented fused moe kernel
-
-## Test Result
-&lt;img width=&quot;1230&quot; height=&quot;111&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/1d994e2d-b919-4cd1-af3b-7d29aebac4c5&quot; /&gt;
-
-Example (
 
 ...</description>
   </item>
@@ -1205,6 +1177,36 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
 
 ...</description>
   </item>
