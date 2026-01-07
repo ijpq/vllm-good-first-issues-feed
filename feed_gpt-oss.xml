@@ -5,7 +5,35 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 17:33:51 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 17:47:59 +0000</lastBuildDate>
+  <item>
+    <title>[Misc] Add VLLM_USE_FLASHINFER_ROPE to control the RoPE kernel for cuda</title>
+    <link>https://github.com/vllm-project/vllm/pull/31893</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31893</guid>
+    <pubDate>Wed, 07 Jan 2026 10:49:29 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Related PRs:
+#21126 integrated the Flashinfer RoPE kernel.
+#25299 disabled it by default due to CI failures.
+#30729 enabled it by default for Deepseek RoPE.
+
+This PR adds `VLLM_USE_FLASHINFER_ROPE` env so that we can easily enable Flashinfer RoPE kernel.
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes up
+
+...</description>
+  </item>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -1178,31 +1206,6 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
-  </item>
-  <item>
-    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
-    <link>https://github.com/vllm-project/vllm/pull/27100</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
-    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
-    <description>
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
