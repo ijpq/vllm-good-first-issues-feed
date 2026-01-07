@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 00:43:29 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 01:16:19 +0000</lastBuildDate>
   <item>
     <title>[responsesAPI] get reasoning token metrics for simpleContext</title>
     <link>https://github.com/vllm-project/vllm/pull/31839</link>
@@ -156,7 +156,7 @@ All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activat
 
 This PR simplifies gpt-oss `w13_lora_b` weight loading code.
 
-gpt-oss `lora_b` weights is in interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. The current code load `lora_b` weights, then do de-interleaving, slicing, and re-interleaving. But the code can be simplified by directly returning a contiguous slice of the original interleaved dimension.
+gpt-oss `lora_b` weights is in interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. The current `_slice_w13_b` code do de-interleaving, slicing, and re-interleaving. But the code can be simplified by directly returning a contiguous slice of the original interleaved dimension.
 
 Below is a short example of the original code:
 
@@ -174,7 +174,8 @@ tensor([[[11],
          [14],
          [24]]])
 &gt;&gt;&gt; 
-&gt;&gt;&gt; w1_lora_b = w13_lora_b[:, ::2, :] # even po
+&gt;&gt;&gt; w1_lora_b = w13_lora_b[:, ::2, :] # even positions
+&gt;&gt;&gt; p
 
 ...</description>
   </item>
