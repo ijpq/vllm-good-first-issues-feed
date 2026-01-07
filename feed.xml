@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 07 Jan 2026 14:55:35 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 07 Jan 2026 15:09:26 +0000</lastBuildDate>
   <item>
     <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
     <link>https://github.com/vllm-project/vllm/issues/31624</link>
@@ -395,6 +395,30 @@ _No response_
 ### Before submitting a new issue...
 
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
+  </item>
+  <item>
+    <title>[Feature]: Batch Invariant Feature and Performance Optimization</title>
+    <link>https://github.com/vllm-project/vllm/issues/27433</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27433</guid>
+    <pubDate>Thu, 23 Oct 2025 19:38:03 +0000</pubDate>
+    <description>## 🚀 The feature, motivation and pitch
+
+We have basically support Batch Invariant based on https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/
+
+https://github.com/orgs/vllm-project/projects/29/views/1
+
+But there are still some work to be done, so here is the issue to track the work
+
+## TODOs:
+
+- [x] Basic framework https://github.com/vllm-project/vllm/pull/25603 @bwasti 
+- [x] Flashinfer support https://github.com/vllm-project/vllm/pull/26373 @bwasti 
+- [x] Deepseek-v3 https://github.com/vllm-project/vllm/pull/26609 @bwasti 
+- [x] DeepGEMM on Blackwell https://github.com/vllm-project/vllm/pull/27127  @yewentao256 
+- [x] Batch Invariant for R1 TP 8 on Blackwell https://github.com/vllm-project/vllm/pull/27229 @yewentao256 
+- [x] Torch compile &amp; Cuda Graph support  htt
+
+...</description>
   </item>
   <item>
     <title>[Usage]: how to request a qwen2.5-VL-7B classify model served by vllm using openai SDK?</title>
