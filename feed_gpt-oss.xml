@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 08 Jan 2026 19:24:13 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 08 Jan 2026 19:35:13 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -201,6 +201,26 @@ Key changes:
 The framework is desig
 
 ...</description>
+  </item>
+  <item>
+    <title>[FIX] Add NO_MUL activation support for modular kernel path</title>
+    <link>https://github.com/vllm-project/vllm/pull/31528</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31528</guid>
+    <pubDate>Tue, 30 Dec 2025 10:38:02 +0000</pubDate>
+    <description>This PR adds support for `*_no_mul` activations (e.g., `relu2_no_mul`) in the modular 
+kernel MoE path (`TritonExperts`).
+
+### Problem
+The modular kernel path assumed all activations use gate/up multiplication (like SiLU, GELU),
+where output size is `N/2`. For `*_no_mul` activations, which apply activation directly 
+without gating, output size should equal input size (`N`). This caused assertion failures 
+and buffer size mismatches.
+
+
+
+Attional Change:
+`modular_kernel.py`: Updated abstract `workspace_shapes()` signature and `_allocate_buffers()` to accept and pass activation parameter
+All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activation parameter and use activation-aware workspace sizing where applicable</description>
   </item>
   <item>
     <title>[LoRA] Simplify gpt-oss w13_lora_b weight loading</title>
@@ -1180,36 +1200,6 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
-
-...</description>
-  </item>
-  <item>
-    <title>Add process pool support fro tokenizer</title>
-    <link>https://github.com/vllm-project/vllm/pull/27180</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
-    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-
-## Purpose
-The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
-
-Related PR: #25301
-
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Rel
 
 ...</description>
   </item>
