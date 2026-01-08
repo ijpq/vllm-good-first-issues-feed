@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 08 Jan 2026 16:23:39 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 08 Jan 2026 16:43:00 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -546,27 +546,6 @@ client:
 
 output:
 &gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765
-
-...</description>
-  </item>
-  <item>
-    <title>[ResponsesAPI] Add GPTOSS MCP tool streaming</title>
-    <link>https://github.com/vllm-project/vllm/pull/30301</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30301</guid>
-    <pubDate>Tue, 09 Dec 2025 04:36:25 +0000</pubDate>
-    <description>## Purpose
-This change enables streaming support for MCP tools when using GPT OSS. It extends the harmony utilities and response serving infrastructure to handle tool streaming, allowing tool calls and their results to be incrementally streamed back to clients rather than returned as a single batch.
-
-taken over from #30192, builds on top of https://github.com/vllm-project/vllm/pull/30054
-
-## Test Plan
-
-```
-VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;openai/gpt-oss-120b&quot; -tp 2     --trust-remote-code  --tool-server=localhost:8081/container,localhost:8081/browser,localhost:8081/python
-```
-
-```
-curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer
 
 ...</description>
   </item>
@@ -1208,6 +1187,36 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
 
 ...</description>
   </item>
