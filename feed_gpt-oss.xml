@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 08 Jan 2026 03:54:14 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 08 Jan 2026 04:18:40 +0000</lastBuildDate>
   <item>
     <title>[1/N][Attention] Restructure attention: move files</title>
     <link>https://github.com/vllm-project/vllm/pull/31916</link>
