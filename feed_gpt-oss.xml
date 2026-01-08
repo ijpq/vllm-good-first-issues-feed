@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 08 Jan 2026 18:11:37 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 08 Jan 2026 18:27:49 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -49,16 +49,9 @@ Implement step 1 of #31919. This PR consists solely of file renaming and movemen
 * Move vllm/attention/ops to vllm/v1/attention/ops
 * Move vllm/attention/selector.py to vllm/v1/attention/selector.py
 
-## Test Plan
-CI
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [x] The purpose of the PR, su
+&gt; [!NOTE]
+&gt; * `vllm/v1/attention` is subject to more mypy scrutiny than `vllm/attention` since https://github.com/vllm-project/vllm/pull/31465
+&gt; * Since this PR
 
 ...</description>
   </item>
@@ -527,12 +520,12 @@ async def run(semaphore, i):
 ...</description>
   </item>
   <item>
-    <title>Upstream fp8 with static scales gpt oss</title>
+    <title>[ROCm][Quantization] GPT OSS, DS FP4 Upstream fp8 with static scales</title>
     <link>https://github.com/vllm-project/vllm/pull/30357</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30357</guid>
     <pubDate>Tue, 09 Dec 2025 19:49:32 +0000</pubDate>
-    <description>##gpt-oss120b-w-mxfp4-a-fp8
-------------------------------------------------------
+    <description>## gpt-oss120b-w-mxfp4-a-fp8
+
 server:
 &gt; VLLM_ROCM_USE_AITER=1 HIP_VISIBLE_DEVICES=1 VLLM_USE_AITER_UNIFIED_ATTENTION=1 VLLM_ROCM_USE_AITER_MHA=0 VLLM_ROCM_USE_AITER_FUSED_MOE_A16W4=0 vllm serve /data/models/gpt-oss120b-w-mxfp4-a-fp8     --port 8000     --swap-space 64     --max-model-len 10368     --tensor-parallel-size 1     --max-num-seqs 1024     --gpu-memory-utilization 0.95     --no-enable-prefix-caching     --enforce-eager
 
@@ -545,7 +538,7 @@ client:
 }&#x27;
 
 output:
-&gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765
+&gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765949222,&quot;model&quot;:&quot;/data/models/gpt-oss120b-w-mxfp4-a-fp
 
 ...</description>
   </item>
