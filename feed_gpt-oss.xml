@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 13:57:00 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 14:10:51 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -36,8 +36,7 @@ I suggest adding two fields, `reasoning_effort` and `parallel_tool_calls`, to `e
     <link>https://github.com/vllm-project/vllm/pull/31916</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31916</guid>
     <pubDate>Wed, 07 Jan 2026 19:56:57 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
 Implement step 1 of #31919. This PR consists solely of file renaming and movement, and the necessary updates to imports.
 
@@ -51,7 +50,7 @@ Implement step 1 of #31919. This PR consists solely of file renaming and movemen
 
 &gt; [!NOTE]
 &gt; * `vllm/v1/attention` is subject to more mypy scrutiny than `vllm/attention` since https://github.com/vllm-project/vllm/pull/31465
-&gt; * Since this PR
+&gt; * Since this PR moves files from `vllm/attent
 
 ...</description>
   </item>
