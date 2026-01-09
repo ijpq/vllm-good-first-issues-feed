@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 21:54:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 22:05:05 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -161,12 +161,11 @@ tensor([[[11],
     <link>https://github.com/vllm-project/vllm/pull/31250</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31250</guid>
     <pubDate>Wed, 24 Dec 2025 00:18:46 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-This draft PR adds an experimental LoRA slab optimization that builds one contiguous CPU slab for all LoRA adapters and performs a single host-to-device copy, reducing fragmented cudaMemcpy operations in multi-LoRA inference.
+    <description>This draft PR adds an experimental LoRA slab optimization that builds one contiguous CPU slab for all LoRA adapters and performs a single host-to-device copy, reducing fragmented cudaMemcpy operations in multi-LoRA inference.
 
 ## Purpose
 This PR aims to optimize the host-to-device transfer of LoRA weights by using a slab-based method. Instead of sending fragmented chunks, we perform a single consolidated host-to-device transfer. This approach significantly reduces overhead. For example, with max-lora=128, the host-to-device transfer and activation now takes about **17ms** in total, compared to around **200ms** on the main branch.
-Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and all
+Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and allows us to reuse the weights wh
 
 ...</description>
   </item>
