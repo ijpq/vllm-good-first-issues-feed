@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 08:24:30 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 08:43:43 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -398,6 +398,7 @@ PR:
 
 This PR is to fix Triton fused_moe_lora.
 * Reorder the rows of `intermediate_cache1` to make sure LoRA weights is added to the correct rows [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/lora/ops/triton_ops/fused_moe_lora_op.py#L388).
+* This will fix `test_gptoss_tp.py` for Triton backend.
 
 ## Test Plan
 
@@ -422,10 +423,7 @@ VLLM_MXFP4_USE_MARLIN=1 vllm serve openai/gpt-oss-20b \
   --no-enable-prefix-caching
 ```
 ```
-OPENAI_API_KEY=EMPTY python3 -m gpt_oss.evals --model lora1 --eval gpqa --n-threads 200 --reasoning-effort low
-```
-```
-Writing report to
+OPENAI_API_KEY=EMPTY python3 -m gpt_oss.evals --model lora1 --eval gpqa --n-thre
 
 ...</description>
   </item>
