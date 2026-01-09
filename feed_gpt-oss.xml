@@ -5,7 +5,28 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 22:54:35 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 23:05:21 +0000</lastBuildDate>
+  <item>
+    <title>[ROCm][CI] Fix flaky `test_function_calling_with_stream` and reduce schema test examples</title>
+    <link>https://github.com/vllm-project/vllm/pull/32063</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32063</guid>
+    <pubDate>Fri, 09 Jan 2026 22:56:26 +0000</pubDate>
+    <description>This PR fixes two test failures in the Harmony and OpenAPI schema test suites:
+
+1. **`test_function_calling_with_stream`**: Fixed an `UnboundLocalError` caused by accessing an uninitialized variable when the model doesn&#x27;t return the expected function call.
+
+2. **`test_openapi_stateless`**: Reduced test examples to avoid timeout failures caused by schemathesis generating malformed requests that the server processes slowly.
+
+## Changes
+
+### 1. `test_function_calling_with_stream` fix
+
+The test assumed the model would always call the `get_weather` function when asked about weather. However, LLM behavior is non-deterministic, and if the model responds differently (e.g., with a text message or different function), the `result` variable was never assigned, causing an `UnboundLocalError`.
+
+**Fix:*
+
+...</description>
+  </item>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -1145,43 +1166,6 @@ This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quo
   - `vllm/entrypoints/openai/serving_responses.py:1830`
   - `vllm/entrypoints/openai/serving_responses.py:1879`
 - Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
-
-...</description>
-  </item>
-  <item>
-    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
-    <link>https://github.com/vllm-project/vllm/pull/26291</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
-    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
-    <description>Hi team!
-
-## Purpose
-
-We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
-
-## Test Plan
-
-Server command:
-
-```
-vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
-```
-
-Test script `streaming_client.py`:
-
-```
-#!/usr/bin/env python3
-
-import asyncio
-import sys
-from typing import List, Dict
-
-import httpx
-from openai import AsyncOpenAI
-
-
-class StreamingClient:
-    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
   </item>
