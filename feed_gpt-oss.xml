@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 01:11:24 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 01:56:52 +0000</lastBuildDate>
   <item>
     <title>fix lora moe sharding when rank &lt; max_lora_rank</title>
     <link>https://github.com/vllm-project/vllm/pull/31994</link>
@@ -129,28 +129,6 @@ This PR adds `VLLM_USE_FLASHINFER_ROPE` env so that we can easily enable Flashin
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[Frontend] Add MCP tool streaming support to Responses API</title>
-    <link>https://github.com/vllm-project/vllm/pull/31761</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31761</guid>
-    <pubDate>Tue, 06 Jan 2026 02:13:18 +0000</pubDate>
-    <description>## Purpose
-This change enables streaming support for MCP tools when using GPT OSS. It extends the harmony utilities and response serving infrastructure to handle tool streaming, allowing tool calls and their results to be incrementally streamed back to clients rather than returned as a single batch.
-
-This PR is taken over from [#30301](https://github.com/vllm-project/vllm/pull/30301)
-
-## Test Plan
-
-```
-VLLM_ENABLE_RESPONSES_API_STORE=1 VLLM_GPT_OSS_SYSTEM_TOOL_MCP_LABELS=web_search_preview,container,code_interpreter VLLM_RESPONSES_API_USE_MCP_TYPES=1 VLLM_GPT_OSS_HARMONY_SYSTEM_INSTRUCTIONS=1 CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 vllm serve openai/gpt-oss-20b/  --served-model-name=default
-```
-
-```
-
-curl -X POST &quot;http://localhost:8000/v1/responses&quot;   -H &quot;Content-Type: application/json&quot;   
-
-...</description>
   </item>
   <item>
     <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
@@ -1186,6 +1164,43 @@ Override
 &lt;/details&gt;
 
 </description>
+  </item>
+  <item>
+    <title>Experimental attention backend in helion</title>
+    <link>https://github.com/vllm-project/vllm/pull/27293</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
+    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+very experimental and draft PR so far
+
+## Test Plan
+
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
+```
+## Test Result
+
+Performance see upcoming publications. 
+Correctness:
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
+```
+results in 
+```
+|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
+|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
+```
+
+---
+&lt;details&gt;
+&lt;summary&gt; Ess
+
+...</description>
   </item>
 </channel>
 </rss>
