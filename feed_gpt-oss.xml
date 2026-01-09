@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 21:09:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 21:23:39 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -28,29 +28,6 @@ I suggest adding two fields, `reasoning_effort` and `parallel_tool_calls`, to `e
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e 
-
-...</description>
-  </item>
-  <item>
-    <title>[1/N][Attention] Restructure attention: move files</title>
-    <link>https://github.com/vllm-project/vllm/pull/31916</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31916</guid>
-    <pubDate>Wed, 07 Jan 2026 19:56:57 +0000</pubDate>
-    <description>
-## Purpose
-Implement step 1 of #31919. This PR consists solely of file renaming and movement, and the necessary updates to imports.
-
-* Move vllm/attention/layers to vllm/model_executor/layers/attention
-* Move vllm/attention/backends/abstract.py to vllm/v1/attention/backend.py 
-* Move vllm/attention/backends/registry.py to vllm/v1/attention/backends/registry.py 
-* Eliminate vllm/attention/backends folder
-* Move vllm/attention/utils/fa_utils.py to vllm/v1/attention/backends/fa_utils.py 
-* Move vllm/attention/ops to vllm/v1/attention/ops
-* Move vllm/attention/selector.py to vllm/v1/attention/selector.py
-
-&gt; [!NOTE]
-&gt; * `vllm/v1/attention` is subject to more mypy scrutiny than `vllm/attention` since https://github.com/vllm-project/vllm/pull/31465
-&gt; * Since this PR moves files from `vllm/attent
 
 ...</description>
   </item>
@@ -1169,6 +1146,43 @@ This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quo
   - `vllm/entrypoints/openai/serving_responses.py:1830`
   - `vllm/entrypoints/openai/serving_responses.py:1879`
 - Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
+
+...</description>
+  </item>
+  <item>
+    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
+    <link>https://github.com/vllm-project/vllm/pull/26291</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
+    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
+    <description>Hi team!
+
+## Purpose
+
+We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
+
+## Test Plan
+
+Server command:
+
+```
+vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
+```
+
+Test script `streaming_client.py`:
+
+```
+#!/usr/bin/env python3
+
+import asyncio
+import sys
+from typing import List, Dict
+
+import httpx
+from openai import AsyncOpenAI
+
+
+class StreamingClient:
+    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
   </item>
