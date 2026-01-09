@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 19:00:55 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 19:13:17 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -107,36 +107,6 @@ This PR adds `VLLM_USE_FLASHINFER_ROPE` env so that we can easily enable Flashin
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
-    <link>https://github.com/vllm-project/vllm/pull/31737</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31737</guid>
-    <pubDate>Mon, 05 Jan 2026 16:37:12 +0000</pubDate>
-    <description>## Purpose
-
-taking over from https://github.com/vllm-project/vllm/pull/27310
-We have use cases where we want to override the system prompt (and not have it fed to developer prompt).
-
-## Test Plan
-
-```
-CUDA_VISIBLE_DEVICES=2,3 with-proxy vllm serve &quot;openai/gpt-oss-120b&quot; -tp 2     --trust-remote-code
-```
-
-This change allows users to override the default system prompt by including a system message in their request.
-
-### Test Command
-```bash
-curl -X POST http://localhost:8000/v1/chat/completions \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#x27;{
-    &quot;model&quot;: &quot;/data/users/axia/checkpoints/gpt-oss-120b&quot;,
-    &quot;messages&quot;: [
-      {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a pirate. Always respond like a pirate would, using pirate language and saying &#x27;\&#x27;&#x27;arrr&#x27;\&#x27;&#x27; frequently.&quot;},
-      {&quot;role&quot;: &quot;user&quot;, &quot;c
-
-...</description>
   </item>
   <item>
     <title>[Bugfix] Sanitize malformed tool call recipients in Harmony parser</title>
@@ -1179,6 +1149,31 @@ Tested with gpt-oss and enabling the expert parallelism
 ## Test Result
 Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Support all MCP servers for gpt-oss</title>
+    <link>https://github.com/vllm-project/vllm/pull/26704</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26704</guid>
+    <pubDate>Mon, 13 Oct 2025 12:51:59 +0000</pubDate>
+    <description>## Purpose
+This PR is an implementation of #26703 
+
+Note: This PR is really big, but there was a lot that had to be cleaned up at the same time. A large amount of the code is from adding tests to existing code and a MCP server to test with and new MCP tests.
+
+There are three main motivations:
+- vLLM should support integrating with all MCP servers
+  - TODO: Test with enterprise ones like Github
+- Clean up gpt-oss tool specific code paths in vLLM
+  - Tools and models change, but MCP is a protocol meant to support all models
+  - Sets the stage for full MCP integration for all tool calling models
+- Avoid losing information due to lossy OpenAI types for output
+  - An example below
+
+```
+# What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
+class ActionOp
+
+...</description>
   </item>
 </channel>
 </rss>
