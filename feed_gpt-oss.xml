@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 19:27:18 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 19:38:00 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -122,30 +122,6 @@ This fix sanitizes the recipient string by stripping `&lt;|channel|&gt;` and eve
 - `serving_chat_stream_harmony.py`: /v1/chat/completions (streaming)
 
 The /v1/responses streaming endpoint already worked correctly because it captures the recipient before malformed tokens can
-
-...</description>
-  </item>
-  <item>
-    <title>[Fix] Introduce audio channels spec</title>
-    <link>https://github.com/vllm-project/vllm/pull/31595</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31595</guid>
-    <pubDate>Thu, 01 Jan 2026 01:53:45 +0000</pubDate>
-    <description>Add generic AudioSpec framework for audio channel normalization
-This PR introduces an extensible AudioSpec-based framework for
-normalizing audio channels in vLLM multimodal models. The framework
-addresses the stereo-to-mono conversion issue where torchaudio returns
-[channels, time] format but Whisper-based models expect [time] (mono).
-
-Key changes:
-- Add AudioSpec dataclass and ChannelReduction enum for flexible
-  audio format specification
-- Add get_audio_spec() to detect model requirements from feature extractors
-- Add normalize_audio() with support for MEAN, FIRST, MAX, SUM reduction
-- Update MultiModalDataParser with normalize_to_mono flag
-- Enable mono normalization for Whisper-based models:
-  - Qwen2 Audio, Qwen2.5 Omni (Qwen3 Omni inherits), Ultravox, Whisper
-
-The framework is desig
 
 ...</description>
   </item>
@@ -1172,6 +1148,27 @@ There are three main motivations:
 ```
 # What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
 class ActionOp
+
+...</description>
+  </item>
+  <item>
+    <title>fix json schema alias serializing when streaming</title>
+    <link>https://github.com/vllm-project/vllm/pull/26356</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26356</guid>
+    <pubDate>Tue, 07 Oct 2025 14:12:21 +0000</pubDate>
+    <description>## Purpose
+
+Fix a serialization bug in streaming responses where Pydantic field aliases (e.g. `schema` → `schema_`) were not preserved during `.model_dump()` calls.
+
+This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quot;` in streamed response events for JSON schema output formats, breaking compatibility with the OpenAI SDK’s `ResponseFormatTextJSONSchemaConfig` parsing.
+
+**Related issue:** [vllm-project/vllm#26288](https://github.com/vllm-project/vllm/issues/26288)
+
+### Root Cause
+- `ResponsesResponse.from_request(...).model_dump()` was called without `by_alias=True` at:
+  - `vllm/entrypoints/openai/serving_responses.py:1830`
+  - `vllm/entrypoints/openai/serving_responses.py:1879`
+- Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
 
 ...</description>
   </item>

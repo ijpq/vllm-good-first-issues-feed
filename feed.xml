@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 19:27:17 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 19:38:00 +0000</lastBuildDate>
   <item>
     <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
     <link>https://github.com/vllm-project/vllm/issues/31624</link>
