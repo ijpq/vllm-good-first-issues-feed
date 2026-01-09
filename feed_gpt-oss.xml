@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 09 Jan 2026 11:39:21 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 09 Jan 2026 11:48:28 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -386,44 +386,6 @@ See also #30357
 PR:
 ```
 [{&#x27;eval_name
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Fix Triton FusedMoE LoRA</title>
-    <link>https://github.com/vllm-project/vllm/pull/30585</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30585</guid>
-    <pubDate>Sat, 13 Dec 2025 01:35:10 +0000</pubDate>
-    <description>## Purpose
-
-This PR is to fix Triton fused_moe_lora.
-* Reorder the rows of `intermediate_cache1` to make sure LoRA weights is added to the correct rows [here](https://github.com/vllm-project/vllm/blob/v0.12.0/vllm/lora/ops/triton_ops/fused_moe_lora_op.py#L388).
-* This will fix `test_gptoss_tp.py` for Triton backend.
-
-## Test Plan
-
-```
-pytest -s -v tests/lora/test_gptoss_tp.py
-```
-
-Tests passed.
-
-## Accuracy Testing
-
-Marlin:
-
-```
-VLLM_MXFP4_USE_MARLIN=1 vllm serve openai/gpt-oss-20b \
-  --tensor-parallel-size 1 \
-  --max-num-seqs 16 \
-  --enable-lora \
-  --max-loras 1 \
-  --lora-modules lora1=/opt/dlami/nvme/models/gpt-oss-20b-lora-gpqa/checkpoint-13 \
-  --max-lora-rank 32 \
-  --no-enable-prefix-caching
-```
-```
-OPENAI_API_KEY=EMPTY python3 -m gpt_oss.evals --model lora1 --eval gpqa --n-thre
 
 ...</description>
   </item>
@@ -1201,6 +1163,22 @@ Related PR: #25301
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Bug] Pass correct ep_rank_start and ep_rank_end</title>
+    <link>https://github.com/vllm-project/vllm/pull/27025</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27025</guid>
+    <pubDate>Thu, 16 Oct 2025 13:30:25 +0000</pubDate>
+    <description>## Purpose
+- _load_weights_others expect the parameters as ep_rank_start and ep_rank_end but its passed in the reverse order
+- Fix to pass the correct parameters
+
+## Test Plan
+Tested with gpt-oss and enabling the expert parallelism
+
+## Test Result
+Earlier gpt-oss was failing when expert parallelism was enabled, after the fix it started passing
 </description>
   </item>
 </channel>
