@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 11 Jan 2026 09:18:45 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 11 Jan 2026 09:32:33 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -120,7 +120,14 @@ and buffer size mismatches.
 
 Attional Change:
 `modular_kernel.py`: Updated abstract `workspace_shapes()` signature and `_allocate_buffers()` to accept and pass activation parameter
-All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activation parameter and use activation-aware workspace sizing where applicable</description>
+All `FusedMoEPermuteExpertsUnpermute` implementations: Updated to accept activation parameter and use activation-aware workspace sizing where applicable
+
+---
+
+&gt; [!NOTE]
+&gt; Introduces activation-aware workspace
+
+...</description>
   </item>
   <item>
     <title>[LoRA] Simplify gpt-oss w13_lora_b weight loading</title>
