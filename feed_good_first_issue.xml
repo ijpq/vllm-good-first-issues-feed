@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 11 Jan 2026 02:05:22 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 11 Jan 2026 02:58:22 +0000</lastBuildDate>
   <item>
     <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
     <link>https://github.com/vllm-project/vllm/issues/31624</link>
@@ -644,38 +644,6 @@ GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
 Clang version                : Could not collect
 CMake version                : version 4.0.2
 Libc version     
-
-...</description>
-  </item>
-  <item>
-    <title>[Bug]: the port number after --port didn&#x27;t take effect; it&#x27;s still using the default port 8000</title>
-    <link>https://github.com/vllm-project/vllm/issues/24416</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/24416</guid>
-    <pubDate>Mon, 08 Sep 2025 06:19:51 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-INFO 09-07 23:10:44 [__init__.py:239] Automatically detected platform cuda.
-Collecting environment information...
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 22.04.4 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 4.0.0
-Libc version                 : glibc-2.35
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.6.0+cu124
-Is debug build               : False
-CUDA used to build PyTorch   : 12.4
-ROCM used to build PyTor
 
 ...</description>
   </item>
