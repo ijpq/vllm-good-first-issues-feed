@@ -5,7 +5,30 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 11 Jan 2026 12:34:42 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 11 Jan 2026 12:58:42 +0000</lastBuildDate>
+  <item>
+    <title>[Bugfix] Fix Harmony preamble visibility in Responses API</title>
+    <link>https://github.com/vllm-project/vllm/pull/32114</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32114</guid>
+    <pubDate>Sun, 11 Jan 2026 12:40:51 +0000</pubDate>
+    <description>##  Purpose
+
+Fix incorrect handling of Harmony format preambles in the Responses API.
+
+Per the https://cookbook.openai.com/articles/openai-harmony, preambles (commentary channel messages with recipient=None) are explanatory text intended to be shown to end-users (e.g., &quot;I&#x27;ll search for that information now...&quot;). The current implementation incorrectly treats them as hidden reasoning content.
+
+This PR changes how commentary-channel preambles are parsed:
+  - Before: ResponseReasoningItem (hidden in reasoning_content)
+  - After: ResponseOutputMessage (visible in content)
+
+Related: This is a follow-up fix to #29972, which added GPT-OSS models with Harmony chat format.
+
+## Migration Note
+
+Breaking Change: Preambles now appear in content instead of reasoning_content. Clients that relied on the pr
+
+...</description>
+  </item>
   <item>
     <title>[Frontend] Add `reasoning_effort` and `parallel_tool_calls` to `extra_args` of `SamplingParams`.</title>
     <link>https://github.com/vllm-project/vllm/pull/31952</link>
@@ -1152,43 +1175,6 @@ This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quo
   - `vllm/entrypoints/openai/serving_responses.py:1830`
   - `vllm/entrypoints/openai/serving_responses.py:1879`
 - Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
-
-...</description>
-  </item>
-  <item>
-    <title>[MODEL] Fix handling of multiple channels for gpt-oss with speculative decoding </title>
-    <link>https://github.com/vllm-project/vllm/pull/26291</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26291</guid>
-    <pubDate>Mon, 06 Oct 2025 11:26:54 +0000</pubDate>
-    <description>Hi team!
-
-## Purpose
-
-We&#x27;ve noticed that that the [recent PR](https://github.com/vllm-project/vllm/pull/26027) doesn&#x27;t fully fix gpt-oss + streaming + speculative-decoding issue, for example generated messages end abruptly. This happens because multiple tokens can relate to different channels (e.g. `&lt;final&gt;`, `&lt;analysis&gt;`, `None`) in one decoding stage. This PR handles it.
-
-## Test Plan
-
-Server command:
-
-```
-vllm serve openai/gpt_oss_20b--speculative-config &#x27;{&quot;method&quot;: &quot;eagle3&quot;, &quot;model&quot;: &lt;name-of-your-draft-model&gt;}&#x27;
-```
-
-Test script `streaming_client.py`:
-
-```
-#!/usr/bin/env python3
-
-import asyncio
-import sys
-from typing import List, Dict
-
-import httpx
-from openai import AsyncOpenAI
-
-
-class StreamingClient:
-    def __init__(self, api_url: str = &quot;http://127.0.0.1:8000/v1&quot;, api_key: str = &quot;E
 
 ...</description>
   </item>
