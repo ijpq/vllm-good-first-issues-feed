@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 11 Jan 2026 18:06:57 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 11 Jan 2026 18:21:33 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix Harmony preamble visibility in Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/32114</link>
