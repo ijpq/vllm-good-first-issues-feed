@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 11 Jan 2026 21:42:30 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 11 Jan 2026 21:51:05 +0000</lastBuildDate>
+  <item>
+    <title>Oracle improvements</title>
+    <link>https://github.com/vllm-project/vllm/pull/32122</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32122</guid>
+    <pubDate>Sun, 11 Jan 2026 14:33:31 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
   <item>
     <title>[Bugfix] Fix Harmony preamble visibility in Responses API</title>
     <link>https://github.com/vllm-project/vllm/pull/32114</link>
@@ -1154,27 +1180,6 @@ There are three main motivations:
 ```
 # What you can return to the user on the ResponsesAPI for this tool call with the OpenAI types.
 class ActionOp
-
-...</description>
-  </item>
-  <item>
-    <title>fix json schema alias serializing when streaming</title>
-    <link>https://github.com/vllm-project/vllm/pull/26356</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/26356</guid>
-    <pubDate>Tue, 07 Oct 2025 14:12:21 +0000</pubDate>
-    <description>## Purpose
-
-Fix a serialization bug in streaming responses where Pydantic field aliases (e.g. `schema` → `schema_`) were not preserved during `.model_dump()` calls.
-
-This caused the `&quot;schema_&quot;` key to appear instead of `&quot;schema&quot;` in streamed response events for JSON schema output formats, breaking compatibility with the OpenAI SDK’s `ResponseFormatTextJSONSchemaConfig` parsing.
-
-**Related issue:** [vllm-project/vllm#26288](https://github.com/vllm-project/vllm/issues/26288)
-
-### Root Cause
-- `ResponsesResponse.from_request(...).model_dump()` was called without `by_alias=True` at:
-  - `vllm/entrypoints/openai/serving_responses.py:1830`
-  - `vllm/entrypoints/openai/serving_responses.py:1879`
-- Without `by_alias=True`, Pydantic outputs internal field names (e.g. `schema_`) instead of their ali
 
 ...</description>
   </item>
