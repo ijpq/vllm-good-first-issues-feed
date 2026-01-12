@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 12 Jan 2026 20:50:56 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 12 Jan 2026 20:58:58 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Fix missing channel assignment for multi-turn message parsing</title>
     <link>https://github.com/vllm-project/vllm/pull/32156</link>
