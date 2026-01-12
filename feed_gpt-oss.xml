@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 12 Jan 2026 15:29:41 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 12 Jan 2026 15:44:55 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Fix missing channel assignment for multi-turn message parsing</title>
     <link>https://github.com/vllm-project/vllm/pull/32156</link>
@@ -108,6 +108,33 @@ Related: This is a follow-up fix to #29972, which added GPT-OSS models with Harm
 ## Migration Note
 
 Breaking Change: Preambles now appear in content instead of reasoning_content. Clients that relied on the pr
+
+...</description>
+  </item>
+  <item>
+    <title>[5/N][Attention] Finish eliminating `vllm/attention` folder</title>
+    <link>https://github.com/vllm-project/vllm/pull/32064</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32064</guid>
+    <pubDate>Fri, 09 Jan 2026 23:03:42 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+Step 5 of #31919: This PR finishes eliminating the `vllm/attention` folder by doing the following:
+* Split `vllm/attention/layer.py` into `vllm/model_executor/layers/attention/mla_attention.py` (`MLAAttention`, `unified_mla_attention`) and `vllm/model_executor/layers/attention/attention.py` (`Attention`, `unified_attention`)
+* Move `vllm/attention/utils/kv_sharing_utils.py` content into `vllm/model_executor/layers/attention/attention.py`
+* Move `vllm/attention/utils/kv_transfer_utils.py` to `vllm/model_executor/layers/attention/kv_transfer_utils.py`
+* Eliminate `vllm/attention` folder
+
+## Test Plan
+CI (should run all tests)
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [x] The pur
 
 ...</description>
   </item>
@@ -1185,31 +1212,6 @@ Related PR: #25301
 - [ ] (Optional) Rel
 
 ...</description>
-  </item>
-  <item>
-    <title>[GPT-OSS] Persistent Masked Activation Kernel</title>
-    <link>https://github.com/vllm-project/vllm/pull/27100</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27100</guid>
-    <pubDate>Fri, 17 Oct 2025 13:02:02 +0000</pubDate>
-    <description>
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
