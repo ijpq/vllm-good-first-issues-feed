@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 07:53:54 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 08:05:46 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [6/N] to simplify the vLLM openai chat_completion serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32240</link>
