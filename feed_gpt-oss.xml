@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 21:56:23 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 22:09:38 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [8/N] to simplify the vLLM openai responsesapi_serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32260</link>
@@ -292,6 +292,38 @@ This fix sanitizes the recipient string by stripping `&lt;|channel|&gt;` and eve
 - `serving_chat_stream_harmony.py`: /v1/chat/completions (streaming)
 
 The /v1/responses streaming endpoint already worked correctly because it captures the recipient before malformed tokens can
+
+...</description>
+  </item>
+  <item>
+    <title>[Kernel] Add Sonic MoE integration for Hopper GPUs</title>
+    <link>https://github.com/vllm-project/vllm/pull/31548</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31548</guid>
+    <pubDate>Tue, 30 Dec 2025 22:01:32 +0000</pubDate>
+    <description>## Purpose
+
+Integrate [Sonic MoE](https://github.com/Dao-AILab/sonic-moe) for Hopper GPUs. ([paper](https://arxiv.org/abs/2512.14080)) 🎸 🚀 
+
+Addresses #31039
+
+### IMPORTANT
+
+**blocked by `sonicmoe` in CI to run tests (Need contributor/maintainer to trigger?)**
+
+## Key changes
+
+  - `SonicMoeExperts` class following `DeepGemmExperts` pattern
+  - Weight permutation for swiglu format compatibility (per [sonic-moe#12](https://github.com/Dao-AILab/sonic-moe/issues/12))
+  - Routing conversion from vLLM&#x27;s `topk_ids/topk_weights` to Sonic&#x27;s scheduling tensors
+  - Wiring into `UnquantizedFusedMoeMethod` behind `VLLM_USE_SONIC_MOE` env flag
+  - H100 CI config with `pip install sonicmoe`
+
+### Gating logic
+
+  Sonic MoE auto-disables when:
+  - Expert parallelism enabled
+  - MoE biases present
+  - FlashI
 
 ...</description>
   </item>
@@ -1153,32 +1185,6 @@ Override
                        
 
 ...</description>
-  </item>
-  <item>
-    <title>Support PP on tpu_inference</title>
-    <link>https://github.com/vllm-project/vllm/pull/27296</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
-    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
