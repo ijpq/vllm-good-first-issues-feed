@@ -5,7 +5,37 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 20:21:13 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 20:36:45 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Refactor Int8ScaledMMLinearLayerConfig to use QuantKey</title>
+    <link>https://github.com/vllm-project/vllm/issues/32268</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/32268</guid>
+    <pubDate>Tue, 13 Jan 2026 16:15:58 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+Replace boolean configuration fields in [ScaledMMLinearLayerConfig](https://github.com/vllm-project/vllm/blob/510265472cb216daf7d8e83db6fa03ce48b0f5fc/vllm/model_executor/layers/quantization/kernels/scaled_mm/ScaledMMLinearKernel.py#L10C1-L10C2) with QuantKey objects to provide a more structured, type-safe quantization configuration API.
+
+Ideally we should change this:
+```python
+@dataclass
+class ScaledMMLinearLayerConfig(ScaledMMLinearLayerConfig):
+    is_static_input_scheme: bool
+    is_channelwise: bool
+    input_symmetric: bool
+```
+to this:
+```python
+@dataclass
+class ScaledMMLinearLayerConfig(ScaledMMLinearLayerConfig):
+    weight_quant_key: QuantKey
+    activation_quant_key: QuantKey
+    input_symmetric: bool
+```
+
+A parallel work found here #278
+
+...</description>
+  </item>
   <item>
     <title>[Feature]: Extend startup time collection script to work with sweep</title>
     <link>https://github.com/vllm-project/vllm/issues/32214</link>
