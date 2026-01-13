@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 17:02:30 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 17:16:26 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [8/N] to simplify the vLLM openai responsesapi_serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32260</link>
@@ -156,7 +156,7 @@ Breaking Change: Preambles now appear in content instead of reasoning_content. C
 ...</description>
   </item>
   <item>
-    <title>[Do not merge][5/N][Attention] Finish eliminating `vllm/attention` folder</title>
+    <title>[5/N][Attention] Finish eliminating `vllm/attention` folder</title>
     <link>https://github.com/vllm-project/vllm/pull/32064</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32064</guid>
     <pubDate>Fri, 09 Jan 2026 23:03:42 +0000</pubDate>
