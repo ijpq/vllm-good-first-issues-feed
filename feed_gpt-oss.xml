@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 23:35:30 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 23:45:24 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [8/N] to simplify the vLLM openai responsesapi_serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32260</link>
@@ -114,8 +114,9 @@ Differential Revision: D90477073
     <description>&lt;!-- markdownlint-disable --&gt;
 
 ## Purpose
-* convert oracle to query kernels for support for various types
-* convert fp8.py to own the modular kernel internally for dp/ep case and tp case
+* add support for running naive and ag/rs dispatch/combine via Modular Kernels
+* update oracle to query kernels for support for various features
+* update fp8.py to own the modular kernel internally for dp/ep case and tp case
 
 ## Test Plan
 
@@ -129,7 +130,7 @@ Differential Revision: D90477073
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the
+- [ ] (Optional) Release notes upd
 
 ...</description>
   </item>
