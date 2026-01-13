@@ -5,14 +5,16 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 08:39:12 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 08:54:23 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [6/N] to simplify the vLLM openai chat_completion serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32240</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32240</guid>
     <pubDate>Tue, 13 Jan 2026 07:00:55 +0000</pubDate>
-    <description>
-## Purpose
+    <description>## Purpose
+refactors the OpenAI chat_completion_serving architecture,
+
+split vllm/entrypoints/openai/protocol.py 
 
 ## Test Plan
 
@@ -26,10 +28,9 @@
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrg
 
-</description>
+...</description>
   </item>
   <item>
     <title>[Frontend] Fix missing channel assignment for multi-turn message parsing</title>
