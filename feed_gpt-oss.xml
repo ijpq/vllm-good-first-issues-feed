@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 16:13:22 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 16:30:35 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [8/N] to simplify the vLLM openai responsesapi_serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32260</link>
@@ -156,11 +156,13 @@ Breaking Change: Preambles now appear in content instead of reasoning_content. C
 ...</description>
   </item>
   <item>
-    <title>[5/N][Attention] Finish eliminating `vllm/attention` folder</title>
+    <title>[Do not merge][5/N][Attention] Finish eliminating `vllm/attention` folder</title>
     <link>https://github.com/vllm-project/vllm/pull/32064</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32064</guid>
     <pubDate>Fri, 09 Jan 2026 23:03:42 +0000</pubDate>
-    <description>## Purpose
+    <description>Merge https://github.com/vllm-project/vllm/pull/32060 before this.
+
+## Purpose
 Step 5 of #31919: This PR finishes eliminating the `vllm/attention` folder by doing the following:
 * Split `vllm/attention/layer.py` into `vllm/model_executor/layers/attention/mla_attention.py` (`MLAAttention`, `unified_mla_attention`) and `vllm/model_executor/layers/attention/attention.py` (`Attention`, `unified_attention`)
 * Move `vllm/attention/utils/kv_sharing_utils.py` content into `vllm/model_executor/layers/attention/attention.py`
@@ -169,13 +171,7 @@ Step 5 of #31919: This PR finishes eliminating the `vllm/attention` folder by do
 * Add imports to `vllm/model_executor/layers/attention/__init__.py` to enable module-level imports
 
 ## Test Plan
-CI (should run all tests)
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Element
+CI (should run a
 
 ...</description>
   </item>
