@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 13 Jan 2026 10:13:51 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 13 Jan 2026 10:30:06 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
@@ -59,34 +59,6 @@ TODO
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optio
-
-...</description>
-  </item>
-  <item>
-    <title>[Frontend] Fix missing channel assignment for multi-turn message parsing</title>
-    <link>https://github.com/vllm-project/vllm/pull/32156</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32156</guid>
-    <pubDate>Mon, 12 Jan 2026 07:45:11 +0000</pubDate>
-    <description>
-## Purpose
-
-This PR fixes a bug where messages parsed via `parse_response_input` and `parse_input_to_harmony_message` were missing required channel assignments, causing `parse_output_message` to raise `ValueError: Unknown channel: None`.
-
-This is critical for Codex compatibility in multi-turn conversations where reasoning items and assistant messages from previous responses are passed back as input.
-
-**Changes:**
-- **`parse_response_input`**: Assign `&quot;analysis&quot;` channel to reasoning items (matches existing pattern for function_call → &quot;commentary&quot;)
-- **`parse_input_to_harmony_message`**: Assign `&quot;final&quot;` channel to assistant messages
-
-
-## Test Plan
-
-```bash
-curl -X POST http://localhost:8000/v1/responses \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#x27;{
-    &quot;model&quot;: &quot;openai/gpt-oss-20b&quot;,
- 
 
 ...</description>
   </item>
@@ -1208,6 +1180,36 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
 
 ...</description>
   </item>
