@@ -5,29 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 14 Jan 2026 11:24:30 +0000</lastBuildDate>
-  <item>
-    <title>[Frontend] Normalize Responses API input for multi-turn conversations</title>
-    <link>https://github.com/vllm-project/vllm/pull/32253</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32253</guid>
-    <pubDate>Tue, 13 Jan 2026 10:14:38 +0000</pubDate>
-    <description>## Purpose
-
-Normalizes input types in the Responses API for **Codex CLI** multi-turn conversation support.
-
-When Codex echoes back previous responses in multi-turn conversations, it includes the exact types that were returned by the server. However, the server expects different types on input vs output:
-- Server returns: `output_text` → Client should send: `input_text`
-- Server returns: `output_text` in reasoning → Client should send: `reasoning_text`
-
-This PR adds preprocessing to automatically normalize these types before validation, enabling seamless multi-turn conversations with Codex without requiring manual type conversion.
-
-**Changes:**
-- Rename `function_call_parsing` → `preprocess_input` (more descriptive)
-- Add `output_text` → `input_text` conversion for message content
-- Add `ou
-
-...</description>
-  </item>
+  <lastBuildDate>Wed, 14 Jan 2026 11:37:02 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
@@ -1194,6 +1172,36 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
+
+...</description>
+  </item>
+  <item>
+    <title>Add process pool support fro tokenizer</title>
+    <link>https://github.com/vllm-project/vllm/pull/27180</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
+    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+
+## Purpose
+The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
+
+Related PR: #25301
+
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Rel
 
 ...</description>
   </item>
