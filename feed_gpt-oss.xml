@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 14 Jan 2026 02:06:48 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 14 Jan 2026 02:55:40 +0000</lastBuildDate>
   <item>
     <title>[Refactor] [8/N] to simplify the vLLM openai responsesapi_serving architecture</title>
     <link>https://github.com/vllm-project/vllm/pull/32260</link>
@@ -58,23 +58,26 @@ This PR adds preprocessing to automatically normalize these types before validat
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32247</guid>
     <pubDate>Tue, 13 Jan 2026 09:24:44 +0000</pubDate>
-    <description>## Purpose
+    <description>  ## Purpose
 
-Populates the `encrypted_content` field in `ResponseReasoningItem` to enable clients to round-trip reasoning items in multi-turn conversations.
+  Add optional Fernet encryption for the `encrypted_content` field in reasoning items. This closes a gap in vLLM&#x27;s implementation of OpenAI&#x27;s Responses API, enabling compatibility with clients like **Codex CLI** that rely on `encrypted_content` for multi-turn conversation continuity.
 
-Before this change, `encrypted_content` was always `null` in reasoning item responses, which broke clients that rely on this field to echo back reasoning items from previous turns.
+  **Key features:**
+  - Opt-in via environment variable (disabled by default)
+  - Uses Fernet symmetric encryption from the `cryptography` package
+  - Supports custom key via `VLLM_REASONING_ENCRYPTION_KEY` for multi-instance deployments
+  - Backward compatible with plain JSON content
 
-**Changes:**
-- Add `_create_reasoning_item_with_encrypted_content()` helper in `harmony_utils.py`
-- Update all `ResponseReasoningItem` usages in `serving_responses.py` to use the helper
+  ## Test Plan
 
-## Test Plan
+  ```bash
+  # Start vLLM with encryption enabled
+  export VLLM_ENCRYPT_REASONING_CONTENT=1
+  vllm serve &lt;model&gt; --port 8000
 
-```bash
-curl -s http://localhost:8000/v1/responses   -H &quot;Content-Type: application/json&quot;   -H &quot;Authorization: Bearer test&quot;   -d &#x27;{
-    &quot;model&quot;: &quot;gpt-oss&quot;,
-    &quot;input&quot;: &quot;What is 2+2?&quot;
-  }&#x27; | jq &#x27;.output[] | select(.type == &quot;reasoning&quot;) | {id, encrypted_content}
+  # Send request
+  curl -X POST http://localhost:8000/v1/responses \
+   
 
 ...</description>
   </item>
@@ -294,38 +297,6 @@ This fix sanitizes the recipient string by stripping `&lt;|channel|&gt;` and eve
 - `serving_chat_stream_harmony.py`: /v1/chat/completions (streaming)
 
 The /v1/responses streaming endpoint already worked correctly because it captures the recipient before malformed tokens can
-
-...</description>
-  </item>
-  <item>
-    <title>[Kernel] Add Sonic MoE integration for Hopper GPUs</title>
-    <link>https://github.com/vllm-project/vllm/pull/31548</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31548</guid>
-    <pubDate>Tue, 30 Dec 2025 22:01:32 +0000</pubDate>
-    <description>## Purpose
-
-Integrate [Sonic MoE](https://github.com/Dao-AILab/sonic-moe) for Hopper GPUs. ([paper](https://arxiv.org/abs/2512.14080)) 🎸 🚀 
-
-Addresses #31039
-
-### IMPORTANT
-
-**blocked by `sonicmoe` in CI to run tests (Need contributor/maintainer to trigger?)**
-
-## Key changes
-
-  - `SonicMoeExperts` class following `DeepGemmExperts` pattern
-  - Weight permutation for swiglu format compatibility (per [sonic-moe#12](https://github.com/Dao-AILab/sonic-moe/issues/12))
-  - Routing conversion from vLLM&#x27;s `topk_ids/topk_weights` to Sonic&#x27;s scheduling tensors
-  - Wiring into `UnquantizedFusedMoeMethod` behind `VLLM_USE_SONIC_MOE` env flag
-  - H100 CI config with `pip install sonicmoe`
-
-### Gating logic
-
-  Sonic MoE auto-disables when:
-  - Expert parallelism enabled
-  - MoE biases present
-  - FlashI
 
 ...</description>
   </item>
@@ -1187,6 +1158,32 @@ Override
                        
 
 ...</description>
+  </item>
+  <item>
+    <title>Support PP on tpu_inference</title>
+    <link>https://github.com/vllm-project/vllm/pull/27296</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
+    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
