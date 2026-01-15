@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 09:14:01 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 09:30:49 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Refactor Int8ScaledMMLinearLayerConfig to use QuantKey</title>
     <link>https://github.com/vllm-project/vllm/issues/32268</link>
@@ -35,29 +35,6 @@ class ScaledMMLinearLayerConfig(ScaledMMLinearLayerConfig):
 A parallel work found here #278
 
 ...</description>
-  </item>
-  <item>
-    <title>[Feature]: Extend startup time collection script to work with sweep</title>
-    <link>https://github.com/vllm-project/vllm/issues/32214</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/32214</guid>
-    <pubDate>Mon, 12 Jan 2026 21:36:48 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-https://github.com/vllm-project/vllm/pull/29919 added a script to collect startup time metrics, such as cold compilation time and warm compilation time. As being suggested here, https://github.com/vllm-project/vllm/pull/29919#pullrequestreview-3532714953, it would be nice to make it work with existing `vllm bench sweep`.
-
-cc @ProExpertProg  
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
     <title>[Bug]: ModelOpt Llama-4 Checkpoints Take 5+ minutes to load</title>
