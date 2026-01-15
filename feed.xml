@@ -5,7 +5,51 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 21:33:35 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 21:44:45 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Extract KV-Cache update from all attention backends</title>
+    <link>https://github.com/vllm-project/vllm/issues/32335</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/32335</guid>
+    <pubDate>Wed, 14 Jan 2026 14:24:56 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+Similar to how https://github.com/vllm-project/vllm/pull/25954 extracts it from FlashAttn. Ideally, we want to cover all backends with kv-cache update from `v1/attention/backends`.
+
+Backends:
+- [x] FlashAttention - In progress
+- [ ] FlashInfer
+- [ ] AiterFlashAttention
+- [ ] RocmAiterUnifiedAttention
+- [ ] RocmAttention
+- [ ] TritonAttention
+- [ ] FlashAttentionDiffKV
+- [ ] FlexAttention
+- [ ] TreeAttention
+
+MLA Backends:
+- [ ] FlashAttnMLA
+- [ ] FlashInferMLA
+- [ ] FlashMLASparse
+- [ ] FlashMLA
+- [ ] AiterMLA
+- [ ] ROCMAiterMLASparse
+- [ ] CutlassMLA
+- [ ] TritonMLA
+
+After all backends are supported, we can remove `slot_mapping` from attention metadata.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_
+
+### Before submitting a
+
+...</description>
+  </item>
   <item>
     <title>[Feature]: Refactor Int8ScaledMMLinearLayerConfig to use QuantKey</title>
     <link>https://github.com/vllm-project/vllm/issues/32268</link>
