@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 05:42:15 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 05:53:11 +0000</lastBuildDate>
+  <item>
+    <title>[Refactor] [10/N] to simplify the vLLM openai completion serving architecture</title>
+    <link>https://github.com/vllm-project/vllm/pull/32369</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32369</guid>
+    <pubDate>Thu, 15 Jan 2026 02:58:01 +0000</pubDate>
+    <description>
+&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+ simplify the vLLM openai completion serving architecture
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTp
+
+...</description>
+  </item>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
@@ -1175,36 +1201,6 @@ results in
 ---
 &lt;details&gt;
 &lt;summary&gt; Ess
-
-...</description>
-  </item>
-  <item>
-    <title>Add process pool support fro tokenizer</title>
-    <link>https://github.com/vllm-project/vllm/pull/27180</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27180</guid>
-    <pubDate>Mon, 20 Oct 2025 03:02:35 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-
-## Purpose
-The preprocessing stage experiences a bottleneck under high concurrency, resulting in extremely long preprocessing times. By introducing additional processes to handle tokenization, this bottleneck can be alleviated.
-
-Related PR: #25301
-
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Rel
 
 ...</description>
   </item>
