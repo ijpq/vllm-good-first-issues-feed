@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 02:37:06 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 03:19:29 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
@@ -70,23 +70,26 @@ Differential Revision: D90477073
     <description>&lt;!-- markdownlint-disable --&gt;
 
 ## Purpose
-* add support for running naive and ag/rs dispatch/combine via Modular Kernels
-* update oracle to query kernels for support for various features
-* update fp8.py to own the modular kernel internally for dp/ep case and tp case
 
-## Test Plan
+This PR does two inter-related things:
 
-## Test Result
+#### Oracle
+* updates oracle to query the mk experts for support for various features in standard way, enabling auto-selection
+* updates the mk experts to express which features are supported
+* creates standard interface for creating experts, simplifying the factory function
 
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+#### Unifies Dp/Ep and Tp cases
+* add support for running naive and ag/rs dispatch/combine via modular kernels
+* allow the QuantMethod to &quot;own&quot; the kernel, no more `FusedMoEModularMethod`
 
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes upd
+#### Follow Ups
+* apply to the other quant methods (this only does fp8 and nvfp4)
+* remove `do_naive_dispatch_combine` from fused moe (^once everything above is migrated)
+
+#### TODOs
+
+- [ ] Figure out flashinfer all2all
+- [ ] Make sure models with sha
 
 ...</description>
   </item>
