@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 04:36:30 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 04:55:00 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
     <link>https://github.com/vllm-project/vllm/pull/32247</link>
@@ -13,7 +13,7 @@
     <pubDate>Tue, 13 Jan 2026 09:24:44 +0000</pubDate>
     <description>  ## Purpose
 
-  Add optional Fernet encryption for the `encrypted_content` field in reasoning items. This closes a gap in vLLM&#x27;s implementation of OpenAI&#x27;s Responses API, enabling compatibility with clients like **Codex CLI** that rely on `encrypted_content` for multi-turn conversation continuity.
+  Add optional encryption for the `encrypted_content` field in reasoning items. This closes a gap in vLLM&#x27;s implementation of OpenAI&#x27;s Responses API, enabling compatibility with clients like **Codex CLI** that rely on `encrypted_content` for multi-turn conversation continuity.
 
   **Key features:**
   - Opt-in via environment variable (disabled by default)
@@ -30,7 +30,7 @@
 
   # Send request
   curl -X POST http://localhost:8000/v1/responses \
-   
+    -H &quot;Co
 
 ...</description>
   </item>
