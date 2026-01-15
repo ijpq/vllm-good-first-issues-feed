@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 23:03:59 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 23:16:49 +0000</lastBuildDate>
   <item>
     <title>[ROCm][CI] Enable AITER Unified Attention On ROCm For gpt-oss Test</title>
     <link>https://github.com/vllm-project/vllm/pull/32431</link>
@@ -17,10 +17,9 @@ https://github.com/vllm-project/vllm/pull/26291 introduced a gpt-oss test which 
 pytest -v -s tests/entrypoints/openai/test_serving_chat.py::TestGPTOSSSpeculativeChat::test_gpt_oss_speculative_reasoning_leakage[with_tool_parser-exclude_tools_when_tool_choice_none]
 ```
 
-On ROCm, gpt-oss requires the `ROCM_AITER_UNIFIED_ATTN` backend to be enabled, along with `VLLM_ROCM_USE_AITER`. You can see this by running the same test with the correct environment variables, and seeing that it passes:
+On ROCm, gpt-oss requires the `ROCM_AITER_UNIFIED_ATTN` backend to be enabled. It is expected that `TRITON_ATTN` should work, however, so I have filed an issue for this here: https://github.com/vllm-project/vllm/issues/32434.You can see this by running the same test with the correct environment variables, and seeing that it passes:
 ```
-VLLM_ROCM_USE_AITER=1 VLLM_ROCM_USE_AITER_UNIFIED_ATTENTION=1 pytest -v -s tests/entrypoints/openai/test_serving_chat.py::TestGPTOSSSpeculativeChat::test_gpt_oss_speculative_reasoning_leakage[with_tool_parser-exclude_tools_when_tool_choice_none]
-
+VLLM_ROCM_USE_AITER=1 VLLM_ROCM_USE_AITER_UNIFIED_ATTENTION=1 pytest -v -s tests/entrypoints/openai/test_serving_chat.py::TestGPTOSSSp
 
 ...</description>
   </item>
