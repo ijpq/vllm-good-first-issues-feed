@@ -5,21 +5,21 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 20:01:13 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 20:14:00 +0000</lastBuildDate>
   <item>
     <title>[MoE Refactor] Make Oracle Select Kernels In Priority Order</title>
     <link>https://github.com/vllm-project/vllm/pull/32414</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32414</guid>
     <pubDate>Thu, 15 Jan 2026 14:00:42 +0000</pubDate>
-    <description>
-## Purpose
+    <description>## Purpose
 * update oracles to have notion of priority of kernels
-* update kernels to have standard interface for contruction
+* update kernels to have standard interface for construction
 * update kernels to have registration of supported features
 
 This allows us to:
-* autoselect kernels across hardware
-* 
+* autoselect kernels across hardware and model architecture (enabling us to opt-into kernels like TRTLLM)
+* verify that kernels support the deployment at init time rather than runtime (enabling clearer error messages)
+* improve code reuse
 
 ## Test Plan
 
@@ -31,9 +31,7 @@ This allows us to:
 
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change 
+- [ ] The test results, such as pasting the results comparison before and a
 
 ...</description>
   </item>
