@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 15 Jan 2026 22:43:54 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 15 Jan 2026 22:53:43 +0000</lastBuildDate>
   <item>
     <title>[ROCm][CI] Enable AITER Unified Attention On ROCm For gpt-oss Test</title>
     <link>https://github.com/vllm-project/vllm/pull/32431</link>
