@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 16 Jan 2026 04:55:02 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 16 Jan 2026 05:09:33 +0000</lastBuildDate>
   <item>
     <title>[MoE Refactor] Oracle Select FP8+NVFP4 Kernels In Priority</title>
     <link>https://github.com/vllm-project/vllm/pull/32414</link>
@@ -813,6 +813,26 @@ Active Buffer Parsing: Added logic to inspect parser.current_content and parser.
 ...</description>
   </item>
   <item>
+    <title>[ROCm] Support AITER paged attention with `sliding_window`</title>
+    <link>https://github.com/vllm-project/vllm/pull/29065</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29065</guid>
+    <pubDate>Thu, 20 Nov 2025 03:12:58 +0000</pubDate>
+    <description>## Purpose
+Based on https://github.com/vllm-project/vllm/pull/28719.
+
+This PR aim to add AITER PagedAttention (PA) with `sliding window` support, which can fix `google/gemma-3-27b-it` bfloat16 model accuracy issue with Aiter PA for `input token &gt; 1024` case.
+
+`google/gemma-3-27b-it` trained with additional parameter `&quot;sliding_window&quot;: 1024`. 
+
+- Triton unified attention (default) `unified_attention` passed sliding windows as input: https://github.com/vllm-project/vllm/blob/30700b1cd7de51f191be718215a58f5a8ddcb8aa/vllm/v1/attention/backends/triton_attn.py#L346-L366
+
+- Aiter PA `torch.ops.aiter.paged_attention_v1` does not pass sliding_windows as input: https://github.com/vllm-project/vllm/blob/30700b1cd7de51f191be718215a58f5a8ddcb8aa/vllm/v1/attention/backends/rocm_aiter_fa.py#L810-L828
+
+If
+
+...</description>
+  </item>
+  <item>
     <title>[ROCm][Quantization] GPT_OSS in amd-quark format model loading and emulations </title>
     <link>https://github.com/vllm-project/vllm/pull/29008</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29008</guid>
@@ -1169,43 +1189,6 @@ Override
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>Experimental attention backend in helion</title>
-    <link>https://github.com/vllm-project/vllm/pull/27293</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
-    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-very experimental and draft PR so far
-
-## Test Plan
-
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
-```
-## Test Result
-
-Performance see upcoming publications. 
-Correctness:
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
-```
-results in 
-```
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
-|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
-```
-
----
-&lt;details&gt;
-&lt;summary&gt; Ess
-
-...</description>
   </item>
 </channel>
 </rss>
