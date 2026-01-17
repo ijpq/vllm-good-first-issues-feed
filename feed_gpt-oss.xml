@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 17 Jan 2026 14:57:32 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 17 Jan 2026 15:08:40 +0000</lastBuildDate>
   <item>
     <title>[MoE Refactor] Oracle Select FP8+NVFP4 Kernels In Priority</title>
     <link>https://github.com/vllm-project/vllm/pull/32414</link>
