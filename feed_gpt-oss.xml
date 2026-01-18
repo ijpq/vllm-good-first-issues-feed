@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 18 Jan 2026 19:53:31 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 18 Jan 2026 20:03:49 +0000</lastBuildDate>
   <item>
     <title>[CI/Build] Use Common Event Map Fixture in Harmony / MCP Server Tests</title>
     <link>https://github.com/vllm-project/vllm/pull/32531</link>
@@ -44,8 +44,7 @@ This allows us to:
 * improve code reuse
 
 ## Test Plan
-
-## Test Result
+- refactor tests in the CI/CD
 
 ---
 &lt;details&gt;
@@ -53,7 +52,7 @@ This allows us to:
 
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and a
+- [ ] The test results, such as pasting the results compariso
 
 ...</description>
   </item>
