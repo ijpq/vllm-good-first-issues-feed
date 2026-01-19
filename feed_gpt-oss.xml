@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 19 Jan 2026 02:55:06 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 19 Jan 2026 03:37:48 +0000</lastBuildDate>
   <item>
     <title>[CI/Build] Use Common Event Map Fixture in Harmony / MCP Server Tests</title>
     <link>https://github.com/vllm-project/vllm/pull/32531</link>
@@ -109,37 +109,6 @@ Differential Revision: D90477073
 &gt; - Add `_get_tool_session` in `ParsableContext` and `HarmonyContext` to raise a descriptive `KeyError` with available sessions and a `--tool-server` hint
 &gt; - Update `call_tool` paths to use `_get_tool_session` instead of direct `_tool_sessions[...]` access for `python`, `browser`, and `container`
 &gt; - Add unit tests validating error messaging, listing of available sessions, and suc
-
-...</description>
-  </item>
-  <item>
-    <title>Oracle improvements</title>
-    <link>https://github.com/vllm-project/vllm/pull/32122</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32122</guid>
-    <pubDate>Sun, 11 Jan 2026 14:33:31 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-This PR does two inter-related things:
-
-#### Oracle
-* updates oracle to query the mk experts for support for various features in standard way, enabling auto-selection
-* updates the mk experts to express which features are supported
-* creates standard interface for creating experts, simplifying the factory function
-
-#### Unifies Dp/Ep and Tp cases
-* add support for running naive and ag/rs dispatch/combine via modular kernels
-* allow the QuantMethod to &quot;own&quot; the kernel, no more `FusedMoEModularMethod`
-
-#### Follow Ups
-* apply to the other quant methods (this only does fp8 and nvfp4)
-* remove `do_naive_dispatch_combine` from fused moe (^once everything above is migrated)
-
-#### TODOs
-
-- [ ] Figure out flashinfer all2all
-- [ ] Make sure models with sha
 
 ...</description>
   </item>
@@ -1189,6 +1158,32 @@ Previously, the responses are empty because of an issue in openai/harmony. (http
 https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
 
 The fix is to trigger
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
+    <link>https://github.com/vllm-project/vllm/pull/27310</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27310</guid>
+    <pubDate>Wed, 22 Oct 2025 00:57:44 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+The current way of implementation forces the system prompt to go into the developer message and it confuses the usage of different roles. We should have developer into developer message, and allow system message to override the system prompt as supported by signature of harmony_utils.py
+
+## Test Result
+Override
+            &quot;openai_harmony_message&quot;: {
+                &quot;author&quot;: {
+                    &quot;role&quot;: &quot;system&quot;
+                },
+                &quot;content&quot;: [
+                    {
+                        &quot;system_content&quot;: {
+                            &quot;type&quot;: &quot;system_content&quot;,
+                            &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
+                            &quot;reasoning_effort&quot;: &quot;high&quot;,
+                       
 
 ...</description>
   </item>
