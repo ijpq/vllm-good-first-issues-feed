@@ -5,7 +5,29 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 19 Jan 2026 15:56:44 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 19 Jan 2026 16:11:42 +0000</lastBuildDate>
+  <item>
+    <title>[Bug]: Wrong timestamps if audio &gt; 30s</title>
+    <link>https://github.com/vllm-project/vllm/issues/32588</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/32588</guid>
+    <pubDate>Mon, 19 Jan 2026 10:27:12 +0000</pubDate>
+    <description>### Your current environment
+
+
+NA
+
+### 🐛 Describe the bug
+
+**Segment level timestamps are incrementally offset by ~0.5s per segment.**
+
+When transcribing long audio with vLLM Whisper, segment-level timestamps are increasingly inaccurate. Chunking uses by default a 1s window to find low-energy (quiet) regions for splitting, so the next chunk may start up to 1s earlier than the nominal chunk length. This offset is not compensated for when generating segment timestamps, resulting in an average delay of ~0.5s per segment, which accumulates (e.g., 5s after 10 segments).
+
+Clients can workaround by subtracting 0.5s per segment, but that&#x27;s obviously not accurate.
+
+Also, the [related documentation](https://github.com/vllm-project/vllm/blob/e83b7e379c11bf136c1b96bc6a67b6d2207cfde4/docs/contributing/
+
+...</description>
+  </item>
   <item>
     <title>[Feature]: Extract KV-Cache update from all attention backends</title>
     <link>https://github.com/vllm-project/vllm/issues/32335</link>
