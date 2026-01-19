@@ -5,29 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 19 Jan 2026 03:37:48 +0000</lastBuildDate>
-  <item>
-    <title>[CI/Build] Use Common Event Map Fixture in Harmony / MCP Server Tests</title>
-    <link>https://github.com/vllm-project/vllm/pull/32531</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32531</guid>
-    <pubDate>Sun, 18 Jan 2026 01:16:14 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-Fixes https://github.com/vllm-project/vllm/issues/32495
-
-There are a few places in the Harmony / MCP server tests that we hardcode response mappings from `done` events to `start` events. This is pretty error prone and can lead to issues like the `KeyError` above, or things like wrong event names in some places, e.g., this one,
-
-```
-&quot;response.web_search_call.done&quot;: &quot;response.web_search_call.added&quot;
-```
-
-which I think are not correct names for the `web_search_call` events.
-
-This PR refactors the tests that hard code their own mappings to use a common fixture to avoid issues due to incomplete mappings and/or copy paste errors. Also, if we explicitly want to disallow certain events in the future, we can add utils to filter the common fixture to get the 
-
-...</description>
-  </item>
+  <lastBuildDate>Mon, 19 Jan 2026 04:08:04 +0000</lastBuildDate>
   <item>
     <title>[MoE Refactor] Oracle Select FP8+NVFP4 Kernels In Priority</title>
     <link>https://github.com/vllm-project/vllm/pull/32414</link>
@@ -1186,6 +1164,32 @@ Override
                        
 
 ...</description>
+  </item>
+  <item>
+    <title>Support PP on tpu_inference</title>
+    <link>https://github.com/vllm-project/vllm/pull/27296</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
+    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
   </item>
 </channel>
 </rss>
