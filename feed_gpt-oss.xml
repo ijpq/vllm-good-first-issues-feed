@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 20 Jan 2026 22:49:31 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 20 Jan 2026 22:57:36 +0000</lastBuildDate>
   <item>
     <title>Fix gpt‑oss Harmony token leaks in tool names and streaming content #32587</title>
     <link>https://github.com/vllm-project/vllm/pull/32633</link>
@@ -459,13 +459,7 @@ After:
 
 Follow-up/alternate possibility is to replace this with a single `F.pad` before the router, then add a fusion pass to fuse AITER CK rmsnorm and pad to PassManager similar to https://github.com/vllm-project/vllm/pull/25693.
 
-See also #30357
-
-## Test Plan
-
-## Test Result
-
--
+See also #30357 (gpt-oss quark w4a8 enablement) 
 
 ...</description>
   </item>
