@@ -5,7 +5,33 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 20 Jan 2026 03:59:34 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 20 Jan 2026 04:27:41 +0000</lastBuildDate>
+  <item>
+    <title>Fix gpt‑oss Harmony token leaks in tool names and streaming content #32587</title>
+    <link>https://github.com/vllm-project/vllm/pull/32633</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32633</guid>
+    <pubDate>Tue, 20 Jan 2026 04:19:50 +0000</pubDate>
+    <description>
+## Purpose
+ #32587
+
+Defined sanitize_harmony_tool_name and strip_harmony_control_tokens in harmony_utils.py.
+
+Used the sanitizer when reconstructing Harmony messages from chat/response history and when converting Harmony outputs back into API responses in harmony_utils.py.
+
+Applied the sanitizer in tool extraction for chat completions (non‑stream) and stripped control tokens from final/commentary content in openai_tool_parser.py.
+
+Applied the sanitizer in streaming deltas for chat completions and stripped control tokens from streamed content/reasoning deltas in stream_harmony.py.
+
+Applied the sanitizer for function call events and stripped control tokens from response streaming deltas and done events in serving.py.
+
+## Test Plan
+```
+python -m vllm.entrypoints.openai.api_server \
+  --model
+
+...</description>
+  </item>
   <item>
     <title>[MoE Refactor] Oracle Select FP8+NVFP4 Kernels In Priority</title>
     <link>https://github.com/vllm-project/vllm/pull/32414</link>
@@ -1164,32 +1190,6 @@ Override
                        
 
 ...</description>
-  </item>
-  <item>
-    <title>Support PP on tpu_inference</title>
-    <link>https://github.com/vllm-project/vllm/pull/27296</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
-    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
