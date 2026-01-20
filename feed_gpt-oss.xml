@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 20 Jan 2026 17:41:44 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 20 Jan 2026 17:55:50 +0000</lastBuildDate>
   <item>
     <title>Fix gpt‑oss Harmony token leaks in tool names and streaming content #32587</title>
     <link>https://github.com/vllm-project/vllm/pull/32633</link>
@@ -457,19 +457,13 @@ Before:
 After:
 &lt;img width=&quot;1462&quot; height=&quot;34&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/e5979f88-03c0-4173-adbd-8227786e929f&quot; /&gt;
 
-Follow-up is to replace this with a single `F.pad` and try fusing CK rmsnorm and pad instead of manually calling this kernel.
+Follow-up/alternate possibility is to replace this with a single `F.pad` before the router, then add a fusion pass to fuse AITER CK rmsnorm and pad to PassManager similar to https://github.com/vllm-project/vllm/pull/25693.
 
 See also #30357
 
 ## Test Plan
 
-## Test Result
 
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- 
 
 ...</description>
   </item>
