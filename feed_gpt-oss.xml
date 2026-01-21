@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 21 Jan 2026 18:02:04 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 21 Jan 2026 18:22:47 +0000</lastBuildDate>
   <item>
     <title>[CI][Bugfix]: return McpCall for built-in MCP tools in non-streaming mode</title>
     <link>https://github.com/vllm-project/vllm/pull/32762</link>
@@ -280,6 +280,23 @@ This PR adds `VLLM_USE_FLASHINFER_ROPE` env so that we can easily enable Flashin
 - [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
 &lt;/details&gt;
 
+</description>
+  </item>
+  <item>
+    <title>[Core] Add optional flags to check for repetitive token patterns in engine output</title>
+    <link>https://github.com/vllm-project/vllm/pull/31690</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31690</guid>
+    <pubDate>Sun, 04 Jan 2026 21:13:48 +0000</pubDate>
+    <description>## Purpose
+This PR allows users to end generation early if they see repetitive token patterns (for example, nonsensically repeated sentences) in their output. This is a real failure case for models prone to hallucination. Testing with Qwen3 VL on multimodal input shows a ~33% increase in throughput and near-total reduction in models hitting the configured max_output_len.
+
+This feature is off by default. We include it in the core so that this can be leveraged for non-streaming generation too.
+
+## Test Plan
+New test file, online tests
+
+## Test Result
+Huge increase in throughput for error-prone multimodal input without sacrificing quality/latency.
 </description>
   </item>
   <item>
@@ -1155,23 +1172,6 @@ ROCM used to build PyTorch   : N/A
       Python Environment
 ==============================
 Python version
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Actually enable serialize_messages for harmony Responses (related to #26185)</title>
-    <link>https://github.com/vllm-project/vllm/pull/27377</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27377</guid>
-    <pubDate>Thu, 23 Oct 2025 01:07:10 +0000</pubDate>
-    <description>## Purpose
-
-For the OpenAI-compatible `v1/responses` route, enable raw messages to be sent when `enable_response_messages` is set to True in `extra_body`.
-
-Previously, the responses are empty because of an issue in openai/harmony. (https://github.com/openai/harmony/issues/78)
-
-https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
-
-The fix is to trigger
 
 ...</description>
   </item>
