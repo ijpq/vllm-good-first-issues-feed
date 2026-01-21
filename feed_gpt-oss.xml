@@ -5,7 +5,31 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 21 Jan 2026 07:31:48 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 21 Jan 2026 07:45:41 +0000</lastBuildDate>
+  <item>
+    <title>[Misc] Add JSON format logging support</title>
+    <link>https://github.com/vllm-project/vllm/pull/32761</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32761</guid>
+    <pubDate>Wed, 21 Jan 2026 07:34:06 +0000</pubDate>
+    <description>Add support of  structured logging.
+
+Inspired by https://github.com/vllm-project/vllm/pull/2432 and https://github.com/vllm-project/vllm/pull/13920, but takes a slightly different approach.
+
+Example of `standard` output:
+```
+Traceback (most recent call last):
+  File &quot;vllm/.venv/lib/python3.10/site-packages/huggingface_hub/utils/_http.py&quot;, line 402, in hf_raise_for_status
+    response.raise_for_status()
+  File &quot;vllm/.venv/lib/python3.10/site-packages/requests/models.py&quot;, line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/meta-llama/Llama-2-7b-chat-hf/resolve/main/config.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent 
+
+...</description>
+  </item>
   <item>
     <title>Fix gpt‑oss Harmony token leaks in tool names and streaming content #32587</title>
     <link>https://github.com/vllm-project/vllm/pull/32633</link>
@@ -1152,32 +1176,6 @@ Previously, the responses are empty because of an issue in openai/harmony. (http
 https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
 
 The fix is to trigger
-
-...</description>
-  </item>
-  <item>
-    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
-    <link>https://github.com/vllm-project/vllm/pull/27310</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27310</guid>
-    <pubDate>Wed, 22 Oct 2025 00:57:44 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-The current way of implementation forces the system prompt to go into the developer message and it confuses the usage of different roles. We should have developer into developer message, and allow system message to override the system prompt as supported by signature of harmony_utils.py
-
-## Test Result
-Override
-            &quot;openai_harmony_message&quot;: {
-                &quot;author&quot;: {
-                    &quot;role&quot;: &quot;system&quot;
-                },
-                &quot;content&quot;: [
-                    {
-                        &quot;system_content&quot;: {
-                            &quot;type&quot;: &quot;system_content&quot;,
-                            &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
-                            &quot;reasoning_effort&quot;: &quot;high&quot;,
-                       
 
 ...</description>
   </item>
