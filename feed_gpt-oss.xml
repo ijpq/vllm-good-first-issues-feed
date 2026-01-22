@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 22 Jan 2026 07:50:02 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 22 Jan 2026 07:58:52 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -782,6 +782,29 @@ track_token_ids: list[int] | None = None
 ...</description>
   </item>
   <item>
+    <title>[Model] Add LoRA support for Whisper models</title>
+    <link>https://github.com/vllm-project/vllm/pull/29856</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29856</guid>
+    <pubDate>Tue, 02 Dec 2025 08:56:32 +0000</pubDate>
+    <description>## Purpose
+
+This PR enables Multi-LoRA support for Whisper speech-to-text models, allowing users to serve multiple fine-tuned Whisper adapters from a single base model.
+
+### Background
+
+Currently, vLLM&#x27;s `WhisperForConditionalGeneration` does not implement the `SupportsLoRA` interface, preventing users from using LoRA adapters with Whisper models. This limitation requires users to deploy
+ separate model instances for each fine-tuned variant, which is inefficient in terms of GPU memory usage.
+
+### Changes
+
+**1. `vllm/model_executor/models/whisper.py`**
+- Add `SupportsLoRA` interface to `WhisperForConditionalGeneration`
+- Add `embedding_modules` and `embedding_padding_modules` attributes required by LoRA
+- Update `packed_modules_mapping` to use simplified keys (`qkv_proj`, `kv_proj`) for LoR
+
+...</description>
+  </item>
+  <item>
     <title>Added regression test for openai/harmony/issues/78</title>
     <link>https://github.com/vllm-project/vllm/pull/29830</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29830</guid>
@@ -1141,18 +1164,6 @@ Allows collection of timing metrics for the Offloading Connector, which is essen
 &gt; - Adds `OffloadingConnectorStats` and `OffloadPromMetrics` with hi
 
 ...</description>
-  </item>
-  <item>
-    <title>[WIP] [GPT-OSS] customized symm_mem based EP comm kernel integration</title>
-    <link>https://github.com/vllm-project/vllm/pull/27495</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27495</guid>
-    <pubDate>Sat, 25 Oct 2025 01:04:50 +0000</pubDate>
-    <description>Integrates Triton MoE communication kernels
-
-achieved 60% throughput increase compared to #[24588](https://github.com/vllm-project/vllm/pull/24588)
-
-&lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
-</description>
   </item>
 </channel>
 </rss>
