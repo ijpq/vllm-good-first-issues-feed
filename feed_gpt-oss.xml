@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 22 Jan 2026 12:28:01 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 22 Jan 2026 12:51:55 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -700,30 +700,6 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 </description>
   </item>
   <item>
-    <title>[Frontend] Introduce Renderer for processing chat messages (using `ModelConfig`)</title>
-    <link>https://github.com/vllm-project/vllm/pull/30200</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30200</guid>
-    <pubDate>Sun, 07 Dec 2025 08:30:34 +0000</pubDate>
-    <description>Ready for review.
-
-## Purpose
-
-- Prototype an interface, `vllm.renderers.RendererLike`, to process chat messages into engine inputs.
-- Introduce `RENDERER_REGISTRY` which lazily registers renderers to avoid circular import problem.
-- Move implementation-specific chat utils to the corresponding renderer in `vllm.renderers`.
-- Initialize the renderer in `InputPreprocessor`, replacing the tokenizer initialization inside `LLMEngine` and `AsyncLLM`.
-- Replace `EngineClient.get_tokenizer()` with `EngineClient.renderer.get_tokenizer()` to avoid unnecessary async.
-- Update tests accordingly, and move some tests into a new directory `tests/renderers` that is run under `Async Engine, Inputs, Utils, Worker, Config Test (CPU)`.
-
-Towards #22880 and #23873
-
-Future work:
-
-- Merge `CompletionRenderer` wit
-
-...</description>
-  </item>
-  <item>
     <title>[Perf] Add benchmark script for triton unified attention kernel performance</title>
     <link>https://github.com/vllm-project/vllm/pull/30191</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30191</guid>
@@ -1164,6 +1140,18 @@ Allows collection of timing metrics for the Offloading Connector, which is essen
 &gt; - Adds `OffloadingConnectorStats` and `OffloadPromMetrics` with hi
 
 ...</description>
+  </item>
+  <item>
+    <title>[WIP] [GPT-OSS] customized symm_mem based EP comm kernel integration</title>
+    <link>https://github.com/vllm-project/vllm/pull/27495</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27495</guid>
+    <pubDate>Sat, 25 Oct 2025 01:04:50 +0000</pubDate>
+    <description>Integrates Triton MoE communication kernels
+
+achieved 60% throughput increase compared to #[24588](https://github.com/vllm-project/vllm/pull/24588)
+
+&lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
+</description>
   </item>
 </channel>
 </rss>
