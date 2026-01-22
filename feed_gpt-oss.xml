@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 22 Jan 2026 02:02:03 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 22 Jan 2026 02:53:59 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -251,6 +251,21 @@ I suggest adding two fields, `reasoning_effort` and `parallel_tool_calls`, to `e
 - [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
 - [ ] The test plan, such as providing test command.
 - [ ] The test results, such as pasting the results comparison before and after, or e2e 
+
+...</description>
+  </item>
+  <item>
+    <title>LoRA Per Request Loading Pipelining Support</title>
+    <link>https://github.com/vllm-project/vllm/pull/31941</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31941</guid>
+    <pubDate>Thu, 08 Jan 2026 03:27:58 +0000</pubDate>
+    <description>## Purpose
+Currently LoRA Loading for Per Request needs to first sequentially **load all the LoRA layers** before **beginning Pre-Fill**. This adds significant overhead in TTFT. 
+&lt;img width=&quot;1522&quot; height=&quot;545&quot; alt=&quot;Screenshot 2026-01-07 at 6 54 53 PM&quot; src=&quot;https://github.com/user-attachments/assets/75932a7d-c8d2-47b2-a121-ab40d5435665&quot; /&gt;
+
+However, **Pre-Fill** is a layer by layer process and for large enough input tokens(**&gt; 1000 tokens**) it is **longer than LoRA Loading time**. If we run **LoRA loading and Compute in separate streams(CUDA or otherwise)** we can hid significant part of the LoRA loading  time with **Sync points** in each LoRA layer of the forward pass to make sure the LoRA layer is loaded.
+
+&lt;img width=&quot;1313&quot; height=&quot;467&quot; alt=&quot;Screenshot 2026-01-07 at 6 59 12 PM&quot; src=&quot;http
 
 ...</description>
   </item>
@@ -1138,33 +1153,6 @@ achieved 60% throughput increase compared to #[24588](https://github.com/vllm-pr
 
 &lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
 </description>
-  </item>
-  <item>
-    <title>[CI/Build] Add aime25 eval to gpt-oss CI</title>
-    <link>https://github.com/vllm-project/vllm/pull/27398</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27398</guid>
-    <pubDate>Thu, 23 Oct 2025 07:38:49 +0000</pubDate>
-    <description>## Purpose
-This PR added eval config for gpt-oss-120b on H100. 
-
-## Test Plan
-pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-oss.txt --tp-size=1
-
-## Test Result
-
-1 passed, 6 warnings in 455.90s (0:07:35) 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the releas
-
-...</description>
   </item>
 </channel>
 </rss>
