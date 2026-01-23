@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 16:24:23 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 16:43:52 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -457,39 +457,6 @@ A new streaming parser that processes tokens incrementally:
   - `&#x27;analysis&#x27;`: reasoning token
   - `&#x27;commentary&#x27;`: tool call token
   - `&#x27;final&#x27;`: regul
-
-...</description>
-  </item>
-  <item>
-    <title>[Frontend] add logprob, compression_rate to &#x27;verbose_json&#x27; features</title>
-    <link>https://github.com/vllm-project/vllm/pull/31059</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31059</guid>
-    <pubDate>Sat, 20 Dec 2025 03:37:19 +0000</pubDate>
-    <description>
-## Purpose
-
-Last time I made verbose_json options on Whisper inference but I left some features like avg_logprob and compression_ratio. And I made this PR to get those features on verbose_json segments!
-
-https://github.com/vllm-project/vllm/pull/24209
-
-## Test Plan
-
-curl --location &#x27;http://domain:port/v1/audio/transcriptions&#x27; \
---header &#x27;Authorization: ••••••&#x27; \
---form &#x27;model=&quot;openai/whisper-large-v3&quot;&#x27; \
---form &#x27;language=&quot;en&quot;&#x27; \
---form &#x27;response_format=&quot;verbose_json&quot;&#x27; \
---form &#x27;temperature=&quot;0&quot;&#x27; \
---form &#x27;file=@&quot;/C:/Users/audio/audio.wav&quot;&#x27;
-
-## Test Result
-
-
-```json
-{
-    &quot;duration&quot;: &quot;30.0&quot;,
-    &quot;language&quot;: &quot;en&quot;,
-    &quot;text&quot;: &quot; as well as a beginning, signifying renewal as well as change. For I have sworn before you and Almighty God the same solemn oath our forebears prescribed nearly a cent
 
 ...</description>
   </item>
@@ -1147,6 +1114,41 @@ pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-o
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optional) Release notes update. If your change is user facing, please update the releas
+
+...</description>
+  </item>
+  <item>
+    <title>[Bug]: gptoss calls built-in tool when no tools are given</title>
+    <link>https://github.com/vllm-project/vllm/issues/27385</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27385</guid>
+    <pubDate>Thu, 23 Oct 2025 04:01:36 +0000</pubDate>
+    <description>### Your current environment
+
+&lt;details&gt;
+&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
+
+```text
+==============================
+        System Info
+==============================
+OS                           : Ubuntu 20.04.6 LTS (x86_64)
+GCC version                  : (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
+Clang version                : Could not collect
+CMake version                : version 3.29.2
+Libc version                 : glibc-2.31
+
+==============================
+       PyTorch Info
+==============================
+PyTorch version              : 2.8.0+cu128
+Is debug build               : False
+CUDA used to build PyTorch   : 12.8
+ROCM used to build PyTorch   : N/A
+
+==============================
+      Python Environment
+==============================
+Python version
 
 ...</description>
   </item>
