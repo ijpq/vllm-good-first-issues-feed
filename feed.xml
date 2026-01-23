@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 08:27:41 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 08:45:59 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate RMS+fp4 fused kernel from FlashInfer</title>
     <link>https://github.com/vllm-project/vllm/issues/32612</link>
