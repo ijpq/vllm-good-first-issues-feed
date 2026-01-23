@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 14:57:42 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 15:12:00 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -987,36 +987,6 @@ python examples/offline_inference/custom_model_with_megatron.py
 ...</description>
   </item>
   <item>
-    <title>[Bug]: rocm crash AMD Ryzen AI 9 HX PRO 370 w/ Radeon 890M - docker/podman</title>
-    <link>https://github.com/vllm-project/vllm/issues/28460</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/28460</guid>
-    <pubDate>Tue, 11 Nov 2025 10:16:32 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-Collecting environment information...
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 22.04.5 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
-Clang version                : 20.0.0git (https://github.com/RadeonOpenCompute/llvm-project roc-7.0.0 25314 f4087f6b428f0e6f575ebac8a8a724dab123d06e)
-CMake version                : version 3.31.6
-Libc version                 : glibc-2.35
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.9.0a0+git1c57644
-Is debug build               : False
-CUDA used to build PyTorc
-
-...</description>
-  </item>
-  <item>
     <title>Fix/responses api harmony channel metadata    #28262</title>
     <link>https://github.com/vllm-project/vllm/pull/28355</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28355</guid>
@@ -1152,6 +1122,33 @@ achieved 60% throughput increase compared to #[24588](https://github.com/vllm-pr
 
 &lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
 </description>
+  </item>
+  <item>
+    <title>[CI/Build] Add aime25 eval to gpt-oss CI</title>
+    <link>https://github.com/vllm-project/vllm/pull/27398</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27398</guid>
+    <pubDate>Thu, 23 Oct 2025 07:38:49 +0000</pubDate>
+    <description>## Purpose
+This PR added eval config for gpt-oss-120b on H100. 
+
+## Test Plan
+pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-oss.txt --tp-size=1
+
+## Test Result
+
+1 passed, 6 warnings in 455.90s (0:07:35) 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the releas
+
+...</description>
   </item>
 </channel>
 </rss>
