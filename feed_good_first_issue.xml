@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 18:16:10 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 18:34:27 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate RMS+fp4 fused kernel from FlashInfer</title>
     <link>https://github.com/vllm-project/vllm/issues/32612</link>
@@ -215,32 +215,6 @@ ROCM used to build PyTorch   : N/A
 ==============================
       Python Environment
 ====
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature][Attention][UX]: Incorporate Features into Attention Selection</title>
-    <link>https://github.com/vllm-project/vllm/issues/30654</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/30654</guid>
-    <pubDate>Sun, 14 Dec 2025 18:04:14 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-SUMMARY:
-* we have default attention backends by priority and a notion of which backend supports what hw
-* however, certain features are not considered in this (e.g. fp8 kv cache, e.g. attention sinks)
-
-Recent example, we had test failures because we updated the logic to load kv cache quantization from the model config. But since CUTLASS_MLA is the default backend on B200, we started seeing test failures (since CUTLASS MLA does not support fp8 kv cache) because we were not automatically falling back to FLASHINFER_MLA (which does)
-
-
-So the proposal is to:
-- make sure all attention backends report what features are supported
-- update the attention selector to consider these features in the selection
-
-### Alternatives
-
-_No response_
-
-### Additional con
 
 ...</description>
   </item>
@@ -760,63 +734,6 @@ _No response_
 - [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
-    <title>[RFC]: Refactor CI/CD</title>
-    <link>https://github.com/vllm-project/vllm/issues/22992</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/22992</guid>
-    <pubDate>Fri, 15 Aug 2025 16:26:44 +0000</pubDate>
-    <description>### Motivation.
-
-vLLM&#x27;s CI/CD has grown in a less than ideal way as it has built up over the years.
-
-We have the following problems:
-- CI takes very long, especially on a per commit cycle
-- CI has failures that cannot be reproduced on every machine due to numerics
-- CI has failures on models that are not the 80-20 of our usage --- which runs per commit
-- CI failures in early tests often lead to vLLM not cleaning up properly --- which creates failures across many tests that makes it hard to identify what is wrong
-- CI is NOT covering the models that actually matter (since not enough GPU memory) or hardware that actually matters to the majority of our users
-- CI is NOT covering performance!
-
-These issues are creating a bad developer experience for vLLM and causes issues like the CI &quot;death sp
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature]: Tune Triton Configs for Qwen3-30B-A3-Fp8 and Bf16</title>
-    <link>https://github.com/vllm-project/vllm/issues/22294</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/22294</guid>
-    <pubDate>Wed, 06 Aug 2025 02:20:33 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Hardware Cases:
-- H100, H200, B200
-
-Configurations:
-- TP=1
-- TP=2
-- TP=4
-- TP=8
-- EP=1
-- EP=2
-- EP=4
-- EP=8
-
-Precisions
-- Fp8
-- Bf16
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
-  </item>
-  <item>
     <title>[Bug]: Add tests for all parallel sampling parameter combinations</title>
     <link>https://github.com/vllm-project/vllm/issues/21948</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/21948</guid>
@@ -969,31 +886,6 @@ Specifically,
 3. It&#x27;d be nice if we can cite speci
 
 ...</description>
-  </item>
-  <item>
-    <title>[Feature]: Audit and Update Examples To Use `VLLM_USE_V1=1`</title>
-    <link>https://github.com/vllm-project/vllm/issues/14530</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/14530</guid>
-    <pubDate>Mon, 10 Mar 2025 02:36:23 +0000</pubDate>
-    <description>### 🚀 The feature, motivation and pitch
-
-Many of the examples leverage V0 internals.
-
-We should:
-- raise `NotImplementedError` if `envs.VLLM_USE_V1` with these
-- convert them to use `V1` if we can
-
-### Alternatives
-
-_No response_
-
-### Additional context
-
-_No response_
-
-### Before submitting a new issue...
-
-- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
   </item>
   <item>
     <title>[Misc]: CMake Clean-up / Refactor Tasks</title>
