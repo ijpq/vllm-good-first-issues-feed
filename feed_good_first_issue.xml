@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 02:06:05 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 02:52:23 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Integrate RMS+fp4 fused kernel from FlashInfer</title>
     <link>https://github.com/vllm-project/vllm/issues/32612</link>
@@ -564,37 +564,6 @@ But there are still some work to be done, so here is the issue to track the work
 - [x] DeepGEMM on Blackwell https://github.com/vllm-project/vllm/pull/27127  @yewentao256 
 - [x] Batch Invariant for R1 TP 8 on Blackwell https://github.com/vllm-project/vllm/pull/27229 @yewentao256 
 - [x] Torch compile &amp; Cuda Graph support  htt
-
-...</description>
-  </item>
-  <item>
-    <title>[Usage]: how to request a qwen2.5-VL-7B classify model served by vllm using openai SDK?</title>
-    <link>https://github.com/vllm-project/vllm/issues/27413</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27413</guid>
-    <pubDate>Thu, 23 Oct 2025 12:32:25 +0000</pubDate>
-    <description>### Your current environment
-
-```text
-The output of `python collect_env.py`
-```
-
-
-### How would you like to use vllm
-
-I launch a server with the following command to serving a Qwen2.5-VL-7B model finetued for seqence classification. (this model replaced the lm_head with a 2 classes score_head)
-
-The launch command is :
-```
-vllm serve --model=//video_classification/qwenvl_7b_video_cls/v5-20251011-121851/2340_vllm_format --served_model_name Qwen2.5-7B-shenhe --task=classify --port=8080 --tensor-parallel-size=2
-```
-
-I don&#x27;t know how to request the server with the openAI sdk.
-I use the code snnipet showed below which works well with pure text, but it got 400 bad request when I put the video url into the prompt
-
-this works well:
-```
-# SPDX-License-Identifier: Apache-2.0
-# SPDX-FileCopyrightText:
 
 ...</description>
   </item>
