@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 23 Jan 2026 18:02:34 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 23 Jan 2026 18:16:11 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -131,34 +131,6 @@ python -m vllm.entrypoints.openai.api_server \
   # Send request
   curl -X POST http://localhost:8000/v1/responses \
     -H &quot;Co
-
-...</description>
-  </item>
-  <item>
-    <title>Add descriptive error message for missing tools.</title>
-    <link>https://github.com/vllm-project/vllm/pull/32147</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32147</guid>
-    <pubDate>Mon, 12 Jan 2026 05:28:45 +0000</pubDate>
-    <description>Summary: Add descriptive error message for missing tools.
-
-Test Plan: Unit test
-
-Differential Revision: D90477073
-
-
----
-
-&gt; [!NOTE]
-&gt; &lt;sup&gt;[Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) is generating a summary for commit 07adcb40f7abf76cf0a056735d621117a4a31949. Configure [here](https://cursor.com/dashboard?tab=bugbot).&lt;/sup&gt;
-
----
-
-&gt; [!NOTE]
-&gt; Improves robustness and debuggability of tool invocation.
-&gt; 
-&gt; - Add `_get_tool_session` in `ParsableContext` and `HarmonyContext` to raise a descriptive `KeyError` with available sessions and a `--tool-server` hint
-&gt; - Update `call_tool` paths to use `_get_tool_session` instead of direct `_tool_sessions[...]` access for `python`, `browser`, and `container`
-&gt; - Add unit tests validating error messaging, listing of available sessions, and suc
 
 ...</description>
   </item>
@@ -1149,6 +1121,23 @@ ROCM used to build PyTorch   : N/A
       Python Environment
 ==============================
 Python version
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix] Actually enable serialize_messages for harmony Responses (related to #26185)</title>
+    <link>https://github.com/vllm-project/vllm/pull/27377</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27377</guid>
+    <pubDate>Thu, 23 Oct 2025 01:07:10 +0000</pubDate>
+    <description>## Purpose
+
+For the OpenAI-compatible `v1/responses` route, enable raw messages to be sent when `enable_response_messages` is set to True in `extra_body`.
+
+Previously, the responses are empty because of an issue in openai/harmony. (https://github.com/openai/harmony/issues/78)
+
+https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
+
+The fix is to trigger
 
 ...</description>
   </item>
