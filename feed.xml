@@ -5,7 +5,35 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 25 Jan 2026 16:19:09 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 25 Jan 2026 16:36:18 +0000</lastBuildDate>
+  <item>
+    <title>[Feature][Help Wanted]: Add tuning script and config files for Mamba selective_state_update kernel</title>
+    <link>https://github.com/vllm-project/vllm/issues/33034</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/33034</guid>
+    <pubDate>Sun, 25 Jan 2026 16:23:04 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+# Background
+This PR introduces an optimization for `selective_state_update` on Blackwell:
+https://github.com/vllm-project/vllm/pull/32873
+
+This optimization is GPU specific and hard coded in the code.
+
+# Fused MoE tuning
+Fused MoE offers a more generic tuning mechanism:
+Configuration files for fused MoE can be generated using the script `benchmarks/kernels/benchmark_moe.py`
+
+The `benchmark_moe.py` script generates JSON files like the following:
+`vllm/model_executor/layers/fused_moe/configs/E=128,N=1024,device_name=NVIDIA_H200.json`
+
+vLLM can auto-detect the file and use the relevant config for optimal performance.
+
+# Requirements
+The same capability should be added for `selective_state_update`:
+* Support for JSON config (instead of hard coded value
+
+...</description>
+  </item>
   <item>
     <title>[Feature]: Integrate RMS+fp4 fused kernel from FlashInfer</title>
     <link>https://github.com/vllm-project/vllm/issues/32612</link>
