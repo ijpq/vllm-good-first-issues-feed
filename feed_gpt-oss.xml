@@ -5,7 +5,34 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 26 Jan 2026 06:56:45 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 26 Jan 2026 07:15:42 +0000</lastBuildDate>
+  <item>
+    <title>[Chore] Update type annotation of `input_ids` in model forward</title>
+    <link>https://github.com/vllm-project/vllm/pull/33063</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33063</guid>
+    <pubDate>Mon, 26 Jan 2026 06:57:30 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+Update the type annotation to correctly consider PP case.
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtT
+
+...</description>
+  </item>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
@@ -1104,41 +1131,6 @@ pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-o
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optional) Release notes update. If your change is user facing, please update the releas
-
-...</description>
-  </item>
-  <item>
-    <title>[Bug]: gptoss calls built-in tool when no tools are given</title>
-    <link>https://github.com/vllm-project/vllm/issues/27385</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27385</guid>
-    <pubDate>Thu, 23 Oct 2025 04:01:36 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 20.04.6 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 3.29.2
-Libc version                 : glibc-2.31
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.8.0+cu128
-Is debug build               : False
-CUDA used to build PyTorch   : 12.8
-ROCM used to build PyTorch   : N/A
-
-==============================
-      Python Environment
-==============================
-Python version
 
 ...</description>
   </item>
