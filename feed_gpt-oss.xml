@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 26 Jan 2026 21:55:53 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 26 Jan 2026 22:08:29 +0000</lastBuildDate>
   <item>
     <title>[WIP] Fix GPT-OSS prefix caching not working with EAGLE</title>
     <link>https://github.com/vllm-project/vllm/pull/32801</link>
