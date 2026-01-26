@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 26 Jan 2026 09:02:16 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 26 Jan 2026 09:19:04 +0000</lastBuildDate>
   <item>
     <title>[Chore] Update type annotation of `input_ids` in model forward</title>
     <link>https://github.com/vllm-project/vllm/pull/33063</link>
