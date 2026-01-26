@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 26 Jan 2026 12:38:39 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 26 Jan 2026 13:06:24 +0000</lastBuildDate>
   <item>
     <title>[Chore] Update type annotation of `input_ids` in model forward</title>
     <link>https://github.com/vllm-project/vllm/pull/33063</link>
@@ -58,24 +58,6 @@ Update the type annotation to correctly consider PP case.
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>[lora/moe] Improve fused MoE‑LoRA kernel indexing and memory access</title>
-    <link>https://github.com/vllm-project/vllm/pull/32770</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32770</guid>
-    <pubDate>Wed, 21 Jan 2026 09:48:27 +0000</pubDate>
-    <description>This PR optimizes the Triton kernel’s inner‑loop indexing and memory‑access patterns
-Key changes:
-Use int32/uint32 for indices (cheaper than int64 in PTX).
-Remove the % N modulo for column offsets; instead compute a plain pid_n * BLOCK_SIZE_N and mask with cn_mask.
-Pass MAX_LORAS_TOTAL as a Python scalar (not via tl.num_programs), and let the kernel early‑exit invalid lora_id using unsigned comparison (automatically filters -1).
-Reduce axis‑2 program count from lora_a_stacked[0].shape[0] to lora_ids.numel() – launches only for actually‑used LoRA adapters.
-Add USE_B_L2_CACHE=True for B‑matrix loads (.ca modifier), improving cache locality for repeated expert‑weight reads.
-Use other=-1 for expert_id/token_id loads, simplifying mask logic.
-Performance impact:
-Faster index arithmetic in the ho
-
-...</description>
   </item>
   <item>
     <title>[CI][Bugfix]: return McpCall for built-in MCP tools in non-streaming mode</title>
@@ -1137,6 +1119,23 @@ ROCM used to build PyTorch   : N/A
       Python Environment
 ==============================
 Python version
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix] Actually enable serialize_messages for harmony Responses (related to #26185)</title>
+    <link>https://github.com/vllm-project/vllm/pull/27377</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27377</guid>
+    <pubDate>Thu, 23 Oct 2025 01:07:10 +0000</pubDate>
+    <description>## Purpose
+
+For the OpenAI-compatible `v1/responses` route, enable raw messages to be sent when `enable_response_messages` is set to True in `extra_body`.
+
+Previously, the responses are empty because of an issue in openai/harmony. (https://github.com/openai/harmony/issues/78)
+
+https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
+
+The fix is to trigger
 
 ...</description>
   </item>
