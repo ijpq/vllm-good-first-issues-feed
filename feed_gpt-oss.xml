@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 27 Jan 2026 07:58:07 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 27 Jan 2026 08:14:21 +0000</lastBuildDate>
   <item>
     <title>[Model] GPT-OSS: Use layer_types config for sliding window selection</title>
     <link>https://github.com/vllm-project/vllm/pull/33124</link>
@@ -401,17 +401,6 @@ This PR aims to optimize the host-to-device transfer of LoRA weights by using a 
 Additionally, this PR implements caching of the LoRA weights after the initial build. This avoids repeated CPU pinning costs and all
 
 ...</description>
-  </item>
-  <item>
-    <title>Cleanup basic and entrypoint test organisation</title>
-    <link>https://github.com/vllm-project/vllm/pull/31228</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31228</guid>
-    <pubDate>Tue, 23 Dec 2025 17:33:22 +0000</pubDate>
-    <description>Supersedes https://github.com/vllm-project/vllm/pull/27747:
-
-- Don&#x27;t call basic test files individually
-- Move the unit tests into a `unit` directory so we don&#x27;t have to manually ignore everything else
-- Move `openai/tool_parsers` into the `unit` tests because that&#x27;s what they are</description>
   </item>
   <item>
     <title>[Feature] add StreamableResponsesParser and token usage counting for ParsableContext</title>
@@ -1121,6 +1110,32 @@ Previously, the responses are empty because of an issue in openai/harmony. (http
 https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
 
 The fix is to trigger
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
+    <link>https://github.com/vllm-project/vllm/pull/27310</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27310</guid>
+    <pubDate>Wed, 22 Oct 2025 00:57:44 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+The current way of implementation forces the system prompt to go into the developer message and it confuses the usage of different roles. We should have developer into developer message, and allow system message to override the system prompt as supported by signature of harmony_utils.py
+
+## Test Result
+Override
+            &quot;openai_harmony_message&quot;: {
+                &quot;author&quot;: {
+                    &quot;role&quot;: &quot;system&quot;
+                },
+                &quot;content&quot;: [
+                    {
+                        &quot;system_content&quot;: {
+                            &quot;type&quot;: &quot;system_content&quot;,
+                            &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
+                            &quot;reasoning_effort&quot;: &quot;high&quot;,
+                       
 
 ...</description>
   </item>
