@@ -5,7 +5,28 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 27 Jan 2026 15:45:00 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 27 Jan 2026 15:56:50 +0000</lastBuildDate>
+  <item>
+    <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
+    <link>https://github.com/vllm-project/vllm/pull/33178</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33178</guid>
+    <pubDate>Tue, 27 Jan 2026 15:39:06 +0000</pubDate>
+    <description>## Purpose
+Consolidates `experts_int8` and `Fp8OnlineMoEMethod` to share common weight loading and quantization logic through a new `MoeOnlineWeightLoader` class.
+
+  Key changes:
+  - Introduced `MoeOnlineWeightLoader` in `moe_weight_loader.py` that handles weight loading for MoE layers
+  - Created `MoeQuantizationCallbacks` protocol that both `int8` and `fp8` methods implement
+  - Both quantization methods now only need to provide:
+    - get_quantized_dtype() - target dtype (int8 or fp8)
+    - quantize_expert(weight) - single expert quantization logic
+    - create_scale_tensors() - scale tensor creation (per-channel for int8, per-tensor for fp8)
+    - setup_kernel() - kernel setup after quantization
+ 
+This PR relies on this [PR](https://github.com/vllm-project/vllm/pull/31914) and need it 
+
+...</description>
+  </item>
   <item>
     <title>[Model] GPT-OSS: Use layer_types config for sliding window selection</title>
     <link>https://github.com/vllm-project/vllm/pull/33124</link>
@@ -1118,43 +1139,6 @@ Override
 &lt;/details&gt;
 
 </description>
-  </item>
-  <item>
-    <title>Experimental attention backend in helion</title>
-    <link>https://github.com/vllm-project/vllm/pull/27293</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
-    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-very experimental and draft PR so far
-
-## Test Plan
-
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
-```
-## Test Result
-
-Performance see upcoming publications. 
-Correctness:
-```
-VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
-```
-results in 
-```
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
-|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
-```
-
----
-&lt;details&gt;
-&lt;summary&gt; Ess
-
-...</description>
   </item>
 </channel>
 </rss>
