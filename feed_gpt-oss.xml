@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 27 Jan 2026 19:55:01 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 27 Jan 2026 20:07:28 +0000</lastBuildDate>
   <item>
     <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/33178</link>
@@ -36,6 +36,27 @@ This PR relies on this [PR](https://github.com/vllm-project/vllm/pull/31914) and
   - Use layer_types from config for sliding window layer selection instead of hardcoded even/odd pattern                                                                                                                                                                    
   - Add routing simulation override for MXFP4 quantized MoE (uniform_random strategy)                                                                                                                                                                                       
                                                                                                                                                                                            
+
+...</description>
+  </item>
+  <item>
+    <title>[Bugfix][Kernel] Rename NoEP to NoDPEP and fix NvFP4 MoE expert routing</title>
+    <link>https://github.com/vllm-project/vllm/pull/32961</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32961</guid>
+    <pubDate>Fri, 23 Jan 2026 19:32:34 +0000</pubDate>
+    <description># [Bugfix][Kernel] Rename NoEP to NoDPEP and fix NvFP4 MoE expert routing
+
+Fixes #32009
+
+## Purpose
+
+This PR addresses feedback regarding the naming and logic of MoE preparation strategies, specifically for NVFP4/FlashInfer backends.
+
+### 1. Rename NoEP to NoDPEP
+As pointed out in PR feedback, `MoEPrepareAndFinalizeNoEP` was a misleading name because it *does* support Expert Parallelism (EP) via redundant computation and AllReduce. It specifically does not support the Data Parallelism + Expert Parallelism (DP+EP) path used by DeepEP. It has been renamed to `MoEPrepareAndFinalizeNoDPEP` across the codebase to reflect this.
+
+### 2. Fix NvFP4 MoE Expert Routing
+Previously, the NvFP4 MoE implementation using `FlashInferExperts` resulted in a 0% acceptance rate in speculative decoding scenarios
 
 ...</description>
   </item>
@@ -1113,32 +1134,6 @@ Override
                        
 
 ...</description>
-  </item>
-  <item>
-    <title>Support PP on tpu_inference</title>
-    <link>https://github.com/vllm-project/vllm/pull/27296</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
-    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
