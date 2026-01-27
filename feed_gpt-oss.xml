@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 27 Jan 2026 19:14:56 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 27 Jan 2026 19:31:25 +0000</lastBuildDate>
   <item>
     <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/33178</link>
