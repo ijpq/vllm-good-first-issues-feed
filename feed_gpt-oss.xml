@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 27 Jan 2026 14:55:14 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 27 Jan 2026 15:12:05 +0000</lastBuildDate>
   <item>
     <title>[Model] GPT-OSS: Use layer_types config for sliding window selection</title>
     <link>https://github.com/vllm-project/vllm/pull/33124</link>
@@ -190,26 +190,6 @@ Replaces the duplicated type definitions and getter dictionary pattern with a un
 ### New Package Structure
 - `vllm/envs/__init__.py`: Module interface with `__getattr__` for dynamic variable access and automatic type conversion
 - `vllm/envs/_variables.py`: Single sour
-
-...</description>
-  </item>
-  <item>
-    <title>[5/N][Attention] Finish eliminating `vllm/attention` folder</title>
-    <link>https://github.com/vllm-project/vllm/pull/32064</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32064</guid>
-    <pubDate>Fri, 09 Jan 2026 23:03:42 +0000</pubDate>
-    <description>Merge https://github.com/vllm-project/vllm/pull/32060 before this.
-
-## Purpose
-Step 5 of #31919: This PR finishes eliminating the `vllm/attention` folder by doing the following:
-* Split `vllm/attention/layer.py` into `vllm/model_executor/layers/attention/mla_attention.py` (`MLAAttention`, `unified_mla_attention`) and `vllm/model_executor/layers/attention/attention.py` (`Attention`, `unified_attention`)
-* Move `vllm/attention/utils/kv_sharing_utils.py` content into `vllm/model_executor/layers/attention/attention.py`
-* Move `vllm/attention/utils/kv_transfer_utils.py` to `vllm/model_executor/layers/attention/kv_transfer_utils.py`
-* Eliminate `vllm/attention` folder
-* Add imports to `vllm/model_executor/layers/attention/__init__.py` to enable module-level imports
-
-## Test Plan
-CI (should run a
 
 ...</description>
   </item>
@@ -612,32 +592,6 @@ When using GPT-OSS, `model_identity` passed in from `chat_template_kwargs` is no
 - [ ] (Optional) Release notes update. If you
 
 ...</description>
-  </item>
-  <item>
-    <title>Feat/support nemotron h mtp wip</title>
-    <link>https://github.com/vllm-project/vllm/pull/30208</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30208</guid>
-    <pubDate>Sun, 07 Dec 2025 13:46:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
   <item>
     <title>[Perf] Add benchmark script for triton unified attention kernel performance</title>
@@ -1136,6 +1090,69 @@ Override
                             &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
                             &quot;reasoning_effort&quot;: &quot;high&quot;,
                        
+
+...</description>
+  </item>
+  <item>
+    <title>Support PP on tpu_inference</title>
+    <link>https://github.com/vllm-project/vllm/pull/27296</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
+    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
+&lt;/details&gt;
+
+</description>
+  </item>
+  <item>
+    <title>Experimental attention backend in helion</title>
+    <link>https://github.com/vllm-project/vllm/pull/27293</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27293</guid>
+    <pubDate>Tue, 21 Oct 2025 20:10:50 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+
+very experimental and draft PR so far
+
+## Test Plan
+
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN vllm serve meta-llama/Llama-3.1-8B-Instruct 
+```
+## Test Result
+
+Performance see upcoming publications. 
+Correctness:
+```
+VLLM_ATTENTION_BAKCEND=EXPERIMENTAL_HELION_ATTN lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks gsm8k --num_fewshot 5 --batch_size auto --limit 500
+```
+results in 
+```
+|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|-----|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.798|±  |0.0180|
+|     |       |strict-match    |     5|exact_match|↑  |0.780|±  |0.0185|
+```
+
+---
+&lt;details&gt;
+&lt;summary&gt; Ess
 
 ...</description>
   </item>
