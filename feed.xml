@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 28 Jan 2026 15:01:40 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 28 Jan 2026 15:17:12 +0000</lastBuildDate>
   <item>
     <title>[Feature][Help Wanted]: Add tuning script and config files for Mamba selective_state_update kernel</title>
     <link>https://github.com/vllm-project/vllm/issues/33034</link>
