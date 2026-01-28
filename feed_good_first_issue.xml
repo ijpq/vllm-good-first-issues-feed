@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 28 Jan 2026 07:26:56 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 28 Jan 2026 07:41:28 +0000</lastBuildDate>
   <item>
     <title>[Feature][Help Wanted]: Add tuning script and config files for Mamba selective_state_update kernel</title>
     <link>https://github.com/vllm-project/vllm/issues/33034</link>
@@ -89,12 +89,12 @@ Also, the [related documentation](https://github.com/vllm-project/vllm/blob/e83b
 Similar to how https://github.com/vllm-project/vllm/pull/25954 extracts it from FlashAttn. Ideally, we want to cover all backends with kv-cache update from `v1/attention/backends`.
 
 Backends:
-- [x] FlashAttention - In progress
+- [x] FlashAttention
 - [ ] FlashInfer
 - [ ] AiterFlashAttention
-- [ ] RocmAiterUnifiedAttention
-- [ ] RocmAttention
-- [ ] TritonAttention
+- [x] RocmAiterUnifiedAttention
+- [x] RocmAttention
+- [x] TritonAttention
 - [ ] FlashAttentionDiffKV
 - [ ] FlexAttention
 - [ ] TreeAttention
@@ -119,7 +119,8 @@ _No response_
 
 _No response_
 
-### Before submitting a
+### Before submitting a new issue...
+
 
 ...</description>
   </item>
