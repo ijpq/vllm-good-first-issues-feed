@@ -5,7 +5,30 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 28 Jan 2026 16:07:10 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 28 Jan 2026 16:22:57 +0000</lastBuildDate>
+  <item>
+    <title>[Feature]: Remove attention layer name from `unified_kv_cache_update`</title>
+    <link>https://github.com/vllm-project/vllm/issues/33267</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/33267</guid>
+    <pubDate>Wed, 28 Jan 2026 16:22:54 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+`unified_kv_cache_update` appears in piecewise cudagraph regions, and each layer has a different name, so each of these have to be compiled separately. This increases cold start compilation time with Dynamo partition because the graphs can no longer be reused.
+
+We should use the same approach as #32805 and #33184 to iterate through the layers in the forward context.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_
+
+### Before submitting a new issue...
+
+- [x] Make sure you already searched for relevant issues, and asked the chatbot living at the bottom right corner of the [documentation page](https://docs.vllm.ai/en/latest/), which can answer lots of frequently asked questions.</description>
+  </item>
   <item>
     <title>[Feature][Help Wanted]: Add tuning script and config files for Mamba selective_state_update kernel</title>
     <link>https://github.com/vllm-project/vllm/issues/33034</link>
