@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 28 Jan 2026 13:32:29 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 28 Jan 2026 13:54:43 +0000</lastBuildDate>
   <item>
     <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/33178</link>
@@ -140,22 +140,18 @@ python -m vllm.entrypoints.openai.api_server \
 ...</description>
   </item>
   <item>
-    <title>[Refactor] Extract KV-cache update logic for TritonAttention backend</title>
+    <title>[Refactor] Extract KV-cache update logic for FlashAttentionDiffKV backend</title>
     <link>https://github.com/vllm-project/vllm/pull/32509</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32509</guid>
     <pubDate>Sat, 17 Jan 2026 08:28:16 +0000</pubDate>
-    <description># PR Title: [Refactor] Extract KV-Cache Update for TritonAttention Backend
+    <description>This PR extracts KV-cache update logic from the forward method for the FlashAttentionDiffKV backend, following the pattern established in #25954.
 
-## Description
-This PR extracts the `kv-cache` update logic for the `TritonAttention` backend into a separate method `do_kv_cache_update`. This improves code organization and allows for better reusability of the update logic.
+Changes:
+- Added forward_includes_kv_cache_update: bool = False flag to FlashAttentionDiffKVBackend
+- Extracted KV-cache update logic into do_kv_cache_update method in FlashAttentionDiffKVImpl
+- Removed KV-cache update logic from the forward method
 
-## Changes
-- Modified `vllm/v1/attention/backends/triton_attn.py` to move the KV cache update logic into `do_kv_cache_update`.
-
-## Verification
-- Code style checks passed.
-- Pre-commit hooks run.
-</description>
+Related to issue #32335</description>
   </item>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
