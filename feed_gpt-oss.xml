@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 28 Jan 2026 10:07:50 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 28 Jan 2026 10:22:43 +0000</lastBuildDate>
   <item>
     <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/33178</link>
@@ -138,6 +138,24 @@ python -m vllm.entrypoints.openai.api_server \
   --model
 
 ...</description>
+  </item>
+  <item>
+    <title>[Refactor] Extract KV-cache update logic for TritonAttention backend</title>
+    <link>https://github.com/vllm-project/vllm/pull/32509</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32509</guid>
+    <pubDate>Sat, 17 Jan 2026 08:28:16 +0000</pubDate>
+    <description># PR Title: [Refactor] Extract KV-Cache Update for TritonAttention Backend
+
+## Description
+This PR extracts the `kv-cache` update logic for the `TritonAttention` backend into a separate method `do_kv_cache_update`. This improves code organization and allows for better reusability of the update logic.
+
+## Changes
+- Modified `vllm/v1/attention/backends/triton_attn.py` to move the KV cache update logic into `do_kv_cache_update`.
+
+## Verification
+- Code style checks passed.
+- Pre-commit hooks run.
+</description>
   </item>
   <item>
     <title>[Frontend] Add encrypted_content to reasoning items for round-tripping</title>
@@ -1113,32 +1131,6 @@ Override
                        
 
 ...</description>
-  </item>
-  <item>
-    <title>Support PP on tpu_inference</title>
-    <link>https://github.com/vllm-project/vllm/pull/27296</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
-    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
