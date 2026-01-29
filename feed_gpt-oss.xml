@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 29 Jan 2026 12:22:51 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 29 Jan 2026 12:45:25 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add tool_choice=required support for GPT-OSS Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33306</link>
