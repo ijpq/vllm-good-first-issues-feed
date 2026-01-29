@@ -5,7 +5,36 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 29 Jan 2026 05:15:31 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 29 Jan 2026 05:35:33 +0000</lastBuildDate>
+  <item>
+    <title>[Model] Add tool_choice=required support for GPT-OSS Harmony models</title>
+    <link>https://github.com/vllm-project/vllm/pull/33306</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33306</guid>
+    <pubDate>Thu, 29 Jan 2026 05:22:47 +0000</pubDate>
+    <description>  ## Summary
+
+  This PR adds `tool_choice=&quot;required&quot;` support for GPT-OSS Harmony models. When `tool_choice=&quot;required&quot;` is set, the model is forced to generate tool calls instead of plain text responses.
+
+  ### Test Results
+
+  | Metric | Before | After |
+  |--------|--------|-------|
+  | Success Rate | 91.0% (91/100) | **100.0% (100/100)** |
+  | no_tool_calls failures | 9 | 0 |
+
+  Test script: https://github.com/gkswns0531/vllm-gpt_oss-tool_call-required-Test-Case-Script
+
+  ### Implementation
+
+  Uses `bad_words` token sequences to block non-tool-call generation paths:
+
+  1. **Dynamic token lookup**: Harmony special token IDs (`&lt;|end|&gt;`, `&lt;|start|&gt;`, `&lt;|channel|&gt;`, `&lt;|message|&gt;`) are looked up dynamically from the vocabulary.
+
+  2. **Blocked sequences**:
+     - `&lt;|end|&gt;&lt;|start|&gt;assistant&lt;|c
+
+...</description>
+  </item>
   <item>
     <title>[Quantization] - Consolidate experts_int8 with FP8 Modular Kernels</title>
     <link>https://github.com/vllm-project/vllm/pull/33178</link>
@@ -1105,32 +1134,6 @@ Override
                        
 
 ...</description>
-  </item>
-  <item>
-    <title>Support PP on tpu_inference</title>
-    <link>https://github.com/vllm-project/vllm/pull/27296</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27296</guid>
-    <pubDate>Tue, 21 Oct 2025 21:58:37 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-## Test Plan
-
-## Test Result
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://docs.google.com/document/d/1YyVqrgX4gHTtrstbq8oWUImOyPCKSGnJ7xtTpmXzlRs/edit?tab=t.0).
-&lt;/details&gt;
-
-</description>
   </item>
 </channel>
 </rss>
