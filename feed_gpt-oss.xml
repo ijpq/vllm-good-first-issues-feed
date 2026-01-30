@@ -5,25 +5,32 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 30 Jan 2026 06:54:43 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 30 Jan 2026 07:19:23 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add tool_choice=required support for GPT-OSS Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33306</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33306</guid>
     <pubDate>Thu, 29 Jan 2026 05:22:47 +0000</pubDate>
-    <description>  ## Summary
+    <description>## Summary
 
-  This PR adds `tool_choice=&quot;required&quot;` support for GPT-OSS Harmony models. When `tool_choice=&quot;required&quot;` is set, the model is forced to generate tool calls instead of plain text responses.
+This PR adds `tool_choice=&quot;required&quot;` support for GPT-OSS Harmony models.  
+When `tool_choice=&quot;required&quot;` is set, the model is forced to generate tool calls instead of plain text responses.
 
-### Problem
+---
 
-GPT-OSS models use the Harmony chat format, which differs from standard models in its response generation behavior. Even when `tool_choice=&quot;required&quot;` is set, these models tend to generate direct text responses instead of tool calls, resulting in only 91% success rate for tool call generation.
+## Problem
 
-### Solution
+GPT-OSS models use the Harmony chat format, which differs from standard models in its response generation behavior.  
+Even when `tool_choice=&quot;required&quot;` is set, these models tend to generate direct text responses instead of tool calls, resulting in only **91% success rate** for tool call generation.
 
-Harmony format models select one of three channels (`final`, `analysis`, `commentary`) after completing their internal processing. Tool calls are only generated through the `commentary` channel with a specified recipient. 
+---
 
-This PR blocks non-tool-call generation paths by
+## Solution
+
+Harmony format models select one of three channels (`final`, `analysis`, `commentary`) after completing their internal processing.  
+Tool calls are only generated through the `commentary` channel with a specified recipient.
+
+This PR uses a **LogitsProcessor-ba
 
 ...</description>
   </item>
