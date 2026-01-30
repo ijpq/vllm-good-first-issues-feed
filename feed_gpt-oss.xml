@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 30 Jan 2026 01:09:01 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 30 Jan 2026 01:54:11 +0000</lastBuildDate>
   <item>
     <title>[Frontend] Add tool_choice=required support for GPT-OSS Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33306</link>
@@ -157,6 +157,30 @@ Applied the sanitizer for function call events and stripped control tokens from 
 ```
 python -m vllm.entrypoints.openai.api_server \
   --model
+
+...</description>
+  </item>
+  <item>
+    <title>[MoE Refactor] Create MK for TRTLLM Kernels</title>
+    <link>https://github.com/vllm-project/vllm/pull/32564</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32564</guid>
+    <pubDate>Mon, 19 Jan 2026 02:12:32 +0000</pubDate>
+    <description>## Purpose
+* convert TRTLLM Kernels into the modular kernel framework
+* introduce the concept of a monolithic kernel to the mk framework
+* remove HACK for the nvfp4 quant pre-AG
+
+MoE refactor CI
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://
 
 ...</description>
   </item>
@@ -1098,32 +1122,6 @@ Previously, the responses are empty because of an issue in openai/harmony. (http
 https://github.com/vllm-project/vllm/pull/26185 implements most of the fix, but these aren&#x27;t actually invoked, at least not when serving the model through the `vllm serve`. The reason is that the said PR specifies `when_used=&quot;json&quot;`. Thus, this serialization method is ignored because of the use of `model_dump()` in [vllm/entrypoints/openai/api_server.py#L527-L529](https://github.com/vllm-project/vllm/blob/a0003b56b0b822c52bb0f3035c164370a802e6f5/vllm/entrypoints/openai/api_server.py#L527-L529).
 
 The fix is to trigger
-
-...</description>
-  </item>
-  <item>
-    <title>[Frontend][gpt-oss] Allow system message to overwrite model identity</title>
-    <link>https://github.com/vllm-project/vllm/pull/27310</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27310</guid>
-    <pubDate>Wed, 22 Oct 2025 00:57:44 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-The current way of implementation forces the system prompt to go into the developer message and it confuses the usage of different roles. We should have developer into developer message, and allow system message to override the system prompt as supported by signature of harmony_utils.py
-
-## Test Result
-Override
-            &quot;openai_harmony_message&quot;: {
-                &quot;author&quot;: {
-                    &quot;role&quot;: &quot;system&quot;
-                },
-                &quot;content&quot;: [
-                    {
-                        &quot;system_content&quot;: {
-                            &quot;type&quot;: &quot;system_content&quot;,
-                            &quot;model_identity&quot;: &quot;You are a helpful agent reponds in Chinese.&quot;,
-                            &quot;reasoning_effort&quot;: &quot;high&quot;,
-                       
 
 ...</description>
   </item>
