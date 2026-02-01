@@ -5,7 +5,26 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sun, 01 Feb 2026 20:25:52 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 01 Feb 2026 20:41:50 +0000</lastBuildDate>
+  <item>
+    <title>[Bugfix] Fix tool call streaming for gpt-oss/Harmony models</title>
+    <link>https://github.com/vllm-project/vllm/pull/33520</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33520</guid>
+    <pubDate>Sun, 01 Feb 2026 20:26:20 +0000</pubDate>
+    <description>## Summary
+
+This PR fixes several issues with tool call handling for gpt-oss models using the Harmony streaming parser:
+
+1. **IndexError in streaming generator**: Added `auto_tools_called` check before accessing `prev_tool_call_arr` to prevent IndexError when the array is empty.
+
+2. **Missing tool call IDs in non-streaming responses**: Added proper ID generation for named tool choice and auto tool choice cases that were missing the required `id` field.
+
+3. **Split tool calls in streaming**: Fixed an issue where a single tool call was being split into multiple entries because:
+   - Tool call IDs are now stored by recipient name (e.g., `functions.glob`) instead of index number, since `base_index` changes between streaming calls as messages complete.
+   - Continuation chunks now include the s
+
+...</description>
+  </item>
   <item>
     <title>[Bugfix] Fix gpt-oss chat format mismatch with HuggingFace</title>
     <link>https://github.com/vllm-project/vllm/pull/33514</link>
@@ -1096,41 +1115,6 @@ pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-o
 - [ ] The test results, such as pasting the results comparison before and after, or e2e results
 - [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
 - [ ] (Optional) Release notes update. If your change is user facing, please update the releas
-
-...</description>
-  </item>
-  <item>
-    <title>[Bug]: gptoss calls built-in tool when no tools are given</title>
-    <link>https://github.com/vllm-project/vllm/issues/27385</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/27385</guid>
-    <pubDate>Thu, 23 Oct 2025 04:01:36 +0000</pubDate>
-    <description>### Your current environment
-
-&lt;details&gt;
-&lt;summary&gt;The output of &lt;code&gt;python collect_env.py&lt;/code&gt;&lt;/summary&gt;
-
-```text
-==============================
-        System Info
-==============================
-OS                           : Ubuntu 20.04.6 LTS (x86_64)
-GCC version                  : (Ubuntu 11.4.0-2ubuntu1~20.04) 11.4.0
-Clang version                : Could not collect
-CMake version                : version 3.29.2
-Libc version                 : glibc-2.31
-
-==============================
-       PyTorch Info
-==============================
-PyTorch version              : 2.8.0+cu128
-Is debug build               : False
-CUDA used to build PyTorch   : 12.8
-ROCM used to build PyTorch   : N/A
-
-==============================
-      Python Environment
-==============================
-Python version
 
 ...</description>
   </item>
