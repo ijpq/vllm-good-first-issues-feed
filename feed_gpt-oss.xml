@@ -5,7 +5,30 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 02 Feb 2026 18:43:07 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 02 Feb 2026 23:06:44 +0000</lastBuildDate>
+  <item>
+    <title>Allow other models to use the Harmony format</title>
+    <link>https://github.com/vllm-project/vllm/pull/33610</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33610</guid>
+    <pubDate>Mon, 02 Feb 2026 22:35:07 +0000</pubDate>
+    <description>This PR allows other, non-GPT-OSS models, to be used with the OpenAI Harmony format.
+
+Prior to this PR, the `openai` tool call parser would crash with &quot;OpenAIToolParser requires token IDs and does not support text-based extraction.&quot; for any such model.</description>
+  </item>
+  <item>
+    <title>[Model] Use layer_types config for sliding window selection in GPT-OSS</title>
+    <link>https://github.com/vllm-project/vllm/pull/33594</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33594</guid>
+    <pubDate>Mon, 02 Feb 2026 21:20:09 +0000</pubDate>
+    <description>## Summary
+- Read layer_types from model config instead of hardcoded even/odd pattern
+- sliding_attention layers use sliding window, full_attention uses full context
+- Fallback to legacy behavior if layer_types not specified
+
+## Test plan
+- [ ] Test with GPT-OSS model that has layer_types in config
+- [ ] Verify fallback behavior with model without layer_types</description>
+  </item>
   <item>
     <title>[Bugfix] Fix tool call streaming for gpt-oss/Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33520</link>
@@ -112,18 +135,6 @@ Consolidates `experts_int8` and `Fp8OnlineMoEMethod` to share common weight load
     - setup_kernel() - kernel setup after quantization
  
 This PR relies on this [PR](https://github.com/vllm-project/vllm/pull/31914) and need it 
-
-...</description>
-  </item>
-  <item>
-    <title>[Model] GPT-OSS: Use layer_types config for sliding window selection</title>
-    <link>https://github.com/vllm-project/vllm/pull/33124</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33124</guid>
-    <pubDate>Mon, 26 Jan 2026 23:59:22 +0000</pubDate>
-    <description>## Summary                                                                
-  - Use layer_types from config for sliding window layer selection instead of hardcoded even/odd pattern                                                                                                                                                                    
-  - Add routing simulation override for MXFP4 quantized MoE (uniform_random strategy)                                                                                                                                                                                       
-                                                                                                                                                                                           
 
 ...</description>
   </item>
@@ -1093,27 +1104,6 @@ Here is the original error traceback w/o this PR fixing.
 Here is a check list of some models defined in `vllm/model_executor/models/` for the supportness of quantized kv cache loading. Models with `get_cache_scale` called is marked as ✅, while models without `get_cache_scale` called is marked as ⚠️.
 
 The ⚠️ symbol is preferred over ❌ since some models can intrinsically have non-quantized KV cache, for i
-
-...</description>
-  </item>
-  <item>
-    <title>[Bugfix] Handle escaped characters in GLM tool parser to prevent double serialization</title>
-    <link>https://github.com/vllm-project/vllm/pull/27970</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27970</guid>
-    <pubDate>Mon, 03 Nov 2025 08:37:00 +0000</pubDate>
-    <description>## Purpose
-
-This PR fixes a bug where the tool call parser fails when the model&#x27;s output contains literal escaped characters, such as `\n`, `\&quot;`.
-
-**The Problem:**
-When GLM-4 outputs tool calls, the XML may contain &#x27;\n&#x27; literal characters and the JSON content within `&lt;arg_value&gt;` tags may contain escaped characters like `\&quot;`, causing regex matching and json parsing both failed. For example:
-
-```
-&lt;tool_call&gt;todo_write\n&lt;arg_key&gt;todos&lt;/arg_key&gt;\n&lt;arg_value&gt;[{\&quot;id\&quot;: \&quot;1\&quot;, \&quot;task\&quot;: \&quot;检查后端代码中的硬编码问题\&quot;, \&quot;status\&quot;: \&quot;in_progress\&quot;}, {\&quot;id\&quot;: \&quot;2\&quot;, \&quot;task\&quot;: \&quot;检查前端代码中的硬编码问题\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}, {\&quot;id\&quot;: \&quot;3\&quot;, \&quot;task\&quot;: \&quot;检查违反单一职责的代码\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}, {\&quot;id\&quot;: \&quot;4\&quot;, \&quot;task\&quot;: \&quot;创建整改建议报告\&quot;, \&quot;status\&quot;: \&quot;pending\&quot;}]&lt;/arg_value&gt;
-&lt;/tool_call&gt;
-```
-
-The current regex fails to ma
 
 ...</description>
   </item>
