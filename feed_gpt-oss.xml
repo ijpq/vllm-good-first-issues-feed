@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 02 Feb 2026 09:05:11 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 02 Feb 2026 09:28:28 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix tool call streaming for gpt-oss/Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33520</link>
@@ -41,6 +41,29 @@ Related [#33210](https://github.com/vllm-project/vllm/issues/33210)
 
                                                                                                               
 **Problem:**                                                                                                              
+
+...</description>
+  </item>
+  <item>
+    <title>PR Title: [Feature] EWSJF: Adaptive Scheduler for Mixed-Workloads (30-50% Throughput Gain)</title>
+    <link>https://github.com/vllm-project/vllm/pull/33392</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33392</guid>
+    <pubDate>Fri, 30 Jan 2026 06:10:50 +0000</pubDate>
+    <description>**Summary**  
+This PR introduces EWSJF (Effective Workload‑based Shortest Job First), an adaptive request‑level scheduler designed to eliminate Head‑of‑Line (HoL) blocking in mixed workloads that combine short interactive queries with long batch requests.
+
+The design aligns with RFC #24484 on mitigating HoL blocking and RFC #24484 on pluggable scheduler interfaces.
+
+By grouping requests into performance‑homogeneous queues and applying a density‑weighted scoring function, EWSJF improves both throughput and tail latency compared to the default FCFS scheduler.
+
+**Key Results**  
+Benchmarks (Llama‑2‑13B, NVIDIA A100, Poisson arrivals):
+
+- Token Throughput: +30% to +54%  
+- TTFT (Short Requests): Up to 4× reduction  
+- GPU Utilization: ~65% → ~80%
+
+Full technical report: https://arxiv.org/abs/2
 
 ...</description>
   </item>
@@ -1090,33 +1113,6 @@ achieved 60% throughput increase compared to #[24588](https://github.com/vllm-pr
 
 &lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
 </description>
-  </item>
-  <item>
-    <title>[CI/Build] Add aime25 eval to gpt-oss CI</title>
-    <link>https://github.com/vllm-project/vllm/pull/27398</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27398</guid>
-    <pubDate>Thu, 23 Oct 2025 07:38:49 +0000</pubDate>
-    <description>## Purpose
-This PR added eval config for gpt-oss-120b on H100. 
-
-## Test Plan
-pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-oss.txt --tp-size=1
-
-## Test Result
-
-1 passed, 6 warnings in 455.90s (0:07:35) 
-
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
-
-- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
-- [ ] The test plan, such as providing test command.
-- [ ] The test results, such as pasting the results comparison before and after, or e2e results
-- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
-- [ ] (Optional) Release notes update. If your change is user facing, please update the releas
-
-...</description>
   </item>
 </channel>
 </rss>
