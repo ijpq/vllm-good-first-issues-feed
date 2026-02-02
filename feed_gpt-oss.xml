@@ -5,24 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 02 Feb 2026 01:26:40 +0000</lastBuildDate>
-  <item>
-    <title>[Fix] prefix cache hit rate == 0 bug with gpt-oss style models</title>
-    <link>https://github.com/vllm-project/vllm/pull/33524</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33524</guid>
-    <pubDate>Sun, 01 Feb 2026 23:13:18 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-With the same purpose as PR #33270, this PR is another simple workaround for issue #32802.
-
-This PR checks GPT-oss style models, which consist of 1 Full Attn group and 1 SWA group, and handles it as a special case where the while loop for convergence check is unnecessary. This addresses the EAGLE spiral block drop bug, and also helps slightly with the efficiency because the while loop is not needed for such simple hybrid models anyway.
-
-However, it is worth noting that for more complicated models with multiple attention groups, this PR does not fully address the EAGLE spiral block drop issue either. A general fix to this issue cannot directly cache the hit_blocks list returned by each attention type, because SWA attn and Mamba-style attn do not fo
-
-...</description>
-  </item>
+  <lastBuildDate>Mon, 02 Feb 2026 02:20:58 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix tool call streaming for gpt-oss/Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33520</link>
@@ -1107,6 +1090,33 @@ achieved 60% throughput increase compared to #[24588](https://github.com/vllm-pr
 
 &lt;img width=&quot;3918&quot; height=&quot;1996&quot; alt=&quot;36117&quot; src=&quot;https://github.com/user-attachments/assets/ad93165c-6869-4a01-8c5b-836f4421f656&quot; /&gt;
 </description>
+  </item>
+  <item>
+    <title>[CI/Build] Add aime25 eval to gpt-oss CI</title>
+    <link>https://github.com/vllm-project/vllm/pull/27398</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27398</guid>
+    <pubDate>Thu, 23 Oct 2025 07:38:49 +0000</pubDate>
+    <description>## Purpose
+This PR added eval config for gpt-oss-120b on H100. 
+
+## Test Plan
+pytest -s -v test_lm_eval_correctness.py --config-list-file=configs/models-gpt-oss.txt --tp-size=1
+
+## Test Result
+
+1 passed, 6 warnings in 455.90s (0:07:35) 
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the releas
+
+...</description>
   </item>
 </channel>
 </rss>
