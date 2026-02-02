@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Mon, 02 Feb 2026 10:32:38 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 02 Feb 2026 10:56:54 +0000</lastBuildDate>
   <item>
     <title>[Bugfix] Fix tool call streaming for gpt-oss/Harmony models</title>
     <link>https://github.com/vllm-project/vllm/pull/33520</link>
@@ -30,8 +30,7 @@ This PR fixes several issues with tool call handling for gpt-oss models using th
     <link>https://github.com/vllm-project/vllm/pull/33514</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33514</guid>
     <pubDate>Sun, 01 Feb 2026 18:41:59 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
+    <description>
 ## Purpose
 
 
@@ -40,7 +39,7 @@ Fix gpt-oss chat format mismatch with HuggingFace `apply_chat_template` output.
 Related [#33210](https://github.com/vllm-project/vllm/issues/33210)
 
                                                                                                               
-**Problem:**                                                                                                              
+**Problem:**                                                                                                                                            
 
 ...</description>
   </item>
