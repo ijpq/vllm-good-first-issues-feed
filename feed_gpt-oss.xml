@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 03 Feb 2026 17:25:59 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 03 Feb 2026 17:50:21 +0000</lastBuildDate>
   <item>
     <title>[Draft] Move Harmony encoding to renderer layer and add gRPC render server</title>
     <link>https://github.com/vllm-project/vllm/pull/33693</link>
