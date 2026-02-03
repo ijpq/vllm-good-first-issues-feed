@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 03 Feb 2026 06:32:37 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 03 Feb 2026 06:58:17 +0000</lastBuildDate>
   <item>
     <title>Allow other models to use the Harmony format</title>
     <link>https://github.com/vllm-project/vllm/pull/33610</link>
@@ -225,6 +225,44 @@ requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://h
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent 
+
+...</description>
+  </item>
+  <item>
+    <title>[Core] Support `min_tokens` with speculative decoding</title>
+    <link>https://github.com/vllm-project/vllm/pull/32642</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32642</guid>
+    <pubDate>Tue, 20 Jan 2026 06:34:03 +0000</pubDate>
+    <description>
+## Purpose
+
+Allow `min_tokens` in speculative decoding by masking stop tokens during rejection sampling.
+
+## Test Plan
+
+Run the server with speculative decoding enabled (example):
+
+1. 
+```sh
+vllm serve deepseek-ai/DeepSeek-V3.2 \
+		--tensor-parallel-size 8 \
+		--tokenizer-mode deepseek_v32 \
+		--tool-call-parser deepseek_v32 \
+		--enable-auto-tool-choice \
+		--reasoning-parser deepseek_v3 \
+		--speculative_config &#x27;{&quot;num_speculative_tokens&quot;:1, &quot;method&quot;:&quot;deepseek_mtp&quot;}&#x27;
+```
+
+2.
+```sh
+CUDA_VISIBLE_DEVICES=0 vllm serve meta-llama/Llama-3.1-8B-Instruct     --tensor-parallel-size 1 --speculative_config &#x27;{&quot;num_speculative_tokens&quot;:1, &quot;method&quot;:&quot;eagle3&quot;,&quot;model&quot;:&quot;lmsys/SGLang-EAGLE3-Llama-3.1-8B-Instruct-SpecForge&quot;}&#x27; --max-model-len 16384
+```
+
+Then exercise `min_tokens` in an API call:
+
+1.
+```sh
+cur
 
 ...</description>
   </item>
@@ -1085,25 +1123,6 @@ It is only added to the Responses API path for now, but it should be able to fix
 Guided decoding for the gpt-oss chat format should only be enabled if `structured_outputs_config.enable_in_reasoning` is True, since the chat format is technically in the reasoning section of model output. It also lets us continue to use structured outputs for the content of the final message. `structured_outputs_config.reasoning_parser` is set by default for gpt-oss. 
 
 TODO: test that structured output works alongside this after #28000 is merged, and adju
-
-...</description>
-  </item>
-  <item>
-    <title>[Quantization] quantized kv cache loading for models like qwen</title>
-    <link>https://github.com/vllm-project/vllm/pull/27980</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/27980</guid>
-    <pubDate>Mon, 03 Nov 2025 12:03:40 +0000</pubDate>
-    <description>## Purpose
-This PR aims to fix quantized kv cache model loading issues using AMD-Quark. 
-The fix was initially applied to the `gpt-oss` model and may be extended to other models in `vllm/model_executor/models`, as they share a nearly identical methodology.
-
-Here is the original error traceback w/o this PR fixing.
-&lt;img width=&quot;1219&quot; height=&quot;468&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/1ce1b92e-04a9-404a-91da-f06151cd54c9&quot; /&gt;
-
-##
-Here is a check list of some models defined in `vllm/model_executor/models/` for the supportness of quantized kv cache loading. Models with `get_cache_scale` called is marked as ✅, while models without `get_cache_scale` called is marked as ⚠️.
-
-The ⚠️ symbol is preferred over ❌ since some models can intrinsically have non-quantized KV cache, for i
 
 ...</description>
   </item>
