@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Tue, 03 Feb 2026 07:24:41 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 03 Feb 2026 07:46:12 +0000</lastBuildDate>
   <item>
     <title>Allow other models to use the Harmony format</title>
     <link>https://github.com/vllm-project/vllm/pull/33610</link>
@@ -113,7 +113,7 @@ Even when `tool_choice=&quot;required&quot;` is set, these models tend to genera
 Harmony format models select one of three channels (`final`, `analysis`, `commentary`) after completing their internal processing.  
 Tool calls are only generated through the `commentary` channel with a specified recipient.
 
-This PR uses a **LogitsProcessor-ba
+This PR uses a *
 
 ...</description>
   </item>
