@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 04 Feb 2026 15:31:39 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 04 Feb 2026 15:54:59 +0000</lastBuildDate>
   <item>
     <title>[Draft] Move Harmony encoding to renderer layer and add gRPC render server</title>
     <link>https://github.com/vllm-project/vllm/pull/33693</link>
@@ -123,11 +123,12 @@ This PR enables models with multiple KV-cache groups to be used as drafters in s
 
 Fixes https://github.com/vllm-project/vllm/issues/33133
 
-## New Test Cases
+&lt;details&gt;
+&lt;summary&gt;Try it: GPT-OSS 120b + 20b&lt;/summary&gt;
 
-Two new end-to-end test cases validate the feature:
-
-1. **Gemma3 (270m)**: Tests a model arch
+```bash
+vllm serve openai/gpt-oss-120b \
+  --no-enable-
 
 ...</description>
   </item>
