@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 04 Feb 2026 08:37:29 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 04 Feb 2026 08:59:50 +0000</lastBuildDate>
   <item>
     <title>[Draft] Move Harmony encoding to renderer layer and add gRPC render server</title>
     <link>https://github.com/vllm-project/vllm/pull/33693</link>
@@ -153,22 +153,6 @@ Consolidates `experts_int8` and `Fp8OnlineMoEMethod` to share common weight load
     - setup_kernel() - kernel setup after quantization
  
 This PR relies on this [PR](https://github.com/vllm-project/vllm/pull/31914) and need it 
-
-...</description>
-  </item>
-  <item>
-    <title>[Model] Video Frame Sparsification via Pixel-Level Similarity for Efficient Multimodal Long-Video Inference for Qwen2.5_vl and Qwen3_vl</title>
-    <link>https://github.com/vllm-project/vllm/pull/32845</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/32845</guid>
-    <pubDate>Thu, 22 Jan 2026 10:29:31 +0000</pubDate>
-    <description>## Purpose
-
-RFC: https://github.com/vllm-project/vllm/issues/31803
-
-The exponential growth of video content and the rising demand for long-video intelligence (e.g., video summarization, multimodal QA, video generation) have made long-video inference a standard requirement for multimodal large models. Current models suffer from critical efficiency bottlenecks and face two key challenges: temporal and spatial redundancy of videos and input sequence overflow, thus necessitating a lightweight, adaptive, and scalable sparsification solution. This PR proposes a video sparsification scheme that adaptively selects key frames based on video inter-frame similarity and user-defined sparsity rates, and it has been compatible with Qwen2.5-VL and Qwen3-VL.
-
-## Implementation details
-This solution implem
 
 ...</description>
   </item>
@@ -1125,6 +1109,22 @@ To fix this, a non-strict mode was added to the openai-harmony library to allow 
 
 This will resolve some cases where the error
 `openai_harmony.HarmonyError: unexpected tokens remaining in message header` was previously thrown. It will not resolve all of those, as not every malformed message output can be recovered. Other ongoing work around using structured output for the Harmony format c
+
+...</description>
+  </item>
+  <item>
+    <title>[Frontend] [gpt-oss] Chat format GD for tool calling with gptoss</title>
+    <link>https://github.com/vllm-project/vllm/pull/28148</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28148</guid>
+    <pubDate>Wed, 05 Nov 2025 18:17:40 +0000</pubDate>
+    <description>## Purpose
+Building on top of the initial gpt-oss reasoning parser in #25515, this PR fleshes out the full structural tags schema to guide the chat format for gpt-oss.
+
+It is only added to the Responses API path for now, but it should be able to fix issues like the ones mentioned in #24954 without needing to make adjustments to Harmony.
+
+Guided decoding for the gpt-oss chat format should only be enabled if `structured_outputs_config.enable_in_reasoning` is True, since the chat format is technically in the reasoning section of model output. It also lets us continue to use structured outputs for the content of the final message. `structured_outputs_config.reasoning_parser` is set by default for gpt-oss. 
+
+TODO: test that structured output works alongside this after #28000 is merged, and adju
 
 ...</description>
   </item>
