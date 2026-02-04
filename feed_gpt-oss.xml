@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Wed, 04 Feb 2026 05:35:16 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 04 Feb 2026 05:59:35 +0000</lastBuildDate>
   <item>
     <title>[Draft] Move Harmony encoding to renderer layer and add gRPC render server</title>
     <link>https://github.com/vllm-project/vllm/pull/33693</link>
@@ -761,7 +761,7 @@ Python version               : 3.12.11
     <description>## gpt-oss120b-w-mxfp4-a-fp8
 
 server:
-&gt; VLLM_ROCM_USE_AITER=1 HIP_VISIBLE_DEVICES=1 VLLM_USE_AITER_UNIFIED_ATTENTION=1 VLLM_ROCM_USE_AITER_MHA=0 VLLM_ROCM_USE_AITER_FUSED_MOE_A16W4=0 vllm serve /data/models/gpt-oss120b-w-mxfp4-a-fp8     --port 8000     --swap-space 64     --max-model-len 10368     --tensor-parallel-size 1     --max-num-seqs 1024     --gpu-memory-utilization 0.95     --no-enable-prefix-caching     --enforce-eager
+&gt; VLLM_ROCM_USE_AITER=1 HIP_VISIBLE_DEVICES=1 VLLM_USE_AITER_UNIFIED_ATTENTION=1 VLLM_ROCM_USE_AITER_MHA=0 vllm serve /data/models/gpt-oss120b-w-mxfp4-a-fp8     --port 8000     --swap-space 64     --max-model-len 10368     --tensor-parallel-size 1     --max-num-seqs 1024     --gpu-memory-utilization 0.95     --no-enable-prefix-caching     --enforce-eager
 
 client:
 &gt; curl http://localhost:8000/v1/completions -H &quot;Content-Type: application/json&quot; -d &#x27;{
@@ -772,7 +772,7 @@ client:
 }&#x27;
 
 output:
-&gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765949222,&quot;model&quot;:&quot;/data/models/gpt-oss120b-w-mxfp4-a-fp
+&gt; {&quot;id&quot;:&quot;cmpl-9e80e71642c56933&quot;,&quot;object&quot;:&quot;text_completion&quot;,&quot;created&quot;:1765949222,&quot;model&quot;:&quot;/data/models/gpt-oss120b-w-mxfp4-a-fp8&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;text&quot;:&quot; city
 
 ...</description>
   </item>
