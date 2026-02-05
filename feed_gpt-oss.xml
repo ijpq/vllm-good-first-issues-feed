@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 05 Feb 2026 14:57:43 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 05 Feb 2026 15:20:34 +0000</lastBuildDate>
   <item>
     <title>[Refactor] Define MoEActivation enum</title>
     <link>https://github.com/vllm-project/vllm/pull/33843</link>
@@ -736,6 +736,25 @@ PR:
     <description></description>
   </item>
   <item>
+    <title>[Release 2.10] Update to Torch 2.10 - final release</title>
+    <link>https://github.com/vllm-project/vllm/pull/30525</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30525</guid>
+    <pubDate>Thu, 11 Dec 2025 23:52:48 +0000</pubDate>
+    <description>&gt; [!NOTE]
+&gt; &lt;sup&gt;[Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) is generating a summary for commit 37af14c52963e6d528866dded7f51985a1fcef7e. Configure [here](https://cursor.com/dashboard?tab=bugbot).&lt;/sup&gt;
+
+---
+
+&gt; [!NOTE]
+&gt; **Upgrade to PyTorch 2.10.0 across the project**
+&gt; 
+&gt; - Bumps `torch/torchaudio/torchvision` to `2.10.0` (and `torchvision 0.25.0`), updates CMake supported torch versions to `2.10.0`, and refreshes related deps (`triton 3.6.0`, `nvidia-nvshmem-cu12 3.4.5`).
+&gt; - Docker: switch PyTorch index to `.../whl/test`, enable `--prerelease=allow` for installs, and plumb test indexes in CUDA and CPU images; add extra-index usage to the python-only compile test.
+&gt; - CI/tooling: pre-commit `pip-compile` now uses test cu129 index; Prime-RL script force-reinstalls torch/visi
+
+...</description>
+  </item>
+  <item>
     <title>[Frontend] Honor chat template for gpt-oss harmony (#23015)</title>
     <link>https://github.com/vllm-project/vllm/pull/30482</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/30482</guid>
@@ -1117,30 +1136,6 @@ python examples/offline_inference/custom_model_with_megatron.py
   - TrainableFlashAttention for attention (with KV cache + backward pass)
   - Ground truth validation against independent PyTorch run
   - Tests TP=4, dynamic batching, train
-
-...</description>
-  </item>
-  <item>
-    <title>Fix/responses api harmony channel metadata    #28262</title>
-    <link>https://github.com/vllm-project/vllm/pull/28355</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28355</guid>
-    <pubDate>Sun, 09 Nov 2025 00:48:27 +0000</pubDate>
-    <description> 
- 
-## Purpose
-Fix issue #28262: Restore missing channel metadata when converting Responses API output items back to Harmony Messages for multi-turn conversations.
-Changes:
-Set channel=&#x27;commentary&#x27; for function_call_output type inputs
-Set channel=&#x27;analysis&#x27; or &#x27;commentary&#x27; for reasoning type based on the following message (commentary if followed by function_call, analysis otherwise)
-Add test to verify channel metadata is correctly preserved across conversation turns
-Update parse_response_input() to accept optional next_msg parameter for context-aware channel assignmen
-## Test Plan
-pytest tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_call_with_previous_input_messages -v
-## Test Result
-pass 
----
-&lt;details&gt;
-&lt;summary&gt; Essential Elements of an Effective PR Description
 
 ...</description>
   </item>
