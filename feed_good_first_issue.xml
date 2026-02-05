@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'good first issue' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 05 Feb 2026 12:47:58 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 05 Feb 2026 13:20:46 +0000</lastBuildDate>
   <item>
     <title>[Feature]: Remove attention layer name from `unified_kv_cache_update`</title>
     <link>https://github.com/vllm-project/vllm/issues/33267</link>
@@ -605,6 +605,24 @@ This issue is a call for help to improve the configs in the following ways:
 
 - Use [`pydantic.Field`](https://docs.pydantic.dev/latest/api/fields/#pydantic.fields.Field) to apply simple constraints, such as `gt=0`, directly to the default values of the dataclass fields ([usage docs](https://docs.pydantic.dev/latest/concepts/fields/))
 - Use [`pydantic.field_validator`](https://docs.pydantic.dev/latest/api/functional_validators/#pydantic.functional_validators.field_validator) to apply more complex field validation to individual fields. ([usage docs](https://docs.pyda
+
+...</description>
+  </item>
+  <item>
+    <title>[Feature]: Tracking Whisper feature requests</title>
+    <link>https://github.com/vllm-project/vllm/issues/25750</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/issues/25750</guid>
+    <pubDate>Fri, 26 Sep 2025 07:54:28 +0000</pubDate>
+    <description>### 🚀 The feature, motivation and pitch
+
+This issue is for keeping track of the recurrent Whisper asks as well as the linked on-going efforts to support that feature, if any. 
+When a feature request has no linked PR, feel free to claim the work here if you want to help!
+
+- [ ] Support different `response_formats` https://platform.openai.com/docs/api-reference/audio/createTranscription
+   - Related issues: https://github.com/vllm-project/vllm/issues/19556, https://github.com/vllm-project/vllm/issues/14818, https://github.com/vllm-project/vllm/issues/24302 
+   - PR(s): https://github.com/vllm-project/vllm/pull/24209 (`verbose_json`, **help needed with other formats**)
+- [ ] Support timestamp granularities:  
+  - Context: Very much related to the above. Unfortunately outputting by `word` requ
 
 ...</description>
   </item>
