@@ -5,7 +5,26 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 05 Feb 2026 23:11:46 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 05 Feb 2026 23:27:14 +0000</lastBuildDate>
+  <item>
+    <title>[CI][MCP][Harmony] Heavy refactoring Harmony &amp; MCP response tests and stabilizing with deterministic test infrastructure</title>
+    <link>https://github.com/vllm-project/vllm/pull/33949</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33949</guid>
+    <pubDate>Thu, 05 Feb 2026 23:26:04 +0000</pubDate>
+    <description>This PR eliminates systemic test flakiness in the Harmony and MCP Responses API integration tests by addressing root causes in both the test infrastructure and source code. The core problem was that tests asserted on non-deterministic LLM output using `@pytest.mark.flaky`, which corrupted server fixture lifecycles and masked real failures. This PR replaces that pattern with deterministic infrastructure: pinned system prompts, API-level retries, and a clear separation between server invariants (hard assertions) and model behaviour (soft/xfail).
+
+## Motivation
+
+The following tests were consistently flaky in CI:
+
+- `test_mcp_tool_env_flag_enabled`
+- `test_mcp_tool_with_allowed_tools_star`
+- `test_mcp_tool_calling_streaming_types`
+- `test_mcp_code_interpreter_streaming`
+- `test_system_prompt_o
+
+...</description>
+  </item>
   <item>
     <title>[Refactor] Replace `activation: str` with `MoEActivation` enum</title>
     <link>https://github.com/vllm-project/vllm/pull/33843</link>
@@ -1097,33 +1116,6 @@ See results below.
 
 ## Test Result
 &lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/86
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
-    <link>https://github.com/vllm-project/vllm/pull/28685</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28685</guid>
-    <pubDate>Thu, 13 Nov 2025 21:25:45 +0000</pubDate>
-    <description>## Purpose
-
-Implement RFC #28326 to enable users to easily integrate custom models with vLLM for both training and inference, with support for external parallelism libraries (e.g., Megatron-LM, FSDP, DeepSpeed).
-
-Enables use cases like:
-  - RL training with vLLM acceleration
-  - Integrating third-party models without rewriting parallelism logic
-  - Mixing external tensor parallel layers (Megatron) with vLLM attention
-
-## Test Plan
-
-```
-# example, should be a test
-python examples/offline_inference/custom_model_with_megatron.py
-```
-  - Full transformer using Megatron-LM&#x27;s ColumnParallelLinear + RowParallelLinear for MLPs
-  - TrainableFlashAttention for attention (with KV cache + backward pass)
-  - Ground truth validation against independent PyTorch run
-  - Tests TP=4, dynamic batching, train
 
 ...</description>
   </item>
