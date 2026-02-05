@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Thu, 05 Feb 2026 23:27:14 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 05 Feb 2026 23:42:18 +0000</lastBuildDate>
   <item>
     <title>[CI][MCP][Harmony] Heavy refactoring Harmony &amp; MCP response tests and stabilizing with deterministic test infrastructure</title>
     <link>https://github.com/vllm-project/vllm/pull/33949</link>
@@ -591,40 +591,6 @@ The /v1/responses streaming endpoint already worked correctly because it capture
 ...</description>
   </item>
   <item>
-    <title>[LoRA] Simplify gpt-oss w13_lora_b weight loading</title>
-    <link>https://github.com/vllm-project/vllm/pull/31255</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31255</guid>
-    <pubDate>Wed, 24 Dec 2025 02:55:40 +0000</pubDate>
-    <description>&lt;!-- markdownlint-disable --&gt;
-
-## Purpose
-
-This PR simplifies gpt-oss `w13_lora_b` weight loading code.
-
-gpt-oss `lora_b` weights is in interleaved layout `[w1_0, w3_0, w1_1, w3_1, ...]`. The current `_slice_w13_b` code do de-interleaving, slicing, and re-interleaving. But the code can be simplified by directly returning a contiguous slice of the original interleaved dimension.
-
-Below is a short example of the original code:
-
-```
-&gt;&gt;&gt; start_idx = 0
-&gt;&gt;&gt; end_idx = 2
-&gt;&gt;&gt; w13_lora_b = torch.tensor([[[11], [21], [12], [22], [13], [23], [14], [24]]]) # shape [num_experts, output_size, rank]
-&gt;&gt;&gt; print(w13_lora_b)
-tensor([[[11],
-         [21],
-         [12],
-         [22],
-         [13],
-         [23],
-         [14],
-         [24]]])
-&gt;&gt;&gt; 
-&gt;&gt;&gt; w1_lora_b = w13_lora_b[:, ::2, :] # even positions
-&gt;&gt;&gt; p
-
-...</description>
-  </item>
-  <item>
     <title>LoRA Slab Optimization</title>
     <link>https://github.com/vllm-project/vllm/pull/31250</link>
     <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/31250</guid>
@@ -1116,6 +1082,33 @@ See results below.
 
 ## Test Result
 &lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/86
+
+...</description>
+  </item>
+  <item>
+    <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
+    <link>https://github.com/vllm-project/vllm/pull/28685</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28685</guid>
+    <pubDate>Thu, 13 Nov 2025 21:25:45 +0000</pubDate>
+    <description>## Purpose
+
+Implement RFC #28326 to enable users to easily integrate custom models with vLLM for both training and inference, with support for external parallelism libraries (e.g., Megatron-LM, FSDP, DeepSpeed).
+
+Enables use cases like:
+  - RL training with vLLM acceleration
+  - Integrating third-party models without rewriting parallelism logic
+  - Mixing external tensor parallel layers (Megatron) with vLLM attention
+
+## Test Plan
+
+```
+# example, should be a test
+python examples/offline_inference/custom_model_with_megatron.py
+```
+  - Full transformer using Megatron-LM&#x27;s ColumnParallelLinear + RowParallelLinear for MLPs
+  - TrainableFlashAttention for attention (with KV cache + backward pass)
+  - Ground truth validation against independent PyTorch run
+  - Tests TP=4, dynamic batching, train
 
 ...</description>
   </item>
