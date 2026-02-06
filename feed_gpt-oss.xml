@@ -5,7 +5,7 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Fri, 06 Feb 2026 19:21:32 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 06 Feb 2026 19:40:40 +0000</lastBuildDate>
   <item>
     <title>[CI][MCP][Harmony] Heavy refactoring Harmony &amp; MCP response tests and stabilizing with deterministic test infrastructure</title>
     <link>https://github.com/vllm-project/vllm/pull/33949</link>
@@ -134,6 +134,32 @@ Related [#33210](https://github.com/vllm-project/vllm/issues/33210)
 
                                                                                                               
 **Problem:**                                                                                                                                            
+
+...</description>
+  </item>
+  <item>
+    <title>[ROCm] AITER fused RoPE+KVCache</title>
+    <link>https://github.com/vllm-project/vllm/pull/33443</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/33443</guid>
+    <pubDate>Fri, 30 Jan 2026 19:27:35 +0000</pubDate>
+    <description>&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+Follow-up to #25954; adda a `fuse_rope_kvcache` Inductor pass to fuse QK RoPE and KVCache ops into the AITER fused kernel.
+
+## Test Plan
+
+## Test Result
+
+---
+&lt;details&gt;
+&lt;summary&gt; Essential Elements of an Effective PR Description Checklist &lt;/summary&gt;
+
+- [ ] The purpose of the PR, such as &quot;Fix some issue (link existing issues this PR will resolve)&quot;.
+- [ ] The test plan, such as providing test command.
+- [ ] The test results, such as pasting the results comparison before and after, or e2e results
+- [ ] (Optional) The necessary documentation update, such as updating `supported_models.md` and `examples` for a new model.
+- [ ] (Optional) Release notes update. If your change is user facing, please update the release notes draft in the [Google Doc](https://
 
 ...</description>
   </item>
@@ -1082,33 +1108,6 @@ See results below.
 
 ## Test Result
 &lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/86
-
-...</description>
-  </item>
-  <item>
-    <title>[Feature] Generic Model Support via TrainableAttention and ModelRegistry parallelism constructor callback</title>
-    <link>https://github.com/vllm-project/vllm/pull/28685</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/28685</guid>
-    <pubDate>Thu, 13 Nov 2025 21:25:45 +0000</pubDate>
-    <description>## Purpose
-
-Implement RFC #28326 to enable users to easily integrate custom models with vLLM for both training and inference, with support for external parallelism libraries (e.g., Megatron-LM, FSDP, DeepSpeed).
-
-Enables use cases like:
-  - RL training with vLLM acceleration
-  - Integrating third-party models without rewriting parallelism logic
-  - Mixing external tensor parallel layers (Megatron) with vLLM attention
-
-## Test Plan
-
-```
-# example, should be a test
-python examples/offline_inference/custom_model_with_megatron.py
-```
-  - Full transformer using Megatron-LM&#x27;s ColumnParallelLinear + RowParallelLinear for MLPs
-  - TrainableFlashAttention for attention (with KV cache + backward pass)
-  - Ground truth validation against independent PyTorch run
-  - Tests TP=4, dynamic batching, train
 
 ...</description>
   </item>
