@@ -5,7 +5,38 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 07 Feb 2026 01:28:42 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 07 Feb 2026 02:22:45 +0000</lastBuildDate>
+  <item>
+    <title>[ROCm] update triton branch to support gpt-oss models for gfx11xx devices</title>
+    <link>https://github.com/vllm-project/vllm/pull/34032</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/34032</guid>
+    <pubDate>Sat, 07 Feb 2026 02:00:53 +0000</pubDate>
+    <description>
+Fix https://github.com/vllm-project/vllm/issues/33906
+Fix https://github.com/vllm-project/vllm/issues/33143
+
+To add support to gfx11xx devices to serve gpt-oss (20b for example) models , we need to update triton branch in Dockerfile.rocm_base.
+The needed support was in upstream triton, but not in the branch used by vllm base docker.
+The patch to rocm/triton was done using this associated PR  https://github.com/ROCm/triton/pull/923.
+
+
+&lt;!-- markdownlint-disable --&gt;
+
+## Purpose
+To add support to gfx11xx devices for gpt-oss models 
+
+(associated PR  https://github.com/ROCm/triton/pull/923 ).
+
+## Test Plan
+Build the base docker locally, and then build vllm docker.
+Verified on gfx1100 devices. 
+Do online serve verification
+
+## Test Result
+Verified on gfx1100 devices on `vllm serve` using `gpt-os
+
+...</description>
+  </item>
   <item>
     <title>[CI][MCP][Harmony] Heavy refactoring Harmony &amp; MCP response tests and stabilizing with deterministic test infrastructure</title>
     <link>https://github.com/vllm-project/vllm/pull/33949</link>
@@ -1075,39 +1106,6 @@ This PR aim to add AITER PagedAttention (PA) with `sliding window` support, whic
 - Aiter PA `torch.ops.aiter.paged_attention_v1` does not pass sliding_windows as input: https://github.com/vllm-project/vllm/blob/30700b1cd7de51f191be718215a58f5a8ddcb8aa/vllm/v1/attention/backends/rocm_aiter_fa.py#L810-L828
 
 If
-
-...</description>
-  </item>
-  <item>
-    <title>[ROCm][Quantization] GPT_OSS in amd-quark format model loading and emulations </title>
-    <link>https://github.com/vllm-project/vllm/pull/29008</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29008</guid>
-    <pubDate>Wed, 19 Nov 2025 11:21:15 +0000</pubDate>
-    <description>## Purpose
-
-This PR aims for:
-- [x] quark model loading, combined with `mxfp4` loading [function ](https://github.com/vllm-project/vllm/blob/256a33ecb4923a4bfa6e1a9adbc69f5255a5aa6d/vllm/model_executor/models/gpt_oss.py#L309) for original openai/gpt-oss-20b &amp; openai/gpt-oss-120b
-- [x] OCPMX_W4A16, OCPMX_W4AFP8 MoE scheme and emulation forward, unified into class `QuarkOCP_MX_MoEMethod`
-
-## Test Plan
-
-- Models:
-  - [x] GPT_OSS_20B
-  - [x] GPT_OSS_120B
-- Quantization schemes:
-  - [x] W: MXFP4, A: BF16, (optional) KV: FP8
-  - [x] W: MXFP4, A: FP8, (optional) KV: FP8
-  - [x] W: MXFP4, A: MXFP4, (optional) KV: FP8
-- TP:
-  - [x] TP1
-  - [x] TP2
-  - [x] TP4
-  - [x] TP8
-
-See results below.
-
-## Test Result
-&lt;img width=&quot;1418&quot; height=&quot;304&quot; alt=&quot;image&quot; src=&quot;https://github.com/user-attachments/assets/86
 
 ...</description>
   </item>
