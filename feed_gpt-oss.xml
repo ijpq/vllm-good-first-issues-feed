@@ -5,7 +5,21 @@
   <link>https://github.com/vllm-project/vllm/issues</link>
   <description>Open issues with label 'gpt-oss' in vllm-project/vllm</description>
   <language>en</language>
-  <lastBuildDate>Sat, 07 Feb 2026 03:16:39 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 07 Feb 2026 04:05:41 +0000</lastBuildDate>
+  <item>
+    <title>[ROCm][AITER] Add fused RoPE+KVCache pass with MultiOutputPattern fix</title>
+    <link>https://github.com/vllm-project/vllm/pull/34037</link>
+    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/34037</guid>
+    <pubDate>Sat, 07 Feb 2026 03:48:21 +0000</pubDate>
+    <description>## Summary
+
+- Add `ROCmAiterTritonRopeReshapeKVCacheFusionPass` that fuses rotary embedding + reshape + KV cache update into a single AITER Triton kernel (`fused_qk_rope_reshape_and_cache`)
+- **Fix for #33666:** PyTorch&#x27;s `MultiOutputPattern` only traces the first output&#x27;s subgraph for anchor node discovery. By returning `(dummy, q, k, v)` instead of `(q, k, v, dummy)`, the `unified_kv_cache_update` node (most connected subgraph) is traced first, ensuring all anchor nodes are discovered and pattern matching succeeds
+- Refactor KV sharing / None guards from backend `do_kv_cache_update` methods to the caller in `attention.py` for cleaner separation of concerns
+- Add `fuse_rope_kvcache` config option with `aiter_rope_kvcache_fusion_max_token_num` threshold (default 256) for small-batch decode
+
+...</description>
+  </item>
   <item>
     <title>[ROCm] update triton branch to support gpt-oss models for gfx11xx devices</title>
     <link>https://github.com/vllm-project/vllm/pull/34032</link>
@@ -1086,26 +1100,6 @@ Channel Leakage/Hallucination: The model appeared to hallucinate or leak tool ca
 Changes Implemented:
 
 Active Buffer Parsing: Added logic to inspect parser.current_content and parser.current_channel. If the active channel is commentary (used 
-
-...</description>
-  </item>
-  <item>
-    <title>[ROCm] Support AITER paged attention with `sliding_window`</title>
-    <link>https://github.com/vllm-project/vllm/pull/29065</link>
-    <guid isPermaLink="false">https://github.com/vllm-project/vllm/pull/29065</guid>
-    <pubDate>Thu, 20 Nov 2025 03:12:58 +0000</pubDate>
-    <description>## Purpose
-Based on https://github.com/vllm-project/vllm/pull/28719.
-
-This PR aim to add AITER PagedAttention (PA) with `sliding window` support, which can fix `google/gemma-3-27b-it` bfloat16 model accuracy issue with Aiter PA for `input token &gt; 1024` case.
-
-`google/gemma-3-27b-it` trained with additional parameter `&quot;sliding_window&quot;: 1024`. 
-
-- Triton unified attention (default) `unified_attention` passed sliding windows as input: https://github.com/vllm-project/vllm/blob/30700b1cd7de51f191be718215a58f5a8ddcb8aa/vllm/v1/attention/backends/triton_attn.py#L346-L366
-
-- Aiter PA `torch.ops.aiter.paged_attention_v1` does not pass sliding_windows as input: https://github.com/vllm-project/vllm/blob/30700b1cd7de51f191be718215a58f5a8ddcb8aa/vllm/v1/attention/backends/rocm_aiter_fa.py#L810-L828
-
-If
 
 ...</description>
   </item>
